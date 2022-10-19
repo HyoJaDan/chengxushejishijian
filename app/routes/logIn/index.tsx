@@ -14,6 +14,12 @@ export default function LoginIndex() {
   console.log("onSuccess", console.log); */
   return (
     <Wrapper>
+      <GoogleLogin
+        clientId="189399095236-k1thmc2f2r2ves3ueb1j2520cuqbdkaj.apps.googleusercontent.com"
+        buttonText="Login"
+        onSuccess={responseGoogle}
+        onFailure={responseGoogle}
+      />,
       <Font>
         <Insert>
           <HW>
