@@ -18,13 +18,22 @@ export default function logIn() {
           입수할 준비 되셨나요?
         </Ipsu>
         <Go>
+<<<<<<< HEAD
           같은 분야의 주니어들과 함께 집단지성에 기대보아요.
+=======
+          같은 분야의 주니어들과 함께 집단지성에 기대보아요
+>>>>>>> 88d8716 (feat logIn)
         </Go>
       </Font>
       <LogIn>
         <Apple>애플로 계속하기</Apple>
+<<<<<<< HEAD
         <KakaoLogin />
         <GoogleLogin/>
+=======
+        <Kakao>카카오톡으로 계속하기</Kakao>
+        <Google>구글로 계속하기</Google>
+>>>>>>> 88d8716 (feat logIn)
       </LogIn>
     </Wrapper>
   )
@@ -89,3 +98,54 @@ const Apple = styled.div`
   justify-content:center;
   align-items:center;
 `;
+<<<<<<< HEAD
+=======
+const Kakao = styled.div`
+  width: 463px;
+  height: 80px;
+
+  background: #FFE459;
+  border-radius: 15px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+`;
+const Google = styled.div`
+  width: 463px;
+  height: 80px;
+
+  background: #EEEEEE;
+  border-radius: 15px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+`;
+
+/* 
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '{your-app-id}',
+      cookie     : true,
+      xfbml      : true,
+      version    : '{api-version}'
+    });
+      
+    FB.AppEvents.logPageView();   
+      
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+ */
+
+>>>>>>> 88d8716 (feat logIn)
