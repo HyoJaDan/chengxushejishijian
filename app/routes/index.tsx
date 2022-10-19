@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 import { Banner } from '~/components/main/banner';
 import { CategorySideBar } from '~/components/main/category-side-bar';
+import { Link } from '@remix-run/react';
 
 export default function HomePage() {
   return (
     <MainWrapper>
+      <Link to="logIn">log in</Link>
       <GridWrapper>
         <TopBanner />
         <SideBar>
