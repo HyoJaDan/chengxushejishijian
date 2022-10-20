@@ -67,14 +67,20 @@ module.exports = {
       },
     ],
     'import/prefer-default-export': 'off',
+<<<<<<< HEAD
     '@typescript-eslint/ban-types':
       'off' /* ts에서 Object 또는 function타입을 가능하게 해준다. */,
     '@typescript-eslint/no-explicit-any': 'off' /* any 사용가능하게 해준다 */,
+=======
+>>>>>>> d588973 (config!: vitest, cf workers)
   },
   settings: {
     'import/resolver': {
       typescript: {
+<<<<<<< HEAD
         'react/jsx-props-no-spreading': 'off',
+=======
+>>>>>>> d588973 (config!: vitest, cf workers)
         project: './tsconfig.json',
       },
     },
