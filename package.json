@@ -2,8 +2,21 @@
   "private": true,
   "sideEffects": false,
   "scripts": {
+<<<<<<< HEAD
     "build": "node --require @lukalabs/esbuild-inject-plugin -- ./node_modules/.bin/remix build",
     "dev": "node --require @lukalabs/esbuild-inject-plugin -- ./node_modules/.bin/remix dev",
+=======
+    "build": "cross-env node --require @lukalabs/esbuild-inject-plugin -- ./node_modules/.bin/remix build",
+    "deploy": "wrangler publish",
+    "dev:remix": "cross-env NODE_ENV=development node --require @lukalabs/esbuild-inject-plugin -- ./node_modules/.bin/remix watch",
+    "dev:miniflare": "cross-env NODE_ENV=development miniflare ./build/index.js --watch",
+    "dev": "yarn run build && run-p dev:*",
+<<<<<<< HEAD
+    "start": "export PORT=3001 && react-scripts start",
+=======
+    "start": "cross-env NODE_ENV=production miniflare ./build/index.js",
+>>>>>>> 89c568a (config!: vitest, cf workers)
+>>>>>>> d96a006 (config!: vitest, cf workers)
     "test": "vitest",
     "test:ui": "vitest --ui",
     "coverage": "vitest run --coverage",
@@ -18,6 +31,13 @@
     "@remix-run/vercel": "^1.7.2",
     "@vercel/node": "^2.4.4",
     "axios": "^1.1.2",
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    "jwt-decode": "^3.1.2",
+=======
+>>>>>>> 89c568a (config!: vitest, cf workers)
+>>>>>>> d96a006 (config!: vitest, cf workers)
     "cross-env": "^7.0.3",
     "jwt-decode": "^3.1.2",
     "lodash": "^4.17.21",
@@ -45,7 +65,10 @@
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.38.0",
     "@vitejs/plugin-react": "^2.1.0",
+<<<<<<< HEAD
     "@vitest/coverage-c8": "^0.24.3",
+=======
+>>>>>>> 89c568a (config!: vitest, cf workers)
     "@vitest/ui": "^0.24.3",
     "eslint": "^8.24.0",
     "eslint-config-airbnb": "^19.0.4",

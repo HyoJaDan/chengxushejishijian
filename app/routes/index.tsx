@@ -11,7 +11,6 @@ export default function Index() {
   console.log("유저 데이터", datas);
 
   return (
-<<<<<<< HEAD
     <MainWrapper>
       <GridWrapper>
         <TopBanner />
@@ -21,14 +20,6 @@ export default function Index() {
         <MainContent>메인 컨텐츠.</MainContent>
       </GridWrapper>
     </MainWrapper>
-=======
-    <div>
-      <div>
-        <Link to="logIn">log in</Link>
-      </div>
-      <Link to="loginDetail">Detail</Link>
-    </div>
->>>>>>> 0eefa3b (feat login Detail)
   );
 }
 const MainWrapper = styled.div`

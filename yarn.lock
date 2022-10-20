@@ -1200,13 +1200,17 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> b786c6a (chore: vitest test)
+=======
+>>>>>>> d96a006 (config!: vitest, cf workers)
 "@bcoe/v8-coverage@^0.2.3":
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -1219,6 +1223,10 @@
 >>>>>>> d588973 (config!: vitest, cf workers)
 =======
 >>>>>>> b786c6a (chore: vitest test)
+=======
+=======
+>>>>>>> 89c568a (config!: vitest, cf workers)
+>>>>>>> d96a006 (config!: vitest, cf workers)
 "@cloudflare/kv-asset-handler@^0.1.3":
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/@cloudflare/kv-asset-handler/-/kv-asset-handler-0.1.3.tgz#3eaaf962b16c48a7189db5d5ac1c4dca4e2ed1a0"
@@ -1380,13 +1388,17 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> b786c6a (chore: vitest test)
+=======
+>>>>>>> d96a006 (config!: vitest, cf workers)
 "@istanbuljs/schema@^0.1.2", "@istanbuljs/schema@^0.1.3":
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.3.tgz#e45e384e4b8ec16bce2fd903af78450f6bf7ec98"
   integrity sha512-ZXRY4jNvVgSVQ8DL3LTcakaAtXwTVUxE81hslsyD2AtoXW/wVob10HkOJ1X/pAlcI7D+2YoZKg5do8G/w6RYgA==
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 "@jest/expect-utils@^29.2.2":
@@ -1425,6 +1437,10 @@
 >>>>>>> d588973 (config!: vitest, cf workers)
 =======
 >>>>>>> b786c6a (chore: vitest test)
+=======
+=======
+>>>>>>> 89c568a (config!: vitest, cf workers)
+>>>>>>> d96a006 (config!: vitest, cf workers)
 "@jridgewell/gen-mapping@^0.1.0":
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/@jridgewell/gen-mapping/-/gen-mapping-0.1.1.tgz#e5d2e450306a9491e3bd77e323e38d7aff315996"
@@ -1457,7 +1473,11 @@
   resolved "https://registry.yarnpkg.com/@jridgewell/sourcemap-codec/-/sourcemap-codec-1.4.14.tgz#add4c98d341472a289190b424efbdb096991bb24"
   integrity sha512-XPSJHWmi394fuUuzDnGz1wiKqWfo1yXecHQMRf2l6hztTO+nPru658AyDngaBe7isIxEkRsPR3FZh+s7iVa4Uw==
 
+<<<<<<< HEAD
 "@jridgewell/trace-mapping@^0.3.12", "@jridgewell/trace-mapping@^0.3.9":
+=======
+"@jridgewell/trace-mapping@^0.3.9":
+>>>>>>> 89c568a (config!: vitest, cf workers)
   version "0.3.17"
   resolved "https://registry.yarnpkg.com/@jridgewell/trace-mapping/-/trace-mapping-0.3.17.tgz#793041277af9073b0951a7fe0f0d8c4c98c36985"
   integrity sha512-MCNzAp77qzKca9+W/+I0+sEpaUnZoeasnghNeVc41VZCEKaCH73Vq3BZZ/SzWIgrqE4H4ceI+p+b6C0mHf9T4g==
@@ -2435,9 +2455,12 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0", "@types/istanbul-lib-coverage@^2.0.1":
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> d96a006 (config!: vitest, cf workers)
 "@types/istanbul-lib-coverage@^2.0.1":
 >>>>>>> d96a006 (config!: vitest, cf workers)
 =======
@@ -2447,6 +2470,7 @@
   resolved "https://registry.yarnpkg.com/@types/istanbul-lib-coverage/-/istanbul-lib-coverage-2.0.4.tgz#8467d4b3c087805d63580480890791277ce35c44"
   integrity sha512-z/QT1XN4K4KYuslS23k62yDIDLwLFkzxOuMplDtObz0+y7VqJCaO2o+SPwHCvLFZh7xazvvoor2tA/hPz9ee7g==
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -2483,6 +2507,10 @@
 >>>>>>> 89c568a (config!: vitest, cf workers)
 =======
 >>>>>>> b786c6a (chore: vitest test)
+=======
+=======
+>>>>>>> 89c568a (config!: vitest, cf workers)
+>>>>>>> d96a006 (config!: vitest, cf workers)
 "@types/json-schema@^7.0.9":
 >>>>>>> d96a006 (config!: vitest, cf workers)
 =======
@@ -2902,6 +2930,7 @@
     magic-string "^0.26.2"
     react-refresh "^0.14.0"
 
+<<<<<<< HEAD
 "@vitest/coverage-c8@^0.24.3":
   version "0.24.3"
   resolved "https://registry.yarnpkg.com/@vitest/coverage-c8/-/coverage-c8-0.24.3.tgz#bc8b4f2a9f2ce5f82b41f98375b46c99ed1ddaf2"
@@ -2910,6 +2939,8 @@
     c8 "^7.12.0"
     vitest "0.24.3"
 
+=======
+>>>>>>> 89c568a (config!: vitest, cf workers)
 "@vitest/ui@^0.24.3":
   version "0.24.3"
   resolved "https://registry.yarnpkg.com/@vitest/ui/-/ui-0.24.3.tgz#8058e4c9b8a276fbfef1ef0907291f19694a722b"
@@ -3514,6 +3545,7 @@ bytes@3.1.2:
   resolved "https://registry.yarnpkg.com/bytes/-/bytes-3.1.2.tgz#8b0beeb98605adf1b128fa4386403c009e0221a5"
   integrity sha512-/Nf7TyzTx6S3yRJObOAV7956r8cr2+Oj8AC5dt8wSP3BQAoeX58NoHyCU8P8zGkNXStjTSi6fzO6F0pBdcYbEg==
 
+<<<<<<< HEAD
 c8@^7.12.0:
   version "7.12.0"
   resolved "https://registry.yarnpkg.com/c8/-/c8-7.12.0.tgz#402db1c1af4af5249153535d1c84ad70c5c96b14"
@@ -3532,6 +3564,8 @@ c8@^7.12.0:
     yargs "^16.2.0"
     yargs-parser "^20.2.9"
 
+=======
+>>>>>>> 89c568a (config!: vitest, cf workers)
 cacache@^15.0.5:
   version "15.3.0"
   resolved "https://registry.yarnpkg.com/cacache/-/cacache-15.3.0.tgz#dc85380fb2f556fe3dda4c719bfa0ec875a7f1eb"
@@ -3789,8 +3823,11 @@ cli-width@^3.0.0:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> b786c6a (chore: vitest test)
+=======
+>>>>>>> d96a006 (config!: vitest, cf workers)
 cliui@^7.0.2:
   version "7.0.4"
   resolved "https://registry.yarnpkg.com/cliui/-/cliui-7.0.4.tgz#a0265ee655476fc807aea9df3df8df7783808b4f"
@@ -3801,12 +3838,17 @@ cliui@^7.0.2:
     wrap-ansi "^7.0.0"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> ed978c8 (fix localhost Err)
 =======
 >>>>>>> d588973 (config!: vitest, cf workers)
 =======
 >>>>>>> b786c6a (chore: vitest test)
+=======
+=======
+>>>>>>> 89c568a (config!: vitest, cf workers)
+>>>>>>> d96a006 (config!: vitest, cf workers)
 clone-deep@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/clone-deep/-/clone-deep-4.0.1.tgz#c19fd9bdbbf85942b4fd979c84dcf7d5f07c2387"
@@ -3968,6 +4010,7 @@ content-type@~1.0.4:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 =======
@@ -3997,6 +4040,12 @@ convert-source-map@^1.7.0:
 =======
 convert-source-map@^1.6.0, convert-source-map@^1.7.0:
 >>>>>>> b786c6a (chore: vitest test)
+=======
+convert-source-map@^1.6.0, convert-source-map@^1.7.0:
+=======
+convert-source-map@^1.7.0:
+>>>>>>> 89c568a (config!: vitest, cf workers)
+>>>>>>> d96a006 (config!: vitest, cf workers)
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/convert-source-map/-/convert-source-map-1.9.0.tgz#7faae62353fb4213366d0ca98358d22e8368b05f"
   integrity sha512-ASFBup0Mz1uyiIjANan1jzLQami9z1PoYSZCiiYW2FczPbenXc45FZdBZLzOT+r6+iciuEModtmCti+hjaAk0A==
@@ -4085,7 +4134,11 @@ cross-spawn@^6.0.5:
     shebang-command "^1.2.0"
     which "^1.2.9"
 
+<<<<<<< HEAD
 cross-spawn@^7.0.0, cross-spawn@^7.0.1, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
+=======
+cross-spawn@^7.0.1, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
+>>>>>>> 89c568a (config!: vitest, cf workers)
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-7.0.3.tgz#f73a85b9d5d41d045551c177e2882d4ac85728a6"
   integrity sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==
@@ -5768,6 +5821,7 @@ for-in@^1.0.2:
   resolved "https://registry.yarnpkg.com/for-in/-/for-in-1.0.2.tgz#81068d295a8142ec0ac726c6e2200c30fb6d5e80"
   integrity sha512-7EwmXrOjyL+ChxMhmG5lnW9MPt1aIeZEwKhQzoBUdTV0N3zuwWDZYVJatDvZ2OyzPUvdIAZDsCetk3coyMfcnQ==
 
+<<<<<<< HEAD
 foreground-child@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/foreground-child/-/foreground-child-2.0.0.tgz#71b32800c9f15aa8f2f83f4a6bd9bff35d861a53"
@@ -5776,6 +5830,8 @@ foreground-child@^2.0.0:
     cross-spawn "^7.0.0"
     signal-exit "^3.0.2"
 
+=======
+>>>>>>> 89c568a (config!: vitest, cf workers)
 form-data@^2.2.0:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/form-data/-/form-data-2.5.1.tgz#f2cbec57b5e59e23716e128fe44d4e5dd23895f4"
@@ -5909,11 +5965,14 @@ gensync@^1.0.0-beta.2:
   resolved "https://registry.yarnpkg.com/gensync/-/gensync-1.0.0-beta.2.tgz#32a6ee76c3d7f52d46b2b1ae5d93fea8580a25e0"
   integrity sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==
 
+<<<<<<< HEAD
 get-caller-file@^2.0.5:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-2.0.5.tgz#4f94412a82db32f36e3b0b9741f8a97feb031f7e"
   integrity sha512-DyFP3BM/3YHTQOCUL/w0OZHR0lpKeGrxotcHWcqNEdnltqFwXVfhEBQ94eIo34AfQpo0rGki4cyIiftY06h2Fg==
 
+=======
+>>>>>>> 89c568a (config!: vitest, cf workers)
 get-func-name@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/get-func-name/-/get-func-name-2.0.0.tgz#ead774abee72e20409433a066366023dd6887a41"
@@ -6337,11 +6396,14 @@ hosted-git-info@^2.1.4:
   resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.8.9.tgz#dffc0bf9a21c02209090f2aa69429e1414daf3f9"
   integrity sha512-mxIDAb9Lsm6DoOJ7xH+5+X4y1LU/4Hi50L9C5sIswK3JzULS4bwk1FvjdBgvYR4bzT4tuUQiC15FE2f5HbLvYw==
 
+<<<<<<< HEAD
 html-escaper@^2.0.0:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/html-escaper/-/html-escaper-2.0.2.tgz#dfd60027da36a36dfcbe236262c00a5822681453"
   integrity sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==
 
+=======
+>>>>>>> 89c568a (config!: vitest, cf workers)
 html-rewriter-wasm@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/html-rewriter-wasm/-/html-rewriter-wasm-0.4.1.tgz#235e3d96c1aa4bfd2182661ee13881e290ff5ff2"
@@ -7014,8 +7076,11 @@ isobject@^3.0.0, isobject@^3.0.1:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> b786c6a (chore: vitest test)
+=======
+>>>>>>> d96a006 (config!: vitest, cf workers)
 istanbul-lib-coverage@^3.0.0, istanbul-lib-coverage@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/istanbul-lib-coverage/-/istanbul-lib-coverage-3.2.0.tgz#189e7909d0a39fa5a3dfad5b03f71947770191d3"
@@ -7038,6 +7103,7 @@ istanbul-reports@^3.1.4:
     html-escaper "^2.0.0"
     istanbul-lib-report "^3.0.0"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 jest-diff@^29.2.1:
@@ -7065,6 +7131,10 @@ jest-get-type@^29.2.0:
 >>>>>>> d588973 (config!: vitest, cf workers)
 =======
 >>>>>>> b786c6a (chore: vitest test)
+=======
+=======
+>>>>>>> 89c568a (config!: vitest, cf workers)
+>>>>>>> d96a006 (config!: vitest, cf workers)
 jest-image-snapshot@^5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/jest-image-snapshot/-/jest-image-snapshot-5.2.0.tgz#4af046935b465f0460aa73e890717bbc25d431e9"
@@ -7272,18 +7342,26 @@ jsonfile@^6.0.1:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 0eefa3b (feat login Detail)
+=======
+>>>>>>> d96a006 (config!: vitest, cf workers)
 jwt-decode@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/jwt-decode/-/jwt-decode-3.1.2.tgz#3fb319f3675a2df0c2895c8f5e9fa4b67b04ed59"
   integrity sha512-UfpWE/VZn0iP50d8cz9NrZLM9lSWhcJ+0Gt/nm4by88UL+J1SiKN8/5dkjMmbEzwL2CAe+67GsegCbIKtbp75A==
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> d588973 (config!: vitest, cf workers)
 =======
 >>>>>>> 0eefa3b (feat login Detail)
+=======
+=======
+>>>>>>> 89c568a (config!: vitest, cf workers)
+>>>>>>> d96a006 (config!: vitest, cf workers)
 keyv@*, keyv@^4.0.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/keyv/-/keyv-4.5.0.tgz#dbce9ade79610b6e641a9a65f2f6499ba06b9bc6"
@@ -7506,8 +7584,11 @@ make-dir@^2.0.0, make-dir@^2.1.0:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> b786c6a (chore: vitest test)
+=======
+>>>>>>> d96a006 (config!: vitest, cf workers)
 make-dir@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/make-dir/-/make-dir-3.1.0.tgz#415e967046b3a7f1d185277d84aa58203726a13f"
@@ -7515,6 +7596,7 @@ make-dir@^3.0.0:
   dependencies:
     semver "^6.0.0"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -7547,6 +7629,10 @@ make-error@^1.1.1:
 >>>>>>> d588973 (config!: vitest, cf workers)
 =======
 >>>>>>> b786c6a (chore: vitest test)
+=======
+=======
+>>>>>>> 89c568a (config!: vitest, cf workers)
+>>>>>>> d96a006 (config!: vitest, cf workers)
 map-cache@^0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/map-cache/-/map-cache-0.2.2.tgz#c32abd0bd6525d9b051645bb4f26ac5dc98a0dbf"
@@ -9284,6 +9370,7 @@ react-dom@^18.2.0:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 react-error-boundary@^3.1.0:
   version "3.1.4"
   resolved "https://registry.yarnpkg.com/react-error-boundary/-/react-error-boundary-3.1.4.tgz#255db92b23197108757a888b01e5b729919abde0"
@@ -9295,6 +9382,8 @@ react-error-boundary@^3.1.0:
 >>>>>>> d96a006 (config!: vitest, cf workers)
 =======
 >>>>>>> 0eefa3b (feat login Detail)
+=======
+>>>>>>> d96a006 (config!: vitest, cf workers)
 react-hook-form@^7.38.0:
   version "7.38.0"
   resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.38.0.tgz#53d6a68df587ce4ce88352f63e0ecc7fc8779320"
@@ -9309,10 +9398,14 @@ react-hook-form@^7.39.0:
 >>>>>>> 7e03000 (fix localhost Err)
 
 =======
+<<<<<<< HEAD
 >>>>>>> d588973 (config!: vitest, cf workers)
 =======
 
 >>>>>>> 0eefa3b (feat login Detail)
+=======
+>>>>>>> 89c568a (config!: vitest, cf workers)
+>>>>>>> d96a006 (config!: vitest, cf workers)
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
@@ -9430,6 +9523,7 @@ recast@^0.20.4:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 recoil@^0.7.6:
 =======
 recoil@^0.7.5:
@@ -9437,6 +9531,12 @@ recoil@^0.7.5:
 =======
 recoil@^0.7.6:
 >>>>>>> 0eefa3b (feat login Detail)
+=======
+recoil@^0.7.6:
+=======
+recoil@^0.7.5:
+>>>>>>> 89c568a (config!: vitest, cf workers)
+>>>>>>> d96a006 (config!: vitest, cf workers)
   version "0.7.6"
   resolved "https://registry.yarnpkg.com/recoil/-/recoil-0.7.6.tgz#75297ecd70bbfeeb72e861aa6141a86bb6dfcd5e"
   integrity sha512-hsBEw7jFdpBCY/tu2GweiyaqHKxVj6EqF2/SfrglbKvJHhpN57SANWvPW+gE90i3Awi+A5gssOd3u+vWlT+g7g==
@@ -9601,13 +9701,17 @@ repeat-string@^1.6.1:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> b786c6a (chore: vitest test)
+=======
+>>>>>>> d96a006 (config!: vitest, cf workers)
 require-directory@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/require-directory/-/require-directory-2.1.1.tgz#8c64ad5fd30dab1c976e2344ffe7f792a6a6df42"
   integrity sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -9640,6 +9744,10 @@ require-from-string@^2.0.2:
 >>>>>>> d588973 (config!: vitest, cf workers)
 =======
 >>>>>>> b786c6a (chore: vitest test)
+=======
+=======
+>>>>>>> 89c568a (config!: vitest, cf workers)
+>>>>>>> d96a006 (config!: vitest, cf workers)
 requireindex@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/requireindex/-/requireindex-1.2.0.tgz#3463cdb22ee151902635aa6c9535d4de9c2ef1ef"
@@ -9853,7 +9961,11 @@ semiver@^1.1.0:
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.7.1.tgz#a954f931aeba508d307bbf069eff0c01c96116f7"
   integrity sha512-sauaDf/PZdVgrLTNYHRtpXa1iRiKcaebiKQ1BJdpQlWH2lCvexQdX55snPFyK7QzpudqbCI0qXFfOasHdyNDGQ==
 
+<<<<<<< HEAD
 semver@^6.0.0, semver@^6.1.0, semver@^6.1.1, semver@^6.1.2, semver@^6.3.0:
+=======
+semver@^6.1.0, semver@^6.1.1, semver@^6.1.2, semver@^6.3.0:
+>>>>>>> 89c568a (config!: vitest, cf workers)
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-6.3.0.tgz#ee0a64c8af5e8ceea67687b133761e1becbd1d3d"
   integrity sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==
@@ -10265,6 +10377,7 @@ string-width@^1.0.1:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 "string-width@^1.0.2 || 2 || 3 || 4", string-width@^4.1.0, string-width@^4.2.0:
 =======
 "string-width@^1.0.2 || 2 || 3 || 4", string-width@^4.1.0:
@@ -10275,6 +10388,12 @@ string-width@^1.0.1:
 =======
 "string-width@^1.0.2 || 2 || 3 || 4", string-width@^4.1.0, string-width@^4.2.0:
 >>>>>>> b786c6a (chore: vitest test)
+=======
+"string-width@^1.0.2 || 2 || 3 || 4", string-width@^4.1.0, string-width@^4.2.0:
+=======
+"string-width@^1.0.2 || 2 || 3 || 4", string-width@^4.1.0:
+>>>>>>> 89c568a (config!: vitest, cf workers)
+>>>>>>> d96a006 (config!: vitest, cf workers)
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
@@ -10542,6 +10661,7 @@ temp@^0.8.4:
   dependencies:
     rimraf "~2.6.2"
 
+<<<<<<< HEAD
 test-exclude@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/test-exclude/-/test-exclude-6.0.0.tgz#04a8698661d805ea6fa293b6cb9e63ac044ef15e"
@@ -10551,6 +10671,8 @@ test-exclude@^6.0.0:
     glob "^7.1.4"
     minimatch "^3.0.4"
 
+=======
+>>>>>>> 89c568a (config!: vitest, cf workers)
 text-table@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
@@ -11114,6 +11236,7 @@ uvu@^0.5.0:
     kleur "^4.0.3"
     sade "^1.7.3"
 
+<<<<<<< HEAD
 v8-to-istanbul@^9.0.0:
   version "9.0.1"
   resolved "https://registry.yarnpkg.com/v8-to-istanbul/-/v8-to-istanbul-9.0.1.tgz#b6f994b0b5d4ef255e17a0d17dc444a9f5132fa4"
@@ -11123,6 +11246,8 @@ v8-to-istanbul@^9.0.0:
     "@types/istanbul-lib-coverage" "^2.0.1"
     convert-source-map "^1.6.0"
 
+=======
+>>>>>>> 89c568a (config!: vitest, cf workers)
 validate-npm-package-license@^3.0.1:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/validate-npm-package-license/-/validate-npm-package-license-3.0.4.tgz#fc91f6b9c7ba15c857f4cb2c5defeec39d4f410a"
@@ -11204,6 +11329,7 @@ vite@^3.0.0, vite@^3.1.8:
     fsevents "~2.3.2"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 vitest@^0.24.3:
 <<<<<<< HEAD
   version "0.24.5"
@@ -11213,6 +11339,12 @@ vitest@^0.24.3:
 =======
 vitest@0.24.3, vitest@^0.24.3:
 >>>>>>> b786c6a (chore: vitest test)
+=======
+vitest@0.24.3, vitest@^0.24.3:
+=======
+vitest@^0.24.3:
+>>>>>>> 89c568a (config!: vitest, cf workers)
+>>>>>>> d96a006 (config!: vitest, cf workers)
   version "0.24.3"
   resolved "https://registry.yarnpkg.com/vitest/-/vitest-0.24.3.tgz#d91c7e2d557877d5270033efdf18add6063f0c97"
   integrity sha512-aM0auuPPgMSstWvr851hB74g/LKaKBzSxcG3da7ejfZbx08Y21JpZmbmDYrMTCGhVZKqTGwzcnLMwyfz2WzkhQ==
@@ -11486,6 +11618,7 @@ xxhash-wasm@^1.0.1:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 yallist@^3.0.2:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-3.1.1.tgz#dbb7daf9bfd8bac9ab45ebf602b8cbad0d5d08fd"
@@ -11494,12 +11627,19 @@ yallist@^3.0.2:
 =======
 >>>>>>> d588973 (config!: vitest, cf workers)
 =======
+=======
+>>>>>>> d96a006 (config!: vitest, cf workers)
 y18n@^5.0.5:
   version "5.0.8"
   resolved "https://registry.yarnpkg.com/y18n/-/y18n-5.0.8.tgz#7f4934d0f7ca8c56f95314939ddcd2dd91ce1d55"
   integrity sha512-0pfFzegeDWJHJIAmTLRP2DwHjdF5s7jo9tuztdQxAhINCdvS+3nGINqPd00AphqJR/0LhANUS6/+7SCb98YOfA==
 
+<<<<<<< HEAD
 >>>>>>> b786c6a (chore: vitest test)
+=======
+=======
+>>>>>>> 89c568a (config!: vitest, cf workers)
+>>>>>>> d96a006 (config!: vitest, cf workers)
 yallist@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-4.0.0.tgz#9bb92790d9c0effec63be73519e11a35019a3a72"
@@ -11509,8 +11649,11 @@ yallist@^4.0.0:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> b786c6a (chore: vitest test)
+=======
+>>>>>>> d96a006 (config!: vitest, cf workers)
 yargs-parser@^20.2.2, yargs-parser@^20.2.9:
   version "20.2.9"
   resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-20.2.9.tgz#2eb7dc3b0289718fc295f362753845c41a0c94ee"
@@ -11537,6 +11680,7 @@ yargs@^16.2.0:
     y18n "^5.0.5"
     yargs-parser "^20.2.2"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -11572,6 +11716,10 @@ yn@3.1.1:
 >>>>>>> d588973 (config!: vitest, cf workers)
 =======
 >>>>>>> b786c6a (chore: vitest test)
+=======
+=======
+>>>>>>> 89c568a (config!: vitest, cf workers)
+>>>>>>> d96a006 (config!: vitest, cf workers)
 yocto-queue@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
