@@ -1,5 +1,4 @@
 name = "remix-cloudflare-workers"
-
 workers_dev = true
 main = "./build/index.js"
 # https://developers.cloudflare.com/workers/platform/compatibility-dates

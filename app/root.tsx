@@ -33,7 +33,6 @@ const queryClient = new QueryClient();
 
 export default function App() {
   return (
-<<<<<<< HEAD
     <RecoilRoot>
       <QueryClientProvider client={queryClient}>
         <html lang='en'>
@@ -53,22 +52,5 @@ export default function App() {
         </html>
       </QueryClientProvider>
     </RecoilRoot>
-=======
-    <html lang='en'>
-      <RecoilRoot>
-        <head>
-          <Meta />
-          <Links />
-          {typeof document === 'undefined' ? '__STYLES__' : null}
-        </head>
-        <body>
-          <Outlet />
-          <ScrollRestoration />
-          <Scripts />
-          <LiveReload />
-        </body>
-      </RecoilRoot>
-    </html>
->>>>>>> 0eefa3b (feat login Detail)
   );
 }
