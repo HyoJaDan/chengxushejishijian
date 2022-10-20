@@ -1,0 +1,31 @@
+name: CI
+on: 
+  push:
+    branches: [main]
+jobs:
+  build:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Yarn 설치 및 패키지 인스톨
+        uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: install # will run `yarn install` command
+      
+      - name: Test 수행 
+        uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: run test run --passWithNoTests # will run `yarn build` command
+
+      - name: Build 수행    
+        uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: run build # will run `yarn test` command
+          
+      - name: Deploy 수행
+        uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: run deploy # will run `yarn test` command
