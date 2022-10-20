@@ -9,6 +9,6 @@ const styledComponentOptions = {
   meaninglessFileNames: ['index', 'styles'],
 };
 
-exports.plugins = function (plugins) {
+exports.plugins = function applyPlugins(plugins) {
   return [styledComponentsPlugin(styledComponentOptions), ...plugins];
 };

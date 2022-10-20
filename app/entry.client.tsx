@@ -1,4 +1,5 @@
 import { RemixBrowser } from '@remix-run/react';
-import { hydrateRoot } from 'react-dom/client';
+import { hydrate } from 'react-dom';
 
-hydrateRoot(document, <RemixBrowser />);
+// react v17 only to enable styled-components ssr.
+hydrate(<RemixBrowser />, document);
