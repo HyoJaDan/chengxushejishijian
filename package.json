@@ -30,6 +30,7 @@
     "@lukalabs/esbuild-styled-components": "^1.0.0",
     "@playwright/test": "^1.27.1",
     "@remix-run/dev": "^1.7.2",
+    "@remix-run/serve": "^1.7.2",
     "@remix-run/eslint-config": "^1.7.2",
     "@remix-run/serve": "^1.7.2",
     "@testing-library/jest-dom": "^5.16.5",
@@ -42,7 +43,10 @@
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.38.0",
     "@vitejs/plugin-react": "^2.1.0",
+<<<<<<< HEAD
     "@vitest/coverage-c8": "^0.24.3",
+=======
+>>>>>>> 0eddf54 (deploy!: rollback to vercel)
     "@vitest/ui": "^0.24.3",
     "eslint": "^8.24.0",
     "eslint-config-airbnb": "^19.0.4",
