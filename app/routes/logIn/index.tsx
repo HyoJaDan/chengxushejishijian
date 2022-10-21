@@ -28,6 +28,7 @@ export default function LoginIndex() {
         </Ipsu>
         <Go>
           같은 분야의 주니어들과 함께 집단지성에 기대보아요.
+          hello
         </Go>
       </Font>
       <Login>
