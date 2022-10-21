@@ -2,7 +2,9 @@ import styled from "styled-components"
 import KakaoLogin from "~/components/KakaoLogin";
 import GoogleLogin from "~/components/GoogleLogin";
 
+
 export default function logIn() {
+  
   return (
     <Wrapper>
       <Font>
@@ -20,9 +22,12 @@ export default function logIn() {
         <Go>
 <<<<<<< HEAD
           같은 분야의 주니어들과 함께 집단지성에 기대보아요.
+<<<<<<< HEAD
 =======
           같은 분야의 주니어들과 함께 집단지성에 기대보아요
 >>>>>>> 88d8716 (feat logIn)
+=======
+>>>>>>> d525eee (featLogin3)
         </Go>
       </Font>
       <LogIn>
@@ -33,7 +38,21 @@ export default function logIn() {
 =======
         <Kakao>카카오톡으로 계속하기</Kakao>
         <Google>구글로 계속하기</Google>
+<<<<<<< HEAD
 >>>>>>> 88d8716 (feat logIn)
+=======
+        <div id="g_id_onload"
+         data-client_id="189399095236-k1thmc2f2r2ves3ueb1j2520cuqbdkaj.apps.googleusercontent.com"
+         data-login_uri="the-pool-web-jun.vercel.app"
+         data-auto_prompt="false" />
+        <div className="g_id_signin"
+         data-type="standard"
+         data-size="large"
+         data-theme="outline"
+         data-text="sign_in_with"
+         data-shape="rectangular"
+         data-logo_alignment="left" />
+>>>>>>> d525eee (featLogin3)
       </LogIn>
     </Wrapper>
   )
