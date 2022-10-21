@@ -26,7 +26,7 @@ export default function logIn() {
           입수할 준비 되셨나요?
         </Ipsu>
         <Go>
-          같은 분야의 주니어들과 함께 집단지성에 기대보아요
+          같은 분야의 주니어들과 함께 집단지성에 기대보아요.
         </Go>
       </Font>
       <LogIn>
