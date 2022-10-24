@@ -52,4 +52,12 @@ export default function App() {
       </QueryClientProvider>
     </RecoilRoot>
   );
+<<<<<<< HEAD
 }
+=======
+}
+/*  
+ID : 381843233037-rocq96ugtv004gbrs920bjm4350lu296.apps.googleusercontent.com
+SECRET : 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
+*/
+>>>>>>> 1f94979 (Done GoogleLogIn)
