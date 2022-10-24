@@ -53,3 +53,7 @@ export default function App() {
     </RecoilRoot>
   );
 }
+/*  
+ID : 381843233037-rocq96ugtv004gbrs920bjm4350lu296.apps.googleusercontent.com
+SECRET : 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
+*/

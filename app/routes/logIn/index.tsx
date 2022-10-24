@@ -1,17 +1,7 @@
 import styled from "styled-components"
-import KakaoLogin from "~/components/login-components/kakao-login";
-import GoogleLogin from "~/components/login-components/google-login";
-import { KAKAO_JS_API } from "~/hooks/login-scipt/oAuth";
-import { useNavigate } from "@remix-run/react";
-import { useSetRecoilState } from 'recoil';
-import { loginInformation } from "~/recoils/user-info/atoms";
+import GoogleLogin from "~/components/GoogleLogin";
 
-export default function LoginIndex() {
-  const navigate = useNavigate();
-  const setLoginInfo = useSetRecoilState(loginInformation);
-/*   console.log("navigate", navigate);
-  console.log("setLoginInfo", setLoginInfo);
-  console.log("onSuccess", console.log); */
+export default function logIn() {
   return (
     <Wrapper>
       <Font>
@@ -32,33 +22,9 @@ export default function LoginIndex() {
       </Font>
       <Login>
         <Apple>애플로 계속하기</Apple>
-<<<<<<< HEAD
-        <KakaoLogin
-          token={KAKAO_JS_API}
-          onSuccess={console.log}
-          onFail={console.error}
-          onLogout={console.info}
-          navigate={navigate}
-          setLoginInfo={setLoginInfo}
-        />
-        <GoogleLogin />
-      </Login>
-=======
         <Kakao>카카오톡으로 계속하기</Kakao>
-        <Google>구글로 계속하기</Google>
-        <div id="g_id_onload"
-         data-client_id="189399095236-k1thmc2f2r2ves3ueb1j2520cuqbdkaj.apps.googleusercontent.com"
-         data-login_uri="the-pool-web-jun.vercel.app"
-         data-auto_prompt="false" />
-        <div className="g_id_signin"
-         data-type="standard"
-         data-size="large"
-         data-theme="outline"
-         data-text="sign_in_with"
-         data-shape="rectangular"
-         data-logo_alignment="left" />
+        <GoogleLogin/>
       </LogIn>
->>>>>>> 9f0fec7 (featLogin3)
     </Wrapper>
   )
 }
@@ -118,6 +84,28 @@ const Apple = styled.div`
 
   background: #000000;
   color:white;
+  border-radius: 15px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+`;
+const Kakao = styled.div`
+  width: 463px;
+  height: 80px;
+
+  background: #FFE459;
+  border-radius: 15px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+`;
+const Google = styled.div`
+  width: 463px;
+  height: 80px;
+
+  background: #EEEEEE;
   border-radius: 15px;
   display:flex;
   flex-direction:column;
