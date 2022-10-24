@@ -2,9 +2,7 @@ import styled from "styled-components"
 import KakaoLogin from "~/components/KakaoLogin";
 import GoogleLogin from "~/components/GoogleLogin";
 
-
 export default function logIn() {
-  
   return (
     <Wrapper>
       <Font>
@@ -37,6 +35,7 @@ export default function logIn() {
         <GoogleLogin/>
 =======
         <Kakao>카카오톡으로 계속하기</Kakao>
+<<<<<<< HEAD
         <Google>구글로 계속하기</Google>
 <<<<<<< HEAD
 >>>>>>> 88d8716 (feat logIn)
@@ -53,6 +52,9 @@ export default function logIn() {
          data-shape="rectangular"
          data-logo_alignment="left" />
 >>>>>>> d525eee (featLogin3)
+=======
+        <GoogleLogin/>
+>>>>>>> 1f94979 (Done GoogleLogIn)
       </LogIn>
     </Wrapper>
   )
@@ -143,6 +145,7 @@ const Google = styled.div`
   justify-content:center;
   align-items:center;
 `;
+<<<<<<< HEAD
 
 /* 
 
@@ -170,3 +173,5 @@ const Google = styled.div`
  */
 
 >>>>>>> 88d8716 (feat logIn)
+=======
+>>>>>>> 1f94979 (Done GoogleLogIn)
