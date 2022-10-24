@@ -1,8 +1,7 @@
 import styled from "styled-components"
-
+import GoogleLogin from "~/components/GoogleLogin";
 
 export default function logIn() {
-  
   return (
     <Wrapper>
       <Font>
@@ -24,18 +23,7 @@ export default function logIn() {
       <LogIn>
         <Apple>애플로 계속하기</Apple>
         <Kakao>카카오톡으로 계속하기</Kakao>
-        <Google>구글로 계속하기</Google>
-        <div id="g_id_onload"
-         data-client_id="189399095236-k1thmc2f2r2ves3ueb1j2520cuqbdkaj.apps.googleusercontent.com"
-         data-login_uri="the-pool-web-jun.vercel.app"
-         data-auto_prompt="false" />
-        <div className="g_id_signin"
-         data-type="standard"
-         data-size="large"
-         data-theme="outline"
-         data-text="sign_in_with"
-         data-shape="rectangular"
-         data-logo_alignment="left" />
+        <GoogleLogin/>
       </LogIn>
     </Wrapper>
   )
@@ -122,29 +110,3 @@ const Google = styled.div`
   justify-content:center;
   align-items:center;
 `;
-
-/* 
-
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '{your-app-id}',
-      cookie     : true,
-      xfbml      : true,
-      version    : '{api-version}'
-    });
-      
-    FB.AppEvents.logPageView();   
-      
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
- */
-
