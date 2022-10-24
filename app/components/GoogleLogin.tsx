@@ -7,7 +7,7 @@ export default function GoogleLogin() {
   const googleButtonRef = useRef();
   const [user, setUser] = useState(false);
 
-  const onGoogleSignIn = (usr) => {
+  const onGoogleSignIn = (usr:any) => {
     let userCred = usr.credential;
     let payload = jwt_deocde(userCred);
     setUser(payload);
@@ -20,13 +20,18 @@ export default function GoogleLogin() {
     });
     
     window.google.accounts.id.renderButton(googleButtonRef.current, {
-      size: "large",
+      size: "medium",
+      type: "icon",
     });
   })
-  
   return (
     <div>
-      <Google ref={googleButtonRef}>구글로 계속하기</Google>
+      <Button
+        onClick={() => {
+        }}>
+        <Google ref={googleButtonRef}/>
+        구글로 계속하기
+      </Button>
       {user && (
         <div>
           <h1>hello, {user.name}</h1>
@@ -40,12 +45,18 @@ export default function GoogleLogin() {
     </div>
   );
 }
-const Google = styled.div`
+const Button = styled.div`
   width: 463px;
   height: 80px;
-
   background: #EEEEEE;
   border-radius: 15px;
+  display:flex;
+  flex-direction:row;
+  justify-content:center;
+  align-items:center;
+`;
+const Google = styled.div`
+
   display:flex;
   flex-direction:column;
   justify-content:center;
