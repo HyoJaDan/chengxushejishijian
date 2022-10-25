@@ -13,7 +13,7 @@ export default function GoogleLogin() {
     setUser(payload);
   }
   
-  useScript("https://accounts.google.com/gsi/client", () => {
+  useScript("https://accounts.google.com/gsi/client" , () => {
     window.google.accounts.id.initialize({
       client_id: "815490852595-tor320oi16paha7tmhs4belkjrcj9k5n.apps.googleusercontent.com",
       callback: onGoogleSignIn,
@@ -26,12 +26,10 @@ export default function GoogleLogin() {
   })
   return (
     <div>
-      <Button
-        onClick={() => {
-        }}>
+      <DIV>
         <Google ref={googleButtonRef}/>
         구글로 계속하기
-      </Button>
+      </DIV>
       {user && (
         <div>
           <h1>hello, {user.name}</h1>
@@ -45,7 +43,7 @@ export default function GoogleLogin() {
     </div>
   );
 }
-const Button = styled.div`
+const DIV = styled.div`
   width: 463px;
   height: 80px;
   background: #EEEEEE;
