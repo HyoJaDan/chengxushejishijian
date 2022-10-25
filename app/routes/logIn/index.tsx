@@ -1,7 +1,25 @@
 import styled from "styled-components"
+import KakaoLogin from "~/components/KakaoLogin";
 import GoogleLogin from "~/components/GoogleLogin";
 
 export default function logIn() {
+  /* Window.Kakao.init("50ad32cbd67e304637f14d4a7155a9b3");
+  console.log(Kakao.isInitialized()); */
+  /* function KakaoLogin() {
+    window.Kakao.Auth.login({
+      scope: 'profile_nickname, profile_image, account_email, gender',
+      success: function (authObj) {
+        console.log(authObj);
+        Kakao.API.request({
+          url: 'v2/user/me',
+          success: res => {
+            const Kakao_account = res.Kakao_account;
+            console.log(Kakao_account);
+          }
+        });
+      }
+    })
+  } */
   return (
     <Wrapper>
       <Font>
@@ -22,7 +40,7 @@ export default function logIn() {
       </Font>
       <LogIn>
         <Apple>애플로 계속하기</Apple>
-        <Kakao>카카오톡으로 계속하기</Kakao>
+        <KakaoLogin />
         <GoogleLogin/>
       </LogIn>
     </Wrapper>
@@ -93,17 +111,6 @@ const Kakao = styled.div`
   height: 80px;
 
   background: #FFE459;
-  border-radius: 15px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-`;
-const Google = styled.div`
-  width: 463px;
-  height: 80px;
-
-  background: #EEEEEE;
   border-radius: 15px;
   display:flex;
   flex-direction:column;
