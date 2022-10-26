@@ -13,6 +13,7 @@ import globalStyle from '~/styles/global.css';
 import { GlobalNavigationBar } from './components/common/global-navigation-bar';
 
 
+
 export const meta: MetaFunction = () => ({
   charset: 'utf-8',
   title: 'New Remix App',

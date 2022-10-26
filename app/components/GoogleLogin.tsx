@@ -7,7 +7,8 @@ export default function GoogleLogin() {
   const googleButtonRef = useRef();
   const [user, setUser] = useState(false);
 
-  const onGoogleSignIn = (usr:any) => {
+  const onGoogleSignIn = (usr: any) => {
+    console.log("usr", usr);
     let userCred = usr.credential;
     let payload = jwt_deocde(userCred);
     setUser(payload);
