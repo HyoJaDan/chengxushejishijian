@@ -17,6 +17,17 @@ module.exports = {
     'prettier',
   ],
   rules: {
+    'react/function-component-definition': [
+      2,
+      {
+        namedComponents: [
+          'arrow-function',
+          'function-expression',
+          'function-declaration',
+        ],
+        unamedComponents: 'arrow-function',
+      },
+    ],
     'import/extensions': [
       'error',
       'ignorePackages',
