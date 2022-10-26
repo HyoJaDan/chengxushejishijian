@@ -13,6 +13,7 @@ import { RecoilRoot } from 'recoil';
 import globalStyle from '~/styles/global.css';
 import { GlobalNavigationBar } from './components/common/global-navigation-bar';
 
+
 export const meta: MetaFunction = () => ({
   charset: 'utf-8',
   title: 'New Remix App',
@@ -52,12 +53,4 @@ export default function App() {
       </QueryClientProvider>
     </RecoilRoot>
   );
-<<<<<<< HEAD
 }
-=======
-}
-/*  
-ID : 381843233037-rocq96ugtv004gbrs920bjm4350lu296.apps.googleusercontent.com
-SECRET : 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
-*/
->>>>>>> 1f94979 (Done GoogleLogIn)

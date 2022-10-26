@@ -28,7 +28,10 @@
         "ts": "never",
         "tsx": "never"
       }
+<<<<<<< HEAD
       
+=======
+>>>>>>> 8051c2e (feat KakaoLogin)
     ],
     "no-console":"off",
     "react/jsx-filename-extension": [

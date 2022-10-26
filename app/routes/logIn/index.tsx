@@ -3,6 +3,23 @@ import KakaoLogin from "~/components/KakaoLogin";
 import GoogleLogin from "~/components/GoogleLogin";
 
 export default function logIn() {
+  /* Window.Kakao.init("50ad32cbd67e304637f14d4a7155a9b3");
+  console.log(Kakao.isInitialized()); */
+  /* function KakaoLogin() {
+    window.Kakao.Auth.login({
+      scope: 'profile_nickname, profile_image, account_email, gender',
+      success: function (authObj) {
+        console.log(authObj);
+        Kakao.API.request({
+          url: 'v2/user/me',
+          success: res => {
+            const Kakao_account = res.Kakao_account;
+            console.log(Kakao_account);
+          }
+        });
+      }
+    })
+  } */
   return (
     <Wrapper>
       <Font>
@@ -119,8 +136,6 @@ const Apple = styled.div`
   justify-content:center;
   align-items:center;
 `;
-<<<<<<< HEAD
-=======
 const Kakao = styled.div`
   width: 463px;
   height: 80px;
@@ -132,44 +147,3 @@ const Kakao = styled.div`
   justify-content:center;
   align-items:center;
 `;
-const Google = styled.div`
-  width: 463px;
-  height: 80px;
-
-  background: #EEEEEE;
-  border-radius: 15px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-`;
-<<<<<<< HEAD
-
-/* 
-
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '{your-app-id}',
-      cookie     : true,
-      xfbml      : true,
-      version    : '{api-version}'
-    });
-      
-    FB.AppEvents.logPageView();   
-      
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
- */
-
->>>>>>> 88d8716 (feat logIn)
-=======
->>>>>>> 1f94979 (Done GoogleLogIn)
