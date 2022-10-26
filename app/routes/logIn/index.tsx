@@ -3,23 +3,6 @@ import KakaoLogin from "~/components/KakaoLogin";
 import GoogleLogin from "~/components/GoogleLogin";
 
 export default function logIn() {
-  /* Window.Kakao.init("50ad32cbd67e304637f14d4a7155a9b3");
-  console.log(Kakao.isInitialized()); */
-  /* function KakaoLogin() {
-    window.Kakao.Auth.login({
-      scope: 'profile_nickname, profile_image, account_email, gender',
-      success: function (authObj) {
-        console.log(authObj);
-        Kakao.API.request({
-          url: 'v2/user/me',
-          success: res => {
-            const Kakao_account = res.Kakao_account;
-            console.log(Kakao_account);
-          }
-        });
-      }
-    })
-  } */
   return (
     <Wrapper>
       <Font>
@@ -100,17 +83,6 @@ const Apple = styled.div`
 
   background: #000000;
   color:white;
-  border-radius: 15px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-`;
-const Kakao = styled.div`
-  width: 463px;
-  height: 80px;
-
-  background: #FFE459;
   border-radius: 15px;
   display:flex;
   flex-direction:column;
