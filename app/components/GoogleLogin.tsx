@@ -2,6 +2,7 @@ import styled from "styled-components";
 import {useState,useRef} from "react";
 import jwt_deocde from "jwt-decode";
 import { useScript } from '../hooks/useScript';
+import { GOOGLE_SCRIPT, GOOGLE_CLIENT_ID } from "~/hooks/OAuth";
 
 export default function GoogleLogin() {
   const googleButtonRef = useRef();
@@ -14,9 +15,9 @@ export default function GoogleLogin() {
     setUser(payload);
   }
   
-  useScript("https://accounts.google.com/gsi/client" , () => {
+  useScript(GOOGLE_SCRIPT , () => {
     window.google.accounts.id.initialize({
-      client_id: "815490852595-tor320oi16paha7tmhs4belkjrcj9k5n.apps.googleusercontent.com",
+      client_id:GOOGLE_CLIENT_ID,
       callback: onGoogleSignIn,
     });
     
@@ -61,7 +62,3 @@ const Google = styled.div`
   justify-content:center;
   align-items:center;
 `;
-/* 
-815490852595-tor320oi16paha7tmhs4belkjrcj9k5n.apps.googleusercontent.com
-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
-*/
