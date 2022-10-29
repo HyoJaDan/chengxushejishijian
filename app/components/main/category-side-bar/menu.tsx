@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { useSelectedSubCategory } from '~/contexts/main/selected-sub-category';
@@ -21,9 +22,11 @@ export const CategoryMenu: FC = () => {
     </CategoryButton>
   ));
 
-  if (subCategories.length > 0) {
-    initialize(subCategories[0]);
-  }
+  useEffect(() => {
+    if (subCategories.length > 0) {
+      initialize(subCategories[0]);
+    }
+  }, [subCategories, initialize]);
 
   return (
     <Wrapper>
