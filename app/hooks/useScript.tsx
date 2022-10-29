@@ -2,8 +2,6 @@ import { useEffect } from "react";
 
 export const useScript = (url: string, onload: any) => {
   useEffect(() => {
-    console.log("url", url);
-    console.log("onload", onload);
     let script = document.createElement("script");
     script.src = url;
     script.onload = onload;

@@ -17,6 +17,7 @@
     "plugin:jsx-a11y/recommended",
     "prettier"
   ],
+  "arrow-body-style": ["error", "never"],
   "rules": {
     "import/extensions": [
       "error",
@@ -27,6 +28,7 @@
         "ts": "never",
         "tsx": "never"
       }
+      
     ],
     "no-console":"off",
     "react/jsx-filename-extension": [
