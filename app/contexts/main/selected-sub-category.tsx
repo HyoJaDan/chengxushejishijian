@@ -2,22 +2,24 @@ import type { FC, PropsWithChildren } from 'react';
 import { createContext, useContext, useRef, useState } from 'react';
 import type { Category } from '~/services/categories/interface';
 
-const defaultSelectedSubCategory: Category = {
+export const defaultSelectedSubCategory: Category = {
   id: -1,
   name: '',
 };
 
 type SelectedSubCategoryContext = {
-  selectedSubCategory: Category | undefined;
+  selectedSubCategory: Category;
   setSelectedSubCategory: (category: Category) => void;
   initialize: (category: Category) => void;
 };
 
 const selectedSubCategoryContext = createContext<SelectedSubCategoryContext>({
   selectedSubCategory: defaultSelectedSubCategory,
+  /* c8 ignore start */
   setSelectedSubCategory: (_) => {},
   initialize: (_) => {},
 });
+/* c8 ignore stop */
 
 export const SelectedSubCategoryProvider: FC<PropsWithChildren> = ({
   children,

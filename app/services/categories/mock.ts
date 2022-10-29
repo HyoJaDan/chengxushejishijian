@@ -27,5 +27,5 @@ export const mockCategoryService: CategoryService = {
         { id: 24, name: 'Web' },
         { id: 25, name: '기타개발' },
       ],
-    ][category.id - 1],
+    ][category.id - 1] ?? [],
 };

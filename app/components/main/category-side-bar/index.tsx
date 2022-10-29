@@ -1,7 +1,7 @@
 import { RecoilRoot } from 'recoil';
 import styled from 'styled-components';
 import { SelectedSubCategoryProvider } from '~/contexts/main/selected-sub-category';
-import { useCategories } from '~/hooks/main/use-categories-query';
+import { useCategories } from '~/hooks/main/use-categories';
 import { mainCategoryProvider } from '~/recoils/main/main-category-provider';
 import { CategoryMenu } from './menu';
 

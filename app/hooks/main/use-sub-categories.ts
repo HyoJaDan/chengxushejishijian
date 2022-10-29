@@ -11,5 +11,3 @@ export function useSubCategories(category: Category) {
 
   return subCategories.data ?? [];
 }
-
-export function useInitSubCategoryEffect() {}

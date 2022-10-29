@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { useSelectedSubCategory } from '~/contexts/main/selected-sub-category';
-import { useSubCategories } from '~/hooks/main/use-sub-categories-query';
+import { useSubCategories } from '~/hooks/main/use-sub-categories';
 import { mainCategoryProvider } from '~/recoils/main/main-category-provider';
 
 export const CategoryMenu: FC = () => {
@@ -14,7 +14,7 @@ export const CategoryMenu: FC = () => {
   const subCategoryChildren = subCategories.map((subCategory) => (
     <CategoryButton
       key={`sub-category-${subCategory.id}`}
-      selected={selectedSubCategory?.id === subCategory.id}
+      selected={selectedSubCategory.id === subCategory.id}
       onClick={() => setSelectedSubCategory(subCategory)}
     >
       {subCategory.name}
