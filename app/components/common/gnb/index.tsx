@@ -1,7 +1,7 @@
-import type { FC, PropsWithChildren } from 'react';
 import styled from 'styled-components';
+import type { FCChildren } from '~/components/common/types/function-component';
 
-export const GNB: FC<PropsWithChildren> = ({ children }) => (
+export const GNB: FCChildren = ({ children }) => (
   <>
     <Wrapper>
       GNB 영역 입니다.

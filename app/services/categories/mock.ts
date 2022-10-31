@@ -1,7 +1,7 @@
 import type { CategoryService } from './interface';
 
 export const mockCategoryService: CategoryService = {
-  getCategories: async () => [
+  getMainCategories: async () => [
     {
       id: 1,
       name: '디자인',

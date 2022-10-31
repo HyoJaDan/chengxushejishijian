@@ -7,7 +7,7 @@ export default function HomePage() {
     <MainWrapper>
       <GridWrapper>
         <TopBanner />
-        <CategorySideBar />
+        <SideBar />
         <MainContent>메인 컨텐츠.</MainContent>
       </GridWrapper>
     </MainWrapper>
@@ -26,6 +26,10 @@ const GridWrapper = styled.div`
   column-gap: 24px;
   row-gap: 64px;
   min-height: 100%;
+`;
+
+const SideBar = styled(CategorySideBar)`
+  grid-column: 1 / 3;
 `;
 
 const TopBanner = styled(Banner)`

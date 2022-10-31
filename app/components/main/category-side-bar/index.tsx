@@ -1,25 +1,23 @@
-import { RecoilRoot } from 'recoil';
 import styled from 'styled-components';
+import type { FCClass } from '~/components/common/types/function-component';
 import { SelectedSubCategoryProvider } from '~/contexts/main/selected-sub-category';
-import { useCategories } from '~/hooks/main/use-categories';
-import { mainCategoryProvider } from '~/recoils/main/main-category-provider';
-import { CategoryMenu } from './menu';
+import { useMainCategories } from '~/hooks/main/use-categories';
+import { MainCategoryMenu } from './main-category-menu';
 
-export const CategorySideBar = () => {
-  const categories = useCategories();
+export const CategorySideBar: FCClass = ({ className }) => {
+  const categories = useMainCategories();
+
+  const mainCategoriesChildren = categories.map((category) => (
+    <MainCategoryMenu
+      key={`main-category-${category.id}`}
+      mainCategory={category}
+    />
+  ));
+
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       <SelectedSubCategoryProvider>
-        {categories.map((category) => (
-          <RecoilRoot
-            key={`main-category-${category.id}`}
-            initializeState={(snapshot) => {
-              snapshot.set(mainCategoryProvider, category);
-            }}
-          >
-            <CategoryMenu />
-          </RecoilRoot>
-        ))}
+        {...mainCategoriesChildren}
       </SelectedSubCategoryProvider>
     </Wrapper>
   );

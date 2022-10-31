@@ -4,14 +4,14 @@ import { mockCategoryService } from './mock';
 
 describe('Mock Categories Service', () => {
   it('should return two categories', async () => {
-    const categories = await mockCategoryService.getCategories();
+    const categories = await mockCategoryService.getMainCategories();
     expect(categories).not.toBeUndefined();
     expect(categories).not.toBeNull();
     expect(categories).toHaveLength(2);
   });
 
   it('should return sub categories of the first one', async () => {
-    const categories = await mockCategoryService.getCategories();
+    const categories = await mockCategoryService.getMainCategories();
     const subCategories = await mockCategoryService.getSubCategories(
       categories[0]
     );
@@ -21,7 +21,7 @@ describe('Mock Categories Service', () => {
   });
 
   it('should return sub categories of the second one', async () => {
-    const categories = await mockCategoryService.getCategories();
+    const categories = await mockCategoryService.getMainCategories();
     const subCategories = await mockCategoryService.getSubCategories(
       categories[1]
     );

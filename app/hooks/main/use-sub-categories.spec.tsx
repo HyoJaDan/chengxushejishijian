@@ -15,7 +15,7 @@ describe('useSubCategories', () => {
   );
 
   it('should return mock sub categories for 디자인', async () => {
-    const design = (await mockCategoryService.getCategories()).filter(
+    const design = (await mockCategoryService.getMainCategories()).filter(
       (category) => category.name === '디자인'
     )[0];
     const expected = await mockCategoryService.getSubCategories(design);
@@ -24,7 +24,7 @@ describe('useSubCategories', () => {
   });
 
   it('should return mock sub categories for 개발', async () => {
-    const develop = (await mockCategoryService.getCategories()).filter(
+    const develop = (await mockCategoryService.getMainCategories()).filter(
       (category) => category.name === '개발'
     )[0];
     const expected = await mockCategoryService.getSubCategories(develop);

@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { RecoilRoot } from 'recoil';
 import { describe, it } from 'vitest';
 import { mockCategoryService } from '~/services/categories/mock';
-import { useCategories } from './use-categories';
+import { useMainCategories } from './use-categories';
 
 describe('useCategoriesQuery', () => {
   const queryClient = new QueryClient();
@@ -14,8 +14,8 @@ describe('useCategoriesQuery', () => {
     </RecoilRoot>
   );
   it('should return mock categories', async () => {
-    const mockCategories = await mockCategoryService.getCategories();
-    const { result } = renderHook(() => useCategories(), {
+    const mockCategories = await mockCategoryService.getMainCategories();
+    const { result } = renderHook(() => useMainCategories(), {
       wrapper,
     });
     await waitFor(() => expect(result.current).toEqual(mockCategories));

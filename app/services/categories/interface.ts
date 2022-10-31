@@ -1,5 +1,5 @@
 export interface CategoryService {
-  getCategories(): Promise<Required<Category>[]>;
+  getMainCategories(): Promise<MainCategory[]>;
   getSubCategories(category: Category): Promise<Category[]>;
 }
 
@@ -8,3 +8,5 @@ export type Category = {
   name: string;
   color?: string;
 };
+
+export type MainCategory = Required<Category>;
