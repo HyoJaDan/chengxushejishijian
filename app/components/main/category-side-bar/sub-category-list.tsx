@@ -18,19 +18,17 @@ export const SubCategoryList: FC<SubCategoriesProps> = ({ subCategories }) => {
     }
   }, [subCategories, initialize]);
 
-  return (
-    <Wrapper>
-      {subCategories.map((subCategory) => (
-        <CategoryButton
-          key={`sub-category-${subCategory.id}`}
-          selected={selectedSubCategory.id === subCategory.id}
-          onClick={() => setSelectedSubCategory(subCategory)}
-        >
-          {subCategory.name}
-        </CategoryButton>
-      ))}
-    </Wrapper>
-  );
+  const subCategoryButtons = subCategories.map((subCategory) => (
+    <CategoryButton
+      key={`sub-category-${subCategory.id}`}
+      selected={selectedSubCategory.id === subCategory.id}
+      onClick={() => setSelectedSubCategory(subCategory)}
+    >
+      {subCategory.name}
+    </CategoryButton>
+  ));
+
+  return <Wrapper>{subCategoryButtons}</Wrapper>;
 };
 
 const Wrapper = styled.ul`

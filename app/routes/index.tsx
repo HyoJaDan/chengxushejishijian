@@ -7,7 +7,9 @@ export default function HomePage() {
     <MainWrapper>
       <GridWrapper>
         <TopBanner />
-        <SideBar />
+        <StikcySideBar>
+          <SideBarContent />
+        </StikcySideBar>
         <MainContent>메인 컨텐츠.</MainContent>
       </GridWrapper>
     </MainWrapper>
@@ -26,10 +28,17 @@ const GridWrapper = styled.div`
   column-gap: 24px;
   row-gap: 64px;
   min-height: 100%;
+  position: relative;
 `;
 
-const SideBar = styled(CategorySideBar)`
+const StikcySideBar = styled.aside`
   grid-column: 1 / 3;
+  position: relative;
+`;
+
+const SideBarContent = styled(CategorySideBar)`
+  position: sticky;
+  top: 0;
 `;
 
 const TopBanner = styled(Banner)`
@@ -39,4 +48,5 @@ const TopBanner = styled(Banner)`
 const MainContent = styled.main`
   grid-column: 3 / -1;
   background-color: green;
+  height: 2000px;
 `;

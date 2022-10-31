@@ -17,13 +17,13 @@ export const CategorySideBar: FCClass = ({ className }) => {
   return (
     <Wrapper className={className}>
       <SelectedSubCategoryProvider>
-        {...mainCategoriesChildren}
+        {mainCategoriesChildren}
       </SelectedSubCategoryProvider>
     </Wrapper>
   );
 };
 
-const Wrapper = styled.aside`
+const Wrapper = styled.nav`
   grid-column: 1 / 3;
   display: flex;
   flex-direction: column;

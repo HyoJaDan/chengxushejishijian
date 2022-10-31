@@ -20,7 +20,7 @@ export const MainCategoryMenu: FC<MainCategoryProps> = ({ mainCategory }) => {
   );
 };
 
-const Wrapper = styled.nav`
+const Wrapper = styled.div`
   --menu-gap: 8px;
   --header-bottom-margin: 24px;
   display: flex;
