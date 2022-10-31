@@ -6,7 +6,9 @@
     "dev": "node --require @lukalabs/esbuild-inject-plugin -- ./node_modules/.bin/remix dev",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "e2e": "playwright test",
+    "e2e:report": "playwright show-report"
   },
   "dependencies": {
     "@remix-run/node": "^1.7.2",
@@ -25,6 +27,7 @@
   "devDependencies": {
     "@lukalabs/esbuild-inject-plugin": "^1.0.2",
     "@lukalabs/esbuild-styled-components": "^1.0.0",
+    "@playwright/test": "^1.27.1",
     "@remix-run/dev": "^1.7.2",
     "@remix-run/eslint-config": "^1.7.2",
     "@remix-run/serve": "^1.7.2",

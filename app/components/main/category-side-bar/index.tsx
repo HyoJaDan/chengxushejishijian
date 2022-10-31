@@ -15,7 +15,7 @@ export const CategorySideBar: FCClass = ({ className }) => {
   ));
 
   return (
-    <Wrapper className={className}>
+    <Wrapper id='category-side-bar' className={className}>
       <SelectedSubCategoryProvider>
         {mainCategoriesChildren}
       </SelectedSubCategoryProvider>
