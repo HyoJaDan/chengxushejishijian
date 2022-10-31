@@ -7,17 +7,21 @@ export const defaultSelectedSubCategory: Category = {
   name: '',
 };
 
-type SelectedSubCategoryContext = {
+interface SelectedSubCategoryContext {
   selectedSubCategory: Category;
   setSelectedSubCategory: (category: Category) => void;
   initialize: (category: Category) => void;
-};
+}
 
 const selectedSubCategoryContext = createContext<SelectedSubCategoryContext>({
   selectedSubCategory: defaultSelectedSubCategory,
   /* c8 ignore start */
-  setSelectedSubCategory: (_) => {},
-  initialize: (_) => {},
+  setSelectedSubCategory: (_) => {
+    throw Error('Not implemented');
+  },
+  initialize: (_) => {
+    throw Error('Not implemented');
+  },
 });
 /* c8 ignore stop */
 
