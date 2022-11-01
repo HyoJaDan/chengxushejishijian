@@ -14,7 +14,7 @@ Platform:
   darwin arm64
 
 Trace: 
-  SyntaxError: /Users/jun/thePool/main_project/package.json: Unexpected token / in JSON at position 473
+  SyntaxError: /Users/jun/thePool/main_project/package.json: Unexpected token < in JSON at position 785
       at JSON.parse (<anonymous>)
       at /opt/homebrew/Cellar/yarn/1.22.19/libexec/lib/cli.js:1629:59
       at Generator.next (<anonymous>)
@@ -31,7 +31,7 @@ npm manifest:
       "dev:remix": "cross-env NODE_ENV=development node --require @lukalabs/esbuild-inject-plugin -- ./node_modules/.bin/remix watch",
       "dev:miniflare": "cross-env NODE_ENV=development miniflare ./build/index.js --watch",
       "dev": "yarn run build && run-p dev:*",
-      /* "start": "cross-env NODE_ENV=production miniflare ./build/index.js", */
+      "start": "export PORT=3001 && react-scripts start",
       "test": "vitest",
       "test:ui": "vitest --ui",
       "coverage": "vitest run --coverage"
@@ -41,13 +41,21 @@ npm manifest:
       "@remix-run/cloudflare-workers": "^1.7.2",
       "@remix-run/react": "^1.7.2",
       "axios": "^1.1.2",
-      "cross-env": "^7.0.3",
+  <<<<<<< HEAD
       "jwt-decode": "^3.1.2",
+  =======
+      "cross-env": "^7.0.3",
+  <<<<<<< HEAD
+  >>>>>>> 89c568a (config!: vitest, cf workers)
+  =======
+      "jwt-decode": "^3.1.2",
+  >>>>>>> 1f94979 (Done GoogleLogIn)
       "lodash": "^4.17.21",
       "react": "^18.2.0",
       "react-dom": "^18.2.0",
+      "react-hook-form": "^7.38.0",
       "react-query": "^3.39.2",
-      "recoil": "^0.7.5",
+      "recoil": "^0.7.6",
       "styled-components": "^5.3.5"
     },
     "devDependencies": {
@@ -6905,6 +6913,11 @@ Lockfile:
       loose-envify "^1.1.0"
       scheduler "^0.23.0"
   
+  react-hook-form@^7.38.0:
+    version "7.38.0"
+    resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.38.0.tgz#53d6a68df587ce4ce88352f63e0ecc7fc8779320"
+    integrity sha512-gxWW1kMeru9xR1GoR+Iw4hA+JBOM3SHfr4DWCUKY0xc7Vv1MLsF109oHtBeWl9shcyPFx67KHru44DheN0XY5A==
+  
   react-is@^16.13.1, react-is@^16.7.0:
     version "16.13.1"
     resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
@@ -6999,7 +7012,7 @@ Lockfile:
       source-map "~0.6.1"
       tslib "^2.0.1"
   
-  recoil@^0.7.5:
+  recoil@^0.7.6:
     version "0.7.6"
     resolved "https://registry.yarnpkg.com/recoil/-/recoil-0.7.6.tgz#75297ecd70bbfeeb72e861aa6141a86bb6dfcd5e"
     integrity sha512-hsBEw7jFdpBCY/tu2GweiyaqHKxVj6EqF2/SfrglbKvJHhpN57SANWvPW+gE90i3Awi+A5gssOd3u+vWlT+g7g==
