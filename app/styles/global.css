@@ -111,18 +111,6 @@ video {
   font: inherit;
   vertical-align: baseline;
 }
-<<<<<<< HEAD
-=======
-
-body {
-  background-color: #E9EAEC;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
->>>>>>> 9f78b98 (feat logIn)
 /* HTML5 display-role reset for older browsers */
 article,
 aside,
@@ -175,12 +163,19 @@ table {
 a {
   text-decoration: none;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 0eefa3b (feat login Detail)
 }
 .cb1{
   width: 25px;
   height: 25px;
   border: 1px solid #BEBEBE;
+<<<<<<< HEAD
 }
 =======
 }
 >>>>>>> 9f78b98 (feat logIn)
+=======
+}
+>>>>>>> 0eefa3b (feat login Detail)
