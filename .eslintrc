@@ -19,6 +19,8 @@
   ],
   "arrow-body-style": ["error", "never"],
   "rules": {
+    "no-console": "off",
+    "react/jsx-props-no-spreading": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
@@ -29,11 +31,13 @@
         "tsx": "never"
       }
 <<<<<<< HEAD
+<<<<<<< HEAD
       
 =======
 >>>>>>> 8051c2e (feat KakaoLogin)
+=======
+>>>>>>> 02cff90 (feat login Detail)
     ],
-    "no-console":"off",
     "react/jsx-filename-extension": [
       1,
       {

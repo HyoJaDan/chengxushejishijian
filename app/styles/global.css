@@ -172,3 +172,8 @@ table {
 a {
   text-decoration: none;
 }
+.cb1{
+  width: 25px;
+  height: 25px;
+  border: 1px solid #BEBEBE;
+}
