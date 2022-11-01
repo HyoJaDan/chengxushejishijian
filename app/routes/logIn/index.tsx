@@ -3,23 +3,6 @@ import KakaoLogin from "~/components/KakaoLogin";
 import GoogleLogin from "~/components/GoogleLogin";
 
 export default function logIn() {
-  /* Window.Kakao.init("50ad32cbd67e304637f14d4a7155a9b3");
-  console.log(Kakao.isInitialized()); */
-  /* function KakaoLogin() {
-    window.Kakao.Auth.login({
-      scope: 'profile_nickname, profile_image, account_email, gender',
-      success: function (authObj) {
-        console.log(authObj);
-        Kakao.API.request({
-          url: 'v2/user/me',
-          success: res => {
-            const Kakao_account = res.Kakao_account;
-            console.log(Kakao_account);
-          }
-        });
-      }
-    })
-  } */
   return (
     <Wrapper>
       <Font>
@@ -35,28 +18,15 @@ export default function logIn() {
           입수할 준비 되셨나요?
         </Ipsu>
         <Go>
-<<<<<<< HEAD
+
           같은 분야의 주니어들과 함께 집단지성에 기대보아요.
-<<<<<<< HEAD
-=======
-          같은 분야의 주니어들과 함께 집단지성에 기대보아요
->>>>>>> 88d8716 (feat logIn)
-=======
->>>>>>> d525eee (featLogin3)
+
         </Go>
       </Font>
       <Login>
         <Apple>애플로 계속하기</Apple>
-<<<<<<< HEAD
         <KakaoLogin />
         <GoogleLogin/>
-=======
-        <Kakao>카카오톡으로 계속하기</Kakao>
-<<<<<<< HEAD
-        <Google>구글로 계속하기</Google>
-<<<<<<< HEAD
->>>>>>> 88d8716 (feat logIn)
-=======
         <div id="g_id_onload"
          data-client_id="189399095236-k1thmc2f2r2ves3ueb1j2520cuqbdkaj.apps.googleusercontent.com"
          data-login_uri="the-pool-web-jun.vercel.app"
@@ -68,10 +38,6 @@ export default function logIn() {
          data-text="sign_in_with"
          data-shape="rectangular"
          data-logo_alignment="left" />
->>>>>>> d525eee (featLogin3)
-=======
-        <GoogleLogin/>
->>>>>>> 1f94979 (Done GoogleLogIn)
       </LogIn>
     </Wrapper>
   )
