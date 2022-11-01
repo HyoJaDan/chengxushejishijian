@@ -10,5 +10,6 @@ export default defineConfig({
     globals: true,
     environment: 'happy-dom',
     exclude: ['**/node_modules/**', 'e2e'],
+    // setupFiles: ['<rootDir>/__test__/setupTests.ts'],
   },
 });
