@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { mockCategoryService } from '~/services/categories/mock';
-import '../../__test__/setupTests';
+import '../../../__test__/setupTests';
 
 describe('MSW handlers', () => {
   it('should return same data with mock service', async () => {
