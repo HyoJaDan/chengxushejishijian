@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import styled from 'styled-components';
-import { useSelectedCategory } from '~/recoils/main/selected-sub-category';
+import { useSelectedCategory } from '~/hooks/main/use-selected-category';
 import type { Category } from '~/services/categories/interface';
 
 type SubCategoriesProps = {

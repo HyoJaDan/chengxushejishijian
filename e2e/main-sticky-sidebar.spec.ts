@@ -1,7 +1,8 @@
 import { expect, test } from '@playwright/test';
 
+const port = process.env.PORT_NUM ?? 3000;
 test(`Main page's sidebar should be stick to the top`, async ({ page }) => {
-  await page.goto('http://localhost:3000');
+  await page.goto(`http://localhost:${port}`);
 
   await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
 
