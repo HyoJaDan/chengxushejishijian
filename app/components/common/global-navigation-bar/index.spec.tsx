@@ -1,13 +1,13 @@
 import matchers from '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import { GNB } from '.';
+import { GlobalNavigationBar } from '.';
 
 expect.extend(matchers);
 
 describe('GNB', () => {
   beforeEach(() => {
-    render(<GNB />);
+    render(<GlobalNavigationBar />);
   });
   it('should render 과제 button', () => {
     const button = screen.getByText(/과제/);

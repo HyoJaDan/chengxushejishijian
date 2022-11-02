@@ -11,7 +11,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { RecoilRoot } from 'recoil';
 
 import globalStyle from '~/styles/global.css';
-import { GNB } from './components/common/gnb';
+import { GlobalNavigationBar } from './components/common/global-navigation-bar';
 
 export const meta: MetaFunction = () => ({
   charset: 'utf-8',
@@ -31,7 +31,6 @@ export const links: LinksFunction = () => [
 const queryClient = new QueryClient();
 
 export default function App() {
-  const Header = GNB;
   return (
     <RecoilRoot>
       <QueryClientProvider client={queryClient}>
@@ -42,9 +41,9 @@ export default function App() {
             {typeof document === 'undefined' ? '__STYLES__' : null}
           </head>
           <body>
-            <Header>
+            <GlobalNavigationBar>
               <Outlet />
-            </Header>
+            </GlobalNavigationBar>
             <ScrollRestoration />
             <Scripts />
             <LiveReload />

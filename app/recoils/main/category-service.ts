@@ -5,5 +5,8 @@ import { recoilKeySuffix } from '~/utils/recoil-key';
 
 export const categoryServiceAtom = atom<CategoryService>({
   key: `categoryServiceAtom${recoilKeySuffix}`,
-  default: mockCategoryService,
+  default:
+    process.env.NODE_ENV === 'development'
+      ? mockCategoryService
+      : mockCategoryService,
 });
