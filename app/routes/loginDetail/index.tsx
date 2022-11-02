@@ -1,8 +1,8 @@
-import styled from "styled-components"
-import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { Datas } from "~/recoil/atoms";
+import styled from "styled-components"
+import { useForm } from "react-hook-form";
 
 interface IUserData{
   userName: string;
@@ -13,7 +13,8 @@ interface IUserData{
 export default function Detail() {
   const [datas, setDatas] = useRecoilState(Datas);
   const [nowUserPool, setNowUserPool] = useState("Initial");
-  const { register,
+  const {
+    register,
     handleSubmit,
     setValue,
     trigger,
@@ -143,13 +144,13 @@ const Wrapper=styled.div`
   align-items:flex-start;
   justify-content:space-evenly;
   padding : 43px 0px 20px 59px;
-`
+`;
 const MainHeader = styled.div`
   font-weight: 700;
   font-size: 24px;
   line-height: 29px;
   height:45px;
-`
+`;
 const HeaderText = styled.div`
   font-weight: 600;
   font-size: 16px;
@@ -231,7 +232,7 @@ const CheckboxSpan = styled.span`
 `;
 const ButtonDiv = styled.div`
   width: -webkit-fill-available;
-`
+`;
 const Btn = styled.button`
   background: #8EAEFF;
   border: 1px solid transparent;
