@@ -1,4 +1,4 @@
-import type { MetaFunction } from '@remix-run/node';
+import type { LinksFunction, MetaFunction } from '@remix-run/node';
 import {
   Links,
   LiveReload,
@@ -7,6 +7,11 @@ import {
   Scripts,
   ScrollRestoration,
 } from '@remix-run/react';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { RecoilRoot } from 'recoil';
+
+import globalStyle from '~/styles/global.css';
+import { GNB } from './components/common/gnb';
 
 export const meta: MetaFunction = () => ({
   charset: 'utf-8',
@@ -14,20 +19,38 @@ export const meta: MetaFunction = () => ({
   viewport: 'width=device-width,initial-scale=1',
 });
 
+export const links: LinksFunction = () => [
+  { rel: 'stylesheet', href: globalStyle },
+  {
+    rel: 'preload',
+    href: 'https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css',
+    as: 'style',
+  },
+];
+
+const queryClient = new QueryClient();
+
 export default function App() {
+  const Header = GNB;
   return (
-    <html lang='en'>
-      <head>
-        <Meta />
-        <Links />
-        {typeof document === 'undefined' ? '__STYLES__' : null}
-      </head>
-      <body>
-        <Outlet />
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
-      </body>
-    </html>
+    <RecoilRoot>
+      <QueryClientProvider client={queryClient}>
+        <html lang='en'>
+          <head>
+            <Meta />
+            <Links />
+            {typeof document === 'undefined' ? '__STYLES__' : null}
+          </head>
+          <body>
+            <Header>
+              <Outlet />
+            </Header>
+            <ScrollRestoration />
+            <Scripts />
+            <LiveReload />
+          </body>
+        </html>
+      </QueryClientProvider>
+    </RecoilRoot>
   );
 }

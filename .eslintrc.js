@@ -14,9 +14,22 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
     'plugin:jsx-a11y/recommended',
+    'plugin:@typescript-eslint/recommended',
     'prettier',
   ],
   rules: {
+    'react/prop-types': 0,
+    'react/function-component-definition': [
+      2,
+      {
+        namedComponents: [
+          'arrow-function',
+          'function-expression',
+          'function-declaration',
+        ],
+        unamedComponents: 'arrow-function',
+      },
+    ],
     'import/extensions': [
       'error',
       'ignorePackages',
