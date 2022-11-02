@@ -2,7 +2,7 @@ import { act, renderHook, waitFor } from '@testing-library/react';
 import { RecoilRoot } from 'recoil';
 import { describe, it } from 'vitest';
 import type { Category } from '~/services/categories/interface';
-import { useSelectedCategory } from './selected-sub-category';
+import { useSelectedCategory } from './use-selected-category';
 
 describe('useSelectedCategory', () => {
   it('returns undefined at first', () => {
