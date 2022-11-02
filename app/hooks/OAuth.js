@@ -1,5 +1,6 @@
 const KAKAO_CLIENT_ID = '3e9c669c67ad90137b5fa81e117199f5';
 const KAKAO_REDIRECT_URI = 'http://localhost:3000/logIn/Kakao';
+/** 로그인을 위한 카카오 주소 */
 export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
 export const KAKAO_SCRIPT =
   'https://t1.kakaocdn.net/kakao_js_sdk/2.0.0/kakao.min.js';

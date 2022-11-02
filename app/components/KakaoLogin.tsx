@@ -6,7 +6,6 @@ export default function KakaoLogin() {
   useScript(KAKAO_SCRIPT , () => {
     window.Kakao.init(KAKAO_JS_API);
   })
-  
   return (
     <div>
       <a href={KAKAO_AUTH_URL}>
