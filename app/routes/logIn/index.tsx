@@ -1,6 +1,8 @@
 import styled from "styled-components"
 import KakaoLogin from "~/components/KakaoLogin";
 import GoogleLogin from "~/components/GoogleLogin";
+import Temp from "~/components/tempLogin";
+import { KAKAO_JS_API } from "~/hooks/OAuth";
 
 export default function logIn() {
   return (
@@ -24,7 +26,13 @@ export default function logIn() {
       <LogIn>
         <Apple>애플로 계속하기</Apple>
         <KakaoLogin />
-        <GoogleLogin/>
+        <GoogleLogin />
+        <Temp
+          token={KAKAO_JS_API}
+          onSuccess={console.log}
+          onFail={console.error}
+          onLogout={console.info}
+        />
       </LogIn>
     </Wrapper>
   )
