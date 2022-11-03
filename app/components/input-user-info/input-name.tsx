@@ -15,7 +15,7 @@ export default function InputUserName({ register, errors }: IInputUserName) {
         required: "이름을 적어주세요"
       })} placeholder="    사용자 이름을 입력해주세요." />
       <Errmessage>
-        { errors?.userName?.message}
+        { errors.userName?.message}
       </Errmessage>
     </InputName>
   );
