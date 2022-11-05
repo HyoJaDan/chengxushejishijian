@@ -1,4 +1,5 @@
-import { CSSProperties, ReactChild, ReactNode } from "react";
+import type{ CSSProperties, ReactChild, ReactNode } from "react";
+
 interface KakaoError {
   error: string;
   error_description: string;

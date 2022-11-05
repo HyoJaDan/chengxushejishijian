@@ -1,19 +1,27 @@
 import React from "react";
-import { loadSdk, DEFAULT_STYLE } from "./utils";
-import { ExtendedWindow, Props, State } from "./types";
+import styled from "styled-components";
+import { loadSdk, DEFAULT_STYLE } from "../../hooks/login-scipt/kakao-script";
+import type{ ExtendedWindow, Props, State } from "./kakao-types";
 
 declare let window: ExtendedWindow;
 
 export default class KakaoLogin extends React.PureComponent<Props, State> {
-  state = { isLoggedIn: false };
-
+  
   public static DEFAULT_STYLE = DEFAULT_STYLE;
 
-  public async componentDidMount() {
-    await loadSdk();
-    window.Kakao.init(this.props.token);
+  constructor(props : any) {
+    super(props);
+    this.state={
+      isLoggedIn: false 
+    }
   }
-  
+
+  public async componentDidMount() {
+    const { token } = this.props;
+    await loadSdk();
+    window.Kakao.init(token);
+  }
+
   private onButtonClick = () => {
     const {
       throughTalk = true,
@@ -23,10 +31,9 @@ export default class KakaoLogin extends React.PureComponent<Props, State> {
       onSuccess,
       onFail,
     } = this.props;
-    console.log("hello",throughTalk);
     const method = useLoginForm ? "loginForm" : "login";
-      
-    (window.Kakao?.Auth)[method]({
+
+    (window.Kakao.Auth)[method]({
       throughTalk,
       persistAccessToken,
       success: (response) => {
@@ -50,35 +57,43 @@ export default class KakaoLogin extends React.PureComponent<Props, State> {
   };
 
   private onLogout = () => {
+    const { onLogout } = this.props;
     window.Kakao?.Auth.logout(() => {
-      this.props.onLogout?.(window.Kakao?.Auth.getAccessToken());
+      onLogout?.(window.Kakao?.Auth.getAccessToken());
       this.setState({ isLoggedIn: false });
     });
   };
 
   public render() {
-    console.log("this",this);
     const { isLoggedIn } = this.state;
     const onClick = isLoggedIn ? this.onLogout : this.onButtonClick;
     const {
       render,
       className = "",
       style = DEFAULT_STYLE,
-      children = "카카오로 로그인하기",
+      children = "카카오톡으로 계속하기",
     } = this.props;
     if (typeof render === "function") {
       return render({ onClick });
     }
 
     return (
-      <button
+      <Button
         type="button"
         className={className}
         onClick={onClick}
         style={style}
       >
         {children}
-      </button>
+      </Button>
     );
   }
 }
+const Button = styled.div`
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  color:black;
+`;

@@ -1,16 +1,16 @@
 import styled from "styled-components";
 import {useState,useRef} from "react";
 import jwt_deocde from "jwt-decode";
-import { useScript } from '../hooks/useScript';
-import { GOOGLE_SCRIPT, GOOGLE_CLIENT_ID } from "~/hooks/OAuth";
+import { useScript } from '../../hooks/login-scipt/google-script';
+import { GOOGLE_SCRIPT, GOOGLE_CLIENT_ID } from "~/hooks/login-scipt/oAuth";
 
 export default function GoogleLogin() {
   const googleButtonRef = useRef();
   const [user, setUser] = useState(false);
 
   const onGoogleSignIn = (usr:any) => {
-    let userCred = usr.credential;
-    let payload = jwt_deocde(userCred);
+    const userCred = usr.credential;
+    const payload = jwt_deocde(userCred);
     setUser(payload);
   }
   
@@ -34,7 +34,8 @@ export default function GoogleLogin() {
       {user && (
         <div>
           <h1>hello, {user.name}</h1>
-          <button onClick={() => {
+          <button
+            onClick={() => {
             setUser(false);
           }}>
             logOut
@@ -55,7 +56,6 @@ const DIV = styled.div`
   align-items:center;
 `;
 const Google = styled.div`
-
   display:flex;
   flex-direction:column;
   justify-content:center;

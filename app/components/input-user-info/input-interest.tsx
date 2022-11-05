@@ -9,7 +9,7 @@ export default function InputUserInterests({register}:any) {
       <GridCheckbox>
         <Gapcheckbox>
           <input {...register("checkbox")} type="checkbox"  id="1" className="cb1" value="백엔드개발" />
-          <Label htmlFor=""><CheckboxSpan>백엔드개발</CheckboxSpan></Label>
+          <Label htmlFor="1"><CheckboxSpan>백엔드개발</CheckboxSpan></Label>
         </Gapcheckbox>
         <Gapcheckbox>
           <input {...register("checkbox")} type="checkbox" id="2" className="cb1" value="IOS" />

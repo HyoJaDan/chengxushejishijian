@@ -1,8 +1,7 @@
 import styled from "styled-components"
-import KakaoLogin from "~/components/KakaoLogin";
-import GoogleLogin from "~/components/GoogleLogin";
-import Temp from "~/components/tempLogin";
-import { KAKAO_JS_API } from "~/hooks/OAuth";
+import GoogleLogin from "~/components/login-components/google-login";
+import KakaoLogin from "~/components/login-components/kakao-login";
+import { KAKAO_JS_API } from "~/hooks/login-scipt/oAuth";
 
 export default function logIn() {
   return (
@@ -25,14 +24,13 @@ export default function logIn() {
       </Font>
       <LogIn>
         <Apple>애플로 계속하기</Apple>
-        <KakaoLogin />
-        <GoogleLogin />
-        <Temp
+        <KakaoLogin
           token={KAKAO_JS_API}
           onSuccess={console.log}
           onFail={console.error}
           onLogout={console.info}
         />
+        <GoogleLogin />
       </LogIn>
     </Wrapper>
   )
@@ -84,6 +82,7 @@ const LogIn = styled.div`
   font-size:20px;
   line-height:24px;
   font-weight:700;
+  cursor: pointer;
 `;
 const Apple = styled.div`
   width: 463px;
