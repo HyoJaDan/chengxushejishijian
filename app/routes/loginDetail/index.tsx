@@ -35,6 +35,7 @@ export default function Detail() {
       setNowUserPool("Initial");
     }
     else setNowUserPool("false");
+    console.log(window);
   }
   console.log("유저 데이터", datas);
   return (

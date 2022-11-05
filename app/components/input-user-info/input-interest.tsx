@@ -9,11 +9,7 @@ export default function InputUserInterests({register}:any) {
       <GridCheckbox>
         <Gapcheckbox>
           <input {...register("checkbox")} type="checkbox"  id="1" className="cb1" value="백엔드개발" />
-<<<<<<< HEAD
           <Label htmlFor="1"><CheckboxSpan>백엔드개발</CheckboxSpan></Label>
-=======
-          <Label htmlFor=""><CheckboxSpan>백엔드개발</CheckboxSpan></Label>
->>>>>>> 99cda6e (feat logindetail)
         </Gapcheckbox>
         <Gapcheckbox>
           <input {...register("checkbox")} type="checkbox" id="2" className="cb1" value="IOS" />
@@ -65,10 +61,7 @@ const GridCheckbox = styled.div`
   grid-template-columns:1fr 1fr 1fr;
   justify-items:start;
   width: -webkit-fill-available;
-<<<<<<< HEAD
   gap:5px;
-=======
->>>>>>> 99cda6e (feat logindetail)
 `;
 const Gapcheckbox = styled.div`
   display:flex;

@@ -97,7 +97,6 @@ export default class KakaoLogin extends React.PureComponent<Props, State> {
     );
   }
 }
-
 const Button = styled.div`
   font-family: 'Pretendard';
   font-style: normal;

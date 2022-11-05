@@ -144,10 +144,13 @@ export interface Props {
   render?: ({ onClick }: { onClick: () => void }) => ReactNode;
   /** 클래스 이름 */
   className?: string;
+<<<<<<< HEAD
 
   navigate: Function;
 
   setLoginInfo: Function;
+=======
+>>>>>>> bee42df (done kakao login)
 }
 
 export interface State {
