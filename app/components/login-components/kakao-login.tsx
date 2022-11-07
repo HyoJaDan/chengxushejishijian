@@ -1,4 +1,5 @@
 import React from "react";
+import { useSubmit } from '@remix-run/react';
 import styled from "styled-components";
 import {  platform } from '~/recoils/user-info/atoms';
 import { loadSdk, DEFAULT_STYLE } from "../../hooks/login-scipt/kakao-script";
@@ -74,6 +75,8 @@ export default class KakaoLogin extends React.PureComponent<Props, State> {
   };
 
   public render() {
+    /* const [loginInfo, setLoginInfo] = useRecoilState(loginInformation); */
+    const submit = useSubmit();
     const { isLoggedIn } = this.state;
     const onClick = isLoggedIn ? this.onLogout : this.onButtonClick;
     const {

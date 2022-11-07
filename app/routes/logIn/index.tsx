@@ -1,6 +1,6 @@
 import styled from "styled-components"
-import GoogleLogin from "~/components/login-components/google-login";
 import KakaoLogin from "~/components/login-components/kakao-login";
+import GoogleLogin from "~/components/login-components/google-login";
 import { KAKAO_JS_API } from "~/hooks/login-scipt/oAuth";
 
 export default function logIn() {
