@@ -1,8 +1,6 @@
 import React from "react";
-import { useSubmit } from '@remix-run/react';
 import styled from "styled-components";
-/* import { useRecoilState } from 'recoil';
-import { loginInformation, platform } from '~/recoil/user-info/atoms'; */
+import {  platform } from '~/recoil/user-info/atoms';
 import { loadSdk, DEFAULT_STYLE } from "../../hooks/login-scipt/kakao-script";
 import type{ ExtendedWindow, Props, State } from "./kakao-types";
 
@@ -33,6 +31,8 @@ export default class KakaoLogin extends React.PureComponent<Props, State> {
       useLoginForm = false,
       onSuccess,
       onFail,
+      setLoginInfo,
+      navigate,
     } = this.props;
     const method = useLoginForm ? "loginForm" : "login";
 
@@ -48,15 +48,18 @@ export default class KakaoLogin extends React.PureComponent<Props, State> {
             success: (profile) => {
               const result = { response, profile };
               onSuccess(result);
-              let a= profile.properties.nickname
-              
+              setLoginInfo({
+                isloggedin: true,
+                platform: platform.KAKAO,
+                name: profile.properties.nickname
+              })
             },
             fail: onFail,
           });
         } else {
           onSuccess({ response });
         }
-        submit(null, { action: "/login/Detail" });
+        navigate("/login/Detail");
       },
       fail: onFail,
     });
@@ -71,8 +74,6 @@ export default class KakaoLogin extends React.PureComponent<Props, State> {
   };
 
   public render() {
-    /* const [loginInfo, setLoginInfo] = useRecoilState(loginInformation); */
-    const submit = useSubmit();
     const { isLoggedIn } = this.state;
     const onClick = isLoggedIn ? this.onLogout : this.onButtonClick;
     const {
@@ -96,6 +97,7 @@ export default class KakaoLogin extends React.PureComponent<Props, State> {
     );
   }
 }
+
 const Button = styled.div`
   font-family: 'Pretendard';
   font-style: normal;

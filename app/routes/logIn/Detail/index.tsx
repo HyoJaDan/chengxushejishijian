@@ -39,7 +39,6 @@ export default function Detail() {
     else setNowUserPool("false");
     submit(null, { action: "/" });
   }
-  console.log("유저 데이터", datas);
   return (
     <Wrapper>
       <MainHeader>회원 정보</MainHeader>

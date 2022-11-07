@@ -2,8 +2,13 @@ import styled from "styled-components"
 import KakaoLogin from "~/components/login-components/kakao-login";
 import GoogleLogin from "~/components/login-components/google-login";
 import { KAKAO_JS_API } from "~/hooks/login-scipt/oAuth";
+import { useNavigate } from "@remix-run/react";
+import { useSetRecoilState } from 'recoil';
+import { loginInformation } from "~/recoil/user-info/atoms";
 
-export default function logIn() {
+export default function LogIn() {
+  const navigate = useNavigate();
+  const setLoginInfo = useSetRecoilState(loginInformation);
   return (
     <Wrapper>
       <Font>
@@ -22,16 +27,18 @@ export default function logIn() {
           같은 분야의 주니어들과 함께 집단지성에 기대보아요.
         </Go>
       </Font>
-      <LogIn>
+      <Login>
         <Apple>애플로 계속하기</Apple>
         <KakaoLogin
           token={KAKAO_JS_API}
           onSuccess={console.log}
           onFail={console.error}
           onLogout={console.info}
+          navigate={navigate}
+          setLoginInfo={setLoginInfo}
         />
         <GoogleLogin />
-      </LogIn>
+      </Login>
     </Wrapper>
   )
 }
@@ -74,7 +81,7 @@ const Go = styled.div`
   line-height: 1.6;
   margin-bottom:20px;
 `;
-const LogIn = styled.div`
+const Login = styled.div`
   display:flex;
   flex-direction:column;
   justify-content:center;

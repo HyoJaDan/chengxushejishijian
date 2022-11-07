@@ -143,6 +143,10 @@ export interface Props {
   render?: ({ onClick }: { onClick: () => void }) => ReactNode;
   /** 클래스 이름 */
   className?: string;
+
+  navigate: any;
+
+  setLoginInfo: any;
 }
 
 export interface State {

@@ -2,8 +2,14 @@ import styled from 'styled-components';
 import { Banner } from '~/components/main/banner';
 import { CategorySideBar } from '~/components/main/category-side-bar';
 import { Link } from '@remix-run/react';
+import { useRecoilValue } from 'recoil';
+import { loginInformation, Datas } from "~/recoil/user-info/atoms"
 
-export default function HomePage() {
+export default function Index() {
+  const loginInfo = useRecoilValue(loginInformation);
+  const datas = useRecoilValue(Datas);
+  console.log("loginInfo",loginInfo);
+  console.log("유저 데이터", datas);
   return (
     <MainWrapper>
       <Link to="logIn">log in</Link>

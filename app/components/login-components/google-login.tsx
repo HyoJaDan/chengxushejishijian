@@ -3,10 +3,10 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import { loginInformation,platform } from '~/recoil/user-info/atoms';
-import { useSubmit} from '@remix-run/react';
+import { useNavigate } from '@remix-run/react';
 
 export default function GoogleLogin() {
-  const submit = useSubmit();
+  const navigate = useNavigate();
   const [loginInfo, setLoginInfo] = useRecoilState(loginInformation);
   const login = useGoogleLogin({
     onSuccess: async tokenResponse => {
@@ -23,11 +23,10 @@ export default function GoogleLogin() {
           platform: platform.Google,
           name: userInfo.data.name,
         });
-      submit(null, { action: "/login/Detail" });
+      navigate("/login/Detail");
     },
     onError: errorResponse => console.log(errorResponse),
   })
-  console.log("loginInfo",loginInfo);
   
   return (
     <div>
