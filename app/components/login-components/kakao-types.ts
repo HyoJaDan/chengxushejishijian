@@ -145,12 +145,19 @@ export interface Props {
   /** 클래스 이름 */
   className?: string;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
   navigate: Function;
 
   setLoginInfo: Function;
 =======
 >>>>>>> bee42df (done kakao login)
+=======
+
+  navigate: any;
+
+  setLoginInfo: any;
+>>>>>>> 5ac765d (feat login-detail)
 }
 
 export interface State {

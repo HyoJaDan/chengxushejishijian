@@ -1,7 +1,10 @@
 import React from "react";
-import { useSubmit } from '@remix-run/react';
 import styled from "styled-components";
+<<<<<<< HEAD
 import {  platform } from '~/recoils/user-info/atoms';
+=======
+import {  platform } from '~/recoil/user-info/atoms';
+>>>>>>> 5ac765d (feat login-detail)
 import { loadSdk, DEFAULT_STYLE } from "../../hooks/login-scipt/kakao-script";
 import type{ ExtendedWindow, Props, State } from "./kakao-types";
 
@@ -75,8 +78,6 @@ export default class KakaoLogin extends React.PureComponent<Props, State> {
   };
 
   public render() {
-    /* const [loginInfo, setLoginInfo] = useRecoilState(loginInformation); */
-    const submit = useSubmit();
     const { isLoggedIn } = this.state;
     const onClick = isLoggedIn ? this.onLogout : this.onButtonClick;
     const {
@@ -100,6 +101,7 @@ export default class KakaoLogin extends React.PureComponent<Props, State> {
     );
   }
 }
+
 const Button = styled.div`
   font-family: 'Pretendard';
   font-style: normal;

@@ -2,7 +2,11 @@ import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
+<<<<<<< HEAD
 import { loginInformation,platform } from '~/recoils/user-info/atoms';
+=======
+import { loginInformation,platform } from '~/recoil/user-info/atoms';
+>>>>>>> 5ac765d (feat login-detail)
 import { useNavigate } from '@remix-run/react';
 
 export default function GoogleLogin() {

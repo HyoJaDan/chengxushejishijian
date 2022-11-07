@@ -2,8 +2,13 @@ import styled from "styled-components"
 import KakaoLogin from "~/components/login-components/kakao-login";
 import GoogleLogin from "~/components/login-components/google-login";
 import { KAKAO_JS_API } from "~/hooks/login-scipt/oAuth";
+import { useNavigate } from "@remix-run/react";
+import { useSetRecoilState } from 'recoil';
+import { loginInformation } from "~/recoil/user-info/atoms";
 
-export default function logIn() {
+export default function LogIn() {
+  const navigate = useNavigate();
+  const setLoginInfo = useSetRecoilState(loginInformation);
   return (
     <Wrapper>
       <Font>
@@ -29,9 +34,11 @@ export default function logIn() {
           onSuccess={console.log}
           onFail={console.error}
           onLogout={console.info}
+          navigate={navigate}
+          setLoginInfo={setLoginInfo}
         />
         <GoogleLogin />
-      </LogIn>
+      </Login>
     </Wrapper>
   )
 }

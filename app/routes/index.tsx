@@ -9,7 +9,6 @@ export default function Index() {
   const datas = useRecoilValue(Datas);
   console.log("loginInfo",loginInfo);
   console.log("유저 데이터", datas);
-
   return (
     <MainWrapper>
       <GridWrapper>
