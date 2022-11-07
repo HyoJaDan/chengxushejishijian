@@ -9,7 +9,6 @@ import {
 } from '@remix-run/react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { RecoilRoot } from 'recoil';
-
 import globalStyle from '~/styles/global.css';
 import { GlobalNavigationBar } from './components/common/global-navigation-bar';
 

@@ -3,7 +3,7 @@
     "remix.env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "app/recoil/user-info"  ],
   "compilerOptions": {
     "types": [
       "node",

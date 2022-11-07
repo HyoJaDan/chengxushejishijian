@@ -1,63 +1,49 @@
-import styled from "styled-components";
-import {useState,useRef} from "react";
-import jwt_deocde from "jwt-decode";
-import { useScript } from '../../hooks/login-scipt/google-script';
-import { GOOGLE_SCRIPT, GOOGLE_CLIENT_ID } from "~/hooks/login-scipt/oAuth";
+import { useGoogleLogin } from '@react-oauth/google';
+import axios from 'axios';
+import styled from 'styled-components';
+import { useRecoilState } from 'recoil';
+import { loginInformation,platform } from '~/recoil/user-info/atoms';
+import { useSubmit} from '@remix-run/react';
 
 export default function GoogleLogin() {
-  const googleButtonRef = useRef();
-  const [user, setUser] = useState(false);
-
-  const onGoogleSignIn = (usr:any) => {
-    const userCred = usr.credential;
-    const payload = jwt_deocde(userCred);
-    setUser(payload);
-  }
-  
-  useScript(GOOGLE_SCRIPT , () => {
-    window.google.accounts.id.initialize({
-      client_id:GOOGLE_CLIENT_ID,
-      callback: onGoogleSignIn,
-    });
-    
-    window.google.accounts.id.renderButton(googleButtonRef.current, {
-      size: "medium",
-      type: "icon",
-    });
+  const submit = useSubmit();
+  const [loginInfo, setLoginInfo] = useRecoilState(loginInformation);
+  const login = useGoogleLogin({
+    onSuccess: async tokenResponse => {
+      const userInfo = await axios.get(
+        'https://www.googleapis.com/oauth2/v3/userinfo',
+        {
+          headers: {
+            Authorization: `Bearer ${tokenResponse.access_token}`
+          }
+        },
+        )
+        setLoginInfo({
+          isloggedin: true,
+          platform: platform.Google,
+          name: userInfo.data.name,
+        });
+      submit(null, { action: "/login/Detail" });
+    },
+    onError: errorResponse => console.log(errorResponse),
   })
+  console.log("loginInfo",loginInfo);
+  
   return (
     <div>
-      <DIV>
-        <Google ref={googleButtonRef}/>
+      <Google onClick={() => { login(); }}>
         구글로 계속하기
-      </DIV>
-      {user && (
-        <div>
-          <h1>hello, {user.name}</h1>
-          <button
-            onClick={() => {
-            setUser(false);
-          }}>
-            logOut
-          </button>
-        </div>
-      )}
+      </Google>
     </div>
   );
 }
-const DIV = styled.div`
+const Google = styled.div`
   width: 463px;
   height: 80px;
   background: #EEEEEE;
   border-radius: 15px;
   display:flex;
   flex-direction:row;
-  justify-content:center;
-  align-items:center;
-`;
-const Google = styled.div`
-  display:flex;
-  flex-direction:column;
   justify-content:center;
   align-items:center;
 `;

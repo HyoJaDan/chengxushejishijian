@@ -1,10 +1,11 @@
 import { useRecoilState } from "recoil";
-import { Datas ,UserPool } from "~/recoil/atoms";
-import styled from "styled-components"
+import { Datas ,UserPool } from "~/recoil/user-info/atoms";
 import { useForm } from "react-hook-form";
+import { useSubmit} from '@remix-run/react';
+import styled from "styled-components"
 import InputUserArea from "~/components/input-user-info/input-area";
 import InputUserInterests from "~/components/input-user-info/input-interest";
-import InputUserName from '../../components/input-user-info/input-name';
+import InputUserName from '../../../components/input-user-info/input-name';
 
 export interface IUserData{
   userName: string;
@@ -12,6 +13,7 @@ export interface IUserData{
   checkbox: [];
 }
 export default function Detail() {
+  const submit = useSubmit();
   const [datas, setDatas] = useRecoilState(Datas);
   const [nowUserPool, setNowUserPool] = useRecoilState(UserPool);
   const {
@@ -31,11 +33,11 @@ export default function Detail() {
         checkbox : data.checkbox,
       }, ... oldDatas])
       setValue("userName", "");
-      setValue("checkbox", "","");
+      setValue("checkbox", "");
       setNowUserPool("Initial");
     }
     else setNowUserPool("false");
-    console.log(window);
+    submit(null, { action: "/" });
   }
   console.log("유저 데이터", datas);
   return (
