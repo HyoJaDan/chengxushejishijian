@@ -4,11 +4,14 @@ import GoogleLogin from "~/components/login-components/google-login";
 import { KAKAO_JS_API } from "~/hooks/login-scipt/oAuth";
 import { useNavigate } from "@remix-run/react";
 import { useSetRecoilState } from 'recoil';
-import { loginInformation } from "~/recoil/user-info/atoms";
+import { loginInformation } from "~/recoils/user-info/atoms";
 
-export default function LogIn() {
+export default function LoginIndex() {
   const navigate = useNavigate();
   const setLoginInfo = useSetRecoilState(loginInformation);
+/*   console.log("navigate", navigate);
+  console.log("setLoginInfo", setLoginInfo);
+  console.log("onSuccess", console.log); */
   return (
     <Wrapper>
       <Font>
@@ -42,8 +45,7 @@ export default function LogIn() {
     </Wrapper>
   )
 }
-
-const Wrapper=styled.div`
+const Wrapper = styled.div`
   position: absolute;
   width: 780px;
   height: 644px;
@@ -58,8 +60,9 @@ const Wrapper=styled.div`
   flex-direction:column;
   justify-content:center;
   align-items:center;
-`
+  `
 const Font = styled.div``;
+
 const Insert = styled.div`
   font-size: 36px;
   line-height: 2.3;

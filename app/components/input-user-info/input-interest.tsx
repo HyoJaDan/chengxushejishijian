@@ -61,6 +61,7 @@ const GridCheckbox = styled.div`
   grid-template-columns:1fr 1fr 1fr;
   justify-items:start;
   width: -webkit-fill-available;
+  gap:5px;
 `;
 const Gapcheckbox = styled.div`
   display:flex;

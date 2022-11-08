@@ -111,15 +111,6 @@ video {
   font: inherit;
   vertical-align: baseline;
 }
-
-body {
-  background-color: #E9EAEC;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 /* HTML5 display-role reset for older browsers */
 article,
 aside,

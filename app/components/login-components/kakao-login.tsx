@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {  platform } from '~/recoil/user-info/atoms';
+import {  platform } from '~/recoils/user-info/atoms';
 import { loadSdk, DEFAULT_STYLE } from "../../hooks/login-scipt/kakao-script";
 import type{ ExtendedWindow, Props, State } from "./kakao-types";
 
@@ -10,7 +10,7 @@ export default class KakaoLogin extends React.PureComponent<Props, State> {
   
   public static DEFAULT_STYLE = DEFAULT_STYLE;
 
-  constructor(props : any) {
+  constructor(props: Props) {
     super(props);
     this.state={
       isLoggedIn: false 

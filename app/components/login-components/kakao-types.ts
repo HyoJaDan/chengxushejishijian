@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import type{ CSSProperties, ReactChild, ReactNode } from "react";
 
 interface KakaoError {
@@ -144,9 +145,9 @@ export interface Props {
   /** 클래스 이름 */
   className?: string;
 
-  navigate: any;
+  navigate: Function;
 
-  setLoginInfo: any;
+  setLoginInfo: Function;
 }
 
 export interface State {

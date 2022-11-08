@@ -23,10 +23,7 @@
     "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-<<<<<<< HEAD
-=======
     "react-hook-form": "^7.39.0",
->>>>>>> 7e03000 (fix localhost Err)
     "react-query": "^3.39.2",
     "recoil": "^0.7.5",
     "styled-components": "^5.3.5"
@@ -38,10 +35,7 @@
     "@remix-run/dev": "^1.7.2",
     "@remix-run/eslint-config": "^1.7.2",
     "@remix-run/serve": "^1.7.2",
-<<<<<<< HEAD
     "@testing-library/jest-dom": "^5.16.5",
-=======
->>>>>>> 7e03000 (fix localhost Err)
     "@testing-library/react": "^13.4.0",
     "@testing-library/react-hooks": "^8.0.1",
     "@testing-library/user-event": "^14.4.3",
@@ -51,10 +45,7 @@
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.38.0",
     "@vitejs/plugin-react": "^2.1.0",
-<<<<<<< HEAD
     "@vitest/coverage-c8": "^0.24.3",
-=======
->>>>>>> 0eddf54 (deploy!: rollback to vercel)
     "@vitest/ui": "^0.24.3",
     "eslint": "^8.24.0",
     "eslint-config-airbnb": "^19.0.4",

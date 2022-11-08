@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useRecoilState } from 'recoil';
-import { UserPool } from "~/recoil/user-info/atoms";
+import { UserPool } from "~/recoils/user-info/atoms";
 
 export default function InputUserArea({ trigger }: any) {
   const [nowUserPool, setNowUserPool] = useRecoilState(UserPool);

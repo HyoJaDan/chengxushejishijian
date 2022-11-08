@@ -1,5 +1,5 @@
-import { useRecoilState } from "recoil";
-import { Datas ,UserPool } from "~/recoil/user-info/atoms";
+import { useSetRecoilState,useRecoilState } from "recoil";
+import { Datas ,UserPool } from "~/recoils/user-info/atoms";
 import { useForm } from "react-hook-form";
 import { useSubmit} from '@remix-run/react';
 import styled from "styled-components"
@@ -14,12 +14,11 @@ export interface IUserData{
 }
 export default function Detail() {
   const submit = useSubmit();
-  const [datas, setDatas] = useRecoilState(Datas);
+  const setDatas = useSetRecoilState(Datas);
   const [nowUserPool, setNowUserPool] = useRecoilState(UserPool);
   const {
     register,
     handleSubmit,
-    setValue,
     trigger,
     formState: { errors },
   } = useForm<IUserData>();
@@ -32,12 +31,10 @@ export default function Detail() {
         userPool: nowUserPool,
         checkbox : data.checkbox,
       }, ... oldDatas])
-      setValue("userName", "");
-      setValue("checkbox", "");
       setNowUserPool("Initial");
+      submit(null, { action: "/" });
     }
     else setNowUserPool("false");
-    submit(null, { action: "/" });
   }
   return (
     <Wrapper>
