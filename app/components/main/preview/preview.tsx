@@ -1,5 +1,3 @@
-import type { FC } from "react";
+import type { FC } from 'react';
 
-export const Preview:FC = () => <div>
-      hello
-    </div>;
+export const Preview: FC = () => <div>hello</div>;

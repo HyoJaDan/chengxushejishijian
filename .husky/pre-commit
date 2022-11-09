@@ -1,8 +1,11 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-yarn eslint --max-warnings 0 ${staged}
+staged=$(git diff --cached --name-only | grep -E '\.(js|jsx|ts|tsx)$')
+yarn prettier --ignore-unknown -w ${staged}
 
-yarn prettier -c ${staged}
+yarn eslint --no-error-on-unmatched-pattern --max-warnings 0 --fix ${staged}
+
+git add ${staged}
 
 yarn test run
