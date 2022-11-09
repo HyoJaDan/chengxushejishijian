@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-yarn eslint app/
+yarn eslint --max-warnings 0 ${staged}
 
-yarn prettier -- -c app/
+yarn prettier -c ${staged}
 
-yarn test -- run
+yarn test run
