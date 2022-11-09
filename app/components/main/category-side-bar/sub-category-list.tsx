@@ -1,7 +1,6 @@
 import type { FC } from 'react';
-import { useEffect } from 'react';
 import styled from 'styled-components';
-import { useSelectedSubCategory } from '~/contexts/main/selected-sub-category';
+import { useSelectedCategory } from '~/hooks/main/use-selected-category';
 import type { Category } from '~/services/categories/interface';
 
 type SubCategoriesProps = {
@@ -9,20 +8,16 @@ type SubCategoriesProps = {
 };
 
 export const SubCategoryList: FC<SubCategoriesProps> = ({ subCategories }) => {
-  const { selectedSubCategory, setSelectedSubCategory, initialize } =
-    useSelectedSubCategory();
+  const { selectedCategory, setSelectedCategory, useInitializeOnce } =
+    useSelectedCategory();
 
-  useEffect(() => {
-    if (subCategories.length > 0) {
-      initialize(subCategories[0]);
-    }
-  }, [subCategories, initialize]);
+  useInitializeOnce(subCategories[0]);
 
   const subCategoryButtons = subCategories.map((subCategory) => (
     <CategoryButton
       key={`sub-category-${subCategory.id}`}
-      selected={selectedSubCategory.id === subCategory.id}
-      onClick={() => setSelectedSubCategory(subCategory)}
+      selected={selectedCategory?.id === subCategory.id}
+      onClick={() => setSelectedCategory(subCategory)}
     >
       {subCategory.name}
     </CategoryButton>

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import type { FCClass } from '~/components/common/types/function-component';
-import { SelectedSubCategoryProvider } from '~/contexts/main/selected-sub-category';
 import { useMainCategories } from '~/hooks/main/use-categories';
 import { MainCategoryMenu } from './main-category-menu';
 
@@ -16,9 +15,7 @@ export const CategorySideBar: FCClass = ({ className }) => {
 
   return (
     <Wrapper id='category-side-bar' className={className}>
-      <SelectedSubCategoryProvider>
-        {mainCategoriesChildren}
-      </SelectedSubCategoryProvider>
+      {mainCategoriesChildren}
     </Wrapper>
   );
 };
