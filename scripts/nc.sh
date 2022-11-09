@@ -9,37 +9,35 @@ if [ -z "$FILEPATH" ]; then
     exit 1
 fi
 
-# create new react component file
-# 1. create directory inside the "./components" directory if not exists
-# 2. extract basename of the file path
-# 3. change the file to kebab-case
-# 4. extension is .tsx
-# 5. create file
+# get the directory path from FILEPATH prefixed with a app/components/
+DIRPATH=./app/components/$FILEPATH
 
-# save the target directory name to a variable
-DIR=./components/$(dirname $FILEPATH)
-mkdir -p $DIR
-# save the kebab-case file name to a variable
-FILE=$(basename $FILEPATH | sed -e 's/\([a-z]\)\([A-Z]\)/\1-\2/g' | tr '[:upper:]' '[:lower:]').tsx
-touch $DIR/$FILE
+# create a directory if not exists
+if [ ! -d "$DIRPATH" ]; then
+    mkdir -p "$DIRPATH"
+fi
 
-# add boilerplate code to the created file
-# 1. import FC type from the react library
-# 2. declare export statement with a const react function component
-# named with $FILEPATH
-# 3. return a div with the text "Hello World" inside the component
-# 4. create index.tsx file in the same directory
-# 5. add export statement for the created component in the index.tsx file
+# get the file name and append .tsx to it
+FILENAME=$(basename "$FILEPATH").tsx
 
-echo "import { FC } from 'react';" >> $DIR/$FILE
+# change base of FILEPATH from kebab-case to PascalCase 
+COMPONENT=$(basename "$FILEPATH" | gsed -E 's/(^|-)([a-zA-Z0-9])/\U\2/g')
 
-# save the component name to a variable, it should be a PascalCase
-COMPONENT=$(basename $FILE | sed -e 's/\([a-z]\)\([A-Z]\)/\1-\2/g' | tr '[:lower:]' '[:upper:]' | sed -e 's/-\([a-z]\)/\U\1/g' | sed -e 's/^\([a-z]\)/\U\1/g' | sed -e 's/\.tsx//g')
+# create a file in DIRPATH
+touch "$DIRPATH/$FILENAME"
 
-echo "export const $COMPONENT: FC = () => {" >> $DIR/$FILE
-echo "  return <div>Hello World</div>;" >> $DIR/$FILE
-echo "}" >> $DIR/$FILE
+echo "import { FC } from 'react';
 
-# create index.tsx file
-touch $DIR/index.tsx
-echo "export * from './$FILE';" >> $DIR/index.tsx
+export const $COMPONENT: FC = () => {
+  return (
+    <div>
+      hello world
+    </div>
+  );
+};" >> "$DIRPATH/$FILENAME"
+
+# create a index.tsx in DIRPATH
+touch "$DIRPATH/index.tsx"
+
+RELATIVE=$(basename $FILEPATH)
+echo "export { ${COMPONENT} } from './${RELATIVE}';" >> "$DIRPATH/index.tsx"
