@@ -18,15 +18,16 @@ if [ ! -d "$DIRPATH" ]; then
 fi
 
 # get the file name and append .tsx to it
-FILENAME=$(basename "$FILEPATH").tsx
+FILEBASE=$(basename "$FILEPATH")
+FILENAME=$FILEBASE.tsx
 
 # change base of FILEPATH from kebab-case to PascalCase 
-COMPONENT=$(basename "$FILEPATH" | gsed -E 's/(^|-)([a-zA-Z0-9])/\U\2/g')
+COMPONENT=$(echo "$FILEBASE" | gsed -E 's/(^|-)([a-zA-Z0-9])/\U\2/g')
 
 # create a file in DIRPATH
 touch "$DIRPATH/$FILENAME"
 
-echo "import { FC } from 'react';
+echo "import type { FC } from 'react';
 
 export const $COMPONENT: FC = () => {
   return (
@@ -37,7 +38,7 @@ export const $COMPONENT: FC = () => {
 };" >> "$DIRPATH/$FILENAME"
 
 # create a index.tsx in DIRPATH
-touch "$DIRPATH/index.tsx"
+INDEXFILE=$DIRPATH/index.tsx
+touch "$INDEXFILE"
 
-RELATIVE=$(basename $FILEPATH)
-echo "export { ${COMPONENT} } from './${RELATIVE}';" >> "$DIRPATH/index.tsx"
+echo "export { ${COMPONENT} } from './${FILEBASE}';" >> "$INDEXFILE"
