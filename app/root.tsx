@@ -9,10 +9,10 @@ import {
 } from '@remix-run/react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { RecoilRoot } from 'recoil';
+import styled from 'styled-components';
+
 import globalStyle from '~/styles/global.css';
 import { GlobalNavigationBar } from './components/common/global-navigation-bar';
-
-
 
 export const meta: MetaFunction = () => ({
   charset: 'utf-8',
@@ -42,9 +42,12 @@ export default function App() {
             {typeof document === 'undefined' ? '__STYLES__' : null}
           </head>
           <body>
-            <GlobalNavigationBar>
-              <Outlet />
-            </GlobalNavigationBar>
+            <Wrapper>
+              <GlobalNavigationBar />
+              <ContentArea>
+                <Outlet />
+              </ContentArea>
+            </Wrapper>
             <ScrollRestoration />
             <Scripts />
             <LiveReload />
@@ -54,3 +57,12 @@ export default function App() {
     </RecoilRoot>
   );
 }
+
+const Wrapper = styled.div`
+  position: relative;
+`;
+
+const ContentArea = styled.div`
+  position: relative;
+  padding-top: 44px;
+`;

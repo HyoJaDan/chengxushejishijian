@@ -2,10 +2,10 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 staged=$(git diff --cached --name-only | grep -E '\.(js|jsx|ts|tsx)$')
-yarn prettier --ignore-unknown -w ${staged}
+yarn prettier --ignore-unknown --no-error-on-unmatched-patter -c ${staged}
 
-yarn eslint --no-error-on-unmatched-pattern --max-warnings 0 --fix ${staged}
+yarn eslint --no-error-on-unmatched-pattern --max-warnings 0 "${staged}"
 
-git add ${staged}
+# git add ${staged}
 
 yarn test run
