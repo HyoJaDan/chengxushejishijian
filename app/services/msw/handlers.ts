@@ -2,6 +2,7 @@
 import type { RestHandler } from 'msw';
 import { rest } from 'msw';
 import type { MainCategory } from '~/services/categories/interface';
+import { assignmentHandlers } from '../assignments/backend.msw';
 import { submitBackendHandlers } from '../submits/backend.msw';
 
 const categoryHandlers: RestHandler[] = [
@@ -27,4 +28,5 @@ const categoryHandlers: RestHandler[] = [
 export const mockHandlers: RestHandler[] = [
   ...categoryHandlers,
   ...submitBackendHandlers,
+  ...assignmentHandlers,
 ];

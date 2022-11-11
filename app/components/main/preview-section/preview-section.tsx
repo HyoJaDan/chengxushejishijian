@@ -3,15 +3,20 @@ import type { FCChildren } from '~/components/common/types/function-component';
 
 type PreviewSectionProps = {
   title: string;
+  leadingContent?: JSX.Element;
 };
 
 export const PreviewSection: FCChildren<PreviewSectionProps> = ({
   title,
   children,
+  leadingContent,
 }) => (
   <Wrapper>
     <Title>{title}</Title>
-    <PreviewList>{children}</PreviewList>
+    <ContentArea>
+      {leadingContent}
+      <PreviewList>{children}</PreviewList>
+    </ContentArea>
   </Wrapper>
 );
 
@@ -28,6 +33,12 @@ const Title = styled.h2`
   font-size: 24px;
   font-weight: 700;
   line-height: 100%;
+`;
+
+const ContentArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
 `;
 
 const PreviewList = styled.ul`
