@@ -2,8 +2,9 @@
 import type { RestHandler } from 'msw';
 import { rest } from 'msw';
 import type { MainCategory } from '~/services/categories/interface';
+import { submitBackendHandlers } from '../submits/backend.msw';
 
-export const mockHandlers: RestHandler[] = [
+const categoryHandlers: RestHandler[] = [
   rest.get('http://localhost:3000/categories', (req, res, ctx) =>
     res(
       ctx.status(200),
@@ -21,4 +22,9 @@ export const mockHandlers: RestHandler[] = [
       ])
     )
   ),
+];
+
+export const mockHandlers: RestHandler[] = [
+  ...categoryHandlers,
+  ...submitBackendHandlers,
 ];

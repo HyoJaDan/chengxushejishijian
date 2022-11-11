@@ -1,15 +1,24 @@
 import styled from 'styled-components';
 import type { FCClass } from '~/components/common/types/function-component';
-import { MainPageTheme } from '~/constants/theme';
+import { HotSubmit } from '../hot-submit';
+import { HotSwimmers } from '../hot-swimmers';
+import { NeedFeedback } from '../need-feedback';
+import { RandomAssignments } from '../random-assignments';
+import { SwimmerRanking } from '../swimmer-ranking';
 
 export const MainContent: FCClass = ({ className }) => (
-  <Wrapper className={className}>Main Content</Wrapper>
+  <Wrapper className={className}>
+    <HotSubmit />
+    <RandomAssignments />
+    <NeedFeedback />
+    <HotSwimmers />
+    <SwimmerRanking />
+  </Wrapper>
 );
 
-const Wrapper = styled.div`
+const Wrapper = styled.main`
   width: 100%;
-  background-color: red;
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: ${MainPageTheme.gridGap};
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
 `;
