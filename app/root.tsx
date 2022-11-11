@@ -60,6 +60,7 @@ export default function App() {
 
 const Wrapper = styled.div`
   position: relative;
+  height: 100%;
 `;
 
 const ContentArea = styled.div`

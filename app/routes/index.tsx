@@ -17,7 +17,8 @@ export default function Index() {
   );
 }
 const MainWrapper = styled.div`
-  height: 100px;
+  height: 100%;
+  overflow-x: auto;
 `;
 const GridWrapper = styled.div`
   --main-page-margin: 172px;

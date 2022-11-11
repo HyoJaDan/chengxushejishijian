@@ -14,6 +14,7 @@ export const mockRandomAssignmentsResult: Assignment = {
   },
   shortDescription: '대시보드를 만들어주세요',
   createdAt: Date.now(),
+  numSubmit: 87,
 };
 
 export const assignmentHandlers: RestHandler[] = [

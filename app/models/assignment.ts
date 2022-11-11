@@ -8,4 +8,5 @@ export type Assignment = {
   createdAt: number;
   updatedAt?: number;
   category: Category;
+  numSubmit: number;
 };
