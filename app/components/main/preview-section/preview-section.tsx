@@ -15,7 +15,9 @@ export const PreviewSection: FCChildren<PreviewSectionProps> = ({
     <Title>{title}</Title>
     <ContentArea>
       {leadingContent}
-      <PreviewList>{children}</PreviewList>
+      <ScrollWrapper>
+        <PreviewList>{children}</PreviewList>
+      </ScrollWrapper>
     </ContentArea>
   </Wrapper>
 );
@@ -27,6 +29,7 @@ const Wrapper = styled.section`
   gap: 32px;
   justify-content: flex-start;
   color: #1f1f1f;
+  overflow-x: hidden;
 `;
 
 const Title = styled.h2`
@@ -41,8 +44,13 @@ const ContentArea = styled.div`
   gap: 17px;
 `;
 
+const ScrollWrapper = styled.div`
+  width: 100%;
+  overflow-x: auto;
+`;
 const PreviewList = styled.ul`
   display: grid;
+  width: max(100%, 500px);
   grid-template-columns: repeat(6, 1fr);
   gap: 24px;
 `;

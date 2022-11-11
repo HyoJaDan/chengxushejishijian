@@ -23,10 +23,9 @@ const MainWrapper = styled.div`
 const GridWrapper = styled.div`
   --main-page-margin: 172px;
   display: grid;
-  width: 1200px;
+  width: min(100%, 1200px);
   margin: 0 auto;
   grid-template-columns: repeat(8, 1fr);
-  grid-template-rows: 260px 1fr;
   column-gap: 24px;
   row-gap: 64px;
   min-height: 100%;

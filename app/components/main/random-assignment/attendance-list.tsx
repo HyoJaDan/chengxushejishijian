@@ -19,6 +19,8 @@ export const AttendanceList: FC<AttendanceListProps> = ({ attendances }) => (
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
+  position: relative;
+  width: 70px;
 `;
 
 const OverlappedAvatar = styled(AttendanceAvatar)`

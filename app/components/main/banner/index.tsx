@@ -10,5 +10,6 @@ export const Banner: FC<HTMLProps<HTMLElement>> = ({ className }) => (
 );
 
 const Wrapper = styled.img`
+  width: 100%;
   position: relative;
 `;
