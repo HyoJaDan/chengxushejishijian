@@ -24,6 +24,7 @@ const Wrapper = styled.nav`
   background-color: #2478f6;
   padding: 0 24px;
   gap: 32px;
+  z-index: 1;
 `;
 
 const Logo = styled.img.attrs({
