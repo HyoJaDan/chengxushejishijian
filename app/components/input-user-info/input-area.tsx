@@ -2,36 +2,37 @@ import styled from "styled-components";
 import { useRecoilState } from 'recoil';
 import { UserPool } from "~/recoils/user-info/atoms";
 
-export default function InputUserArea({ trigger }: any) {
+interface ITrigger{
+  triggerValidation : () => void;
+}
+
+export default function InputUserArea({ triggerValidation }: ITrigger) {
   const [nowUserPool, setNowUserPool] = useRecoilState(UserPool);
   
-  const clickFunc = ( now : string )=>{
-    setNowUserPool(now);
-  }
   return (
     <InputArea>
       <Header>
         직업 분야
       </Header>
       <InputUsrPool>
-        <PoolDev
+        <DevPool
           type="button"
           onClick={() => {
-            clickFunc("dev");
-            trigger();
+            setNowUserPool("dev");
+            triggerValidation();
           }}
         >
           개발
-        </PoolDev>
-        <PoolDesign
+        </DevPool>
+        <DesignPool
           type="button"
           onClick={() => {
-            clickFunc("design");
-            trigger();
+            setNowUserPool("design");
+            triggerValidation();
           }}
         >
           디자인
-        </PoolDesign>
+        </DesignPool>
       </InputUsrPool>
       {nowUserPool === "false" ? <Errmessage>
           직업 분야를 선택해 주세요.
@@ -57,7 +58,7 @@ const InputUsrPool = styled.div`
   display:flex;
   gap:10px;
 `;
-const PoolDev = styled.button`
+const DevPool = styled.button`
   width: 230px;
   height: 79px;
 
@@ -73,7 +74,7 @@ const PoolDev = styled.button`
   text-align: center;
   color: #FFFFFF;
 `;
-const PoolDesign = styled(PoolDev)`
+const DesignPool = styled(DevPool)`
   background: #8EAEFF;
 `;
 const Errmessage = styled.span`

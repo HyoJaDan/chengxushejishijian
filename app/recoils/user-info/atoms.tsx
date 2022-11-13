@@ -26,7 +26,7 @@ export enum platform{
 interface ILoginInfo<platform>{
   isloggedin: boolean;
   platform: platform;
-  name: string;
+  name: string | undefined;
 }
 export const loginInformation = atom<ILoginInfo<platform>>({
   key: "info",

@@ -1,44 +1,48 @@
+import type{ UseFormRegister } from "react-hook-form";
+import type{ IUserData } from "~/routes/login/Detail";
 import styled from "styled-components";
 
-export default function InputUserInterests({register}:any) {
+interface InputInterestProps{
+  register : UseFormRegister<IUserData>
+}
+
+export default function InputUserInterests({ register }: InputInterestProps) {
+  const interests = [
+    '백엔드개발',
+    'IOS',
+    'Android',
+    'UX/UI',
+    'BX',
+    'WEB개발',
+    '기타디자인',
+    '기타개발'
+  ];
+  const checkBoxes = interests.map((interest, index) => {
+    const id = `interest-id-${index}`;
+    return (
+      <Gapcheckbox key={id}>
+        <input
+          {...register("checkbox")}
+          type="checkbox" id={id}
+          className="cb1"
+          value={interest}
+        />
+        <Label htmlFor={id}>
+          <CheckboxSpan>
+            {interest}
+          </CheckboxSpan>
+        </Label>
+      </Gapcheckbox>
+    );
+  });
+
   return (
     <UserInterests>
       <Header>
         관심 분야
       </Header> 
       <GridCheckbox>
-        <Gapcheckbox>
-          <input {...register("checkbox")} type="checkbox"  id="1" className="cb1" value="백엔드개발" />
-          <Label htmlFor="1"><CheckboxSpan>백엔드개발</CheckboxSpan></Label>
-        </Gapcheckbox>
-        <Gapcheckbox>
-          <input {...register("checkbox")} type="checkbox" id="2" className="cb1" value="IOS" />
-          <Label htmlFor="2"><CheckboxSpan>IOS</CheckboxSpan></Label>
-        </Gapcheckbox>
-        <Gapcheckbox>
-          <input {...register("checkbox")} type="checkbox" id="3" className="cb1" value="Android" />
-          <Label htmlFor="3"><CheckboxSpan>Android</CheckboxSpan></Label>
-        </Gapcheckbox>
-        <Gapcheckbox>
-          <input {...register("checkbox")} type="checkbox" id="4" className="cb1" value="UX/UI" />
-          <Label htmlFor="4"><CheckboxSpan>UX/UI</CheckboxSpan></Label>
-        </Gapcheckbox>
-        <Gapcheckbox>
-          <input {...register("checkbox")} type="checkbox" id="5" className="cb1" value="BX" />
-          <Label htmlFor="5"><CheckboxSpan>BX</CheckboxSpan></Label>
-        </Gapcheckbox>
-        <Gapcheckbox>
-          <input {...register("checkbox")} type="checkbox" id="6" className="cb1" value="WEB개발" />
-          <Label htmlFor="6"><CheckboxSpan>WEB개발</CheckboxSpan></Label>
-        </Gapcheckbox>
-        <Gapcheckbox>
-          <input {...register("checkbox")} type="checkbox" id="7" className="cb1" value="기타디자인" />
-          <Label htmlFor="7"><CheckboxSpan>기타디자인</CheckboxSpan></Label>
-        </Gapcheckbox>
-        <Gapcheckbox>
-          <input {...register("checkbox")} type="checkbox" id="8" className="cb1" value="기타개발" />
-          <Label htmlFor="8"><CheckboxSpan>기타개발</CheckboxSpan></Label>
-        </Gapcheckbox>
+        {checkBoxes}
       </GridCheckbox>
     </UserInterests>
   );

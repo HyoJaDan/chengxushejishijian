@@ -9,3 +9,4 @@ compatibility_date = "2022-04-05"
 
 [build]
   command = "yarn run build"
+x

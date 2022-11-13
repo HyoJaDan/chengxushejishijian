@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import styled from "styled-components";
 
 interface IInputUserName{
@@ -11,9 +12,12 @@ export default function InputUserName({ register, errors }: IInputUserName) {
       <Header>
         사용자 이름
       </Header>
-      <InputText {...register("userName", {
-        required: "이름을 적어주세요"
-      })} placeholder="    사용자 이름을 입력해주세요." />
+      <InputText
+        {...register("userName", {
+          required: "이름을 적어주세요"
+        })}
+        placeholder="    사용자 이름을 입력해주세요."
+      />
       <Errmessage>
         { errors.userName?.message}
       </Errmessage>

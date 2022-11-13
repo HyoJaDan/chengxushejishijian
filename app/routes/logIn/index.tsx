@@ -1,48 +1,40 @@
 import styled from "styled-components"
-import KakaoLogin from "~/components/login-components/kakao-login";
 import GoogleLogin from "~/components/login-components/google-login";
-import { KAKAO_JS_API } from "~/hooks/login-scipt/oAuth";
-import { useNavigate } from "@remix-run/react";
-import { useSetRecoilState } from 'recoil';
-import { loginInformation } from "~/recoil/user-info/atoms";
+import KakaoLogin from "~/components/login-components/kakao-login";
 
-export default function LogIn() {
-  const navigate = useNavigate();
-  const setLoginInfo = useSetRecoilState(loginInformation);
+function Header() {
+  return (
+    <Font>
+      <Insert>
+        <HW>
+          THE POOL
+        </HW>
+        <LW>
+          에 입장하기
+        </LW>
+      </Insert>
+      <Ipsu>
+        입수할 준비 되셨나요?
+      </Ipsu>
+      <Go>
+        같은 분야의 주니어들과 함께 집단지성에 기대보아요.
+      </Go>
+    </Font>
+  );
+}
+export default function LoginIndex() {
   return (
     <Wrapper>
-      a
-      <Font>
-        <Insert>
-          <HW>
-            THE POOL
-          </HW>
-          <LW>
-            에 입장하기
-          </LW>
-        </Insert>
-        <Ipsu>
-          입수할 준비 되셨나요?
-        </Ipsu>
-        <Go>
-          같은 분야의 주니어들과 함께 집단지성에 기대보아요.
-        </Go>
-      </Font>
+      <Header />
       <Login>
         <Apple>애플로 계속하기</Apple>
-        <KakaoLogin
-          token={KAKAO_JS_API}
-          onSuccess={console.log}
-          onFail={console.error}
-          onLogout={console.info}
-          navigate={navigate}
-          setLoginInfo={setLoginInfo}
-        />
+        <KakaoLogin/>
         <GoogleLogin />
       </Login>
     </Wrapper>
   )
 }
+
 const Wrapper = styled.div`
   position: absolute;
   width: 780px;
@@ -87,7 +79,7 @@ const Login = styled.div`
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  gap:16px;
+  gap:32px;
   font-size:20px;
   line-height:24px;
   font-weight:700;

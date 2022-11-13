@@ -1,7 +1,7 @@
 import { useSetRecoilState,useRecoilState } from "recoil";
 import { Datas ,UserPool } from "~/recoils/user-info/atoms";
 import { useForm } from "react-hook-form";
-import { useSubmit} from '@remix-run/react';
+import { useNavigate } from '@remix-run/react';
 import styled from "styled-components"
 import InputUserArea from "~/components/input-user-info/input-area";
 import InputUserInterests from "~/components/input-user-info/input-interest";
@@ -13,7 +13,7 @@ export interface IUserData{
   checkbox: [];
 }
 export default function Detail() {
-  const submit = useSubmit();
+  const navigate = useNavigate();
   const setDatas = useSetRecoilState(Datas);
   const [nowUserPool, setNowUserPool] = useRecoilState(UserPool);
   const {
@@ -32,7 +32,7 @@ export default function Detail() {
         checkbox : data.checkbox,
       }, ... oldDatas])
       setNowUserPool("Initial");
-      submit(null, { action: "/" });
+      navigate("/");
     }
     else setNowUserPool("false");
   }
@@ -41,16 +41,9 @@ export default function Detail() {
       <MainHeader>회원 정보</MainHeader>
       <HeaderText>입수 전 마지막 단계!</HeaderText>
       <Form onSubmit={handleSubmit(onValid)}>
-        <InputUserName
-          register={register}
-          errors={errors}
-        />
-        <InputUserArea
-          trigger={trigger}
-        />
-        <InputUserInterests
-          register={register}
-        />
+        <InputUserName register={register} errors={errors} />
+        <InputUserArea triggerValidation={trigger} />
+        <InputUserInterests register={register} />
         <ButtonDiv>
           <Btn>완료</Btn>
         </ButtonDiv>

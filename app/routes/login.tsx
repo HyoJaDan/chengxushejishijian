@@ -1,7 +1,7 @@
 import { Outlet } from "@remix-run/react"
 import styled from "styled-components"
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import { GOOGLE_CLIENT_ID } from '~/hooks/login-scipt/oAuth';
+import { GOOGLE_CLIENT_ID } from '~/constants/oAuth';
 
 export default function Login() {
   return (

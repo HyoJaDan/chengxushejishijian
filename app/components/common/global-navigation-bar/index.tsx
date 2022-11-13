@@ -8,7 +8,7 @@ export const GlobalNavigationBar: FCChildren = ({ children }) => (
       GNB 영역 입니다.
       <div role='button'>과제</div>
       <div role='button'>커뮤니티</div>
-      <Link to="login">로그인하기</Link>
+      {/* <Link to="login">로그인하기</Link> */}
     </Wrapper>
     {children}
   </>
