@@ -30,6 +30,8 @@ module.exports = {
         unamedComponents: 'arrow-function',
       },
     ],
+    'no-console': 0, // console.log 사용
+    'react/jsx-props-no-spreading': 'off', // react-hoo--form에서 ...register안되는 오류
     'import/extensions': [
       'error',
       'ignorePackages',
