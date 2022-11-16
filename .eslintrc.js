@@ -18,6 +18,7 @@ module.exports = {
     'prettier',
   ],
   rules: {
+    'arrow-body-style': 'off', // block body is more readable
     'react/prop-types': 0,
     'react/function-component-definition': [
       2,
