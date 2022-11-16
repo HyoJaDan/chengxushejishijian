@@ -17,3 +17,5 @@ api/
 /test-results/
 /playwright-report/
 /playwright/.cache/
+
+/app/constants/oAuth.js

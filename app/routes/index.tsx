@@ -1,8 +1,14 @@
 import styled from 'styled-components';
 import { Banner } from '~/components/main/banner';
 import { CategorySideBar } from '~/components/main/category-side-bar';
+import { useRecoilValue } from 'recoil';
+import { loginInformation, Datas } from "~/recoils/user-info/atoms"
 
-export default function HomePage() {
+export default function Index() {
+  const loginInfo = useRecoilValue(loginInformation);
+  const datas = useRecoilValue(Datas);
+  console.log("loginInfo",loginInfo);
+  console.log("유저 데이터", datas);
   return (
     <MainWrapper>
       <GridWrapper>
