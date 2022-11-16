@@ -3,7 +3,6 @@
 
 staged=$(git diff --cached --name-only | grep -E '\.(js|jsx|ts|tsx)$')
 
-echo "preparing"
 # if staged is not empty
 if [ -n "$staged" ]
 then

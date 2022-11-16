@@ -2,16 +2,28 @@ import { Link } from '@remix-run/react';
 import styled from 'styled-components';
 import type { FCClass } from '../types/function-component';
 
+type LinkType = {
+  title: string;
+  link: string;
+};
+const menus: LinkType[] = [
+  {
+    title: '홈',
+    link: '/',
+  },
+  {
+    title: '과제',
+    link: '/assignments',
+  },
+  {
+    title: 'Q&A',
+    link: '/qna',
+  },
+];
 export const NavButtons: FCClass = ({ className }) => {
-  const menus = [
-    ['홈', '/'],
-    ['과제', '/assignments'],
-    ['Q&A', '/qna'],
-  ];
-
-  const buttons = menus.map(([text, to]) => (
-    <NavButton to={to} key={`nav-link-to-${text}`}>
-      {text}
+  const buttons = menus.map(({ title, link }) => (
+    <NavButton to={link} key={`nav-link-to-${title}`}>
+      {title}
     </NavButton>
   ));
   return <Wrapper>{...buttons}</Wrapper>;
