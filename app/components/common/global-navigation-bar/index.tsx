@@ -2,6 +2,7 @@ import { Link } from '@remix-run/react';
 import styled from 'styled-components';
 import type { FCClass } from '~/components/common/types/function-component';
 import { NavButtons } from './nav-buttons';
+import { TrailingButtons } from './trailing-buttons';
 
 export const GlobalNavigationBar: FCClass = ({ className }) => (
   <Wrapper className={className}>
@@ -10,6 +11,7 @@ export const GlobalNavigationBar: FCClass = ({ className }) => (
     </Link>
     <NavButtons />
     <Spacer />
+    <TrailingButtons />
   </Wrapper>
 );
 
