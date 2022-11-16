@@ -108,7 +108,6 @@ video {
   padding: 0;
   border: 0;
   font-size: 100%;
-  font: inherit;
   vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -156,26 +155,12 @@ table {
   border-spacing: 0;
 }
 
-* {
-  box-sizing: border-box;
-}
-
 a {
   text-decoration: none;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 0eefa3b (feat login Detail)
 }
-.cb1{
+
+.cb1 {
   width: 25px;
   height: 25px;
-  border: 1px solid #BEBEBE;
-<<<<<<< HEAD
+  border: 1px solid #bebebe;
 }
-=======
-}
->>>>>>> 9f78b98 (feat logIn)
-=======
-}
->>>>>>> 0eefa3b (feat login Detail)
