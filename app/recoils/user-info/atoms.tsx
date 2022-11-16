@@ -1,38 +1,38 @@
 /* eslint-disable no-shadow */
-import { atom } from "recoil";
+import { atom } from 'recoil';
 
-interface IUserData{
+interface IUserData {
   userName: string;
   userPool: string;
   checkbox: [];
 }
 
 export const Datas = atom<IUserData[]>({
-  key:"UserData",
-  default:[],
-})
-
-export const UserPool = atom({
-  key: "userPool",
-  default: "Initial",
+  key: 'UserData',
+  default: [],
 });
 
-export enum platform{
-  "Not_login"="Not_login",
-  "Google" = "Google",
-  "APPLE" = "APPLE",
-  "KAKAO"="KAKAO",
+export const UserPool = atom({
+  key: 'userPool',
+  default: 'Initial',
+});
+
+export enum platform {
+  'Not_login' = 'Not_login',
+  'Google' = 'Google',
+  'APPLE' = 'APPLE',
+  'KAKAO' = 'KAKAO',
 }
-interface ILoginInfo<platform>{
+interface ILoginInfo<platform> {
   isloggedin: boolean;
   platform: platform;
   name: string | undefined;
 }
 export const loginInformation = atom<ILoginInfo<platform>>({
-  key: "info",
+  key: 'info',
   default: {
     isloggedin: false,
     platform: platform.Not_login,
-    name: "",
+    name: '',
   },
-})
+});

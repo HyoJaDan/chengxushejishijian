@@ -1,6 +1,6 @@
-import { Outlet } from "@remix-run/react"
-import styled from "styled-components"
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { Outlet } from '@remix-run/react';
+import styled from 'styled-components';
 import { GOOGLE_CLIENT_ID } from '~/constants/oAuth';
 
 export default function Login() {
@@ -10,12 +10,12 @@ export default function Login() {
         <Outlet />
       </GoogleOAuthProvider>
     </Wrapper>
-  )
+  );
 }
 const Wrapper = styled.div`
-  background-color: #E9EAEC;
+  background-color: #e9eaec;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  `;
+`;

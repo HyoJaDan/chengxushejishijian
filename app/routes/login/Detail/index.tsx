@@ -1,13 +1,13 @@
-import { useSetRecoilState,useRecoilState } from "recoil";
-import { Datas ,UserPool } from "~/recoils/user-info/atoms";
-import { useForm } from "react-hook-form";
 import { useNavigate } from '@remix-run/react';
-import styled from "styled-components"
-import InputUserArea from "~/components/input-user-info/input-area";
-import InputUserInterests from "~/components/input-user-info/input-interest";
+import { useForm } from 'react-hook-form';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import styled from 'styled-components';
+import InputUserArea from '~/components/input-user-info/input-area';
+import InputUserInterests from '~/components/input-user-info/input-interest';
+import { Datas, UserPool } from '~/recoils/user-info/atoms';
 import InputUserName from '../../../components/input-user-info/input-name';
 
-export interface IUserData{
+export interface IUserData {
   userName: string;
   userPool: string;
   checkbox: [];
@@ -22,20 +22,21 @@ export default function Detail() {
     trigger,
     formState: { errors },
   } = useForm<IUserData>();
-  
+
   const onValid = (data: IUserData) => {
-    if (nowUserPool !== "Initial" && nowUserPool !== "false")
-    {
-      setDatas(oldDatas => [{
-        userName : data.userName,
-        userPool: nowUserPool,
-        checkbox : data.checkbox,
-      }, ... oldDatas])
-      setNowUserPool("Initial");
-      navigate("/");
-    }
-    else setNowUserPool("false");
-  }
+    if (nowUserPool !== 'Initial' && nowUserPool !== 'false') {
+      setDatas((oldDatas) => [
+        {
+          userName: data.userName,
+          userPool: nowUserPool,
+          checkbox: data.checkbox,
+        },
+        ...oldDatas,
+      ]);
+      setNowUserPool('Initial');
+      navigate('/');
+    } else setNowUserPool('false');
+  };
   return (
     <Wrapper>
       <MainHeader>회원 정보</MainHeader>
@@ -49,52 +50,52 @@ export default function Detail() {
         </ButtonDiv>
       </Form>
     </Wrapper>
-  )
+  );
 }
-const Wrapper=styled.div`
+const Wrapper = styled.div`
   position: absolute;
   width: 640px;
   height: 750px;
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.05);
   border-radius: 30px;
   font-family: 'Pretendard';
   font-style: normal;
   color: #000000;
   text-align: center;
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  justify-content:space-evenly;
-  padding : 43px 0px 20px 59px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  padding: 43px 0px 20px 59px;
 `;
 const MainHeader = styled.div`
   font-weight: 700;
   font-size: 24px;
   line-height: 29px;
-  height:45px;
+  height: 45px;
 `;
 const HeaderText = styled.div`
   font-weight: 600;
   font-size: 16px;
   line-height: 19px;
-  height:45px;
-  margin-bottom:19px;
+  height: 45px;
+  margin-bottom: 19px;
 `;
 
 const Form = styled.form`
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:flex-start;
-  gap:20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
 `;
 
 const ButtonDiv = styled.div`
   width: -webkit-fill-available;
 `;
 const Btn = styled.button`
-  background: #8EAEFF;
+  background: #8eaeff;
   border: 1px solid transparent;
   border-radius: 30px;
   width: 232px;
@@ -109,7 +110,7 @@ const Btn = styled.button`
 
   color: rgba(255, 255, 255, 0.85);
 
-  &:focus{
+  &:focus {
     outline: 10px;
   }
 `;
