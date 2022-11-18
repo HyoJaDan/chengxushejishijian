@@ -1,19 +1,6 @@
 import styled from 'styled-components';
-import GoogleLogin from '~/components/login-components/google-login';
 import KakaoLogin from '~/components/login-components/kakao-login';
-
-export default function LoginIndex() {
-  return (
-    <Wrapper>
-      <Header />
-      <Login>
-        <Apple>애플로 계속하기</Apple>
-        <KakaoLogin />
-        <GoogleLogin />
-      </Login>
-    </Wrapper>
-  );
-}
+import GoogleLogin from '~/components/login-components/google-login';
 
 function Header() {
   return (
@@ -25,6 +12,18 @@ function Header() {
       <Ipsu>입수할 준비 되셨나요?</Ipsu>
       <Go>같은 분야의 주니어들과 함께 집단지성에 기대보아요.</Go>
     </Font>
+  );
+}
+export default function LoginIndex() {
+  return (
+    <Wrapper>
+      <Header />
+      <Login>
+        <Apple>애플로 계속하기</Apple>
+        <KakaoLogin />
+        <GoogleLogin />
+      </Login>
+    </Wrapper>
   );
 }
 

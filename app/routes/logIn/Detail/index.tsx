@@ -1,49 +1,53 @@
-import { useNavigate } from '@remix-run/react';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { userData, loginInformation } from '~/recoils/user-info/atoms';
 import { useForm } from 'react-hook-form';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRef } from 'react';
+import { useNavigate } from '@remix-run/react';
 import styled from 'styled-components';
 import InputUserArea from '~/components/input-user-info/input-area';
 import InputUserInterests from '~/components/input-user-info/input-interest';
-import { Datas, UserPool } from '~/recoils/user-info/atoms';
 import InputUserName from '../../../components/input-user-info/input-name';
 
 export interface IUserData {
-  userName: string;
-  userPool: string;
-  checkbox: [];
+  userNickName: string;
+  userJobPool: string;
+  userInterest: [];
 }
+
 export default function Detail() {
   const navigate = useNavigate();
-  const setDatas = useSetRecoilState(Datas);
-  const [nowUserPool, setNowUserPool] = useRecoilState(UserPool);
+  const setUserDatas = useSetRecoilState(userData);
+  const loginInfo = useRecoilValue(loginInformation);
+  const nowUserPool = useRef('Initial');
+
   const {
     register,
     handleSubmit,
-    trigger,
     formState: { errors },
-  } = useForm<IUserData>();
+  } = useForm<IUserData>({
+    defaultValues: {
+      userNickName: loginInfo?.name,
+    },
+  });
 
   const onValid = (data: IUserData) => {
-    if (nowUserPool !== 'Initial' && nowUserPool !== 'false') {
-      setDatas((oldDatas) => [
-        {
-          userName: data.userName,
-          userPool: nowUserPool,
-          checkbox: data.checkbox,
-        },
-        ...oldDatas,
-      ]);
-      setNowUserPool('Initial');
+    if (nowUserPool.current !== 'Initial' && nowUserPool.current !== 'false') {
+      setUserDatas({
+        userNickName: data.userNickName,
+        userJobPool: nowUserPool.current,
+        userInterest: data.userInterest,
+      });
       navigate('/');
-    } else setNowUserPool('false');
+    } else nowUserPool.current = 'false';
   };
+
   return (
     <Wrapper>
       <MainHeader>회원 정보</MainHeader>
       <HeaderText>입수 전 마지막 단계!</HeaderText>
       <Form onSubmit={handleSubmit(onValid)}>
         <InputUserName register={register} errors={errors} />
-        <InputUserArea triggerValidation={trigger} />
+        <InputUserArea userPool={nowUserPool} />
         <InputUserInterests register={register} />
         <ButtonDiv>
           <Btn>완료</Btn>
@@ -109,7 +113,7 @@ const Btn = styled.button`
   text-align: center;
 
   color: rgba(255, 255, 255, 0.85);
-
+  cursor: pointer;
   &:focus {
     outline: 10px;
   }

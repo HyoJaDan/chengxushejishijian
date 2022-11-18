@@ -2,19 +2,19 @@
 import { atom } from 'recoil';
 
 interface IUserData {
-  userName: string;
-  userPool: string;
-  checkbox: [];
+  userNickName: string;
+  userJobPool: string;
+  userInterest: [];
 }
 
-export const Datas = atom<IUserData[]>({
+/** userData에는 닉네임, 직업분야, 관심분야가 담겨있다. */
+export const userData = atom<IUserData>({
   key: 'UserData',
-  default: [],
-});
-
-export const UserPool = atom({
-  key: 'userPool',
-  default: 'Initial',
+  default: {
+    userNickName: 'undifined',
+    userJobPool: 'undifined',
+    userInterest: [],
+  },
 });
 
 export enum platform {
@@ -23,11 +23,13 @@ export enum platform {
   'APPLE' = 'APPLE',
   'KAKAO' = 'KAKAO',
 }
-interface ILoginInfo<platform> {
+export interface ILoginInfo<platform> {
   isloggedin: boolean;
   platform: platform;
   name: string | undefined;
 }
+
+/** loginInformation에는 로그인 여부, 플랫폼, 사용자 이름 */
 export const loginInformation = atom<ILoginInfo<platform>>({
   key: 'info',
   default: {

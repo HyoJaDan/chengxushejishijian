@@ -1,13 +1,15 @@
-import { useRecoilState } from 'recoil';
+/* eslint-disable no-param-reassign */
 import styled from 'styled-components';
-import { UserPool } from '~/recoils/user-info/atoms';
+import { useState } from 'react';
 
-interface ITrigger {
-  triggerValidation: () => void;
+interface IUserPool {
+  userPool: React.MutableRefObject<string>;
 }
 
-export default function InputUserArea({ triggerValidation }: ITrigger) {
-  const [nowUserPool, setNowUserPool] = useRecoilState(UserPool);
+export default function InputUserArea({ userPool }: IUserPool) {
+  const [activeDev, setActiveDev] = useState(false);
+  const [activeDesign, setActiveDesign] = useState(false);
+  const UserPool = userPool;
 
   return (
     <InputArea>
@@ -15,24 +17,34 @@ export default function InputUserArea({ triggerValidation }: ITrigger) {
       <InputUsrPool>
         <DevPool
           type='button'
+          className={
+            activeDev ? 'chooseAreaButtonActive' : 'chooseAreaButtonNotActive'
+          }
           onClick={() => {
-            setNowUserPool('dev');
-            triggerValidation();
+            UserPool.current = '개발';
+            setActiveDev(true);
+            setActiveDesign(false);
           }}
         >
           개발
         </DevPool>
         <DesignPool
           type='button'
+          className={
+            activeDesign
+              ? 'chooseAreaButtonActive'
+              : 'chooseAreaButtonNotActive'
+          }
           onClick={() => {
-            setNowUserPool('design');
-            triggerValidation();
+            UserPool.current = '디자인';
+            setActiveDev(false);
+            setActiveDesign(true);
           }}
         >
           디자인
         </DesignPool>
       </InputUsrPool>
-      {nowUserPool === 'false' ? (
+      {UserPool.current === 'false' ? (
         <Errmessage>직업 분야를 선택해 주세요.</Errmessage>
       ) : (
         <Errmessage />
@@ -59,7 +71,6 @@ const DevPool = styled.button`
   width: 230px;
   height: 79px;
 
-  background: #505050;
   border: 1px solid transparent;
   border-radius: 30px;
   display: flex;
@@ -70,10 +81,9 @@ const DevPool = styled.button`
   line-height: 29px;
   text-align: center;
   color: #ffffff;
+  cursor: pointer;
 `;
-const DesignPool = styled(DevPool)`
-  background: #8eaeff;
-`;
+const DesignPool = styled(DevPool)``;
 const Errmessage = styled.span`
   color: red;
   height: 18px;

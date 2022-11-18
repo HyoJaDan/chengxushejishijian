@@ -1,4 +1,8 @@
 import { useGoogleLogin } from '@react-oauth/google';
+import axios from 'axios';
+import styled from 'styled-components';
+import { useSetRecoilState } from 'recoil';
+import { loginInformation, platform } from '~/recoils/user-info/atoms';
 import { useNavigate } from '@remix-run/react';
 import axios from 'axios';
 import { useSetRecoilState } from 'recoil';
@@ -23,7 +27,7 @@ export default function GoogleLogin() {
         platform: platform.Google,
         name: userInfo.data.name,
       });
-      navigate('/login/detail');
+      navigate('/login/Detail');
     },
     onError: (errorResponse) => console.log(errorResponse),
   });

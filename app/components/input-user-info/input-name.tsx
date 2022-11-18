@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import styled from 'styled-components';
+import { useEffect, useRef } from 'react';
 
 interface IInputUserName {
   register: Function;
@@ -7,16 +8,26 @@ interface IInputUserName {
 }
 
 export default function InputUserName({ register, errors }: IInputUserName) {
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const { ref, ...rest } = register('userNickName', {
+    required: '이름을 적어주세요',
+  });
+  useEffect(() => {
+    inputRef.current?.focus();
+  });
   return (
     <InputName>
       <Header>사용자 이름</Header>
       <InputText
-        {...register('userName', {
-          required: '이름을 적어주세요',
-        })}
+        {...rest}
+        name='userNickName'
+        ref={(e) => {
+          ref(e);
+          inputRef.current = e;
+        }}
         placeholder='    사용자 이름을 입력해주세요.'
       />
-      <Errmessage>{errors.userName?.message}</Errmessage>
+      <Errmessage>{errors.userNickName?.message}</Errmessage>
     </InputName>
   );
 }

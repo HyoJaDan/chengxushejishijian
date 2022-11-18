@@ -1,8 +1,8 @@
-import { useNavigate } from '@remix-run/react';
 import KakaoLogin from 'react-kakao-login';
-import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { KAKAO_JS_API } from '~/constants/oAuth';
+import { useNavigate } from '@remix-run/react';
+import { useSetRecoilState } from 'recoil';
 import { loginInformation, platform } from '~/recoils/user-info/atoms';
 
 export default function Kakao() {

@@ -1,6 +1,6 @@
 import type { UseFormRegister } from 'react-hook-form';
+import type { IUserData } from '~/routes/login/Detail';
 import styled from 'styled-components';
-import type { IUserData } from '~/routes/login/detail';
 
 interface InputInterestProps {
   register: UseFormRegister<IUserData>;
@@ -18,11 +18,11 @@ export default function InputUserInterests({ register }: InputInterestProps) {
     '기타개발',
   ];
   const checkBoxes = interests.map((interest, index) => {
-    const id = `interest-id-${index}`;
+    const id = `interest_id_${index}`;
     return (
       <Gapcheckbox key={id}>
         <input
-          {...register('checkbox')}
+          {...register('userInterest')}
           type='checkbox'
           id={id}
           className='cb1'
@@ -69,6 +69,7 @@ const Gapcheckbox = styled.div`
   font-weight: 500;
   font-size: 16px;
   line-height: 19px;
+  cursor: pointer;
 `;
 const CheckboxSpan = styled.span`
   padding: 9px;

@@ -158,9 +158,18 @@ table {
 a {
   text-decoration: none;
 }
-
 .cb1 {
   width: 25px;
   height: 25px;
   border: 1px solid #bebebe;
+}
+.chooseAreaButtonNotActive {
+  border-radius: 50px;
+  background: #8eaeff;
+  box-shadow: 5px 5px 11px #596ea1, -5px -5px 11px #c3eeff;
+}
+.chooseAreaButtonActive {
+  border-radius: 50px;
+  background: linear-gradient(145deg, #809de6, #98baff);
+  box-shadow: 5px 5px 11px #596ea1, -5px -5px 11px #c3eeff;
 }
