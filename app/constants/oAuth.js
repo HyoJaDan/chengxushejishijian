@@ -17,11 +17,3 @@ export const KAKAO_JS_API = '50ad32cbd67e304637f14d4a7155a9b3';
 export const GOOGLE_SCRIPT = 'https://accounts.google.com/gsi/client';
 export const GOOGLE_CLIENT_ID =
   '815490852595-tor320oi16paha7tmhs4belkjrcj9k5n.apps.googleusercontent.com';
-/* 
-815490852595-tor320oi16paha7tmhs4belkjrcj9k5n.apps.googleusercontent.com
-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
-*/
-/*  
-ID : 381843233037-rocq96ugtv004gbrs920bjm4350lu296.apps.googleusercontent.com
-SECRET : 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
-*/

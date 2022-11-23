@@ -1,16 +1,15 @@
 /* eslint-disable no-param-reassign */
 import styled from 'styled-components';
 import { useState } from 'react';
+import { Header } from './input-name';
 
 interface IUserPool {
   userPool: React.MutableRefObject<string>;
 }
-
 export default function InputUserArea({ userPool }: IUserPool) {
   const [activeDev, setActiveDev] = useState(false);
   const [activeDesign, setActiveDesign] = useState(false);
   const UserPool = userPool;
-
   return (
     <InputArea>
       <Header>직업 분야</Header>
@@ -21,9 +20,14 @@ export default function InputUserArea({ userPool }: IUserPool) {
             activeDev ? 'chooseAreaButtonActive' : 'chooseAreaButtonNotActive'
           }
           onClick={() => {
-            UserPool.current = '개발';
-            setActiveDev(true);
-            setActiveDesign(false);
+            if (activeDev) {
+              setActiveDev(false);
+              UserPool.current = 'false';
+            } else {
+              UserPool.current = '개발';
+              setActiveDev(true);
+              setActiveDesign(false);
+            }
           }}
         >
           개발
@@ -36,9 +40,14 @@ export default function InputUserArea({ userPool }: IUserPool) {
               : 'chooseAreaButtonNotActive'
           }
           onClick={() => {
-            UserPool.current = '디자인';
-            setActiveDev(false);
-            setActiveDesign(true);
+            if (activeDesign) {
+              setActiveDesign(false);
+              UserPool.current = 'false';
+            } else {
+              setActiveDev(false);
+              setActiveDesign(true);
+              UserPool.current = '디자인';
+            }
           }}
         >
           디자인
@@ -58,11 +67,6 @@ const InputArea = styled.div`
   align-items: flex-start;
   grid-gap: 19px;
 `;
-const Header = styled.div`
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 24px;
-`;
 const InputUsrPool = styled.div`
   display: flex;
   gap: 10px;
@@ -72,7 +76,7 @@ const DevPool = styled.button`
   height: 79px;
 
   border: 1px solid transparent;
-  border-radius: 30px;
+  border-radius: 24px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -87,4 +91,5 @@ const DesignPool = styled(DevPool)``;
 const Errmessage = styled.span`
   color: red;
   height: 18px;
+  width: -webkit-fit-content;
 `;

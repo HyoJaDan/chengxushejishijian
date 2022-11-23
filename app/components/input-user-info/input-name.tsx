@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import styled from 'styled-components';
 import { useEffect, useRef } from 'react';
+import type { UseFormRegister } from 'react-hook-form';
+import type { IUserData } from '~/routes/login/account-info';
 
 interface IInputUserName {
-  register: Function;
+  register: UseFormRegister<IUserData>;
   errors: any;
 }
 
@@ -37,7 +39,7 @@ const InputName = styled.div`
   align-items: flex-start;
   grid-gap: 19px;
 `;
-const Header = styled.div`
+export const Header = styled.div`
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
@@ -60,4 +62,8 @@ const InputText = styled.input`
 const Errmessage = styled.span`
   color: red;
   height: 18px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: -o-fit-content;
+  width: -ms-fit-content;
 `;

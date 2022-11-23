@@ -3,16 +3,12 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { useSetRecoilState } from 'recoil';
 import { loginInformation, platform } from '~/recoils/user-info/atoms';
-import { useNavigate } from '@remix-run/react';
-import axios from 'axios';
-import { useSetRecoilState } from 'recoil';
-import styled from 'styled-components';
-import { loginInformation, platform } from '~/recoils/user-info/atoms';
+import { setUser } from './setUser';
 
 export default function GoogleLogin() {
-  const navigate = useNavigate();
   const setLoginInfo = useSetRecoilState(loginInformation);
-  const login = useGoogleLogin({
+
+  const login2 = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       const userInfo = await axios.get(
         'https://www.googleapis.com/oauth2/v3/userinfo',
@@ -27,7 +23,9 @@ export default function GoogleLogin() {
         platform: platform.Google,
         name: userInfo.data.name,
       });
-      navigate('/login/Detail');
+      console.log('OAuth accessToken', tokenResponse);
+      console.log('userInfo', userInfo);
+      /* setUser(tokenResponse.access_token, 2); */
     },
     onError: (errorResponse) => console.log(errorResponse),
   });
@@ -36,7 +34,7 @@ export default function GoogleLogin() {
     <div>
       <Google
         onClick={() => {
-          login();
+          login2();
         }}
       >
         구글로 계속하기
@@ -53,4 +51,22 @@ const Google = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
+/* const googleLogin = useGoogleLogin({
+    flow: 'auth-code',
+    onSuccess: async (codeResponse) => {
+      console.log('1', codeResponse);
+      const response = await axios.post(
+        'https://api.thepool.kr/api/member/social',
+        {
+          accessToken: codeResponse.code,
+          oAuthAgency: 2,
+        }
+      );
+      console.log('codeResponse', codeResponse);
+      console.log('OAuth', response);
+      await setUser(codeResponse.code, platform.Google);
+    },
+    onError: (errorResponse) => console.log(errorResponse),
+  }); */

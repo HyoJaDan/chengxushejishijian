@@ -1,5 +1,6 @@
 /* eslint-disable no-shadow */
 import { atom } from 'recoil';
+import { recoilKeySuffix } from '../../utils/recoil-key';
 
 interface IUserData {
   userNickName: string;
@@ -9,7 +10,7 @@ interface IUserData {
 
 /** userData에는 닉네임, 직업분야, 관심분야가 담겨있다. */
 export const userData = atom<IUserData>({
-  key: 'UserData',
+  key: `UserData${recoilKeySuffix}`,
   default: {
     userNickName: 'undifined',
     userJobPool: 'undifined',
@@ -18,20 +19,20 @@ export const userData = atom<IUserData>({
 });
 
 export enum platform {
-  'Not_login' = 'Not_login',
-  'Google' = 'Google',
-  'APPLE' = 'APPLE',
-  'KAKAO' = 'KAKAO',
+  'Not_login' = 0,
+  'KAKAO' = 1,
+  'Google' = 2,
+  'APPLE' = 3,
 }
 export interface ILoginInfo<platform> {
   isloggedin: boolean;
   platform: platform;
-  name: string | undefined;
+  name: string;
 }
 
 /** loginInformation에는 로그인 여부, 플랫폼, 사용자 이름 */
 export const loginInformation = atom<ILoginInfo<platform>>({
-  key: 'info',
+  key: `info${recoilKeySuffix}`,
   default: {
     isloggedin: false,
     platform: platform.Not_login,

@@ -19,17 +19,15 @@ export default function Detail() {
   const setUserDatas = useSetRecoilState(userData);
   const loginInfo = useRecoilValue(loginInformation);
   const nowUserPool = useRef('Initial');
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IUserData>({
     defaultValues: {
-      userNickName: loginInfo?.name,
+      userNickName: loginInfo.name,
     },
   });
-
   const onValid = (data: IUserData) => {
     if (nowUserPool.current !== 'Initial' && nowUserPool.current !== 'false') {
       setUserDatas({
@@ -40,26 +38,37 @@ export default function Detail() {
       navigate('/');
     } else nowUserPool.current = 'false';
   };
-
   return (
-    <Wrapper>
-      <MainHeader>회원 정보</MainHeader>
-      <HeaderText>입수 전 마지막 단계!</HeaderText>
-      <Form onSubmit={handleSubmit(onValid)}>
-        <InputUserName register={register} errors={errors} />
-        <InputUserArea userPool={nowUserPool} />
-        <InputUserInterests register={register} />
-        <ButtonDiv>
-          <Btn>완료</Btn>
-        </ButtonDiv>
-      </Form>
-    </Wrapper>
+    <Wrap>
+      <Wrapper>
+        <Head>
+          <HeadInfo>회원 정보</HeadInfo>
+          <HeadBefore>입수 전 마지막 단계!</HeadBefore>
+        </Head>
+        <Form onSubmit={handleSubmit(onValid)}>
+          <InputUserName register={register} errors={errors} />
+          <InputUserArea userPool={nowUserPool} />
+          <InputUserInterests register={register} />
+          <ButtonDiv>
+            <Btn>완료</Btn>
+          </ButtonDiv>
+        </Form>
+      </Wrapper>
+    </Wrap>
   );
 }
+const Wrap = styled.div`
+  position: absolute;
+  height: 1080px;
+  width: -webkit-fill-available;
+  background-color: #e9eaec;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 const Wrapper = styled.div`
   position: absolute;
   width: 640px;
-  height: 750px;
   background: #ffffff;
   box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.05);
   border-radius: 30px;
@@ -69,22 +78,28 @@ const Wrapper = styled.div`
   text-align: center;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-evenly;
-  padding: 43px 0px 20px 59px;
+  gap: 54px;
+  top: 74px;
 `;
-const MainHeader = styled.div`
+const Head = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-right: 340px;
+`;
+const HeadInfo = styled.div`
   font-weight: 700;
   font-size: 24px;
   line-height: 29px;
   height: 45px;
+  margin-top: 69px;
 `;
-const HeaderText = styled.div`
+const HeadBefore = styled.div`
   font-weight: 600;
   font-size: 16px;
   line-height: 19px;
-  height: 45px;
-  margin-bottom: 19px;
 `;
 
 const Form = styled.form`
@@ -93,17 +108,19 @@ const Form = styled.form`
   justify-content: center;
   align-items: flex-start;
   gap: 20px;
+  margin-bottom: 48px;
 `;
 
 const ButtonDiv = styled.div`
   width: -webkit-fill-available;
+  margin-top: 55px;
 `;
 const Btn = styled.button`
-  background: #8eaeff;
   border: 1px solid transparent;
-  border-radius: 30px;
-  width: 232px;
-  height: 65px;
+  width: 240px;
+  height: 72px;
+  background: rgba(36, 120, 246, 0.4);
+  border-radius: 16px;
 
   font-family: 'Alata';
   font-style: normal;
@@ -116,5 +133,6 @@ const Btn = styled.button`
   cursor: pointer;
   &:focus {
     outline: 10px;
+    background: #2478f6;
   }
 `;

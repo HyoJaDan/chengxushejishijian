@@ -31,6 +31,7 @@ export const GlobalNavigationBar: FCClass = ({ className }) => (
     <NavButtons />
     <Spacer />
     <TrailingButtons />
+    <Login isloggedin={loginInfo.isloggedin} name={loginInfo.name} />
   </Wrapper>
 );
 

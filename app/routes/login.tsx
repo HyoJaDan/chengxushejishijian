@@ -10,17 +10,11 @@ import { GOOGLE_CLIENT_ID } from '~/constants/oAuth';
 
 export default function Login() {
   return (
-    <Wrapper>
+    <Wrappers>
       <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
         <Outlet />
       </GoogleOAuthProvider>
-    </Wrapper>
+    </Wrappers>
   );
 }
-const Wrapper = styled.div`
-  background-color: #e9eaec;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+export const Wrappers = styled.div``;

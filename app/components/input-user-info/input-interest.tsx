@@ -1,6 +1,7 @@
 import type { UseFormRegister } from 'react-hook-form';
-import type { IUserData } from '~/routes/login/Detail';
+import type { IUserData } from '~/routes/login/account-info';
 import styled from 'styled-components';
+import { Header } from './input-name';
 
 interface InputInterestProps {
   register: UseFormRegister<IUserData>;
@@ -28,7 +29,7 @@ export default function InputUserInterests({ register }: InputInterestProps) {
           className='cb1'
           value={interest}
         />
-        <Label htmlFor={id}>
+        <Label htmlFor={id} style={{ cursor: 'pointer' }}>
           <CheckboxSpan>{interest}</CheckboxSpan>
         </Label>
       </Gapcheckbox>
@@ -49,18 +50,14 @@ const UserInterests = styled.div`
   grid-gap: 19px;
   width: -webkit-fill-available;
 `;
-const Header = styled.div`
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 24px;
-`;
 const GridCheckbox = styled.div`
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr;
   justify-items: start;
   width: -webkit-fill-available;
-  gap: 5px;
+  gap: 22px;
+  margin-left: 15px;
 `;
 const Gapcheckbox = styled.div`
   display: flex;
@@ -70,6 +67,7 @@ const Gapcheckbox = styled.div`
   font-size: 16px;
   line-height: 19px;
   cursor: pointer;
+  padding: 10px;
 `;
 const CheckboxSpan = styled.span`
   padding: 9px;

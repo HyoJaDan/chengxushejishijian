@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import KakaoLogin from '~/components/login-components/kakao-login';
 import GoogleLogin from '~/components/login-components/google-login';
+import bording from './bording.svg';
 
 function Header() {
   return (
@@ -16,21 +17,31 @@ function Header() {
 }
 export default function LoginIndex() {
   return (
-    <Wrapper>
-      <Header />
-      <Login>
-        <Apple>애플로 계속하기</Apple>
-        <KakaoLogin />
-        <GoogleLogin />
-      </Login>
-    </Wrapper>
+    <Wrap>
+      <Wrapper>
+        <Img src={bording} alt='bording' />
+        <Header />
+        <Login>
+          <Apple>애플로 계속하기</Apple>
+          <KakaoLogin />
+          <GoogleLogin />
+        </Login>
+      </Wrapper>
+    </Wrap>
   );
 }
-
+const Wrap = styled.div`
+  background-color: #e9eaec;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 const Wrapper = styled.div`
   position: absolute;
-  width: 780px;
-  height: 644px;
+  width: 640px;
+  height: 718px;
+  padding-bottom: 37px;
   background: #ffffff;
   box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.05);
   border-radius: 30px;
@@ -42,7 +53,10 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 20px;
 `;
+
+const Img = styled.img``;
 const Font = styled.div``;
 
 const Insert = styled.div`
@@ -71,11 +85,10 @@ const Login = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 32px;
+  gap: 16px;
   font-size: 20px;
   line-height: 24px;
   font-weight: 700;
-  cursor: pointer;
 `;
 const Apple = styled.div`
   width: 463px;
@@ -88,4 +101,5 @@ const Apple = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
