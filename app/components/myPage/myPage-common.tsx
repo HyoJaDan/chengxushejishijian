@@ -44,7 +44,6 @@ const Wrapper = styled.div`
   gap: 32px;
 `;
 const Header = styled.div`
-  font-family: 'Pretendard';
   font-style: normal;
   font-weight: 700;
   font-size: 24px;

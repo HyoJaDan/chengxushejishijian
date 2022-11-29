@@ -11,10 +11,10 @@ export async function GetUserInfo(
 ) {
   let thePoolAccessToken = '';
   let thePoolStatus;
-
+  /* 
   await setUser(OAuthresponse, platform).then((response: any) => {
     [thePoolAccessToken, thePoolStatus] = response;
-  });
+  }); */
 
   console.log('thePoolAccessToken', thePoolAccessToken);
   setLoginInfo({
@@ -29,4 +29,6 @@ export async function GetUserInfo(
   } else if (thePoolStatus === userStatus.ACTIVE) {
     navigate('/');
   }
+  //
+  navigate('/login/account-info');
 }

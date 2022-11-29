@@ -58,7 +58,7 @@ const Google = styled.div`
     onSuccess: async (codeResponse) => {
       console.log('1', codeResponse);
       const response = await axios.post(
-        'https://api.thepool.kr/api/member/social',
+        'https://api.thepool.kr/api/members/social',
         {
           accessToken: codeResponse.code,
           oAuthAgency: 2,

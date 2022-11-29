@@ -1,16 +1,22 @@
 import styled from 'styled-components';
+import Part2 from '~/components/myPage/profile/part2';
+import Part3 from '~/components/myPage/profile/part3';
 
 export default function Profile() {
   return (
     <Wrapper>
       <Container />
-      <Container2 />
-      <Container3 />
-      <Container4 />
+      <Part2 />
+      <Part3 />
+      <Div>
+        <Container4 />
+        <Container4 />
+        <Container4 />
+      </Div>
     </Wrapper>
   );
 }
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   flex-grow: 2.2;
   display: flex;
   flex-direction: column;
@@ -22,12 +28,11 @@ const Container = styled.div`
   background: #ffffff;
   border-radius: 8px;
 `;
-const Container2 = styled(Container)`
-  height: 264px;
-`;
-const Container3 = styled(Container)`
-  height: 893px;
+const Div = styled.div`
+  display: flex;
+  gap: 24px;
 `;
 const Container4 = styled(Container)`
-  height: 264px;
+  height: 224px;
+  width: 296px;
 `;

@@ -3,7 +3,7 @@ import axios from 'axios';
 export async function setUser(OAuthresponse: string, platform: number) {
   try {
     const response = await axios.post(
-      'https://api.thepool.kr/api/member/social',
+      'https://api.thepool.kr/api/members/social',
       {
         accessToken: OAuthresponse,
         oAuthAgency: platform,

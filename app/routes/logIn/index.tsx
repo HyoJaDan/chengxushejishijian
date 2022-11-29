@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import KakaoLogin from '~/components/login-components/kakao-login';
 import GoogleLogin from '~/components/login-components/google-login';
-import bording from './bording.svg';
+import bording from '~/image/bording.svg';
 
 function Header() {
   return (
