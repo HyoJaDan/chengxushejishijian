@@ -1,6 +1,8 @@
 import type { UseFormRegister } from 'react-hook-form';
 import type { IUserData } from '~/routes/login/account-info';
 import styled from 'styled-components';
+import { userData } from '~/recoils/user-info/atoms';
+import { useRecoilValue } from 'recoil';
 import { Header } from './input-name';
 
 interface InputInterestProps {
@@ -8,17 +10,9 @@ interface InputInterestProps {
 }
 
 export default function InputUserInterests({ register }: InputInterestProps) {
-  const interests = [
-    '백엔드개발',
-    'IOS',
-    'Android',
-    'UX/UI',
-    'BX',
-    'WEB개발',
-    '기타디자인',
-    '기타개발',
-  ];
-  const checkBoxes = interests.map((interest, index) => {
+  const interests = useRecoilValue(userData);
+
+  const checkBoxes = interests.userInterest.map(({ value }, index) => {
     const id = `interest_id_${index}`;
     return (
       <Gapcheckbox key={id}>
@@ -27,10 +21,10 @@ export default function InputUserInterests({ register }: InputInterestProps) {
           type='checkbox'
           id={id}
           className='cb1'
-          value={interest}
+          value={value}
         />
         <Label htmlFor={id} style={{ cursor: 'pointer' }}>
-          <CheckboxSpan>{interest}</CheckboxSpan>
+          <CheckboxSpan>{value}</CheckboxSpan>
         </Label>
       </Gapcheckbox>
     );

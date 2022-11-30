@@ -5,7 +5,6 @@ import OutputTags from './outputTags';
 
 export default function Part3() {
   const data2 = useRecoilValue(userData2);
-
   return (
     <Wrapper>
       <Title>자기소개</Title>

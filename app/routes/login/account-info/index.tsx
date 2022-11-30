@@ -1,4 +1,4 @@
-import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue, useRecoilState } from 'recoil';
 import { userData, loginInformation } from '~/recoils/user-info/atoms';
 import { useForm } from 'react-hook-form';
 import { useRef } from 'react';
@@ -16,7 +16,7 @@ export interface IUserData {
 
 export default function Detail() {
   const navigate = useNavigate();
-  const setUserDatas = useSetRecoilState(userData);
+  const [userDatas, setUserDatas] = useRecoilState(userData);
   const loginInfo = useRecoilValue(loginInformation);
   const nowUserPool = useRef('Initial');
   const {
@@ -29,11 +29,25 @@ export default function Detail() {
     },
   });
   const onValid = (data: IUserData) => {
+    let temp = userDatas.userInterest;
+    for (let i = 0; i < data.userInterest.length; i += 1) {
+      const Idx = userDatas.userInterest.findIndex(
+        (v) => v.value === data.userInterest[i]
+      );
+      temp = [
+        ...temp.slice(0, Idx),
+        {
+          value: temp[Idx].value,
+          isTrue: true,
+        },
+        ...temp.slice(Idx + 1),
+      ];
+    }
     if (nowUserPool.current !== 'Initial' && nowUserPool.current !== 'false') {
       setUserDatas({
         userNickName: data.userNickName,
         userJobPool: nowUserPool.current,
-        userInterest: data.userInterest,
+        userInterest: temp,
       });
       navigate('/');
     } else nowUserPool.current = 'false';

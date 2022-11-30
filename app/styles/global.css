@@ -178,3 +178,23 @@ a {
   background: #6a6a6a;
   border-radius: 24px;
 }
+.TrueTag {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.1s ease-out;
+}
+.TrueTag:hover {
+  background-color: #d5d5d5;
+}
+.FalseTag {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.1s ease-out;
+  background-color: #d5d5d5;
+}

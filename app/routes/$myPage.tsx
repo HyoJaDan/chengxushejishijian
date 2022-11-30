@@ -8,6 +8,7 @@ import { motion, AnimatePresence, useScroll } from 'framer-motion';
 import { loginInformation, clickSetting } from '~/recoils/user-info/atoms';
 import { useRecoilState } from 'recoil';
 
+
 export default function DefaultMyPage() {
   /*   const loginInfo = useRecoilValue(loginInformation);
   const navigate = useNavigate(); */
@@ -16,6 +17,7 @@ export default function DefaultMyPage() {
       navigate('/');
     }
   }); */
+
   const [clicked, setClicked] = useRecoilState(clickSetting);
   const { scrollY } = useScroll();
   return (
@@ -37,7 +39,7 @@ export default function DefaultMyPage() {
               exit={{ opacity: 0 }}
             />
             <Animi layoutId='setting' style={{ top: scrollY.get() + 50 }}>
-              {clicked.skill ? <SettingPage clicked='skill' /> : null}
+              {clicked.skill ? <SettingPage clicked='skills' /> : null}
             </Animi>
           </>
         ) : null}
@@ -55,7 +57,7 @@ export default function DefaultMyPage() {
               exit={{ opacity: 0 }}
             />
             <Animi layoutId='interest' style={{ top: scrollY.get() + 50 }}>
-              {clicked.interest ? <SettingPage clicked='interest' /> : null}
+              {clicked.interest ? <SettingPage clicked='interests' /> : null}
             </Animi>
           </>
         ) : null}
@@ -73,7 +75,7 @@ export default function DefaultMyPage() {
               exit={{ opacity: 0 }}
             />
             <Animi layoutId='tag' style={{ top: scrollY.get() + 50 }}>
-              {clicked.tag ? <SettingPage clicked='tag' /> : null}
+              {clicked.tag ? <SettingPage clicked='tags' /> : null}
             </Animi>
           </>
         ) : null}

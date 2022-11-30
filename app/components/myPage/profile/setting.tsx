@@ -1,30 +1,73 @@
+/* eslint-disable guard-for-in */
+/* eslint-disable no-restricted-syntax */
 import styled from 'styled-components';
+import type { IValue } from '~/recoils/user-info/atoms';
+import { userData, userData2 } from '~/recoils/user-info/atoms';
+import { useRecoilState } from 'recoil';
 
-interface IValue {
-  value: string;
-}
 interface IClick {
   clicked: string;
 }
+
 export default function SettingPage({ clicked }: IClick) {
-  const skills: IValue[] = [
-    { value: 'HTML' },
-    { value: 'CSS' },
-    { value: 'Javascript' },
-    { value: 'Typescript' },
-    { value: 'React' },
-    { value: 'IOS개발' },
-    { value: '안드로이드 개발' },
-    { value: 'DevOps' },
-    { value: '보안' },
-    { value: '블록체인 개발' },
-  ];
-  const skill = skills.map(({ value }, index) => {
+  const [data, setData] = useRecoilState(userData);
+  const [data2, setData2] = useRecoilState(userData2);
+  let output: IValue[];
+  if (clicked === 'skills') output = [...data2.skill];
+  else if (clicked === 'interests') output = data.userInterest;
+  else if (clicked === 'tags') output = data2.tag;
+
+  const skill = output.map(({ value, isTrue }, index) => {
     const id = `skill_${index}`;
     return (
-      <Hello key={id}>
+      <Div
+        key={id}
+        className={isTrue ? 'FalseTag' : 'TrueTag'}
+        onClick={() => {
+          const Idx = output.findIndex((v) => v.value === value);
+          if (clicked === 'skills')
+            setData2({
+              introduce: data2.introduce,
+              skill: [
+                ...output.slice(0, Idx),
+                {
+                  value: data2.skill[Idx].value,
+                  isTrue: !data2.skill[Idx].isTrue,
+                },
+                ...output.slice(Idx + 1),
+              ],
+              tag: data2.tag,
+            });
+          else if (clicked === 'interests')
+            setData({
+              userNickName: data.userNickName,
+              userJobPool: data.userJobPool,
+              userInterest: [
+                ...output.slice(0, Idx),
+                {
+                  value: data.userInterest[Idx].value,
+                  isTrue: !data.userInterest[Idx].isTrue,
+                },
+                ...output.slice(Idx + 1),
+              ],
+            });
+          else if (clicked === 'tags')
+            setData2({
+              introduce: data2.introduce,
+              skill: data2.skill,
+              tag: [
+                ...output.slice(0, Idx),
+                {
+                  value: data2.tag[Idx].value,
+                  isTrue: !data2.tag[Idx].isTrue,
+                },
+                ...output.slice(Idx + 1),
+              ],
+            });
+        }}
+      >
         <Text>{value}</Text>
-      </Hello>
+      </Div>
     );
   });
   return (
@@ -61,15 +104,4 @@ const Text = styled.div`
   margin-left: 15px;
 `;
 
-const Hello = styled.div`
-  height: 60px;
-  display: flex;
-  align-items: center;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.1s ease-out;
-  &:hover {
-    background-color: #d5d5d5;
-    /* transform: scale(1.1) */
-  }
-`;
+const Div = styled.div``;

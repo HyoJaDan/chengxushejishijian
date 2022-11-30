@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 import { userData, userData2 } from '~/recoils/user-info/atoms';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
@@ -6,13 +7,25 @@ interface ITag {
   tag: string;
 }
 const OutputTags = ({ tag }: ITag) => {
-  let output;
+  let output = [];
   const data = useRecoilValue(userData);
   const data2 = useRecoilValue(userData2);
 
-  if (tag === 'skills') output = data2.skill;
-  else if (tag === 'interests') output = data.userInterest;
-  else if (tag === 'tags') output = data2.tag;
+  if (tag === 'skills') {
+    for (const key in data2.skill) {
+      if (data2.skill[key].isTrue === true) output.push(data2.skill[key].value);
+    }
+  } else if (tag === 'interests')
+    for (const key in data.userInterest) {
+      if (data.userInterest[key].isTrue === true)
+        output.push(data.userInterest[key].value);
+    }
+  else if (tag === 'tags') {
+    for (const key in data2.tag) {
+      if (data2.tag[key].isTrue === true) output.push(data2.tag[key].value);
+    }
+  }
+  console.log('output', output);
   return (
     <Exist>
       {output?.map((outputs) => (
@@ -24,6 +37,12 @@ const OutputTags = ({ tag }: ITag) => {
 const Exist = styled.div`
   display: flex;
   gap: 8px;
+  flex-basis: 80%;
+  overflow-x: auto;
+  white-space: nowrap;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 const Tag = styled.div`
   display: flex;

@@ -11,10 +11,8 @@ interface IData {
   userJobPool: string;
   self_introduction: string;
 }
-
 export default function ProfileSetting() {
   const [clicked, setClicked] = useRecoilState(clickSetting);
-
   const onClickSetting = (data: string) => {
     if (data === 'skill') {
       setClicked({
@@ -51,12 +49,12 @@ export default function ProfileSetting() {
     setData({
       userNickName: inputData.userName,
       userJobPool: inputData.userJobPool,
-      userInterest: [],
+      userInterest: data.userInterest,
     });
     setData2({
       introduce: inputData.self_introduction,
-      skill: [],
-      tag: [],
+      skill: data2.skill,
+      tag: data2.tag,
     });
     navigate(`/${data.userNickName}/profile`);
   };
