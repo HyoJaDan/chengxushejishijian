@@ -1,22 +1,20 @@
 import styled from 'styled-components';
 import MyPagePart from '~/components/myPage/myPage-common';
 import { Outlet, useNavigate } from '@remix-run/react';
-/* import { useEffect } from 'react';
-import { useRecoilValue } from 'recoil'; */
+import { useEffect } from 'react';
+import { useRecoilValue, useRecoilState } from 'recoil';
 import SettingPage from '~/components/myPage/profile/setting';
 import { motion, AnimatePresence, useScroll } from 'framer-motion';
 import { loginInformation, clickSetting } from '~/recoils/user-info/atoms';
-import { useRecoilState } from 'recoil';
-
 
 export default function DefaultMyPage() {
-  /*   const loginInfo = useRecoilValue(loginInformation);
-  const navigate = useNavigate(); */
-  /* useEffect(() => {
+  const loginInfo = useRecoilValue(loginInformation);
+  const navigate = useNavigate();
+  useEffect(() => {
     if (loginInfo.isloggedin === false) {
       navigate('/');
     }
-  }); */
+  });
 
   const [clicked, setClicked] = useRecoilState(clickSetting);
   const { scrollY } = useScroll();

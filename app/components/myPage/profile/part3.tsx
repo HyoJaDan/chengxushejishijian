@@ -1,14 +1,14 @@
 import styled from 'styled-components';
-import { userData2 } from '~/recoils/user-info/atoms';
+import { userData } from '~/recoils/user-info/atoms';
 import { useRecoilValue } from 'recoil';
 import OutputTags from './outputTags';
 
 export default function Part3() {
-  const data2 = useRecoilValue(userData2);
+  const data = useRecoilValue(userData);
   return (
     <Wrapper>
       <Title>자기소개</Title>
-      {data2.introduce}
+      {data.introduce}
       <Title>스킬</Title>
       <OutputTags tag='skills' />
       <Title>관심분야</Title>

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Link, useNavigate } from '@remix-run/react';
-import { userData, userData2, clickSetting } from '~/recoils/user-info/atoms';
-import { useRecoilState } from 'recoil';
+import { userData, clickSetting } from '~/recoils/user-info/atoms';
+import { useSetRecoilState, useRecoilState } from 'recoil';
 import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import OutputTags from '../../../../components/myPage/profile/outputTags';
@@ -11,50 +11,36 @@ interface IData {
   userJobPool: string;
   self_introduction: string;
 }
+const defaultData = {
+  skill: false,
+  interest: false,
+  tag: false,
+};
 export default function ProfileSetting() {
-  const [clicked, setClicked] = useRecoilState(clickSetting);
+  const setClicked = useSetRecoilState(clickSetting);
   const onClickSetting = (data: string) => {
-    if (data === 'skill') {
-      setClicked({
-        skill: !clicked.skill,
-        interest: false,
-        tag: false,
-      });
-    } else if (data === 'interest') {
-      setClicked({
-        skill: false,
-        interest: !clicked.interest,
-        tag: false,
-      });
-    } else if (data === 'tag') {
-      setClicked({
-        skill: false,
-        interest: false,
-        tag: !clicked.tag,
-      });
-    }
+    const newData = {
+      ...defaultData,
+      [data]: true,
+    };
+    setClicked(newData);
   };
 
   const navigate = useNavigate();
   const [data, setData] = useRecoilState(userData);
-  const [data2, setData2] = useRecoilState(userData2);
   const { register, handleSubmit } = useForm<IData>({
     defaultValues: {
       userName: data.userNickName,
       userJobPool: data.userJobPool,
-      self_introduction: data2.introduce,
+      self_introduction: data.introduce,
     },
   });
   const onValid = (inputData: IData) => {
     setData({
+      ...data,
       userNickName: inputData.userName,
       userJobPool: inputData.userJobPool,
-      userInterest: data.userInterest,
-    });
-    setData2({
       introduce: inputData.self_introduction,
-      skill: data2.skill,
-      tag: data2.tag,
     });
     navigate(`/${data.userNickName}/profile`);
   };
@@ -76,7 +62,7 @@ export default function ProfileSetting() {
           <Title>자기소개</Title>
           <InputInproduction
             {...register('self_introduction')}
-            placeholder={`${data2.introduce}`}
+            placeholder={`${data.introduce}`}
           />
           <Title>스킬</Title>
           <Div>

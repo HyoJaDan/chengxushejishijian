@@ -29,25 +29,26 @@ export default function Detail() {
     },
   });
   const onValid = (data: IUserData) => {
-    let temp = userDatas.userInterest;
+    let nextInterestData = userDatas.userInterest;
     for (let i = 0; i < data.userInterest.length; i += 1) {
       const Idx = userDatas.userInterest.findIndex(
         (v) => v.value === data.userInterest[i]
       );
-      temp = [
-        ...temp.slice(0, Idx),
+      nextInterestData = [
+        ...nextInterestData.slice(0, Idx),
         {
-          value: temp[Idx].value,
+          value: nextInterestData[Idx].value,
           isTrue: true,
         },
-        ...temp.slice(Idx + 1),
+        ...nextInterestData.slice(Idx + 1),
       ];
     }
     if (nowUserPool.current !== 'Initial' && nowUserPool.current !== 'false') {
       setUserDatas({
+        ...userDatas,
         userNickName: data.userNickName,
         userJobPool: nowUserPool.current,
-        userInterest: temp,
+        userInterest: nextInterestData,
       });
       navigate('/');
     } else nowUserPool.current = 'false';

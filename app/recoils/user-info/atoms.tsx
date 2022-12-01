@@ -29,18 +29,21 @@ export interface IValue {
   isTrue: boolean;
 }
 
-interface IUserData {
+export interface IUserData {
   userNickName: string;
   userJobPool: string;
   userInterest: IValue[];
+  introduce: string;
+  skill: IValue[];
+  tag: IValue[];
 }
 
 /** userData에는 닉네임, 직업분야, 관심분야가 담겨있다. */
 export const userData = atom<IUserData>({
   key: `UserData${recoilKeySuffix}`,
   default: {
-    userNickName: 'undifined',
-    userJobPool: 'undifined',
+    userNickName: '배고플땐밥먹어',
+    userJobPool: '프로덕트 디자이너',
     userInterest: [
       { value: '백엔드개발', isTrue: false },
       { value: 'IOS', isTrue: false },
@@ -51,23 +54,14 @@ export const userData = atom<IUserData>({
       { value: '기타디자인', isTrue: false },
       { value: '기타개발', isTrue: false },
     ],
-  },
-});
-
-interface IUserData2 {
-  introduce: string;
-  skill: IValue[];
-  tag: IValue[];
-}
-/** userData2에는 자기소개, 스킬, 추천 태그가 담겨있다. */
-export const userData2 = atom<IUserData2>({
-  key: `UserData2${recoilKeySuffix}`,
-  default: {
     introduce: '반갑습니다',
     skill: [
-      { value: 'HTML', isTrue: true },
-      { value: 'CSS', isTrue: true },
+      { value: 'Figma', isTrue: true },
+      { value: 'Sketch', isTrue: true },
       { value: 'Javascript', isTrue: true },
+      { value: '교육', isTrue: true },
+      { value: 'HTML', isTrue: false },
+      { value: 'CSS', isTrue: false },
       { value: 'Typescript', isTrue: false },
       { value: 'React', isTrue: false },
       { value: 'IOS개발', isTrue: false },
@@ -78,7 +72,8 @@ export const userData2 = atom<IUserData2>({
     ],
     tag: [
       { value: '완벽주의자', isTrue: true },
-      { value: '디테일의신', isTrue: false },
+      { value: '디테일의 신', isTrue: true },
+      { value: '바람의 손', isTrue: true },
     ],
   },
 });

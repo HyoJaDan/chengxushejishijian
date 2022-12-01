@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-syntax */
-import { userData, userData2 } from '~/recoils/user-info/atoms';
+import { userData } from '~/recoils/user-info/atoms';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
@@ -7,13 +7,12 @@ interface ITag {
   tag: string;
 }
 const OutputTags = ({ tag }: ITag) => {
-  let output = [];
+  const output = [];
   const data = useRecoilValue(userData);
-  const data2 = useRecoilValue(userData2);
 
   if (tag === 'skills') {
-    for (const key in data2.skill) {
-      if (data2.skill[key].isTrue === true) output.push(data2.skill[key].value);
+    for (const key in data.skill) {
+      if (data.skill[key].isTrue === true) output.push(data.skill[key].value);
     }
   } else if (tag === 'interests')
     for (const key in data.userInterest) {
@@ -21,8 +20,8 @@ const OutputTags = ({ tag }: ITag) => {
         output.push(data.userInterest[key].value);
     }
   else if (tag === 'tags') {
-    for (const key in data2.tag) {
-      if (data2.tag[key].isTrue === true) output.push(data2.tag[key].value);
+    for (const key in data.tag) {
+      if (data.tag[key].isTrue === true) output.push(data.tag[key].value);
     }
   }
   console.log('output', output);

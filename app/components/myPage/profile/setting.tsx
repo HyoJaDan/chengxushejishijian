@@ -2,7 +2,7 @@
 /* eslint-disable no-restricted-syntax */
 import styled from 'styled-components';
 import type { IValue } from '~/recoils/user-info/atoms';
-import { userData, userData2 } from '~/recoils/user-info/atoms';
+import { userData } from '~/recoils/user-info/atoms';
 import { useRecoilState } from 'recoil';
 
 interface IClick {
@@ -11,11 +11,10 @@ interface IClick {
 
 export default function SettingPage({ clicked }: IClick) {
   const [data, setData] = useRecoilState(userData);
-  const [data2, setData2] = useRecoilState(userData2);
   let output: IValue[];
-  if (clicked === 'skills') output = [...data2.skill];
+  if (clicked === 'skills') output = [...data.skill];
   else if (clicked === 'interests') output = data.userInterest;
-  else if (clicked === 'tags') output = data2.tag;
+  else output = data.tag;
 
   const skill = output.map(({ value, isTrue }, index) => {
     const id = `skill_${index}`;
@@ -26,22 +25,20 @@ export default function SettingPage({ clicked }: IClick) {
         onClick={() => {
           const Idx = output.findIndex((v) => v.value === value);
           if (clicked === 'skills')
-            setData2({
-              introduce: data2.introduce,
+            setData({
+              ...data,
               skill: [
                 ...output.slice(0, Idx),
                 {
-                  value: data2.skill[Idx].value,
-                  isTrue: !data2.skill[Idx].isTrue,
+                  value: data.skill[Idx].value,
+                  isTrue: !data.skill[Idx].isTrue,
                 },
                 ...output.slice(Idx + 1),
               ],
-              tag: data2.tag,
             });
           else if (clicked === 'interests')
             setData({
-              userNickName: data.userNickName,
-              userJobPool: data.userJobPool,
+              ...data,
               userInterest: [
                 ...output.slice(0, Idx),
                 {
@@ -52,14 +49,13 @@ export default function SettingPage({ clicked }: IClick) {
               ],
             });
           else if (clicked === 'tags')
-            setData2({
-              introduce: data2.introduce,
-              skill: data2.skill,
+            setData({
+              ...data,
               tag: [
                 ...output.slice(0, Idx),
                 {
-                  value: data2.tag[Idx].value,
-                  isTrue: !data2.tag[Idx].isTrue,
+                  value: data.tag[Idx].value,
+                  isTrue: !data.tag[Idx].isTrue,
                 },
                 ...output.slice(Idx + 1),
               ],

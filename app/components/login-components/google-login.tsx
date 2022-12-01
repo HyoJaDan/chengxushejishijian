@@ -3,7 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { useSetRecoilState } from 'recoil';
 import { loginInformation, platform } from '~/recoils/user-info/atoms';
-import { setUser } from './setUser';
+/* import { setUser } from './setUser'; */
 
 export default function GoogleLogin() {
   const setLoginInfo = useSetRecoilState(loginInformation);
