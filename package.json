@@ -3,7 +3,7 @@
   "sideEffects": false,
   "scripts": {
     "build": "node --require @lukalabs/esbuild-inject-plugin -- ./node_modules/.bin/remix build",
-    "dev": "node --require @lukalabs/esbuild-inject-plugin -- ./node_modules/.bin/remix dev",
+    "dev": "RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED=false node --require @lukalabs/esbuild-inject-plugin -- ./node_modules/.bin/remix dev",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "coverage": "vitest run --coverage",
