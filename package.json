@@ -4,9 +4,9 @@
   "scripts": {
     "build": "node --require @lukalabs/esbuild-inject-plugin -- ./node_modules/.bin/remix build",
     "dev": "RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED=false node --require @lukalabs/esbuild-inject-plugin -- ./node_modules/.bin/remix dev",
-    "test": "vitest",
-    "test:ui": "vitest --ui",
-    "coverage": "vitest run --coverage",
+    "test": "RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED=false vitest",
+    "test:ui": "RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED=false vitest --ui",
+    "coverage": "RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED=false vitest run --coverage",
     "e2e": "playwright test",
     "e2e:report": "playwright show-report",
     "postinstall": "husky install"
