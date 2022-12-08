@@ -1,12 +1,17 @@
 import { Link } from '@remix-run/react';
 import type { FC } from 'react';
 import styled from 'styled-components';
+import { useRecoilValue } from 'recoil';
+import { loginInformation } from '~/recoils/user-info/atoms';
 
 type TrailingButtonMenu = {
   src: string;
   to: string;
 };
-
+type IType = {
+  isloggedin: boolean;
+  name: string;
+};
 const menu: TrailingButtonMenu[] = [
   {
     to: '/',
@@ -21,16 +26,27 @@ const menu: TrailingButtonMenu[] = [
     src: '/icons/notifications.svg',
   },
 ];
+const Login = ({ isloggedin, name }: IType) => {
+  const output = name.substring(0, 1);
+
+  if (isloggedin) {
+    return <CircleLink to={`/${name}/profile`}>{output}</CircleLink>;
+  }
+  return <TextLink to='login'>로그인</TextLink>;
+};
 export const TrailingButtons: FC = () => {
-  const menuButtons = menu.map(({ src, to }) => (
-    <IconLink to={to} key='menu-icon-buttons-$to'>
-      <Icon src={src} />
-    </IconLink>
-  ));
+  const loginInfo = useRecoilValue(loginInformation);
+  const menuButtons = menu.map(({ src, to }) => {
+    return (
+      <IconLink to={to} key={`menu-icon-buttons-${src}`}>
+        <Icon src={src} />
+      </IconLink>
+    );
+  });
   return (
     <Wrapper>
       {menuButtons}
-      <Avatar>v</Avatar>
+      <Login isloggedin={loginInfo.isloggedin} name={loginInfo.name} />
     </Wrapper>
   );
 };
@@ -45,21 +61,27 @@ const Wrapper = styled.div`
 const IconLink = styled(Link)`
   display: block;
 `;
+const TextLink = styled(Link)`
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 100%;
+  /* identical to box height, or 16px */
 
-const Icon = styled.img.attrs({
-  role: 'button',
-})`
-  display: block;
-  width: 24px;
+  color: #ffffff;
 `;
-
-const Avatar = styled.div.attrs({
-  role: 'button',
-})`
+const CircleLink = styled(Link)`
   display: grid;
   place-content: center;
   width: 32px;
   height: 32px;
   background-color: white;
   clip-path: circle(50%);
+`;
+const Icon = styled.img.attrs({
+  role: 'button',
+})`
+  display: block;
+  width: 24px;
 `;

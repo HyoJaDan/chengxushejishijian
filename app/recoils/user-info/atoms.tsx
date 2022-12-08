@@ -1,5 +1,5 @@
 /* eslint-disable no-shadow */
-import { atom } from 'recoil';
+import { atom, selector } from 'recoil';
 import { recoilKeySuffix } from '../../utils/recoil-key';
 
 export enum platform {
@@ -75,6 +75,14 @@ export const userData = atom<IUserData>({
       { value: '디테일의 신', isTrue: true },
       { value: '바람의 손', isTrue: true },
     ],
+  },
+});
+
+export const userJobPoolSelector = selector({
+  key: `userJobPool${recoilKeySuffix}`,
+  get: ({ get }) => get(userData).userJobPool,
+  set: ({ set }, newValue) => {
+    set(userData, (oldValue) => ({ ...oldValue, userJobPool: newValue }));
   },
 });
 

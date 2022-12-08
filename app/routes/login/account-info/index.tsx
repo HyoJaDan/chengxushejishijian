@@ -1,7 +1,10 @@
 import { useRecoilValue, useRecoilState } from 'recoil';
-import { userData, loginInformation } from '~/recoils/user-info/atoms';
+import {
+  userData,
+  loginInformation,
+  userJobPoolSelector,
+} from '~/recoils/user-info/atoms';
 import { useForm } from 'react-hook-form';
-import { useRef } from 'react';
 import { useNavigate } from '@remix-run/react';
 import styled from 'styled-components';
 import InputUserArea from '~/components/input-user-info/input-area';
@@ -13,12 +16,12 @@ export interface IUserData {
   userJobPool: string;
   userInterest: [];
 }
-
 export default function Detail() {
   const navigate = useNavigate();
   const [userDatas, setUserDatas] = useRecoilState(userData);
   const loginInfo = useRecoilValue(loginInformation);
-  const nowUserPool = useRef('Initial');
+  const [useUserJobPool, setUserJobPool] = useRecoilState(userJobPoolSelector);
+
   const {
     register,
     handleSubmit,
@@ -43,15 +46,15 @@ export default function Detail() {
         ...nextInterestData.slice(Idx + 1),
       ];
     }
-    if (nowUserPool.current !== 'Initial' && nowUserPool.current !== 'false') {
+    if (useUserJobPool !== 'false' && useUserJobPool !== '프로덕트 디자이너') {
       setUserDatas({
         ...userDatas,
         userNickName: data.userNickName,
-        userJobPool: nowUserPool.current,
+        userJobPool: useUserJobPool,
         userInterest: nextInterestData,
       });
       navigate('/');
-    } else nowUserPool.current = 'false';
+    } else setUserJobPool('false');
   };
   return (
     <Wrap>
@@ -62,7 +65,7 @@ export default function Detail() {
         </Head>
         <Form onSubmit={handleSubmit(onValid)}>
           <InputUserName register={register} errors={errors} />
-          <InputUserArea userPool={nowUserPool} />
+          <InputUserArea />
           <InputUserInterests register={register} />
           <ButtonDiv>
             <Btn>완료</Btn>
@@ -74,7 +77,7 @@ export default function Detail() {
 }
 const Wrap = styled.div`
   position: absolute;
-  height: 1080px;
+  height: 130vh;
   width: -webkit-fill-available;
   background-color: #e9eaec;
   display: flex;

@@ -4,12 +4,15 @@ import { useEffect, useRef } from 'react';
 import type { UseFormRegister } from 'react-hook-form';
 import type { IUserData } from '~/routes/login/account-info';
 
-interface IInputUserName {
+interface inputUserNameProps {
   register: UseFormRegister<IUserData>;
   errors: any;
 }
 
-export default function InputUserName({ register, errors }: IInputUserName) {
+export default function InputUserName({
+  register,
+  errors,
+}: inputUserNameProps) {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const { ref, ...rest } = register('userNickName', {
     required: '이름을 적어주세요',

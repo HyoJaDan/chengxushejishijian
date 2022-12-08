@@ -3,26 +3,7 @@ import styled from 'styled-components';
 import type { FCClass } from '~/components/common/types/function-component';
 import { NavButtons } from './nav-buttons';
 import { TrailingButtons } from './trailing-buttons';
-import { useRecoilValue } from 'recoil';
-import { loginInformation } from '~/recoils/user-info/atoms';
 
-const Login = ({
-  isloggedin,
-  name,
-}: {
-  isloggedin: boolean;
-  name: string | undefined;
-}) => {
-  if (isloggedin) {
-    return (
-      <div>
-        hello
-        <Link to={`/${name}/profile`}>{name}</Link>
-      </div>
-    );
-  }
-  return <Link to='login'>로그인하기</Link>;
-};
 export const GlobalNavigationBar: FCClass = ({ className }) => (
   <Wrapper className={className}>
     <Link to='/'>
@@ -31,10 +12,8 @@ export const GlobalNavigationBar: FCClass = ({ className }) => (
     <NavButtons />
     <Spacer />
     <TrailingButtons />
-    <Login isloggedin={loginInfo.isloggedin} name={loginInfo.name} />
   </Wrapper>
 );
-
 const Wrapper = styled.nav`
   display: flex;
   flex-direction: row;
@@ -59,7 +38,4 @@ const Logo = styled.img.attrs({
 const Spacer = styled.div`
   flex: 1;
   justify-content: space-between;
-`;
-const GNBArea = styled.div`
-  display: flex;
 `;

@@ -5,11 +5,11 @@ import type { IValue } from '~/recoils/user-info/atoms';
 import { userData } from '~/recoils/user-info/atoms';
 import { useRecoilState } from 'recoil';
 
-interface IClick {
+interface clickProps {
   clicked: string;
 }
 
-export default function SettingPage({ clicked }: IClick) {
+export default function SettingPage({ clicked }: clickProps) {
   const [data, setData] = useRecoilState(userData);
   let output: IValue[];
   if (clicked === 'skills') output = [...data.skill];

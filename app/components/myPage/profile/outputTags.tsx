@@ -3,10 +3,10 @@ import { userData } from '~/recoils/user-info/atoms';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
-interface ITag {
+interface tagProps {
   tag: string;
 }
-const OutputTags = ({ tag }: ITag) => {
+const OutputTags = ({ tag }: tagProps) => {
   const output = [];
   const data = useRecoilValue(userData);
 
@@ -24,7 +24,6 @@ const OutputTags = ({ tag }: ITag) => {
       if (data.tag[key].isTrue === true) output.push(data.tag[key].value);
     }
   }
-  console.log('output', output);
   return (
     <Exist>
       {output?.map((outputs) => (

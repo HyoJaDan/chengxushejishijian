@@ -1,59 +1,40 @@
 /* eslint-disable no-param-reassign */
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { userJobPoolSelector } from '~/recoils/user-info/atoms';
 import { Header } from './input-name';
 
-interface IUserPool {
-  userPool: React.MutableRefObject<string>;
+interface temp {
+  name: string;
 }
-export default function InputUserArea({ userPool }: IUserPool) {
-  const [activeDev, setActiveDev] = useState(false);
-  const [activeDesign, setActiveDesign] = useState(false);
-  const UserPool = userPool;
+
+export default function InputUserArea() {
+  const [userJobpool, setUserJobPool] = useRecoilState(userJobPoolSelector);
+  const buttons: temp[] = [{ name: '개발자' }, { name: '디자인' }];
+  const button = buttons.map(({ name }, index) => {
+    const id = `button_${index}`;
+    return (
+      <Pool
+        key={id}
+        type='button'
+        className={
+          userJobpool === name
+            ? 'chooseAreaButtonActive'
+            : 'chooseAreaButtonNotActive'
+        }
+        onClick={() => {
+          setUserJobPool(name);
+        }}
+      >
+        {name}
+      </Pool>
+    );
+  });
   return (
     <InputArea>
       <Header>직업 분야</Header>
-      <InputUsrPool>
-        <DevPool
-          type='button'
-          className={
-            activeDev ? 'chooseAreaButtonActive' : 'chooseAreaButtonNotActive'
-          }
-          onClick={() => {
-            if (activeDev) {
-              setActiveDev(false);
-              UserPool.current = 'false';
-            } else {
-              UserPool.current = '개발';
-              setActiveDev(true);
-              setActiveDesign(false);
-            }
-          }}
-        >
-          개발
-        </DevPool>
-        <DesignPool
-          type='button'
-          className={
-            activeDesign
-              ? 'chooseAreaButtonActive'
-              : 'chooseAreaButtonNotActive'
-          }
-          onClick={() => {
-            if (activeDesign) {
-              setActiveDesign(false);
-              UserPool.current = 'false';
-            } else {
-              setActiveDev(false);
-              setActiveDesign(true);
-              UserPool.current = '디자인';
-            }
-          }}
-        >
-          디자인
-        </DesignPool>
-      </InputUsrPool>
-      {UserPool.current === 'false' ? (
+      <InputUsrPool>{button}</InputUsrPool>
+      {userJobpool === 'false' ? (
         <Errmessage>직업 분야를 선택해 주세요.</Errmessage>
       ) : (
         <Errmessage />
@@ -71,7 +52,7 @@ const InputUsrPool = styled.div`
   display: flex;
   gap: 10px;
 `;
-const DevPool = styled.button`
+const Pool = styled.button`
   width: 230px;
   height: 79px;
 
@@ -87,7 +68,6 @@ const DevPool = styled.button`
   color: #ffffff;
   cursor: pointer;
 `;
-const DesignPool = styled(DevPool)``;
 const Errmessage = styled.span`
   color: red;
   height: 18px;

@@ -32,7 +32,7 @@ export default function LoginIndex() {
 }
 const Wrap = styled.div`
   background-color: #e9eaec;
-  height: 100vh;
+  height: calc(100vh - 56px);
   display: flex;
   justify-content: center;
   align-items: center;

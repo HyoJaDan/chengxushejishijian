@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Link, useNavigate } from '@remix-run/react';
 import { userData, clickSetting } from '~/recoils/user-info/atoms';
-import { useSetRecoilState, useRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import OutputTags from '../../../../components/myPage/profile/outputTags';
@@ -17,15 +17,11 @@ const defaultData = {
   tag: false,
 };
 export default function ProfileSetting() {
-  const setClicked = useSetRecoilState(clickSetting);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [clicked, setClicked] = useRecoilState(clickSetting);
   const onClickSetting = (data: string) => {
-    const newData = {
-      ...defaultData,
-      [data]: true,
-    };
-    setClicked(newData);
+    setClicked({ ...defaultData, [data]: true });
   };
-
   const navigate = useNavigate();
   const [data, setData] = useRecoilState(userData);
   const { register, handleSubmit } = useForm<IData>({
@@ -165,7 +161,7 @@ const SettingBtn = styled(motion.div)`
   font-weight: 500;
   font-size: 12px;
   line-height: 100%;
-  /* identical to box height, or 12px */
+
   cursor: pointer;
   color: #ffffff;
   &:hover {

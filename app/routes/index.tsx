@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Banner } from '~/components/main/banner';
 import { CategorySideBar } from '~/components/main/category-side-bar';
+import { MainContent } from '~/components/main/main-content';
 
 export default function Index() {
   return (
@@ -18,6 +19,7 @@ export default function Index() {
 const MainWrapper = styled.div`
   height: 100%;
   overflow-x: auto;
+  padding-top: 44px;
 `;
 const GridWrapper = styled.div`
   --main-page-margin: 172px;

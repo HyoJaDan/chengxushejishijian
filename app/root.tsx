@@ -65,5 +65,4 @@ const Wrapper = styled.div`
 
 const ContentArea = styled.div`
   position: relative;
-  padding-top: 44px;
 `;
