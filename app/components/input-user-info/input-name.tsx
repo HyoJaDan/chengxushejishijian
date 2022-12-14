@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import styled from 'styled-components';
-import { useEffect, useRef } from 'react';
 import type { UseFormRegister } from 'react-hook-form';
+import styled from 'styled-components';
 import type { IUserData } from '~/routes/login/account-info';
 
 interface inputUserNameProps {
@@ -13,23 +12,12 @@ export default function InputUserName({
   register,
   errors,
 }: inputUserNameProps) {
-  const inputRef = useRef<HTMLInputElement | null>(null);
-  const { ref, ...rest } = register('userNickName', {
-    required: '이름을 적어주세요',
-  });
-  useEffect(() => {
-    inputRef.current?.focus();
-  });
   return (
     <InputName>
       <Header>사용자 이름</Header>
       <InputText
-        {...rest}
-        name='userNickName'
-        ref={(e) => {
-          ref(e);
-          inputRef.current = e;
-        }}
+        {...register('userNickName', { required: '이름을 적어주세요' })}
+        autoFocus
         placeholder='    사용자 이름을 입력해주세요.'
       />
       <Errmessage>{errors.userNickName?.message}</Errmessage>

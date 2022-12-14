@@ -1,15 +1,15 @@
+import { Link } from '@remix-run/react';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { userData } from '~/recoils/user-info/atoms';
-import { useRecoilValue } from 'recoil';
-import { Link } from '@remix-run/react';
 
 export default function Part2() {
   const user = useRecoilValue(userData);
   return (
     <Wrapper>
       <Left>
-        <LeftUserNickName>{user.userNickName}</LeftUserNickName>
-        <LeftUserJobPool>{user.userJobPool}</LeftUserJobPool>
+        <LeftUserNickName>{user.nickName}</LeftUserNickName>
+        <LeftUserJobPool>{user.jobPool}</LeftUserJobPool>
         <LeftTemp>팔로워 0명 팔로잉 0명</LeftTemp>
         <LeftSetting to='setting'>수정하기</LeftSetting>
       </Left>

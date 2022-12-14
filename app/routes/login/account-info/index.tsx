@@ -32,26 +32,17 @@ export default function Detail() {
     },
   });
   const onValid = (data: IUserData) => {
-    let nextInterestData = userDatas.userInterest;
-    for (let i = 0; i < data.userInterest.length; i += 1) {
-      const Idx = userDatas.userInterest.findIndex(
-        (v) => v.value === data.userInterest[i]
-      );
-      nextInterestData = [
-        ...nextInterestData.slice(0, Idx),
-        {
-          value: nextInterestData[Idx].value,
-          isTrue: true,
-        },
-        ...nextInterestData.slice(Idx + 1),
-      ];
-    }
+    const nextInterestData = JSON.parse(JSON.stringify(userDatas.interest));
+    data.userInterest.forEach((index) => {
+      const Idx = userDatas.interest.findIndex((v) => v.value === index);
+      nextInterestData[Idx].isTrue = true;
+    });
     if (useUserJobPool !== 'false' && useUserJobPool !== '프로덕트 디자이너') {
       setUserDatas({
         ...userDatas,
-        userNickName: data.userNickName,
-        userJobPool: useUserJobPool,
-        userInterest: nextInterestData,
+        nickName: data.userNickName,
+        jobPool: useUserJobPool,
+        interest: nextInterestData,
       });
       navigate('/');
     } else setUserJobPool('false');

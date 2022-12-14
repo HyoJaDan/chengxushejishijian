@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { NavLink } from '@remix-run/react';
+import styled from 'styled-components';
 
 interface IPages {
   title: string;

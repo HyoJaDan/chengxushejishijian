@@ -1,9 +1,9 @@
-import styled from 'styled-components';
 import { Link, useNavigate } from '@remix-run/react';
-import { userData, clickSetting } from '~/recoils/user-info/atoms';
-import { useRecoilState } from 'recoil';
-import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
+import { useForm } from 'react-hook-form';
+import { useRecoilState } from 'recoil';
+import styled from 'styled-components';
+import { clickSetting, userData } from '~/recoils/user-info/atoms';
 import OutputTags from '../../../../components/myPage/profile/outputTags';
 
 interface IData {
@@ -16,7 +16,7 @@ const defaultData = {
   interest: false,
   tag: false,
 };
-export default function ProfileSetting() {
+function InputForm() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [clicked, setClicked] = useRecoilState(clickSetting);
   const onClickSetting = (data: string) => {
@@ -24,78 +24,74 @@ export default function ProfileSetting() {
   };
   const navigate = useNavigate();
   const [data, setData] = useRecoilState(userData);
+
   const { register, handleSubmit } = useForm<IData>({
     defaultValues: {
-      userName: data.userNickName,
-      userJobPool: data.userJobPool,
+      userName: data.nickName,
+      userJobPool: data.jobPool,
       self_introduction: data.introduce,
     },
   });
   const onValid = (inputData: IData) => {
     setData({
       ...data,
-      userNickName: inputData.userName,
-      userJobPool: inputData.userJobPool,
+      nickName: inputData.userName,
+      jobPool: inputData.userJobPool,
       introduce: inputData.self_introduction,
     });
-    navigate(`/${data.userNickName}/profile`);
+    navigate('/my-page/profile');
   };
-
+  return (
+    <Form onSubmit={handleSubmit(onValid)}>
+      <Title>사용자 이름</Title>
+      <Input {...register('userName')} placeholder={`${data.nickName}`} />
+      <Title>직무/분야</Title>
+      <Input {...register('userJobPool')} placeholder={`${data.jobPool}`} />
+      <Title>자기소개</Title>
+      <InputInproduction
+        {...register('self_introduction')}
+        placeholder={`${data.introduce}`}
+      />
+      <Title>스킬</Title>
+      <Div>
+        <OutputTags tag='skill' />
+        <SettingBtn layoutId='skill' onClick={() => onClickSetting('skill')}>
+          스킬 설정
+        </SettingBtn>
+      </Div>
+      <Title>관심분야</Title>
+      <Div>
+        <OutputTags tag='interest' />
+        <SettingBtn
+          layoutId='interest'
+          onClick={() => onClickSetting('interest')}
+        >
+          관심분야 설정
+        </SettingBtn>
+      </Div>
+      <Title>추천 태그</Title>
+      <Div>
+        <OutputTags tag='tag' />
+        <SettingBtn layoutId='tag' onClick={() => onClickSetting('tag')}>
+          추천태그 설정
+        </SettingBtn>
+      </Div>
+      <div />
+      <Div>
+        <div />
+        <SubmitBtn>저장하기</SubmitBtn>
+      </Div>
+    </Form>
+  );
+}
+export default function ProfileSetting() {
   return (
     <Background>
       <Wrapper>
-        <Form onSubmit={handleSubmit(onValid)}>
-          <Title>사용자 이름</Title>
-          <Input
-            {...register('userName')}
-            placeholder={`${data.userNickName}`}
-          />
-          <Title>직무/분야</Title>
-          <Input
-            {...register('userJobPool')}
-            placeholder={`${data.userJobPool}`}
-          />
-          <Title>자기소개</Title>
-          <InputInproduction
-            {...register('self_introduction')}
-            placeholder={`${data.introduce}`}
-          />
-          <Title>스킬</Title>
-          <Div>
-            <OutputTags tag='skills' />
-            <SettingBtn
-              layoutId='setting'
-              onClick={() => onClickSetting('skill')}
-            >
-              스킬 설정
-            </SettingBtn>
-          </Div>
-          <Title>관심분야</Title>
-          <Div>
-            <OutputTags tag='interests' />
-            <SettingBtn
-              layoutId='interest'
-              onClick={() => onClickSetting('interest')}
-            >
-              관심분야 설정
-            </SettingBtn>
-          </Div>
-          <Title>추천 태그</Title>
-          <Div>
-            <OutputTags tag='tags' />
-            <SettingBtn layoutId='tag' onClick={() => onClickSetting('tag')}>
-              추천태그 설정
-            </SettingBtn>
-          </Div>
-          <div />
-          <Div>
-            <div />
-            <SubmitBtn>저장하기</SubmitBtn>
-          </Div>
-        </Form>
+        <InputForm />
       </Wrapper>
       <Button>
-        <Back to={`/${data.userNickName}/profile`}>프로필로 돌아가기</Back>
+        <Back to='/my-page/profile'>프로필로 돌아가기</Back>
       </Button>
     </Background>
   );

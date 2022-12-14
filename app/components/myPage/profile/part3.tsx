@@ -1,6 +1,6 @@
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { userData } from '~/recoils/user-info/atoms';
-import { useRecoilValue } from 'recoil';
 import OutputTags from './outputTags';
 
 export default function Part3() {
@@ -10,11 +10,11 @@ export default function Part3() {
       <Title>자기소개</Title>
       {data.introduce}
       <Title>스킬</Title>
-      <OutputTags tag='skills' />
+      <OutputTags tag='skill' />
       <Title>관심분야</Title>
-      <OutputTags tag='interests' />
+      <OutputTags tag='interest' />
       <Title>추천태그</Title>
-      <OutputTags tag='tags' />
+      <OutputTags tag='tag' />
       <Title>획득한 뱃지</Title>
       <Temp />
     </Wrapper>

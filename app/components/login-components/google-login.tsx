@@ -1,7 +1,7 @@
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
-import styled from 'styled-components';
 import { useSetRecoilState } from 'recoil';
+import styled from 'styled-components';
 import { loginInformation, platform } from '~/recoils/user-info/atoms';
 /* import { setUser } from './setUser'; */
 

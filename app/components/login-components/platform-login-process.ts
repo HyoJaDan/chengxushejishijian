@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { userStatus } from '../../hooks/userStatus/userStatus';
 import { setUser } from './setUser';
 
@@ -9,12 +8,10 @@ export async function GetUserInfo(
   navigate: Function,
   setLoginInfo: Function
 ) {
-  let thePoolAccessToken = '';
-  let thePoolStatus;
-
-  await setUser(OAuthresponse, platform).then((response: any) => {
-    [thePoolAccessToken, thePoolStatus] = response;
-  });
+  const [thePoolAccessToken, thePoolStatus] = await setUser(
+    OAuthresponse,
+    platform
+  );
 
   console.log('thePoolAccessToken', thePoolAccessToken);
   setLoginInfo({
@@ -29,6 +26,5 @@ export async function GetUserInfo(
   } else if (thePoolStatus === userStatus.ACTIVE) {
     navigate('/');
   }
-  //
   navigate('/login/account-info');
 }

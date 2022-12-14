@@ -30,7 +30,7 @@ const Login = ({ isloggedin, name }: IType) => {
   const output = name.substring(0, 1);
 
   if (isloggedin) {
-    return <CircleLink to={`/${name}/profile`}>{output}</CircleLink>;
+    return <CircleLink to='/my-page/profile'>{output}</CircleLink>;
   }
   return <TextLink to='login'>로그인</TextLink>;
 };

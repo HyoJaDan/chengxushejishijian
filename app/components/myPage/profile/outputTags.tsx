@@ -1,33 +1,20 @@
 /* eslint-disable no-restricted-syntax */
-import { userData } from '~/recoils/user-info/atoms';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
+import { userData } from '~/recoils/user-info/atoms';
 
 interface tagProps {
   tag: string;
 }
 const OutputTags = ({ tag }: tagProps) => {
-  const output = [];
   const data = useRecoilValue(userData);
-
-  if (tag === 'skills') {
-    for (const key in data.skill) {
-      if (data.skill[key].isTrue === true) output.push(data.skill[key].value);
-    }
-  } else if (tag === 'interests')
-    for (const key in data.userInterest) {
-      if (data.userInterest[key].isTrue === true)
-        output.push(data.userInterest[key].value);
-    }
-  else if (tag === 'tags') {
-    for (const key in data.tag) {
-      if (data.tag[key].isTrue === true) output.push(data.tag[key].value);
-    }
-  }
+  const output = data[tag].filter(
+    (idx: { isTrue: boolean }) => idx.isTrue === true
+  );
   return (
     <Exist>
-      {output?.map((outputs) => (
-        <Tag key={`${outputs}`}>{outputs}</Tag>
+      {output?.map(({ value }) => (
+        <Tag key={`${value}`}>{value}</Tag>
       ))}
     </Exist>
   );

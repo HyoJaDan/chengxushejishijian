@@ -30,9 +30,9 @@ export interface IValue {
 }
 
 export interface IUserData {
-  userNickName: string;
-  userJobPool: string;
-  userInterest: IValue[];
+  nickName: string;
+  jobPool: string;
+  interest: IValue[];
   introduce: string;
   skill: IValue[];
   tag: IValue[];
@@ -42,9 +42,9 @@ export interface IUserData {
 export const userData = atom<IUserData>({
   key: `UserData${recoilKeySuffix}`,
   default: {
-    userNickName: '배고플땐밥먹어',
-    userJobPool: '프로덕트 디자이너',
-    userInterest: [
+    nickName: '배고플땐밥먹어',
+    jobPool: '프로덕트 디자이너',
+    interest: [
       { value: '백엔드개발', isTrue: false },
       { value: 'IOS', isTrue: false },
       { value: 'Android', isTrue: false },
@@ -80,9 +80,9 @@ export const userData = atom<IUserData>({
 
 export const userJobPoolSelector = selector({
   key: `userJobPool${recoilKeySuffix}`,
-  get: ({ get }) => get(userData).userJobPool,
+  get: ({ get }) => get(userData).jobPool,
   set: ({ set }, newValue) => {
-    set(userData, (oldValue) => ({ ...oldValue, userJobPool: newValue }));
+    set(userData, (oldValue) => ({ ...oldValue, jobPool: newValue }));
   },
 });
 

@@ -1,16 +1,16 @@
 /* eslint-disable no-param-reassign */
-import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
+import styled from 'styled-components';
 import { userJobPoolSelector } from '~/recoils/user-info/atoms';
 import { Header } from './input-name';
 
-interface temp {
+interface IButton {
   name: string;
 }
 
 export default function InputUserArea() {
   const [userJobpool, setUserJobPool] = useRecoilState(userJobPoolSelector);
-  const buttons: temp[] = [{ name: '개발자' }, { name: '디자인' }];
+  const buttons: IButton[] = [{ name: '개발자' }, { name: '디자인' }];
   const button = buttons.map(({ name }, index) => {
     const id = `button_${index}`;
     return (

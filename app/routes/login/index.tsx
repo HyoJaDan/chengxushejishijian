@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import KakaoLogin from '~/components/login-components/kakao-login';
 import GoogleLogin from '~/components/login-components/google-login';
-import bording from '~/image/bording.svg';
 
 function Header() {
   return (
@@ -19,7 +18,7 @@ export default function LoginIndex() {
   return (
     <Wrap>
       <Wrapper>
-        <Img src={bording} alt='bording' />
+        <Img src='/icons/bording.svg' alt='bording' />
         <Header />
         <Login>
           <Apple>애플로 계속하기</Apple>
