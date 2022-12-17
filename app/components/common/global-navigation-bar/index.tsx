@@ -10,7 +10,6 @@ import { TrailingButtons } from './trailing-buttons';
 export const GlobalNavigationBar: FCClass = ({ className }) => {
   const [loginInfo, setLoginInfo] = useRecoilState(loginInformation);
   useEffect(() => {
-    console.log('rendered');
     if (localStorage.getItem('thePoolAccessToken')) {
       setLoginInfo({
         ...loginInfo,
@@ -54,5 +53,4 @@ const Logo = styled.img.attrs({
 
 const Spacer = styled.div`
   flex: 1;
-  justify-content: space-between;
 `;

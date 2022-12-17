@@ -1,13 +1,11 @@
-import { useNavigate } from '@remix-run/react';
-import { useEffect } from 'react';
+import type { LoaderFunction } from '@remix-run/node';
+import { redirect } from '@remix-run/node';
 import { useRecoilValue } from 'recoil';
 import { loginInformation } from '~/recoils/user-info/atoms';
 
-export default function Mypage() {
-  const navigate = useNavigate();
+export const Loader: LoaderFunction = () => {
   const loginInfo = useRecoilValue(loginInformation);
-  useEffect(() => {
-    if (loginInfo.isloggedin) navigate('/my-page/profile');
-    navigate('/');
-  }, []);
-}
+
+  if (loginInfo.isloggedin) redirect('/my-page/profile');
+  redirect('/');
+};

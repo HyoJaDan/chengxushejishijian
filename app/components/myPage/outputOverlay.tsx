@@ -2,15 +2,11 @@ import { motion } from 'framer-motion';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import SettingPage from '~/components/myPage/profile/profile-setting';
+import type { IClickSetting } from '~/recoils/user-info/atoms';
 import { clickSetting } from '~/recoils/user-info/atoms';
 
-const defaultValue = {
-  skill: false,
-  interest: false,
-  tag: false,
-};
 interface clickedOverlayProp {
-  clickedOverlay: string;
+  clickedOverlay: Exclude<IClickSetting, undefined>;
   scroll: number;
 }
 export default function OutputOverlay({
@@ -21,17 +17,12 @@ export default function OutputOverlay({
   return (
     <>
       <Overlay
-        onClick={() =>
-          setClicked({
-            ...defaultValue,
-            [clickedOverlay]: !clicked[clickedOverlay],
-          })
-        }
+        onClick={() => setClicked(clickedOverlay)}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       />
       <Animi layoutId={clickedOverlay} style={{ top: scroll + 50 }}>
-        {clicked[clickedOverlay] ? (
+        {clicked === clickedOverlay ? (
           <SettingPage clicked={clickedOverlay} />
         ) : null}
       </Animi>

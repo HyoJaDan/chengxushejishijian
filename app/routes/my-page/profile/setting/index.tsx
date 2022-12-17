@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
+import type { IClickSetting } from '~/recoils/user-info/atoms';
 import { clickSetting, userData } from '~/recoils/user-info/atoms';
 import OutputTags from '../../../../components/myPage/profile/outputTags';
 
@@ -11,16 +12,12 @@ interface IData {
   userJobPool: string;
   self_introduction: string;
 }
-const defaultData = {
-  skill: false,
-  interest: false,
-  tag: false,
-};
+
 function InputForm() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [clicked, setClicked] = useRecoilState(clickSetting);
-  const onClickSetting = (data: string) => {
-    setClicked({ ...defaultData, [data]: true });
+  const onClickSetting = (data: Exclude<IClickSetting, undefined>) => {
+    setClicked(data);
   };
   const navigate = useNavigate();
   const [data, setData] = useRecoilState(userData);

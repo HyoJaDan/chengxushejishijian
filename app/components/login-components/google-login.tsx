@@ -1,31 +1,24 @@
 import { useGoogleLogin } from '@react-oauth/google';
-import axios from 'axios';
+import { useNavigate } from '@remix-run/react';
 import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { loginInformation, platform } from '~/recoils/user-info/atoms';
-/* import { setUser } from './setUser'; */
+import { LoginProcess } from './platform-login-process';
 
 export default function GoogleLogin() {
+  const navigate = useNavigate();
   const setLoginInfo = useSetRecoilState(loginInformation);
 
-  const login2 = useGoogleLogin({
-    onSuccess: async (tokenResponse) => {
-      const userInfo = await axios.get(
-        'https://www.googleapis.com/oauth2/v3/userinfo',
-        {
-          headers: {
-            Authorization: `Bearer ${tokenResponse.access_token}`,
-          },
-        }
-      );
-      setLoginInfo({
-        isloggedin: true,
+  const login = useGoogleLogin({
+    flow: 'auth-code',
+    onSuccess: async (response) => {
+      LoginProcess({
+        OAuthresponse: response.code,
         platform: platform.Google,
-        name: userInfo.data.name,
+        name: undefined,
+        navigate,
+        setLoginInfo,
       });
-      console.log('OAuth accessToken', tokenResponse);
-      console.log('userInfo', userInfo);
-      /* setUser(tokenResponse.access_token, 2); */
     },
     onError: (errorResponse) => console.log(errorResponse),
   });
@@ -34,7 +27,7 @@ export default function GoogleLogin() {
     <div>
       <Google
         onClick={() => {
-          login2();
+          login();
         }}
       >
         구글로 계속하기
@@ -53,20 +46,3 @@ const Google = styled.div`
   align-items: center;
   cursor: pointer;
 `;
-/* const googleLogin = useGoogleLogin({
-    flow: 'auth-code',
-    onSuccess: async (codeResponse) => {
-      console.log('1', codeResponse);
-      const response = await axios.post(
-        'https://api.thepool.kr/api/members/social',
-        {
-          accessToken: codeResponse.code,
-          oAuthAgency: 2,
-        }
-      );
-      console.log('codeResponse', codeResponse);
-      console.log('OAuth', response);
-      await setUser(codeResponse.code, platform.Google);
-    },
-    onError: (errorResponse) => console.log(errorResponse),
-  }); */

@@ -82,20 +82,12 @@ export const userJobPoolSelector = selector({
   key: `userJobPool${recoilKeySuffix}`,
   get: ({ get }) => get(userData).jobPool,
   set: ({ set }, newValue) => {
-    set(userData, (oldValue) => ({ ...oldValue, jobPool: newValue }));
+    set(userData, (oldValue) => ({ ...oldValue, jobPool: newValue as string }));
   },
 });
 
-interface IClickSetting {
-  skill: boolean;
-  interest: boolean;
-  tag: boolean;
-}
+export type IClickSetting = 'skill' | 'interest' | 'tag' | undefined;
 export const clickSetting = atom<IClickSetting>({
   key: `clickSetting${recoilKeySuffix}`,
-  default: {
-    skill: false,
-    interest: false,
-    tag: false,
-  },
+  default: undefined,
 });

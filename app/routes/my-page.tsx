@@ -14,14 +14,8 @@ export default function DefaultMyPage() {
       <MyPagePart />
       <Outlet />
       <AnimatePresence>
-        {clicked.skill ? (
-          <OutputOverlay clickedOverlay='skill' scroll={scrollY.get()} />
-        ) : null}
-        {clicked.interest ? (
-          <OutputOverlay clickedOverlay='interest' scroll={scrollY.get()} />
-        ) : null}
-        {clicked.tag ? (
-          <OutputOverlay clickedOverlay='tag' scroll={scrollY.get()} />
+        {clicked !== undefined ? (
+          <OutputOverlay clickedOverlay={clicked} scroll={scrollY.get()} />
         ) : null}
       </AnimatePresence>
     </Wrapper>

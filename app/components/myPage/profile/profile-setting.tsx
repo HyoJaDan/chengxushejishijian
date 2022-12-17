@@ -4,7 +4,7 @@ import type { IValue } from '~/recoils/user-info/atoms';
 import { userData } from '~/recoils/user-info/atoms';
 
 interface clickProps {
-  clicked: string;
+  clicked: 'skill' | 'interest' | 'tag';
 }
 
 export default function SettingPage({ clicked }: clickProps) {

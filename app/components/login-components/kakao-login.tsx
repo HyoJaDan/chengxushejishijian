@@ -4,7 +4,7 @@ import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { KAKAO_JS_API } from '~/constants/oAuth';
 import { loginInformation, platform } from '~/recoils/user-info/atoms';
-import { GetUserInfo } from './platform-login-process';
+import { LoginProcess } from './platform-login-process';
 
 export default function Kakao() {
   const navigate = useNavigate();
@@ -13,14 +13,13 @@ export default function Kakao() {
     <Wrapper
       token={KAKAO_JS_API}
       onSuccess={(response) => {
-        console.log('OAuth accessToken', response.response.access_token);
-        GetUserInfo(
-          response.response.access_token,
-          platform.KAKAO,
-          response.profile?.properties.nickname,
+        LoginProcess({
+          OAuthresponse: response.response.access_token,
+          platform: platform.KAKAO,
+          name: response.profile?.properties.nickname,
           navigate,
-          setLoginInfo
-        );
+          setLoginInfo,
+        });
       }}
       onFail={(error) => console.log(error)}
     >

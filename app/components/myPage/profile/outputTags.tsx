@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { userData } from '~/recoils/user-info/atoms';
 
 interface tagProps {
-  tag: string;
+  tag: 'skill' | 'interest' | 'tag';
 }
 const OutputTags = ({ tag }: tagProps) => {
   const data = useRecoilValue(userData);
