@@ -3,11 +3,18 @@ import styled from 'styled-components';
 export default function Archive() {
   return (
     <Wrapper>
-      <div>archive</div>
+      <Content />
     </Wrapper>
   );
 }
 const Wrapper = styled.div`
-  height: 100vh;
-  flex-grow: 2.2;
+  background-color: #f8f6f4;
+  display: flex;
+  justify-content: center;
+`;
+const Content = styled.div`
+  width: 1256px;
+  height: 1289px;
+  margin: 40px 0 40px 0;
+  background: #ffffff;
 `;

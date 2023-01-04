@@ -1,38 +1,70 @@
 import styled from 'styled-components';
-import Part2 from '~/components/myPage/profile/part2';
-import Part3 from '~/components/myPage/profile/part3';
+import { Calender } from '~/components/myPage/profile/calender/calander';
+
+import { ClientOnly } from 'remix-utils';
+import Chart from '~/components/myPage/profile/chart/chart.client';
+import UserInfoLeft from '~/components/myPage/profile/main-content/userInfoLeft';
+import UserInfoRight from '~/components/myPage/profile/main-content/userInfoRight';
 
 export default function Profile() {
   return (
     <Wrapper>
-      <Container />
-      <Part2 />
-      <Part3 />
-      <Div>
-        <Container4 />
-        <Container4 />
-        <Container4 />
-      </Div>
+      <Content>
+        <MainContainer>
+          <UserInfoLeft />
+          <UserInfoRight />
+        </MainContainer>
+        <Div>
+          <SubContainer>
+            <ClientOnly>{() => <Chart />}</ClientOnly>
+          </SubContainer>
+          <Calender />
+        </Div>
+      </Content>
+      <Footer>
+        <FooterContainer />
+        <FooterContainer />
+        <FooterContainer />
+        <FooterContainer />
+      </Footer>
     </Wrapper>
   );
 }
-export const Wrapper = styled.div`
-  flex-grow: 2.2;
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
+const Wrapper = styled.div`
+  background-color: #f8f6f4;
+  padding-top: 32px;
 `;
-const Container = styled.div`
-  width: 936px;
-  height: 80px;
+const Content = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+`;
+const Footer = styled.div`
+  display: flex;
+  justify-content: center;
+  grid-gap: 24px;
+  margin: 88px 0 178px 0;
+`;
+const DefaultContainer = styled.div`
+  border: 1px solid #efedea;
   background: #ffffff;
   border-radius: 8px;
+  display: flex;
+`;
+const MainContainer = styled(DefaultContainer)`
+  width: 936px;
+  height: 496px;
 `;
 const Div = styled.div`
   display: flex;
+  flex-direction: column;
   gap: 24px;
 `;
-const Container4 = styled(Container)`
-  height: 224px;
+const SubContainer = styled(DefaultContainer)`
+  height: 234px;
   width: 296px;
+`;
+const FooterContainer = styled(DefaultContainer)`
+  width: 296px;
+  height: 200px;
 `;

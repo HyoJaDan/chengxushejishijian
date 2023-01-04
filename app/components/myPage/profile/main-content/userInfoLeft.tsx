@@ -3,37 +3,34 @@ import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { userData } from '~/recoils/user-info/atoms';
 
-export default function Part2() {
+export default function UserInfoLeft() {
   const user = useRecoilValue(userData);
   return (
     <Wrapper>
-      <Left>
+      <Content>
+        <Temp />
         <LeftUserNickName>{user.nickName}</LeftUserNickName>
         <LeftUserJobPool>{user.jobPool}</LeftUserJobPool>
         <LeftTemp>팔로워 0명 팔로잉 0명</LeftTemp>
         <LeftSetting to='setting'>수정하기</LeftSetting>
-      </Left>
-      <Right>hello</Right>
+      </Content>
     </Wrapper>
   );
 }
 const Wrapper = styled.div`
-  width: 936px;
-  height: 212px;
-  background: #ffffff;
   border-radius: 8px;
   padding: 24px;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+  border-right: 1px solid #efedea;
 `;
-const Left = styled.div`
-  flex-grow: 3.5;
+const Content = styled.div`
   display: flex;
   flex-direction: column;
-  font-family: 'Pretendard';
-  font-style: normal;
-  color: #1f1f1f;
-  line-height: 150%;
-  gap: 12px;
+  grid-gap: 16px;
+  align-items: start;
 `;
 const LeftUserNickName = styled.div`
   font-weight: 800;
@@ -69,6 +66,12 @@ const LeftSetting = styled(Link)`
     color: #2478f6;
   }
 `;
-const Right = styled.div`
-  flex-grow: 1;
+
+const Temp = styled.div`
+  width: 77px;
+  height: 77px;
+
+  background: #d9d9d9;
+  border: 2px solid #d9d9d9;
+  border-radius: 38.5px;
 `;

@@ -198,3 +198,31 @@ a {
   transition: 0.1s ease-out;
   background-color: #d5d5d5;
 }
+.CalenderWeekCells {
+  color: rgba(164, 164, 164);
+}
+.CalenderNotThisMonth {
+  color: rgba(223, 223, 223);
+}
+.CalenderToday {
+  border: 1px solid rgba(110, 207, 131);
+  border-radius: 50%;
+  padding: 4px;
+}
+.CalenderUpLoadedNotThisMonth {
+  background-color: rgba(244, 245, 246);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-content: center;
+}
+
+.CalenderUpLoaded {
+  background-color: rgba(214, 244, 226);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-content: center;
+}

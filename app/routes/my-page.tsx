@@ -2,7 +2,7 @@ import { Outlet } from '@remix-run/react';
 import { AnimatePresence, useScroll } from 'framer-motion';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import MyPagePart from '~/components/myPage/myPage-common';
+import MyPageHeader from '~/components/myPage/myPage-header';
 import OutputOverlay from '~/components/myPage/outputOverlay';
 import { clickSetting } from '~/recoils/user-info/atoms';
 
@@ -11,7 +11,7 @@ export default function DefaultMyPage() {
   const { scrollY } = useScroll();
   return (
     <Wrapper>
-      <MyPagePart />
+      <MyPageHeader />
       <Outlet />
       <AnimatePresence>
         {clicked !== undefined ? (
@@ -23,6 +23,6 @@ export default function DefaultMyPage() {
 }
 const Wrapper = styled.div`
   display: flex;
-  padding: 95px 0px;
-  background-color: #d5d5d5;
+  flex-direction: column;
+  height: 100%;
 `;

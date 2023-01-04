@@ -65,4 +65,7 @@ const Wrapper = styled.div`
 
 const ContentArea = styled.div`
   position: relative;
+  height: 100%;
+  margin: -56px 0 0 0;
+  padding: 56px 0 0 0;
 `;

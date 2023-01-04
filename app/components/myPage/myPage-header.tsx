@@ -6,7 +6,7 @@ interface IPages {
   link: string;
 }
 
-export default function MyPagePart() {
+export default function MyPageHeader() {
   const pages: IPages[] = [
     { title: '프로필', link: 'profile' },
     { title: '아카이브', link: 'archive' },
@@ -37,11 +37,14 @@ export default function MyPagePart() {
 }
 
 const Wrapper = styled.div`
-  flex-grow: 1;
   display: flex;
-  flex-direction: column;
-  margin-left: 172px;
+  align-items: center;
   gap: 32px;
+  background-color: #ffffff;
+  position: sticky;
+  padding: 17px 0 17px 172px;
+  top: 56px;
+  z-index: 1;
 `;
 const Header = styled.div`
   font-style: normal;
@@ -55,6 +58,5 @@ const Content = styled.div`
   font-size: 20px;
   line-height: 14px;
   display: flex;
-  flex-direction: column;
   gap: 24px;
 `;

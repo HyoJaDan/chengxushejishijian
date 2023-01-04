@@ -1,25 +1,43 @@
-/* eslint-disable no-restricted-syntax */
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { userData } from '~/recoils/user-info/atoms';
 
 interface tagProps {
+  name: string;
   tag: 'skill' | 'interest' | 'tag';
 }
-const OutputTags = ({ tag }: tagProps) => {
+const OutputTags = ({ name, tag }: tagProps) => {
   const data = useRecoilValue(userData);
   const output = data[tag].filter(
     (idx: { isTrue: boolean }) => idx.isTrue === true
   );
   return (
-    <Exist>
-      {output?.map(({ value }) => (
-        <Tag key={`${value}`}>{value}</Tag>
-      ))}
-    </Exist>
+    <Wrapper>
+      <Font>{name}</Font>
+      <Exist>
+        {output?.map(({ value }) => (
+          <Tag key={`${value}`}>{value}</Tag>
+        ))}
+      </Exist>
+    </Wrapper>
   );
 };
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+const Font = styled.div`
+  flex-basis: 20%;
+  flex-shrink: 1;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 140%;
+  color: #31302f;
+  font-weight: 700;
+`;
 const Exist = styled.div`
+  flex-basis: 80%;
+  flex-shrink: 2;
   display: flex;
   gap: 8px;
   flex-basis: 80%;

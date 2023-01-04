@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
-import SettingPage from '~/components/myPage/profile/profile-setting';
+import SettingPage from '~/components/myPage/profile/setting';
 import type { IClickSetting } from '~/recoils/user-info/atoms';
 import { clickSetting } from '~/recoils/user-info/atoms';
 
