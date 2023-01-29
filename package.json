@@ -77,9 +77,6 @@
     "vitest": "^0.24.3",
     "wrangler": "^2.0.27"
   },
-  "engines": {
-    "node": ">=14"
-  },
   "msw": {
     "workerDirectory": "public"
   },
