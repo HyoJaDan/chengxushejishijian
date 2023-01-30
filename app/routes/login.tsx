@@ -1,15 +1,17 @@
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import { Outlet } from '@remix-run/react';
-import styled from 'styled-components';
-import { GOOGLE_CLIENT_ID } from '~/constants/oAuth';
+import type { LoaderFunction } from '@remix-run/node';
+import { Outlet, useLoaderData } from '@remix-run/react';
+
+export const loader: LoaderFunction = async () => {
+  return process.env.GOOGLE_CLIENT_ID;
+};
 
 export default function Login() {
+  const GOOGLE_CLIENT_ID = useLoaderData();
+
   return (
-    <Wrappers>
-      <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-        <Outlet />
-      </GoogleOAuthProvider>
-    </Wrappers>
+    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+      <Outlet />
+    </GoogleOAuthProvider>
   );
 }
-export const Wrappers = styled.div``;

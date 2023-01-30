@@ -17,7 +17,7 @@ const menus: LinkType[] = [
   },
   {
     title: 'Q&A',
-    link: '/qna',
+    link: '/QnA',
   },
 ];
 export const NavButtons: FCClass = ({ className }) => {

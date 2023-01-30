@@ -10,7 +10,7 @@ export const submitBackend: SubmitService = {
     return hotSubmits;
   },
   async getRandomSubmits(): Promise<SubmitSummary[]> {
-    const url = SubmitEndpoint.random;
+    /* const url = SubmitEndpoint.random; */
     throw new Error('Not implemented');
   },
 };

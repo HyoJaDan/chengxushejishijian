@@ -1,5 +1,6 @@
 /* eslint-disable no-shadow */
-import { atom, selector } from 'recoil';
+import axios from 'axios';
+import { atom, selector, selectorFamily } from 'recoil';
 import { recoilKeySuffix } from '../../utils/recoil-key';
 
 export enum platform {
@@ -38,6 +39,10 @@ export interface IUserData {
   tag: IValue[];
 }
 
+export const userId = atom<number>({
+  key: `UserId${recoilKeySuffix}`,
+  default: undefined,
+});
 /** userData에는 닉네임, 직업분야, 관심분야가 담겨있다. */
 export const userData = atom<IUserData>({
   key: `UserData${recoilKeySuffix}`,
@@ -45,14 +50,14 @@ export const userData = atom<IUserData>({
     nickName: '배고플땐밥먹어',
     jobPool: '프로덕트 디자이너',
     interest: [
-      { value: '백엔드개발', isTrue: false },
+      { value: '백엔드 개발', isTrue: false },
       { value: 'IOS', isTrue: false },
       { value: 'Android', isTrue: false },
       { value: 'UX/UI', isTrue: false },
       { value: 'BX', isTrue: false },
-      { value: 'WEB개발', isTrue: false },
-      { value: '기타디자인', isTrue: false },
-      { value: '기타개발', isTrue: false },
+      { value: 'WEB 개발', isTrue: false },
+      { value: '기타 디자인', isTrue: false },
+      { value: '기타 개발', isTrue: false },
     ],
     introduce: '반갑습니다',
     skill: [
@@ -90,4 +95,18 @@ export type IClickSetting = 'skill' | 'interest' | 'tag' | undefined;
 export const clickSetting = atom<IClickSetting>({
   key: `clickSetting${recoilKeySuffix}`,
   default: undefined,
+});
+
+export const getUserData = selectorFamily({
+  key: 'user',
+  get: (userId: number) => async () => {
+    const userData = await axios
+      .get(`https://api.thepool.kr/api/members/${userId}`)
+      .then((response) => {
+        return response.data.member;
+      })
+      .catch((error) => console.log('error', error));
+
+    return userData;
+  },
 });

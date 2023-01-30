@@ -5,7 +5,7 @@ import {
   Meta,
   Outlet,
   Scripts,
-  ScrollRestoration,
+  ScrollRestoration
 } from '@remix-run/react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { RecoilRoot } from 'recoil';
@@ -60,12 +60,12 @@ export default function App() {
 
 const Wrapper = styled.div`
   position: relative;
-  height: 100%;
+  min-height: 100vh;
 `;
 
 const ContentArea = styled.div`
   position: relative;
-  height: 100%;
+  min-height: 100vh;
   margin: -56px 0 0 0;
   padding: 56px 0 0 0;
 `;

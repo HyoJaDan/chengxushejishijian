@@ -30,8 +30,11 @@ export default function MyPageHeader() {
 
   return (
     <Wrapper>
-      <Header>마이페이지</Header>
-      <Content>{Links}</Content>
+      <Gap>
+        <Header>마이페이지</Header>
+        <Content>{Links}</Content>
+      </Gap>
+      <Blank />
     </Wrapper>
   );
 }
@@ -39,10 +42,10 @@ export default function MyPageHeader() {
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 32px;
+  justify-content: center;
   background-color: #ffffff;
   position: sticky;
-  padding: 17px 0 17px 172px;
+  padding: 17px 10px;
   top: 56px;
   z-index: 1;
 `;
@@ -52,6 +55,16 @@ const Header = styled.div`
   font-size: 24px;
   line-height: 18px;
   color: #1f1f1f;
+`;
+const Gap = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 936px;
+  gap: 24px;
+`;
+const Blank = styled.div`
+  width: 296px;
 `;
 const Content = styled.div`
   font-weight: 500;

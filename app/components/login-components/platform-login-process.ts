@@ -7,6 +7,7 @@ type LoginProcessProps = {
   name: string | undefined;
   navigate: Function;
   setLoginInfo: Function;
+  setUserId: Function;
 };
 
 export async function LoginProcess({
@@ -15,22 +16,25 @@ export async function LoginProcess({
   name,
   navigate,
   setLoginInfo,
+  setUserId,
 }: LoginProcessProps) {
-  const [thePoolAccessToken, thePoolStatus] = await setUser(
-    OAuthresponse,
-    platform
-  );
-  setLoginInfo({
-    isloggedin: true,
-    platform,
-    name,
-  });
-  localStorage.setItem('thePoolAccessToken', thePoolAccessToken);
+  const [isSucceed, thePoolAccessToken, thePoolStatus, thePoolId] =
+    await setUser(OAuthresponse, platform);
 
-  if (thePoolStatus === userStatus.PENDING) {
-    navigate('/login/account-info');
-  } else if (thePoolStatus === userStatus.ACTIVE) {
-    navigate('/');
+  if (isSucceed) {
+    setLoginInfo({
+      isloggedin: true,
+      platform,
+      name,
+    });
+    setUserId(thePoolId);
+    localStorage.setItem('thePoolAccessToken', thePoolAccessToken as string);
+    if (thePoolStatus === userStatus.PENDING) {
+      navigate('/login/account-info');
+    } else if (thePoolStatus === userStatus.ACTIVE) {
+      navigate('/');
+    }
+  } else {
+    localStorage.removeItem('thePoolAccessToken');
   }
-  navigate('/login/account-info');
 }

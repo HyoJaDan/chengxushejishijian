@@ -1,19 +1,30 @@
 import { Link } from '@remix-run/react';
+import { Suspense } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { userData } from '~/recoils/user-info/atoms';
+import { getUserData, userId } from '~/recoils/user-info/atoms';
+
+const UserInfoLeftFunction = () => {
+  const Id = useRecoilValue(userId);
+  const user = useRecoilValue(getUserData(Id));
+  return (
+    <Content>
+      <Temp />
+      <LeftUserNickName>{user.nickname}</LeftUserNickName>
+      <LeftUserJobPool>{user.job}</LeftUserJobPool>
+      <LeftTemp>팔로워 0명 팔로잉 0명</LeftTemp>
+      <LeftSetting to='setting'>수정하기</LeftSetting>
+    </Content>
+  );
+};
 
 export default function UserInfoLeft() {
-  const user = useRecoilValue(userData);
+  const Id = useRecoilValue(userId);
   return (
     <Wrapper>
-      <Content>
-        <Temp />
-        <LeftUserNickName>{user.nickName}</LeftUserNickName>
-        <LeftUserJobPool>{user.jobPool}</LeftUserJobPool>
-        <LeftTemp>팔로워 0명 팔로잉 0명</LeftTemp>
-        <LeftSetting to='setting'>수정하기</LeftSetting>
-      </Content>
+      <Suspense fallback={<div>Loading...</div>}>
+        {Id !== undefined && <UserInfoLeftFunction />}
+      </Suspense>
     </Wrapper>
   );
 }

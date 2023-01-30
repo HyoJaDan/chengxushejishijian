@@ -1,7 +1,7 @@
 import { Link } from '@remix-run/react';
 import type { FC } from 'react';
-import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
+import styled from 'styled-components';
 import { loginInformation } from '~/recoils/user-info/atoms';
 
 type TrailingButtonMenu = {

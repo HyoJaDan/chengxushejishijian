@@ -158,25 +158,25 @@ table {
 a {
   text-decoration: none;
 }
-.cb1 {
-  width: 25px;
-  height: 25px;
-  border: 1px solid #bebebe;
-}
-.cb1:hover {
-  cursor: pointer;
-}
 .chooseAreaButtonNotActive {
-  width: 235px;
-  height: 88px;
-  background: rgba(106, 106, 106, 0.4);
-  border-radius: 24px;
+  background-color: #efedea;
+  color: #484746;
+}
+.chooseAreaButtonNotActive:hover {
+  background: #f8f6f4;
+  color: #787573;
 }
 .chooseAreaButtonActive {
-  width: 235px;
-  height: 88px;
-  background: #6a6a6a;
-  border-radius: 24px;
+  background: #2db8f3;
+  color: white;
+}
+.chooseAreaButtonActive:hover {
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.25),
+      rgba(255, 255, 255, 0.25)
+    ),
+    #2db8f3;
 }
 .TrueTag {
   height: 60px;
@@ -225,4 +225,24 @@ a {
   height: 30px;
   display: grid;
   place-content: center;
+  .cb1 {
+    width: 25px;
+    height: 25px;
+    border: 1px solid #bebebe;
+  }
+  .cb1:hover {
+    cursor: pointer;
+  }
+  .chooseAreaButtonNotActive {
+    width: 235px;
+    height: 88px;
+    background: rgba(106, 106, 106, 0.4);
+    border-radius: 24px;
+  }
+  .chooseAreaButtonActive {
+    width: 235px;
+    height: 88px;
+    background: #6a6a6a;
+    border-radius: 24px;
+  }
 }

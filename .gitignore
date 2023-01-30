@@ -19,3 +19,5 @@ api/
 /playwright/.cache/
 
 /app/constants/oAuth.js
+
+.DS_Store

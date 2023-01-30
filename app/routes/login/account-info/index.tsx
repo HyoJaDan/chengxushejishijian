@@ -1,14 +1,15 @@
-import { useRecoilValue, useRecoilState } from 'recoil';
+import { useNavigate } from '@remix-run/react';
+import axios from 'axios';
+import { useForm } from 'react-hook-form';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import styled from 'styled-components';
+import InputUserArea from '~/components/input-user-info/input-area-button';
+import InputUserInterests from '~/components/input-user-info/input-interest';
 import {
-  userData,
   loginInformation,
+  userData,
   userJobPoolSelector,
 } from '~/recoils/user-info/atoms';
-import { useForm } from 'react-hook-form';
-import { useNavigate } from '@remix-run/react';
-import styled from 'styled-components';
-import InputUserArea from '~/components/input-user-info/input-area';
-import InputUserInterests from '~/components/input-user-info/input-interest';
 import InputUserName from '../../../components/input-user-info/input-name';
 
 export interface IUserData {
@@ -21,10 +22,10 @@ export default function Detail() {
   const [userDatas, setUserDatas] = useRecoilState(userData);
   const loginInfo = useRecoilValue(loginInformation);
   const [useUserJobPool, setUserJobPool] = useRecoilState(userJobPoolSelector);
-
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<IUserData>({
     defaultValues: {
@@ -32,30 +33,47 @@ export default function Detail() {
     },
   });
   const onValid = (data: IUserData) => {
-    const nextInterestData = JSON.parse(JSON.stringify(userDatas.interest));
-    data.userInterest.forEach((index) => {
-      const Idx = userDatas.interest.findIndex((v) => v.value === index);
-      nextInterestData[Idx].isTrue = true;
-    });
     if (useUserJobPool !== 'false' && useUserJobPool !== '프로덕트 디자이너') {
+      const nextInterestData = JSON.parse(JSON.stringify(userDatas.interest));
+      if (data.userInterest.length > 0)
+        data.userInterest.forEach((index) => {
+          const Idx = userDatas.interest.findIndex((v) => v.value === index);
+          nextInterestData[Idx].isTrue = true;
+        });
       setUserDatas({
         ...userDatas,
         nickName: data.userNickName,
         jobPool: useUserJobPool,
         interest: nextInterestData,
       });
+
+      axios.patch(
+        'https://api.thepool.kr/api/members/1',
+        {
+          nickname: data.userNickName,
+          job: useUserJobPool,
+          status: 1,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem(
+              'thePoolAccessToken'
+            )}`,
+          },
+        }
+      );
       navigate('/');
     } else setUserJobPool('false');
   };
   return (
-    <Wrap>
+    <Background>
       <Wrapper>
         <Head>
-          <HeadInfo>회원 정보</HeadInfo>
+          <HeadInfo>🤿 회원 정보 입력</HeadInfo>
           <HeadBefore>입수 전 마지막 단계!</HeadBefore>
         </Head>
         <Form onSubmit={handleSubmit(onValid)}>
-          <InputUserName register={register} errors={errors} />
+          <InputUserName register={register} errors={errors} watch={watch} />
           <InputUserArea />
           <InputUserInterests register={register} />
           <ButtonDiv>
@@ -63,52 +81,52 @@ export default function Detail() {
           </ButtonDiv>
         </Form>
       </Wrapper>
-    </Wrap>
+    </Background>
   );
 }
-const Wrap = styled.div`
-  position: absolute;
-  height: 130vh;
-  width: -webkit-fill-available;
-  background-color: #e9eaec;
+const Background = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
+  background-color: #e5e5e5;
+  margin: -56px 0 0 0;
+  padding: 56px 0 0 0;
+  width: -webkit-fill-available;
 `;
 const Wrapper = styled.div`
-  position: absolute;
-  width: 640px;
-  background: #ffffff;
-  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.05);
-  border-radius: 30px;
-  font-family: 'Pretendard';
-  font-style: normal;
-  color: #000000;
-  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  gap: 54px;
-  top: 74px;
+  margin: 74px 0;
+  width: 640px;
+  gap: 40px;
+  background: #ffffff;
+  box-shadow: 0px 24px 40px rgba(0, 0, 0, 0.1);
+  border-radius: 24px;
+  font-style: normal;
+  color: #000000;
+  text-align: center;
 `;
 const Head = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-right: 340px;
+  align-items: baseline;
+  width: -webkit-fill-available;
+  margin: 40px 0 0 80px;
+  gap: 20px;
 `;
 const HeadInfo = styled.div`
   font-weight: 700;
   font-size: 24px;
-  line-height: 29px;
-  height: 45px;
-  margin-top: 69px;
+  line-height: 132%;
+  color: #31302f;
 `;
 const HeadBefore = styled.div`
   font-weight: 600;
   font-size: 16px;
-  line-height: 19px;
+  line-height: 140%;
+  color: #787573;
 `;
 
 const Form = styled.form`
@@ -117,7 +135,7 @@ const Form = styled.form`
   justify-content: center;
   align-items: flex-start;
   gap: 20px;
-  margin-bottom: 48px;
+  margin-bottom: 40px;
 `;
 
 const ButtonDiv = styled.div`
@@ -126,22 +144,23 @@ const ButtonDiv = styled.div`
 `;
 const Btn = styled.button`
   border: 1px solid transparent;
-  width: 240px;
-  height: 72px;
-  background: rgba(36, 120, 246, 0.4);
-  border-radius: 16px;
-
-  font-family: 'Alata';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 24px;
-  line-height: 33px;
+  width: 131px;
+  height: 60px;
+  background: linear-gradient(
+      0deg,
+      rgba(45, 184, 243, 0.36),
+      rgba(45, 184, 243, 0.36)
+    ),
+    #ffffff;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 140%;
   text-align: center;
-
-  color: rgba(255, 255, 255, 0.85);
+  color: #ffffff;
   cursor: pointer;
-  &:focus {
+  &:hover {
     outline: 10px;
-    background: #2478f6;
+    background: #2db8f3;
   }
 `;

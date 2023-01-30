@@ -10,7 +10,7 @@ interface IButton {
 
 export default function InputUserArea() {
   const [userJobpool, setUserJobPool] = useRecoilState(userJobPoolSelector);
-  const buttons: IButton[] = [{ name: '개발자' }, { name: '디자인' }];
+  const buttons: IButton[] = [{ name: '개발' }, { name: '디자인' }];
   const button = buttons.map(({ name }, index) => {
     const id = `button_${index}`;
     return (
@@ -46,26 +46,27 @@ const InputArea = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  grid-gap: 19px;
+  grid-gap: 24px;
 `;
 const InputUsrPool = styled.div`
   display: flex;
-  gap: 10px;
+  gap: 8px;
 `;
 const Pool = styled.button`
-  width: 230px;
-  height: 79px;
-
+  /* button */
+  width: 224px;
+  height: 80px;
+  border-radius: 16px;
   border: 1px solid transparent;
-  border-radius: 24px;
+
+  /* font */
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: 300;
-  font-size: 24px;
-  line-height: 29px;
   text-align: center;
-  color: #ffffff;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 140%;
   cursor: pointer;
 `;
 const Errmessage = styled.span`
