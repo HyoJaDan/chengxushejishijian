@@ -8,7 +8,7 @@ interface HeaderProps {
   nextMonth: () => void;
 }
 
-export const CalenderHeader = ({
+const CalenderHeader = ({
   currentMonth,
   prevMonth,
   nextMonth,
@@ -36,3 +36,4 @@ const Gap = styled.div`
   display: flex;
   gap: 4px;
 `;
+export default CalenderHeader;

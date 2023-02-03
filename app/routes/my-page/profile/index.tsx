@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Calender } from '~/components/myPage/profile/calender/calander';
+import Calender from '~/components/myPage/profile/calender';
 
 import { ClientOnly } from 'remix-utils';
 import Chart from '~/components/myPage/profile/chart/chart.client';

@@ -10,7 +10,7 @@ type LoginProcessProps = {
   setUserId: Function;
 };
 
-export async function LoginProcess({
+export async function loginProcess({
   OAuthresponse,
   platform,
   name,

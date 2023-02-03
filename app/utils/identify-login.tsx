@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 import { userId } from '~/recoils/user-info/atoms';
 
-export const IdentifyLogin = () => {
+export const useIdentifyLogin = () => {
   const navigate = useNavigate();
   const Id = useRecoilValue(userId);
 

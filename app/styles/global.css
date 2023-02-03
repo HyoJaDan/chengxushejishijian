@@ -225,24 +225,4 @@ a {
   height: 30px;
   display: grid;
   place-content: center;
-  .cb1 {
-    width: 25px;
-    height: 25px;
-    border: 1px solid #bebebe;
-  }
-  .cb1:hover {
-    cursor: pointer;
-  }
-  .chooseAreaButtonNotActive {
-    width: 235px;
-    height: 88px;
-    background: rgba(106, 106, 106, 0.4);
-    border-radius: 24px;
-  }
-  .chooseAreaButtonActive {
-    width: 235px;
-    height: 88px;
-    background: #6a6a6a;
-    border-radius: 24px;
-  }
 }

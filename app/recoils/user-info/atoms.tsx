@@ -104,8 +104,8 @@ export const getUserData = selectorFamily({
       .get(`https://api.thepool.kr/api/members/${userId}`)
       .then((response) => {
         return response.data.member;
-      })
-      .catch((error) => console.log('error', error));
+      });
+    /* .catch((error) => console.log('error', error)); */
 
     return userData;
   },

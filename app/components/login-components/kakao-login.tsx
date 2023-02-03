@@ -3,7 +3,7 @@ import KakaoLogin from 'react-kakao-login';
 import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { loginInformation, platform, userId } from '~/recoils/user-info/atoms';
-import { LoginProcess } from './platform-login-process';
+import { loginProcess } from './platform-login-process';
 
 export default function Kakao() {
   const KAKAO_API = useLoaderData();
@@ -14,7 +14,7 @@ export default function Kakao() {
     <Wrapper
       token={KAKAO_API}
       onSuccess={(response) => {
-        LoginProcess({
+        loginProcess({
           OAuthresponse: response.response.access_token,
           platform: platform.KAKAO,
           name: response.profile?.properties.nickname,

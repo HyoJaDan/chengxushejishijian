@@ -17,7 +17,7 @@ interface dateType {
   type: IDate[];
 }
 
-export const CalenderCells = ({ currentMonth }: { currentMonth: Date }) => {
+const CalenderCells = ({ currentMonth }: { currentMonth: Date }) => {
   const monthStart = startOfMonth(currentMonth);
   const monthEnd = endOfMonth(monthStart);
   let day = startOfWeek(monthStart);
@@ -90,3 +90,4 @@ const Wrapper = styled.div`
   align-items: center;
   align-content: space-evenly;
 `;
+export default CalenderCells;

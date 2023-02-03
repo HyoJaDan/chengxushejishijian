@@ -20,6 +20,6 @@ export async function setUser(
       response.data.member.id,
     ];
   } catch (error) {
-    return [true, `${error}`];
+    return [false, `${error}`];
   }
 }
