@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import MyPageHeader from '~/components/myPage/myPage-header';
 import OutputOverlay from '~/components/myPage/outputOverlay';
 import { clickSetting } from '~/recoils/user-info/atoms';
-import { useIdentifyLogin } from '~/utils/identify-login';
+import { useIdentifyLogin } from '~/hooks/userStatus/identify-login';
 
 export default function DefaultMyPage() {
   useIdentifyLogin();
