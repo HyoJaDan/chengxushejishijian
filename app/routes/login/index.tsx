@@ -20,6 +20,7 @@ function Header() {
 }
 export default function LoginIndex() {
   const GOOGLE_CLIENT_ID = useLoaderData()[0];
+
   return (
     <Wrap>
       <Wrapper>

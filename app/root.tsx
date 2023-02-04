@@ -5,7 +5,7 @@ import {
   Meta,
   Outlet,
   Scripts,
-  ScrollRestoration
+  ScrollRestoration,
 } from '@remix-run/react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { RecoilRoot } from 'recoil';
@@ -13,6 +13,7 @@ import styled from 'styled-components';
 
 import globalStyle from '~/styles/global.css';
 import { GlobalNavigationBar } from './components/common/global-navigation-bar';
+import LoginWrapper from './components/login-wrapper';
 
 export const meta: MetaFunction = () => ({
   charset: 'utf-8',
@@ -46,6 +47,7 @@ export default function App() {
               <GlobalNavigationBar />
               <ContentArea>
                 <Outlet />
+                <LoginWrapper />
               </ContentArea>
             </Wrapper>
             <ScrollRestoration />

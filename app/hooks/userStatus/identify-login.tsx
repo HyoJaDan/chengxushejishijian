@@ -1,14 +1,14 @@
 import { useNavigate } from '@remix-run/react';
 import { useEffect } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { userId } from '~/recoils/user-info/atoms';
 
 export const useIdentifyLogin = () => {
   const navigate = useNavigate();
-  const Id = useRecoilValue(userId);
-
+  const [Id, setId] = useRecoilState(userId);
   useEffect(() => {
     if (Id === undefined) {
+      setId('notLoggedin');
       navigate('/login');
     }
     return Id;

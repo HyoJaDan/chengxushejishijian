@@ -10,10 +10,9 @@ export default function GoogleLogin() {
   const setLoginInfo = useSetRecoilState(loginInformation);
   const setUserId = useSetRecoilState(userId);
   const login = useGoogleLogin({
-    flow: 'auth-code',
     onSuccess: (response) => {
       loginProcess({
-        OAuthresponse: response.code,
+        OAuthresponse: response.access_token,
         platform: platform.Google,
         name: undefined,
         navigate,

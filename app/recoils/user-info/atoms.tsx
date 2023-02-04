@@ -38,8 +38,9 @@ export interface IUserData {
   skill: IValue[];
   tag: IValue[];
 }
-
-export const userId = atom<number>({
+/* id: 확인한함 / 확인 → 아님 / logined 상태 */
+export type IUserId = undefined | 'notLoggedin' | 'logined';
+export const userId = atom<IUserId>({
   key: `UserId${recoilKeySuffix}`,
   default: undefined,
 });
