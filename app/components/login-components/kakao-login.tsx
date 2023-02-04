@@ -6,10 +6,11 @@ import { loginInformation, platform, userId } from '~/recoils/user-info/atoms';
 import { loginProcess } from './platform-login-process';
 
 export default function Kakao() {
-  const KAKAO_API = useLoaderData();
+  const KAKAO_API = useLoaderData()[1];
   const navigate = useNavigate();
   const setLoginInfo = useSetRecoilState(loginInformation);
   const setUserId = useSetRecoilState(userId);
+
   return (
     <Wrapper
       token={KAKAO_API}

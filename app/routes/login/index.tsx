@@ -6,7 +6,7 @@ import GoogleLogin from '~/components/login-components/google-login';
 import KakaoLogin from '~/components/login-components/kakao-login';
 
 export const loader: LoaderFunction = async () => {
-  return process.env.GOOGLE_CLIENT_ID;
+  return [process.env.GOOGLE_CLIENT_ID, process.env.KAKAO_JS_API];
 };
 
 function Header() {
@@ -19,7 +19,7 @@ function Header() {
   );
 }
 export default function LoginIndex() {
-  const GOOGLE_CLIENT_ID = useLoaderData();
+  const GOOGLE_CLIENT_ID = useLoaderData()[0];
   return (
     <Wrap>
       <Wrapper>
