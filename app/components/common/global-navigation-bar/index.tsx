@@ -1,14 +1,11 @@
 import { Link } from '@remix-run/react';
-import { useEffect } from 'react';
-import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import type { FCClass } from '~/components/common/types/function-component';
-import { loginInformation } from '~/recoils/user-info/atoms';
 import { NavButtons } from './nav-buttons';
 import { TrailingButtons } from './trailing-buttons';
 
 export const GlobalNavigationBar: FCClass = ({ className }) => {
-  const [loginInfo, setLoginInfo] = useRecoilState(loginInformation);
+  /*  const [loginInfo, setLoginInfo] = useRecoilState(loginInformation);
   useEffect(() => {
     if (localStorage.getItem('thePoolAccessToken')) {
       setLoginInfo({
@@ -18,7 +15,7 @@ export const GlobalNavigationBar: FCClass = ({ className }) => {
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, []); */
   return (
     <Wrapper className={className}>
       <Link to='/'>

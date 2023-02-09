@@ -1,7 +1,7 @@
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
-import type { IValue } from '~/recoils/user-info/atoms';
-import { userData } from '~/recoils/user-info/atoms';
+import type { IValue } from '~/recoils/user/user-data';
+import { userData } from '~/recoils/user/user-data';
 
 interface clickProps {
   clicked: 'skill' | 'interest' | 'tag';

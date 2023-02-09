@@ -2,8 +2,8 @@ import { useState } from 'react';
 import type { UseFormRegister } from 'react-hook-form';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { userData } from '~/recoils/user-info/atoms';
-import type { IUserData } from '~/routes/login/account-info';
+import { userData } from '~/recoils/user/user-data';
+import type { IUserData } from '~/routes/account-info';
 import { Header } from './input-name';
 
 interface InputInterestProps {

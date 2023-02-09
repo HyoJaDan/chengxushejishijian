@@ -1,11 +1,12 @@
 import { Link } from '@remix-run/react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { getUserData, userId } from '~/recoils/user-info/atoms';
+import { userId } from '~/recoils/user/login-information';
+import { getUserData } from '~/recoils/user/user-data';
 
 const UserInfoLeftFunction = () => {
   const Id = useRecoilValue(userId);
-  const user = useRecoilValue(getUserData(Id));
+  const user = useRecoilValue(getUserData(Id as number));
   return (
     <Content>
       <Temp />
