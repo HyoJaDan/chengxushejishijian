@@ -1,12 +1,10 @@
-import { GoogleOAuthProvider } from '@react-oauth/google';
 import type { LoaderFunction } from '@remix-run/node';
-import { useLoaderData } from '@remix-run/react';
 import styled from 'styled-components';
 import GoogleLogin from '~/components/login-components/google-login';
 import KakaoLogin from '~/components/login-components/kakao-login';
 
 export const loader: LoaderFunction = async () => {
-  return [process.env.GOOGLE_CLIENT_ID, process.env.KAKAO_JS_API];
+  return process.env.KAKAO_JS_API;
 };
 
 function Header() {
@@ -19,8 +17,6 @@ function Header() {
   );
 }
 export default function LoginIndex() {
-  const GOOGLE_CLIENT_ID = useLoaderData()[0];
-
   return (
     <Wrap>
       <Wrapper>
@@ -31,9 +27,7 @@ export default function LoginIndex() {
             <img src='/icons/github.svg' alt='github' />
             github으로 계속하기
           </Github>
-          <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-            <GoogleLogin />
-          </GoogleOAuthProvider>
+          <GoogleLogin />
           <KakaoLogin />
         </Login>
       </Wrapper>
