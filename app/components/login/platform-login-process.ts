@@ -1,4 +1,4 @@
-import { userStatus } from '../../hooks/userStatus/userStatus';
+import { userStatus } from '~/hooks/userStatus/userStatus';
 import { setUser } from './setUser';
 
 type LoginProcessProps = {
@@ -32,10 +32,11 @@ export async function loginProcess({
       navigate('/account-info');
     }
   } else {
+    alert('해당 아이디가 존재하지 않습니다.');
     localStorage.removeItem('thePoolAccessToken');
     setLoginInfo({
       loginStatus: false,
     });
-    navigate('/account-info');
+    navigate('/');
   }
 }

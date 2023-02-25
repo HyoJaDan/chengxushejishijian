@@ -7,7 +7,7 @@ import InputUserArea from '~/components/input-user-info/input-area-button';
 import InputUserInterests from '~/components/input-user-info/input-interest';
 import { loginInformation } from '~/recoils/user/login-information';
 import { userData, userJobPoolSelector } from '~/recoils/user/user-data';
-import InputUserName from '../../components/input-user-info/input-name';
+import InputUserName from '../components/input-user-info/input-name';
 
 export interface IUserData {
   userNickName: string;

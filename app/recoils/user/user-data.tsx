@@ -78,8 +78,6 @@ export const getUserData = selectorFamily({
       .then((response) => {
         return response.data.member;
       });
-    /* .catch((error) => console.log('error', error)); */
-
     return userData;
   },
 });

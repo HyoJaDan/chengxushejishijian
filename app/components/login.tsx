@@ -3,12 +3,18 @@ import type { LoaderFunction } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
-import GoogleLogin from '~/components/login-components/google-login';
-import KakaoLogin from '~/components/login-components/kakao-login';
+import GoogleLogin from '~/components/login/google';
+import KakaoLogin from '~/components/login/kakao';
 import { loginStatus } from '~/recoils/user/login-information';
+import GithubLogin from './login/github';
 
 export const loader: LoaderFunction = async () => {
-  return process.env.KAKAO_JS_API;
+  return [
+    process.env.GOOGLE_CLIENT_ID,
+    process.env.KAKAO_JS_API,
+    process.env.GITHUB_CLIENT_ID,
+    process.env.GITHUB_CLIENT_SECRET,
+  ];
 };
 
 function Header() {
@@ -22,6 +28,8 @@ function Header() {
 }
 export default function LoginComponent() {
   const GOOGLE_CLIENT_ID = useLoaderData()[0];
+  const temp = useLoaderData();
+  console.log('data', temp);
   const setType = useSetRecoilState(loginStatus);
   const onclick = () => {
     setType(undefined);
@@ -32,10 +40,7 @@ export default function LoginComponent() {
       <Img src='/icons/bording.svg' alt='bording' />
       <Header />
       <Login>
-        <Github>
-          <img src='/icons/github.svg' alt='github' />
-          github으로 계속하기
-        </Github>
+        <GithubLogin />
         <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
           <GoogleLogin />
         </GoogleOAuthProvider>
@@ -101,18 +106,4 @@ const Login = styled.div`
   font-size: 20px;
   line-height: 24px;
   font-weight: 700;
-`;
-const Github = styled.div`
-  width: 330px;
-  height: 72px;
-  background: #f8f6f4;
-  border-radius: 8px;
-
-  color: #484746;
-  display: flex;
-  flex-direction: row;
-  gap: 9.5px;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
 `;

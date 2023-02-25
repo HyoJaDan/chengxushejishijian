@@ -13,7 +13,7 @@ export default function MyPageHeader() {
     { title: '설정', link: 'setting' },
   ];
 
-  const Links = pages.map(({ title, link }, index) => {
+  const links = pages.map(({ title, link }, index) => {
     const id = `${link}_${index}`;
     return (
       <NavLink
@@ -32,7 +32,7 @@ export default function MyPageHeader() {
     <Wrapper>
       <Gap>
         <Header>마이페이지</Header>
-        <Content>{Links}</Content>
+        <Content>{links}</Content>
       </Gap>
       <Blank />
     </Wrapper>
