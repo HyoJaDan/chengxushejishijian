@@ -1,6 +1,6 @@
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { userData } from '~/recoils/user-info/atoms';
+import { userData } from '~/recoils/user/user-data';
 
 interface tagProps {
   name: string;

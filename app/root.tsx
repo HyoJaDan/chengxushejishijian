@@ -1,4 +1,8 @@
-import type { LinksFunction, MetaFunction } from '@remix-run/node';
+import type {
+  LinksFunction,
+  LoaderFunction,
+  MetaFunction,
+} from '@remix-run/node';
 import {
   Links,
   LiveReload,
@@ -13,8 +17,11 @@ import styled from 'styled-components';
 
 import globalStyle from '~/styles/global.css';
 import { GlobalNavigationBar } from './components/common/global-navigation-bar';
-import LoginWrapper from './components/login-wrapper';
+import { LoginWrapper } from './components/login-wrapper';
 
+export const loader: LoaderFunction = async () => {
+  return [process.env.GOOGLE_CLIENT_ID, process.env.KAKAO_JS_API];
+};
 export const meta: MetaFunction = () => ({
   charset: 'utf-8',
   title: 'New Remix App',
@@ -65,7 +72,7 @@ const Wrapper = styled.div`
   min-height: 100vh;
 `;
 
-const ContentArea = styled.div`
+export const ContentArea = styled.div`
   position: relative;
   min-height: 100vh;
   margin: -56px 0 0 0;

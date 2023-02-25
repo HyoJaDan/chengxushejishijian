@@ -3,8 +3,8 @@ import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
-import type { IClickSetting } from '~/recoils/user-info/atoms';
-import { clickSetting, userData } from '~/recoils/user-info/atoms';
+import type { IClickSetting } from '~/recoils/user/user-data';
+import { clickSetting, userData } from '~/recoils/user/user-data';
 import OutputTags from '../../../../components/myPage/profile/outputTags';
 
 interface IData {

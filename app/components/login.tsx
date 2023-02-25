@@ -1,7 +1,11 @@
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import type { LoaderFunction } from '@remix-run/node';
+import { useLoaderData } from '@remix-run/react';
+import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import GoogleLogin from '~/components/login-components/google-login';
 import KakaoLogin from '~/components/login-components/kakao-login';
+import { loginStatus } from '~/recoils/user/login-information';
 
 export const loader: LoaderFunction = async () => {
   return process.env.KAKAO_JS_API;
@@ -16,40 +20,40 @@ function Header() {
     </Font>
   );
 }
-export default function LoginIndex() {
+export default function LoginComponent() {
+  const GOOGLE_CLIENT_ID = useLoaderData()[0];
+  const setType = useSetRecoilState(loginStatus);
+  const onclick = () => {
+    setType(undefined);
+  };
   return (
-    <Wrap>
-      <Wrapper>
-        <Img src='/icons/bording.svg' alt='bording' />
-        <Header />
-        <Login>
-          <Github>
-            <img src='/icons/github.svg' alt='github' />
-            github으로 계속하기
-          </Github>
+    <Wrapper>
+      <X src='/icons/X.svg' alt='X' onClick={onclick} />
+      <Img src='/icons/bording.svg' alt='bording' />
+      <Header />
+      <Login>
+        <Github>
+          <img src='/icons/github.svg' alt='github' />
+          github으로 계속하기
+        </Github>
+        <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
           <GoogleLogin />
-          <KakaoLogin />
-        </Login>
-      </Wrapper>
-    </Wrap>
+        </GoogleOAuthProvider>
+        <KakaoLogin />
+      </Login>
+    </Wrapper>
   );
 }
-const Wrap = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  margin-top: -56px;
-  padding-top: 56px;
-  background-color: #e9eaec;
+
+const X = styled.img`
+  position: absolute;
+  top: 32.33px;
+  right: 32.33px;
+  cursor: pointer;
 `;
 const Wrapper = styled.div`
-  width: 616px;
-  height: 654px;
   padding-bottom: 64px;
-  background: #ffffff;
-  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.05);
-  border-radius: 30px;
+
   font-family: 'Pretendard';
   font-style: normal;
   color: #000000;

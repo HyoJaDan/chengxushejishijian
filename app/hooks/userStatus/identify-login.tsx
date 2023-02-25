@@ -1,17 +1,14 @@
-import { useNavigate } from '@remix-run/react';
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import { userId } from '~/recoils/user-info/atoms';
+import { loginStatus } from '~/recoils/user/login-information';
 
 export const useIdentifyLogin = () => {
-  const navigate = useNavigate();
-  const [Id, setId] = useRecoilState(userId);
+  const [type, setType] = useRecoilState(loginStatus);
+
   useEffect(() => {
-    if (Id === undefined) {
-      setId('notLoggedin');
-      navigate('/login');
+    if (type === undefined || type === 'shutDown') {
+      setType(false);
     }
-    return Id;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };

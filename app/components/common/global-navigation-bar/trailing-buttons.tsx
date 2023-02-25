@@ -1,16 +1,20 @@
 import { Link } from '@remix-run/react';
 import type { FC } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { loginInformation } from '~/recoils/user-info/atoms';
+import {
+  loginInformation,
+  loginStatus,
+} from '~/recoils/user/login-information';
 
 type TrailingButtonMenu = {
   src: string;
   to: string;
 };
 type IType = {
-  isloggedin: boolean;
+  isloggedin: boolean | undefined | 'shutDown';
   name: string;
+  setlogin: Function;
 };
 const menu: TrailingButtonMenu[] = [
   {
@@ -26,16 +30,19 @@ const menu: TrailingButtonMenu[] = [
     src: '/icons/notifications.svg',
   },
 ];
-const Login = ({ isloggedin, name }: IType) => {
+const Login = ({ isloggedin, name, setlogin }: IType) => {
   const output = name.substring(0, 1);
-
-  if (isloggedin) {
+  const onClick = () => {
+    setlogin(false);
+  };
+  if (isloggedin === true) {
     return <CircleLink to='/my-page/profile'>{output}</CircleLink>;
   }
-  return <TextLink to='login'>로그인</TextLink>;
+  return <TextLink onClick={onClick}>로그인</TextLink>;
 };
 export const TrailingButtons: FC = () => {
   const loginInfo = useRecoilValue(loginInformation);
+  const setStatus = useSetRecoilState(loginStatus);
   const menuButtons = menu.map(({ src, to }) => {
     return (
       <IconLink to={to} key={`menu-icon-buttons-${src}`}>
@@ -46,7 +53,11 @@ export const TrailingButtons: FC = () => {
   return (
     <Wrapper>
       {menuButtons}
-      <Login isloggedin={loginInfo.isloggedin} name={loginInfo.name} />
+      <Login
+        isloggedin={loginInfo.loginStatus}
+        setlogin={setStatus}
+        name={loginInfo.name}
+      />
     </Wrapper>
   );
 };
@@ -61,14 +72,14 @@ const Wrapper = styled.div`
 const IconLink = styled(Link)`
   display: block;
 `;
-const TextLink = styled(Link)`
+const TextLink = styled.div`
   font-family: 'Noto Sans';
   font-style: normal;
   font-weight: 300;
   font-size: 16px;
   line-height: 100%;
   /* identical to box height, or 16px */
-
+  cursor: pointer;
   color: #ffffff;
 `;
 const CircleLink = styled(Link)`

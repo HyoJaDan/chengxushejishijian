@@ -1,6 +1,8 @@
 import styled from 'styled-components';
+import { useIdentifyLogin } from '~/hooks/userStatus/identify-login';
 
 const QnA = () => {
+  useIdentifyLogin();
   return (
     <Wrappar>
       <NavigationBar>NavigationBar</NavigationBar>

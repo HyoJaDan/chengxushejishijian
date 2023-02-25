@@ -2,14 +2,13 @@ import { useLoaderData, useNavigate } from '@remix-run/react';
 import KakaoLogin from 'react-kakao-login';
 import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { loginInformation, platform, userId } from '~/recoils/user-info/atoms';
+import { loginInformation, platform } from '~/recoils/user/login-information';
 import { loginProcess } from './platform-login-process';
 
 export default function Kakao() {
   const KAKAO_API = useLoaderData()[1];
   const navigate = useNavigate();
   const setLoginInfo = useSetRecoilState(loginInformation);
-  const setUserId = useSetRecoilState(userId);
 
   return (
     <Wrapper
@@ -21,7 +20,6 @@ export default function Kakao() {
           name: response.profile?.properties.nickname,
           navigate,
           setLoginInfo,
-          setUserId,
         });
       }}
     >

@@ -1,7 +1,6 @@
+import { ClientOnly } from 'remix-utils';
 import styled from 'styled-components';
 import Calender from '~/components/myPage/profile/calender';
-
-import { ClientOnly } from 'remix-utils';
 import Chart from '~/components/myPage/profile/chart/chart.client';
 import UserInfoLeft from '~/components/myPage/profile/main-content/userInfoLeft';
 import UserInfoRight from '~/components/myPage/profile/main-content/userInfoRight';

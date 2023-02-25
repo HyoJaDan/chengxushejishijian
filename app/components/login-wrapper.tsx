@@ -1,35 +1,29 @@
-import type { LoaderFunction } from '@remix-run/node';
-import { AnimatePresence, motion } from 'framer-motion';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { userId } from '~/recoils/user-info/atoms';
+import { loginStatus } from '~/recoils/user/login-information';
+import LoginComponent from './login';
 
-export const loader: LoaderFunction = async () => {
-  return [process.env.GOOGLE_CLIENT_ID, process.env.KAKAO_JS_API];
-};
-
-export default function LoginWrapper() {
-  const Id = useRecoilValue(userId);
-  /* const GOOGLE_CLIENT_ID = useLoaderData()[0]; */
-  /* console.log(GOOGLE_CLIENT_ID); */
+export function LoginWrapper() {
+  const [type, setType] = useRecoilState(loginStatus);
   return (
-    <AnimatePresence>
-      {Id === 'notLoggedin' ? (
-        <div>
+    <div>
+      {type === false ? (
+        <>
           <Overlay
-            /* onClick={() => setClicked(clickedOverlay)} */
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            onClick={() => {
+              setType('shutDown');
+            }}
           />
-          <Animi layoutId='123' style={{ top: 100 }}>
-            {/* <LoginIndex /> */}
-          </Animi>
-        </div>
+          <LoginBackground>
+            <LoginComponent />
+          </LoginBackground>
+        </>
       ) : null}
-    </AnimatePresence>
+    </div>
   );
 }
-const Overlay = styled(motion.div)`
+
+const Overlay = styled.div`
   position: fixed;
   top: 0;
   width: 101vw;
@@ -38,17 +32,19 @@ const Overlay = styled(motion.div)`
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: saturate(180%) blur(7px);
-  opacity: 0;
+  z-index: 2;
 `;
-const Animi = styled(motion.div)`
-  position: absolute;
+const LoginBackground = styled.div`
+  position: fixed;
   width: 616px;
   height: 654px;
   left: 0;
   right: 0;
+  top: 50%;
+  transform: translateY(-50%);
   margin: 0 auto;
   background-color: white;
   box-shadow: 0px 24px 40px rgba(0, 0, 0, 0.1);
   border-radius: 24px;
-  overflow-y: scroll;
+  z-index: 3;
 `;

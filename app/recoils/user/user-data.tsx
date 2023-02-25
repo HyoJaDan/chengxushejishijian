@@ -3,28 +3,6 @@ import axios from 'axios';
 import { atom, selector, selectorFamily } from 'recoil';
 import { recoilKeySuffix } from '../../utils/recoil-key';
 
-export enum platform {
-  'Not_login' = 0,
-  'KAKAO' = 1,
-  'Google' = 2,
-  'APPLE' = 3,
-}
-export interface ILoginInfo<platform> {
-  isloggedin: boolean;
-  platform: platform;
-  name: string;
-}
-
-/** loginInformation에는 로그인 여부, 플랫폼, 사용자 이름 */
-export const loginInformation = atom<ILoginInfo<platform>>({
-  key: `info${recoilKeySuffix}`,
-  default: {
-    isloggedin: false,
-    platform: platform.Not_login,
-    name: '',
-  },
-});
-
 export interface IValue {
   value: string;
   isTrue: boolean;
@@ -38,12 +16,6 @@ export interface IUserData {
   skill: IValue[];
   tag: IValue[];
 }
-/* id: 확인한함 / 확인 → 아님 / logined 상태 */
-export type IUserId = undefined | 'notLoggedin' | 'logined';
-export const userId = atom<IUserId>({
-  key: `UserId${recoilKeySuffix}`,
-  default: undefined,
-});
 /** userData에는 닉네임, 직업분야, 관심분야가 담겨있다. */
 export const userData = atom<IUserData>({
   key: `UserData${recoilKeySuffix}`,
