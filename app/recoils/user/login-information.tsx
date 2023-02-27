@@ -9,7 +9,6 @@ export enum platform {
   'APPLE' = 3,
   'GITHUB' = 4,
 }
-/* undefined :확인한함 / false : 확인 -> 아니니까 로그인페이지 킴 / true : logined 상태 / 강제종료 상태 */
 /* undefined :확인한함 / false : 확인 → 아님 / true : logined 상태 */
 export type loginType = undefined | boolean | 'shutDown';
 export interface ILoginInfo<platform, loginType> {

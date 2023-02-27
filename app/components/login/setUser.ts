@@ -8,7 +8,6 @@ export async function setUser(
   OAuthresponse: string,
   platform: number
 ): Promise<IResponse> {
-  console.log(OAuthresponse, platform);
   try {
     const response = await axios.post('https://api.thepool.kr/api/members', {
       oAuthToken: OAuthresponse,

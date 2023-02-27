@@ -18,7 +18,6 @@ export async function loginProcess({
 }: LoginProcessProps) {
   const [isSucceed, thePoolAccessToken, thePoolStatus, thePoolId] =
     await setUser(OAuthresponse, platform);
-
   if (isSucceed) {
     setLoginInfo({
       loginStatus: true,
@@ -32,7 +31,7 @@ export async function loginProcess({
       navigate('/account-info');
     }
   } else {
-    alert('해당 아이디가 존재하지 않습니다.');
+    alert('해당 아이디가 존재하지 않습니다. 다시 시도해 주세요');
     localStorage.removeItem('thePoolAccessToken');
     setLoginInfo({
       loginStatus: false,

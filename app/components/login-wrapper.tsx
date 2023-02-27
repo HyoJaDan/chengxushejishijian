@@ -5,13 +5,14 @@ import LoginComponent from './login';
 
 export function LoginWrapper() {
   const [type, setType] = useRecoilState(loginStatus);
+
   return (
     <div>
       {type === false ? (
         <>
           <Overlay
             onClick={() => {
-              setType('shutDown');
+              setType(undefined);
             }}
           />
           <LoginBackground>

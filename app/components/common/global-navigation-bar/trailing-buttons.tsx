@@ -31,7 +31,9 @@ const menu: TrailingButtonMenu[] = [
   },
 ];
 const Login = ({ isloggedin, name, setlogin }: IType) => {
-  const output = name.substring(0, 1);
+  let output;
+  if (name !== undefined) output = name.substring(0, 1);
+  else output = '';
   const onClick = () => {
     setlogin(false);
   };

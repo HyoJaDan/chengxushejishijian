@@ -28,8 +28,6 @@ function Header() {
 }
 export default function LoginComponent() {
   const GOOGLE_CLIENT_ID = useLoaderData()[0];
-  const temp = useLoaderData();
-  console.log('data', temp);
   const setType = useSetRecoilState(loginStatus);
   const onclick = () => {
     setType(undefined);

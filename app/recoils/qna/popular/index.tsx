@@ -10,7 +10,6 @@ const RealContent = selector<popularQuestionType>({
     const data = await axios
       .get(`https://api.thepool.kr/api/questions/popularcategories`)
       .then((response) => {
-        console.log(response.data);
         return response.data.json();
       });
     return data;

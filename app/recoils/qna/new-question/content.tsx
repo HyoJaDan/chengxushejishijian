@@ -19,7 +19,6 @@ const RealContent = selector<newQuestionType>({
     const data = await axios
       .get(`https://api.thepool.kr/api/questions/categories/${Idx}`)
       .then((response) => {
-        console.log(response.data);
         return response.data.json();
       });
     return data;

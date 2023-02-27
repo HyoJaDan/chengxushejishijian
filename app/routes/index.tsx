@@ -4,8 +4,8 @@ import { CategorySideBar } from '~/components/main/category-side-bar';
 import { MainContent } from '~/components/main/main-content';
 
 export default function Index() {
-  return (
-    <MainWrapper>
+  return null;
+  /* <MainWrapper>
       <GridWrapper>
         <TopBanner />
         <SideBar>
@@ -13,8 +13,7 @@ export default function Index() {
         </SideBar>
         <MainContentArea />
       </GridWrapper>
-    </MainWrapper>
-  );
+    </MainWrapper> */
 }
 const MainWrapper = styled.div`
   height: 100%;
