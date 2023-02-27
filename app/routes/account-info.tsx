@@ -87,8 +87,8 @@ const Background = styled.div`
   align-items: center;
   min-height: 100vh;
   background-color: #e5e5e5;
-  margin: -56px 0 0 0;
-  padding: 56px 0 0 0;
+  margin: -72px 0 0 0;
+  padding: 72px 0 0 0;
   width: -webkit-fill-available;
 `;
 const Wrapper = styled.div`

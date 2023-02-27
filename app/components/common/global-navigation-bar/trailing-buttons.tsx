@@ -7,29 +7,11 @@ import {
   loginStatus,
 } from '~/recoils/user/login-information';
 
-type TrailingButtonMenu = {
-  src: string;
-  to: string;
-};
 type IType = {
   isloggedin: boolean | undefined | 'shutDown';
   name: string;
   setlogin: Function;
 };
-const menu: TrailingButtonMenu[] = [
-  {
-    to: '/',
-    src: '/icons/search.svg',
-  },
-  {
-    to: '/',
-    src: '/icons/email.svg',
-  },
-  {
-    to: '/',
-    src: '/icons/notifications.svg',
-  },
-];
 const Login = ({ isloggedin, name, setlogin }: IType) => {
   let output;
   if (name !== undefined) output = name.substring(0, 1);
@@ -42,6 +24,18 @@ const Login = ({ isloggedin, name, setlogin }: IType) => {
   }
   return <TextLink onClick={onClick}>로그인</TextLink>;
 };
+type TrailingButtonMenu = {
+  src: string;
+  to: string;
+};
+
+const menu: TrailingButtonMenu[] = [
+  {
+    to: '/',
+    src: '/icons/notification.svg',
+  },
+];
+
 export const TrailingButtons: FC = () => {
   const loginInfo = useRecoilValue(loginInformation);
   const setStatus = useSetRecoilState(loginStatus);
@@ -82,14 +76,14 @@ const TextLink = styled.div`
   line-height: 100%;
   /* identical to box height, or 16px */
   cursor: pointer;
-  color: #ffffff;
+  color: black;
 `;
 const CircleLink = styled(Link)`
   display: grid;
   place-content: center;
   width: 32px;
   height: 32px;
-  background-color: white;
+  background-color: #c2c0bd;
   clip-path: circle(50%);
 `;
 const Icon = styled.img.attrs({
@@ -97,4 +91,5 @@ const Icon = styled.img.attrs({
 })`
   display: block;
   width: 24px;
+  color: #c2c0bd;
 `;

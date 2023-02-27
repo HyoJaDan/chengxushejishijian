@@ -75,6 +75,6 @@ const Wrapper = styled.div`
 export const ContentArea = styled.div`
   position: relative;
   min-height: 100vh;
-  margin: -56px 0 0 0;
-  padding: 56px 0 0 0;
+  margin: -72px 0 0 0;
+  padding: 72px 0 0 0;
 `;

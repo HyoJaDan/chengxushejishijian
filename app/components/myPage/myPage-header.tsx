@@ -46,7 +46,7 @@ const Wrapper = styled.div`
   background-color: #ffffff;
   position: sticky;
   padding: 17px 10px;
-  top: 56px;
+  top: 72px;
   z-index: 1;
 `;
 const Header = styled.div`

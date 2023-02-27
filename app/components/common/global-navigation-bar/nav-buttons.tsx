@@ -1,32 +1,33 @@
-import { Link } from '@remix-run/react';
+import { NavLink } from '@remix-run/react';
 import styled from 'styled-components';
 import type { FCClass } from '../types/function-component';
 
-type LinkType = {
+interface IPages {
   title: string;
   link: string;
-};
-const menus: LinkType[] = [
-  {
-    title: '홈',
-    link: '/',
-  },
-  {
-    title: '과제',
-    link: '/assignments',
-  },
-  {
-    title: 'Q&A',
-    link: '/QnA',
-  },
-];
+}
 export const NavButtons: FCClass = ({ className }) => {
-  const buttons = menus.map(({ title, link }) => (
-    <NavButton to={link} key={`nav-link-to-${title}`}>
-      {title}
-    </NavButton>
-  ));
-  return <Wrapper>{...buttons}</Wrapper>;
+  const pages: IPages[] = [
+    { title: '트레이닝', link: '/' },
+    { title: '마이페이지', link: 'my-page/profile' },
+  ];
+
+  const links = pages.map(({ title, link }, index) => {
+    const id = `${link}_${index}`;
+    return (
+      <NavLink
+        key={id}
+        to={link}
+        style={({ isActive }) => ({
+          color: isActive ? '#31302F' : '#A4A2A0',
+        })}
+      >
+        {title}
+      </NavLink>
+    );
+  });
+
+  return <Wrapper>{links}</Wrapper>;
 };
 
 const Wrapper = styled.div`
@@ -34,16 +35,8 @@ const Wrapper = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 28px;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 100%;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 140%;
   color: #ffffff;
-`;
-
-const NavButton = styled(Link)`
-  font-size: inherit;
-  font-weight: inherit;
-  color: inherit;
-  text-decoration: none;
-  cursor: pointer;
 `;

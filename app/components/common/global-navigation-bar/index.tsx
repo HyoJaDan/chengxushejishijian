@@ -5,49 +5,48 @@ import { NavButtons } from './nav-buttons';
 import { TrailingButtons } from './trailing-buttons';
 
 export const GlobalNavigationBar: FCClass = ({ className }) => {
-  /*  const [loginInfo, setLoginInfo] = useRecoilState(loginInformation);
-  useEffect(() => {
-    if (localStorage.getItem('thePoolAccessToken')) {
-      setLoginInfo({
-        ...loginInfo,
-        isloggedin: true,
-        name: '전성호',
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); */
   return (
     <Wrapper className={className}>
-      <Link to='/'>
-        <Logo src='/the-pool-logo.svg' />
-      </Link>
-      <NavButtons />
-      <Spacer />
-      <TrailingButtons />
+      <Temp>
+        <Div>
+          <Link to='/'>
+            <Logo src='/icons/thePool.svg' alt='thePool' />
+          </Link>
+          <NavButtons />
+        </Div>
+        <TrailingButtons />
+      </Temp>
     </Wrapper>
   );
 };
 const Wrapper = styled.nav`
+  position: sticky;
+  top: 0;
+  height: 72px;
+  width: 100%;
+  background-color: #ffffff;
+  color: black;
+  z-index: 1;
+  border-bottom: 1px solid #efedea;
+`;
+const Temp = styled.div`
+  width: min(100%, 1400px);
+  height: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
-  position: sticky;
-  top: 0;
-  height: 56px;
-  width: 100%;
-  background-color: #2478f6;
+  justify-content: space-between;
   padding: 0 24px;
   gap: 32px;
-  z-index: 1;
+  margin: 0 auto;
 `;
-
+const Div = styled.div`
+  display: flex;
+  gap: 36px;
+`;
 const Logo = styled.img.attrs({
   role: 'button',
 })`
-  width: 80px;
-  height: 26px;
-`;
-
-const Spacer = styled.div`
-  flex: 1;
+  width: 48px;
+  height: 30px;
 `;

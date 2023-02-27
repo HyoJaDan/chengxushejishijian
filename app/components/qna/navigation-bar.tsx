@@ -42,11 +42,12 @@ export const Navigaion = () => {
 const Wrapper = styled.div`
   position: sticky;
   padding: 17px 10px;
-  top: 56px;
+  top: 72px;
   z-index: 1;
   display: flex;
   align-items: center;
   height: 62px;
+  width: 100%;
   background: #ffffff;
 `;
 const FlexWrapper = styled.div`

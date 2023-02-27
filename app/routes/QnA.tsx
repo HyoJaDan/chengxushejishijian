@@ -18,8 +18,8 @@ const QnA = () => {
 };
 const Wrappar = styled.div`
   min-height: 100vh;
-  margin: -56px 0 0 0;
-  padding: 56px 0 0 0;
+  margin: -72px 0 0 0;
+  padding: 72px 0 0 0;
   background: #e5e5e5;
 `;
 
