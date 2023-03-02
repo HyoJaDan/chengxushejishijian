@@ -33,7 +33,12 @@ export const NavButtons: FCClass = ({ className }) => {
     );
   });
 
-  return <Wrapper>{links}</Wrapper>;
+  return (
+    <Wrapper>
+      {links}
+      <Temp>더풀 사용법</Temp>
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.div`
@@ -45,6 +50,15 @@ const Wrapper = styled.div`
   font-size: 20px;
   line-height: 140%;
   color: #ffffff;
+`;
+const Temp = styled.div`
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 140%;
+  color: #959290;
+  padding-left: 28px;
+  border-left: 1px solid #959290;
+  cursor: pointer;
 `;
 const Link = styled(NavLink)<{ isTrue: boolean }>`
   color: #a4a2a0;
