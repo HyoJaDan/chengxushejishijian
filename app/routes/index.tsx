@@ -1,10 +1,13 @@
 import styled from 'styled-components';
-import { Banner } from '~/components/main/banner';
-import { CategorySideBar } from '~/components/main/category-side-bar';
-import { MainContent } from '~/components/main/main-content';
+import MyPageHeader from '~/components/common/\bsub-navigation-bar';
 
 export default function Index() {
-  return null;
+  return (
+    <Wrapper>
+      <MyPageHeader page='Training' />
+      <Temp />
+    </Wrapper>
+  );
   /* <MainWrapper>
       <GridWrapper>
         <TopBanner />
@@ -15,6 +18,13 @@ export default function Index() {
       </GridWrapper>
     </MainWrapper> */
 }
+const Wrapper = styled.div``;
+const Temp = styled.div`
+  background-color: #f8f6f4;
+  min-height: 100vh;
+  margin-top: -112px;
+  padding-top: 144px;
+`; /* 
 const MainWrapper = styled.div`
   height: 100%;
   overflow-x: auto;
@@ -49,3 +59,4 @@ const TopBanner = styled(Banner)`
 const MainContentArea = styled(MainContent)`
   grid-column: 3 / -1;
 `;
+ */

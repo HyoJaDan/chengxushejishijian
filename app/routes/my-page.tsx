@@ -3,7 +3,7 @@ import { Outlet } from '@remix-run/react';
 import { useRecoilValue } from 'recoil';
 import { clickSetting } from '~/recoils/user-info/atoms'; */
 import styled from 'styled-components';
-import MyPageHeader from '~/components/myPage/myPage-header';
+import MyPageHeader from '~/components/common/sub-navigation-bar';
 import { useIdentifyLogin } from '~/hooks/userStatus/identify-login';
 
 export default function DefaultMyPage() {
@@ -13,7 +13,7 @@ export default function DefaultMyPage() {
 
   return (
     <Wrapper>
-      <MyPageHeader />
+      <MyPageHeader page='Mypage' />
       <Outlet />
       {/* <AnimatePresence>
         {clicked !== undefined ? (

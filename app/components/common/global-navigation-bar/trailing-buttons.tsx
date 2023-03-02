@@ -13,14 +13,14 @@ type IType = {
   setlogin: Function;
 };
 const Login = ({ isloggedin, name, setlogin }: IType) => {
-  let output;
+  /*   let output;
   if (name !== undefined) output = name.substring(0, 1);
-  else output = '';
+  else output = ''; */
   const onClick = () => {
     setlogin(false);
   };
   if (isloggedin === true) {
-    return <CircleLink to='/my-page/profile'>{output}</CircleLink>;
+    return <CircleLink />;
   }
   return <TextLink onClick={onClick}>로그인</TextLink>;
 };
@@ -78,18 +78,20 @@ const TextLink = styled.div`
   cursor: pointer;
   color: black;
 `;
-const CircleLink = styled(Link)`
+const CircleLink = styled.div`
   display: grid;
   place-content: center;
   width: 32px;
   height: 32px;
   background-color: #c2c0bd;
   clip-path: circle(50%);
+  cursor: pointer;
 `;
 const Icon = styled.img.attrs({
   role: 'button',
 })`
   display: block;
   width: 24px;
+  height: 24px;
   color: #c2c0bd;
 `;
