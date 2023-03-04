@@ -1,9 +1,15 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 export default function GithubLogin() {
-  const GithubID = /*  useLoaderData()[2]; */ '4eda15a08f26b80b6112';
+  const GithubID = /*  useLoaderData()[2]; */ '7ac9ebbbfe9684ed54a6';
 
-  const loginUri = `https://github.com/login/oauth/authorize?client_id=${GithubID}&redirect_uri=http://dev.thepool.kr/callback`;
+  const [currentURL, setCurrentURL] = useState<string>();
+  useEffect(() => {
+    setCurrentURL(window.location.href);
+  }, []);
+  console.log('temp', currentURL);
+  const loginUri = `https://github.com/login/oauth/authorize?client_id=${GithubID}&redirect_uri=${currentURL}callback`;
 
   return (
     <Wrapper href={loginUri}>

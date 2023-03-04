@@ -9,13 +9,9 @@ import {
 
 type IType = {
   isloggedin: boolean | undefined | 'shutDown';
-  name: string;
   setlogin: Function;
 };
-const Login = ({ isloggedin, name, setlogin }: IType) => {
-  /*   let output;
-  if (name !== undefined) output = name.substring(0, 1);
-  else output = ''; */
+const Login = ({ isloggedin, setlogin }: IType) => {
   const onClick = () => {
     setlogin(false);
   };
@@ -49,11 +45,7 @@ export const TrailingButtons: FC = () => {
   return (
     <Wrapper>
       {menuButtons}
-      <Login
-        isloggedin={loginInfo.loginStatus}
-        setlogin={setStatus}
-        name={loginInfo.name}
-      />
+      <Login isloggedin={loginInfo.loginStatus} setlogin={setStatus} />
     </Wrapper>
   );
 };

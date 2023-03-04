@@ -31,10 +31,7 @@ const Wrapper = styled.nav`
   z-index: 1;
   border-bottom: 1px solid #efedea;
 `;
-const Temp = styled.div`
-  width: 94px;
-  height: 30px;
-`;
+
 const FlexWrapper = styled.div`
   width: min(100%, 1256px);
   height: 100%;
