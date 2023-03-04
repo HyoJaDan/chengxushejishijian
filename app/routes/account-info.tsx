@@ -1,5 +1,6 @@
 import { useNavigate } from '@remix-run/react';
 import axios from 'axios';
+import { id } from 'date-fns/locale';
 import { useForm } from 'react-hook-form';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
@@ -44,9 +45,9 @@ export default function Detail() {
         jobPool: useUserJobPool,
         interest: nextInterestData,
       });
-
+      console.log('id', id);
       axios.patch(
-        `https://api.thepool.kr/api/members${id}`,
+        `https://api.thepool.kr/api/members/${id}`,
         {
           nickname: data.userNickName,
           job: useUserJobPool,
