@@ -9,9 +9,11 @@ export const GlobalNavigationBar: FCClass = ({ className }) => {
     <Wrapper className={className}>
       <FlexWrapper>
         <FlexTie>
-          <Link to='/'>
-            <Logo src='/icons/thePool.svg' alt='thePool' />
-          </Link>
+          <Links>
+            <Link to='/'>
+              <Logo src='/icons/the-pool.svg' alt='thePool' />
+            </Link>
+          </Links>
           <NavButtons />
         </FlexTie>
         <TrailingButtons />
@@ -29,6 +31,10 @@ const Wrapper = styled.nav`
   z-index: 1;
   border-bottom: 1px solid #efedea;
 `;
+const Temp = styled.div`
+  width: 94px;
+  height: 30px;
+`;
 const FlexWrapper = styled.div`
   width: min(100%, 1256px);
   height: 100%;
@@ -41,11 +47,12 @@ const FlexWrapper = styled.div`
 `;
 const FlexTie = styled.div`
   display: flex;
-  gap: 36px;
+  gap: 32px;
+`;
+const Links = styled.div`
+  display: flex;
+  gap: 16px;
 `;
 const Logo = styled.img.attrs({
   role: 'button',
-})`
-  width: 48px;
-  height: 30px;
-`;
+})``;

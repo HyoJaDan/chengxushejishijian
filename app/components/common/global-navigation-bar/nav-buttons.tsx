@@ -27,7 +27,7 @@ export const NavButtons: FCClass = ({ className }) => {
     const [temp] = link.split('/');
 
     return (
-      <Link isTrue={URL === temp} key={id} to={link} end>
+      <Link istrue={URL === temp} key={id} to={link} end>
         {title}
       </Link>
     );
@@ -60,7 +60,7 @@ const Temp = styled.div`
   border-left: 1px solid #959290;
   cursor: pointer;
 `;
-const Link = styled(NavLink)<{ isTrue: boolean }>`
+const Link = styled(NavLink)<{ istrue: boolean }>`
   color: #a4a2a0;
-  ${({ isTrue }) => isTrue && `color:#31302F`}
+  ${({ istrue }) => istrue && `color:#31302F`}
 `;

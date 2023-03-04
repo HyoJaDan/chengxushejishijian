@@ -14,8 +14,8 @@ export default function MyPageHeader({ page }: IPage) {
   const myPages: IPageName[] = [
     { title: '프로필', link: 'profile' },
     { title: '저장한 문제', link: 'archive' },
+    { title: '제출한 풀이', link: 'setting' },
     { title: '좋아요', link: 'setting' },
-    { title: '나의활동', link: 'setting' },
   ];
   const trainPages: IPageName[] = [
     { title: '문제', link: '/' },
