@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export default function GithubLogin() {
   const GithubID = /*  useLoaderData()[2]; */ '4eda15a08f26b80b6112';
 
-  const loginUri = `https://github.com/login/oauth/authorize?client_id=${GithubID}&redirect_uri=http://localhost:3000/callback`;
+  const loginUri = `https://github.com/login/oauth/authorize?client_id=${GithubID}&redirect_uri=http://dev.thepool.kr/callback`;
 
   return (
     <Wrapper href={loginUri}>
