@@ -5,7 +5,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import InputUserArea from '~/components/input-user-info/input-area-button';
 import InputUserInterests from '~/components/input-user-info/input-interest';
-import { loginInformation } from '~/recoils/user/login-information';
+import { loginInformation, userId } from '~/recoils/user/login-information';
 import { userData, userJobPoolSelector } from '~/recoils/user/user-data';
 import InputUserName from '../components/input-user-info/input-name';
 
@@ -19,6 +19,7 @@ export default function Detail() {
   const [userDatas, setUserDatas] = useRecoilState(userData);
   const loginInfo = useRecoilValue(loginInformation);
   const [useUserJobPool, setUserJobPool] = useRecoilState(userJobPoolSelector);
+  const [Id] = useRecoilValue(userId);
   const {
     register,
     handleSubmit,
@@ -45,7 +46,7 @@ export default function Detail() {
       });
 
       axios.patch(
-        'https://api.thepool.kr/api/members/1',
+        `https://api.thepool.kr/api/members${id}`,
         {
           nickname: data.userNickName,
           job: useUserJobPool,
