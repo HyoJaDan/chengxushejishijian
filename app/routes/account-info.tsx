@@ -1,6 +1,5 @@
 import { useNavigate } from '@remix-run/react';
 import axios from 'axios';
-import { id } from 'date-fns/locale';
 import { useForm } from 'react-hook-form';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
@@ -20,7 +19,7 @@ export default function Detail() {
   const [userDatas, setUserDatas] = useRecoilState(userData);
   const loginInfo = useRecoilValue(loginInformation);
   const [useUserJobPool, setUserJobPool] = useRecoilState(userJobPoolSelector);
-  const [Id] = useRecoilValue(userId);
+  const id = useRecoilValue(userId);
   const {
     register,
     handleSubmit,

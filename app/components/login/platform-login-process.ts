@@ -18,6 +18,13 @@ export async function loginProcess({
 }: LoginProcessProps) {
   const [isSucceed, thePoolAccessToken, thePoolStatus, thePoolId] =
     await setUser(OAuthresponse, platform);
+  console.log(
+    'retured value',
+    isSucceed,
+    thePoolAccessToken,
+    thePoolStatus,
+    thePoolId
+  );
   if (isSucceed) {
     setLoginInfo({
       loginStatus: true,
