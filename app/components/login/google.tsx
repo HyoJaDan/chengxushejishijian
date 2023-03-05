@@ -3,21 +3,25 @@ import { useNavigate } from '@remix-run/react';
 import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { loginInformation, platform } from '~/recoils/user/login-information';
+import { userAccessToken } from '~/recoils/user/user-accesstoken';
+import { userId } from '~/recoils/user/user-id';
 
 import { loginProcess } from './platform-login-process';
 
 export default function GoogleLogin() {
   const navigate = useNavigate();
   const setLoginInfo = useSetRecoilState(loginInformation);
-
+  const setId = useSetRecoilState(userId);
+  const setAccessToken = useSetRecoilState(userAccessToken);
   const login = useGoogleLogin({
     onSuccess: (response) => {
       loginProcess({
         OAuthresponse: response.access_token,
         platform: platform.Google,
-        name: undefined,
         navigate,
         setLoginInfo,
+        setId,
+        setAccessToken,
       });
     },
   });

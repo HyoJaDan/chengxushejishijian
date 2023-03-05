@@ -1,7 +1,8 @@
 /* eslint-disable no-shadow */
 import axios from 'axios';
-import { atom, selector, selectorFamily } from 'recoil';
+import { atom, selector } from 'recoil';
 import { recoilKeySuffix } from '../../utils/recoil-key';
+import { userId } from './user-id';
 
 export interface IValue {
   value: string;
@@ -70,13 +71,17 @@ export const clickSetting = atom<IClickSetting>({
   default: undefined,
 });
 
-export const getUserData = selectorFamily({
-  key: 'user',
-  get: (userId: number) => async () => {
+export const getUserData = selector({
+  key: 'temp',
+  get: async ({ get }) => {
+    const id = get(userId);
     const userData = await axios
-      .get(`https://api.thepool.kr/api/members/${userId}`)
+      .get(`https://api.thepool.kr/api/members/${id}`)
       .then((response) => {
         return response.data.member;
+      })
+      .catch(() => {
+        return false;
       });
     return userData;
   },

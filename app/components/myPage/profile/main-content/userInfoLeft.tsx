@@ -1,14 +1,9 @@
 import { Suspense } from 'react';
-import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { loginStatus } from '~/recoils/user/login-information';
-
 import Succeed from './userInfoLeftSucceed';
 
 const IsStatusTrue = () => {
-  const status = useRecoilValue(loginStatus);
-  if (status === true) return <Succeed />;
-  return null;
+  return <Succeed />;
 };
 
 export default function UserInfoLeft() {

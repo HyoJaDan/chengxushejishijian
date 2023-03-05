@@ -5,8 +5,9 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import InputUserArea from '~/components/input-user-info/input-area-button';
 import InputUserInterests from '~/components/input-user-info/input-interest';
-import { loginInformation, userId } from '~/recoils/user/login-information';
+import { loginInformation } from '~/recoils/user/login-information';
 import { userData, userJobPoolSelector } from '~/recoils/user/user-data';
+import { userId } from '~/recoils/user/user-id';
 import InputUserName from '../components/input-user-info/input-name';
 
 export interface IUserData {
@@ -44,7 +45,7 @@ export default function Detail() {
         jobPool: useUserJobPool,
         interest: nextInterestData,
       });
-      console.log('id', id);
+
       axios.patch(
         `https://api.thepool.kr/api/members/${id}`,
         {

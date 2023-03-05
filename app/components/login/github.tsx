@@ -8,7 +8,7 @@ export default function GithubLogin() {
   useEffect(() => {
     setCurrentURL(window.location.href);
   }, []);
-  console.log('temp', currentURL);
+
   const loginUri = `https://github.com/login/oauth/authorize?client_id=${GithubID}&redirect_uri=${currentURL}callback`;
 
   return (

@@ -15,7 +15,6 @@ export interface ILoginInfo<platform, loginType> {
   loginStatus: loginType;
   platform: platform;
   name: string;
-  id: undefined | number;
 }
 
 /** loginInformation에는 로그인 여부, 플랫폼, 사용자 이름 */
@@ -25,9 +24,9 @@ export const loginInformation = atom<ILoginInfo<platform, loginType>>({
     loginStatus: undefined,
     platform: platform.Not_login,
     name: '',
-    id: undefined,
   },
 });
+
 export const loginStatus = selector({
   key: 'loginStatusSelector',
   get: ({ get }) => get(loginInformation).loginStatus,
@@ -35,16 +34,6 @@ export const loginStatus = selector({
     set(loginInformation, (oldValue) => ({
       ...oldValue,
       loginStatus: newValue as boolean | undefined,
-    }));
-  },
-});
-export const userId = selector({
-  key: 'IdSelector',
-  get: ({ get }) => get(loginInformation).id,
-  set: ({ set }, newValue) => {
-    set(loginInformation, (oldValue) => ({
-      ...oldValue,
-      id: newValue as number,
     }));
   },
 });

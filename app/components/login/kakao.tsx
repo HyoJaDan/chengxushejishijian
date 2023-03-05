@@ -3,13 +3,16 @@ import KakaoLogin from 'react-kakao-login';
 import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { loginInformation, platform } from '~/recoils/user/login-information';
+import { userAccessToken } from '~/recoils/user/user-accesstoken';
+import { userId } from '~/recoils/user/user-id';
 import { loginProcess } from './platform-login-process';
 
 export default function Kakao() {
   const KAKAO_API = useLoaderData()[1];
   const navigate = useNavigate();
   const setLoginInfo = useSetRecoilState(loginInformation);
-
+  const setId = useSetRecoilState(userId);
+  const setAccessToken = useSetRecoilState(userAccessToken);
   return (
     <Wrapper
       token={KAKAO_API}
@@ -17,9 +20,10 @@ export default function Kakao() {
         loginProcess({
           OAuthresponse: response.response.access_token,
           platform: platform.KAKAO,
-          name: response.profile?.properties.nickname,
           navigate,
           setLoginInfo,
+          setId,
+          setAccessToken,
         });
       }}
     >

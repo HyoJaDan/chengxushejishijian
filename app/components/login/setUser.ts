@@ -1,7 +1,25 @@
 import axios from 'axios';
 
-type ISuccess = [boolean, string, number?, number?];
-type IFail = [string];
+interface IResponseData {
+  member: {
+    id: number;
+    createdAt: string;
+    updatedAt: string;
+    deletedAt: string;
+    majorId: number;
+    account: string;
+    nickname: string;
+    memberName: string;
+    job: string;
+    status: number;
+    loginType: number;
+    thumbnail: string;
+    introduce: string;
+  };
+  accessToken: string;
+}
+type ISuccess = [boolean, IResponseData];
+type IFail = [boolean];
 type IResponse = ISuccess | IFail;
 
 export async function setUser(
@@ -13,13 +31,8 @@ export async function setUser(
       oAuthToken: OAuthresponse,
       loginType: platform,
     });
-    return [
-      true,
-      response.data.accessToken,
-      response.data.member.status,
-      response.data.member.id,
-    ];
+    return [true, response.data];
   } catch (error) {
-    return [false, `${error}`];
+    return [false];
   }
 }
