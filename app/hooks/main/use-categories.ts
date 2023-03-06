@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 import { useRecoilValue } from 'recoil';
-import { categoryServiceAtom } from '~/recoils/main/category-service';
+import { categoryServiceAtom } from '~/recoils/unused/category-service';
 import type { MainCategory } from '~/services/categories/interface';
 
 export function useMainCategories(): MainCategory[] {

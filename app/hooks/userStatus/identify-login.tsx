@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { loginStatus } from '~/recoils/user/login-information';
 
 export const useIdentifyLogin = (isTrue: boolean) => {
-  const [type, setType] = useRecoilState(loginStatus);
+  const setType = useSetRecoilState(loginStatus);
   useEffect(() => {
     if (isTrue) setType(true);
     else setType(false);

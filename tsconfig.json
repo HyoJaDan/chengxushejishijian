@@ -4,7 +4,8 @@
     "**/*.ts",
     "**/*.tsx",
     "app/recoil/user-info",
-    "app/components/myPage/profile/chart/abc.ts"
+    "app/components/myPage/profile/chart/abc.ts",
+    "app/components/main"
   ],
   "compilerOptions": {
     "types": ["node"],

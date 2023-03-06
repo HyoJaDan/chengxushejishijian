@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import { selectedCategoryState } from '~/recoils/main/selected-sub-category';
+import { selectedCategoryState } from '~/recoils/unused/selected-sub-category';
 import type { Category } from '~/services/categories/interface';
 
 export function useSelectedCategory() {

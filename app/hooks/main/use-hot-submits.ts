@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 import { useRecoilValue } from 'recoil';
-import { submitServiceProvider } from '~/recoils/main/submit-service';
+import { submitServiceProvider } from '~/recoils/unused/submit-service';
 
 export function useHotSubmits() {
   const service = useRecoilValue(submitServiceProvider);
