@@ -1,23 +1,21 @@
 import styled from 'styled-components';
 import MyPageHeader from '~/components/common/\bsub-navigation-bar';
 import Suspenses from '~/components/common/suspense';
-import Radio from '~/components/main/radio';
 
-export default function Index() {
+export default function Tempfun() {
   return (
-    <Wrapper>
+    <Fuck>
       <MyPageHeader page='Training' />
       <Content>
-        <Radio />
-        <Suspenses pageName='Training' />
+        <Suspenses pageName='Detail' />
       </Content>
-    </Wrapper>
+    </Fuck>
   );
 }
-const Wrapper = styled.div``;
 const Content = styled.div`
   background-color: #f8f6f4;
   min-height: 100vh;
   margin-top: -144px;
-  padding-top: 168px;
+  padding-top: 144px;
 `;
+const Fuck = styled.div``;

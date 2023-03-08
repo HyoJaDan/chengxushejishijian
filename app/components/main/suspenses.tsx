@@ -1,12 +1,12 @@
 import { Suspense } from 'react';
 import styled from 'styled-components';
-import { Training } from '.';
+import { Default } from './detail';
 
-export default function Suspenses() {
+export default function temp() {
   return (
     <Wrapper>
       <Suspense fallback={<div>loadiong</div>}>
-        <Training />
+        <Default />
       </Suspense>
     </Wrapper>
   );

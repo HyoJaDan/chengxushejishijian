@@ -1,6 +1,6 @@
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { categoryId } from '~/recoils/main/category-id';
+import { categoryId } from '~/recoils/main/category';
 
 interface radioName {
   en: string;

@@ -1,29 +1,31 @@
 /* eslint-disable no-underscore-dangle */
+import { Link } from '@remix-run/react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { categoryId, getLessons } from '~/recoils/main/category-id';
+import { categoryId, getLessons } from '~/recoils/main/category';
 
 export const Training = () => {
   const id = useRecoilValue(categoryId);
   const lessons = useRecoilValue(getLessons(id));
+
   const lesson = lessons.map((data, index) => {
     const keyId = `${data.id_index}`;
     return (
-      <Box key={keyId}>
+      <Box to={`/training/${data.id}`} key={keyId}>
         <Category>{data.lessonCategory.name}</Category>
         <Title>{data.title}</Title>
         <Counts>
           <Count>
             <Img src='/icons/lesson/likes.svg' alt='lessonLikes' />
-            {data._count.lessonLikes}
+            <Text>{data._count.lessonLikes}</Text>
           </Count>
           <Count>
-            <Img src='/icons/lesson/likes.svg' alt='lessonLikes' />
-            {data._count.lessonComments}
+            <Img src='/icons/lesson/comments.svg' alt='lessonLikes' />
+            <Text>{data._count.lessonComments}</Text>
           </Count>
           <Count>
-            <Img src='/icons/lesson/likes.svg' alt='lessonLikes' />
-            {data._count.lessonSolutions}
+            <Img src='/icons/lesson/solutions.svg' alt='lessonLikes' />
+            <Text>{data._count.lessonSolutions}</Text>
           </Count>
         </Counts>
       </Box>
@@ -34,8 +36,10 @@ export const Training = () => {
 const Wrapper = styled.div`
   display: flex;
   gap: 24px;
+  max-width: 1256px;
+  margin: 28px auto;
 `;
-const Box = styled.div`
+const Box = styled(Link)`
   width: 403px;
   height: 142px;
   background: #ffffff;
@@ -45,6 +49,7 @@ const Box = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+  cursor: pointer;
 `;
 const Category = styled.div`
   display: flex;
@@ -77,3 +82,6 @@ const Count = styled.div`
   gap: 4px;
 `;
 const Img = styled.img``;
+const Text = styled.div`
+  color: black;
+`;
