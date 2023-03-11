@@ -3,12 +3,23 @@ import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { getLessonDetail, getLessonDetailTags } from '~/recoils/main/lesson';
 
+interface ILessonHashtag {
+  id: number;
+  tag: string;
+  createdAt: string;
+}
+
 export const LessonDetail = () => {
   const params = useParams();
   const data = useRecoilValue(getLessonDetail(params.id));
   const hashTags = useRecoilValue(getLessonDetailTags(params.id));
-  console.log(hashTags);
 
+  /* const hashTagList = hashTags.lessonHashtag.map(
+    ({ id, tag, createdAt }: ILessonHashtag) => {
+      const Id = `${id}_${createdAt}`;
+      return <Tag key={Id}>{tag}</Tag>;
+    }
+  ); */
   return (
     <Wrapper>
       <Box>
@@ -19,7 +30,10 @@ export const LessonDetail = () => {
             <Date>{data.updatedAt.substr(0, 10)}</Date>
           </Titles>
         </Header>
-        <Main>{data.description}</Main>
+        <Main>
+          {data.description}
+          {/* <Tags>{hashTagList}</Tags> */}
+        </Main>
       </Box>
     </Wrapper>
   );
@@ -65,4 +79,14 @@ const Date = styled.div`
   line-height: 140%;
   text-align: right;
   color: #c2c0bd;
+`;
+const Tags = styled.div`
+  display: flex;
+  gap: 8px;
+`;
+const Tag = styled.div`
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 140%;
+  color: #2bc0ef;
 `;

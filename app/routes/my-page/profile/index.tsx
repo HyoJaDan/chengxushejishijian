@@ -1,31 +1,24 @@
 import { ClientOnly } from 'remix-utils';
 import styled from 'styled-components';
+import Suspenses from '~/components/common/suspense';
 import Calender from '~/components/myPage/profile/calender';
 import Chart from '~/components/myPage/profile/chart/chart.client';
-import UserInfoLeft from '~/components/myPage/profile/main-content/userInfoLeft';
-import UserInfoRight from '~/components/myPage/profile/main-content/userInfoRight';
 
 export default function Profile() {
   return (
     <Wrapper>
       <Content>
-        <MainContainer>
-          <UserInfoLeft />
-          <UserInfoRight />
-        </MainContainer>
+        <Suspenses pageName='UserInformation' />
         <Div>
-          <SubContainer>
-            <ClientOnly>{() => <Chart />}</ClientOnly>
-          </SubContainer>
-          <Calender />
+          <Suspenses pageName='IntroductionAndLink' />
+          <div>
+            <SubContainer>
+              <ClientOnly>{() => <Chart />}</ClientOnly>
+            </SubContainer>
+            <Calender />
+          </div>
         </Div>
       </Content>
-      <Footer>
-        <FooterContainer />
-        <FooterContainer />
-        <FooterContainer />
-        <FooterContainer />
-      </Footer>
     </Wrapper>
   );
 }
@@ -36,36 +29,27 @@ const Wrapper = styled.div`
   padding-top: 144px;
 `;
 const Content = styled.div`
+  width: 1256px;
+  margin: 50px auto;
   display: flex;
   justify-content: center;
+  flex-direction: column;
   gap: 24px;
 `;
-const Footer = styled.div`
-  display: flex;
-  justify-content: center;
-  grid-gap: 24px;
-  margin: 88px 0 178px 0;
-`;
+
 const DefaultContainer = styled.div`
   border: 1px solid #efedea;
   background: #ffffff;
   border-radius: 8px;
   display: flex;
 `;
-const MainContainer = styled(DefaultContainer)`
-  width: 936px;
-  height: 496px;
-`;
+
 const Div = styled.div`
   display: flex;
-  flex-direction: column;
+
   gap: 24px;
 `;
 const SubContainer = styled(DefaultContainer)`
   height: 234px;
   width: 296px;
-`;
-const FooterContainer = styled(DefaultContainer)`
-  width: 296px;
-  height: 200px;
 `;

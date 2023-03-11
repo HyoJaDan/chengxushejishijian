@@ -2,9 +2,9 @@ import { useGoogleLogin } from '@react-oauth/google';
 import { useNavigate } from '@remix-run/react';
 import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
+import { userAccessToken } from '~/recoils/user/common/user-accesstoken';
+import { userId } from '~/recoils/user/common/user-id';
 import { loginInformation, platform } from '~/recoils/user/login-information';
-import { userAccessToken } from '~/recoils/user/user-accesstoken';
-import { userId } from '~/recoils/user/user-id';
 
 import { loginProcess } from './platform-login-process';
 
@@ -33,7 +33,7 @@ export default function GoogleLogin() {
           login();
         }}
       >
-        <img src='/icons/google.svg' alt='google' />
+        <img src='/icons/login/google.svg' alt='google' />
         구글로 계속하기
       </Google>
     </div>

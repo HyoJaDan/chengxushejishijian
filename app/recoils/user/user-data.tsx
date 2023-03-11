@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { atom, selector } from 'recoil';
 import { recoilKeySuffix } from '../../utils/recoil-key';
-import { userId } from './user-id';
+import { userId } from './common/user-id';
 
 export interface IValue {
   value: string;
@@ -72,7 +72,7 @@ export const clickSetting = atom<IClickSetting>({
 });
 
 export const getUserData = selector({
-  key: 'temp',
+  key: 'getUserData',
   get: async ({ get }) => {
     const id = get(userId);
     const userData = await axios

@@ -2,9 +2,9 @@ import { useLoaderData, useNavigate } from '@remix-run/react';
 import KakaoLogin from 'react-kakao-login';
 import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
+import { userAccessToken } from '~/recoils/user/common/user-accesstoken';
+import { userId } from '~/recoils/user/common/user-id';
 import { loginInformation, platform } from '~/recoils/user/login-information';
-import { userAccessToken } from '~/recoils/user/user-accesstoken';
-import { userId } from '~/recoils/user/user-id';
 import { loginProcess } from './platform-login-process';
 
 export default function Kakao() {
@@ -27,7 +27,7 @@ export default function Kakao() {
         });
       }}
     >
-      <img src='/icons/kakao.svg' alt='kakao' />
+      <img src='/icons//loginkakao.svg' alt='kakao' />
       <Text>카카오톡으로 계속하기</Text>
     </Wrapper>
   );

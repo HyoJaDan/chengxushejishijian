@@ -13,7 +13,7 @@ export default function GithubLogin() {
 
   return (
     <Wrapper href={loginUri}>
-      <img src='/icons/github.svg' alt='github' />
+      <img src='/icons/login/github.svg' alt='github' />
       github으로 계속하기
     </Wrapper>
   );

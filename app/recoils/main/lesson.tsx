@@ -16,7 +16,7 @@ export const getLessonDetail = selectorFamily({
   },
 });
 export const getLessonDetailTags = selectorFamily({
-  key: 'getLessonDetail',
+  key: 'getLessonDetailTags',
   get: (id) => async () => {
     const lessonDetail = await axios
       .get(`https://api.thepool.kr/api/lessons/${id}/hashtags`)

@@ -5,9 +5,9 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import InputUserArea from '~/components/input-user-info/input-area-button';
 import InputUserInterests from '~/components/input-user-info/input-interest';
+import { userId } from '~/recoils/user/common/user-id';
 import { loginInformation } from '~/recoils/user/login-information';
 import { userData, userJobPoolSelector } from '~/recoils/user/user-data';
-import { userId } from '~/recoils/user/user-id';
 import InputUserName from '../components/input-user-info/input-name';
 
 export interface IUserData {
