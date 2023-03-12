@@ -1,23 +1,19 @@
 import { ClientOnly } from 'remix-utils';
 import styled from 'styled-components';
 import Suspenses from '~/components/common/suspense';
-import Calender from '~/components/myPage/profile/calender';
-import Chart from '~/components/myPage/profile/chart/chart.client';
 
 export default function Profile() {
   return (
     <Wrapper>
       <Content>
         <Suspenses pageName='UserInformation' />
-        <Div>
+        <Flex>
           <Suspenses pageName='IntroductionAndLink' />
-          <div>
-            <SubContainer>
-              <ClientOnly>{() => <Chart />}</ClientOnly>
-            </SubContainer>
-            <Calender />
-          </div>
-        </Div>
+          <SmallFlex>
+            <ClientOnly>{() => <Suspenses pageName='Chart' />}</ClientOnly>
+            <Suspenses pageName='Statistics' />
+          </SmallFlex>
+        </Flex>
       </Content>
     </Wrapper>
   );
@@ -37,19 +33,11 @@ const Content = styled.div`
   gap: 24px;
 `;
 
-const DefaultContainer = styled.div`
-  border: 1px solid #efedea;
-  background: #ffffff;
-  border-radius: 8px;
+const Flex = styled.div`
   display: flex;
-`;
-
-const Div = styled.div`
-  display: flex;
-
   gap: 24px;
 `;
-const SubContainer = styled(DefaultContainer)`
-  height: 234px;
-  width: 296px;
+const SmallFlex = styled(Flex)`
+  flex-direction: column;
 `;
+const Box = styled.div``;
