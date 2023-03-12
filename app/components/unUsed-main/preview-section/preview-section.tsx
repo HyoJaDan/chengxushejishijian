@@ -12,7 +12,7 @@ export const PreviewSection: FCChildren<PreviewSectionProps> = ({
   leadingContent,
 }) => (
   <Wrapper>
-    <Title>{title}</Title>
+    <div className='title4_BD'>{title}</div>
     <ContentArea>
       {leadingContent}
       <ScrollWrapper>
@@ -31,13 +31,6 @@ const Wrapper = styled.section`
   color: #1f1f1f;
   overflow-x: hidden;
 `;
-
-const Title = styled.h2`
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 100%;
-`;
-
 const ContentArea = styled.div`
   display: flex;
   flex-direction: column;

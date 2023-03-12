@@ -15,14 +15,14 @@ const QnA = () => {
     });
     return (
       <ContentWrapper key={Idx}>
-        <Title>
+        <Title className='body1_SB'>
           <Rank>{value.rank}</Rank>
           {value.title}
         </Title>
         <OutputQuestionInfo value={value} isMain={false} />
         <Line />
-        <Content>{value.content}</Content>
-        <Tags>{outputValues}</Tags>
+        <Content className='body3_MD'>{value.content}</Content>
+        <Tags className='body3_SB'>{outputValues}</Tags>
       </ContentWrapper>
     );
   });
@@ -32,7 +32,7 @@ const QnA = () => {
 export default function PopularQnA() {
   return (
     <Wrapper>
-      <Header>많이 본 Q&A</Header>
+      <Header className='title4_BD'>많이 본 Q&A</Header>
       <Suspense fallback={<div>loading...</div>}>
         <QnA />
       </Suspense>
@@ -48,10 +48,6 @@ const Wrapper = styled.div`
   mix-blend-mode: normal;
 `;
 const Header = styled.header`
-  font-style: normal;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 132%;
   width: min(100%, 1200px);
   margin: 0 auto;
 `;
@@ -61,7 +57,7 @@ const ContentWrapper = styled.div`
   gap: 16px;
   width: 404px !important;
   height: 256px;
-  background: #ffffff;
+  background: ${(prop) => prop.theme.color.basic.white};
   border-radius: 8px;
   padding: 24px;
   &:hover {
@@ -70,25 +66,17 @@ const ContentWrapper = styled.div`
   }
 `;
 const Title = styled.div`
-  font-style: normal;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 140%;
-  color: #31302f;
+  color: ${(prop) => prop.theme.color.grayScale.gray_900};
   display: flex;
   gap: 8px;
 `;
 const Tags = styled.div`
   display: flex;
   gap: 12px;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 140%;
   color: #2bc0ef;
 `;
 const Line = styled.div`
-  border: 1px solid #f8f6f4;
+  border: 1px solid ${(prop) => prop.theme.color.grayScale.gray_100};
 `;
 
 const Contents = styled.div`
@@ -99,18 +87,14 @@ const Contents = styled.div`
   padding: 30px 171px;
 `;
 const Content = styled.div`
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 140%;
-  color: #787573;
+  color: ${(prop) => prop.theme.color.grayScale.gray_700};
 `;
 const Rank = styled.div`
   width: 28px;
   height: 28px;
-  background: #31302f;
+  background: ${(prop) => prop.theme.color.grayScale.gray_900};
   border-radius: 100px;
-  color: white;
+  color: ${(prop) => prop.theme.color.basic.white};
   display: flex;
   justify-content: center;
 `;

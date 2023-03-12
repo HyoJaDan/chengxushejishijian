@@ -31,10 +31,10 @@ export const Navigaion = () => {
     <Wrapper>
       <FlexWrapper>
         <Category>
-          <Header>커뮤니티</Header>
+          <Header className='body1_BD'>커뮤니티</Header>
           <NavigationBar>{links}</NavigationBar>
         </Category>
-        <Button>질문하기</Button>
+        <Button className='body3_SB'>질문하기</Button>
       </FlexWrapper>
     </Wrapper>
   );
@@ -48,7 +48,7 @@ const Wrapper = styled.div`
   align-items: center;
   height: 62px;
   width: 100%;
-  background: #ffffff;
+  background: ${(prop) => prop.theme.color.basic.white};
 `;
 const FlexWrapper = styled.div`
   display: flex;
@@ -62,13 +62,9 @@ const Category = styled.div`
   gap: 24px;
 `;
 const Header = styled.header`
-  font-style: normal;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 140%;
   display: flex;
   align-items: center;
-  color: #31302f;
+  color: ${(prop) => prop.theme.color.grayScale.gray_900};
 `;
 const NavigationBar = styled.nav`
   display: flex;
@@ -87,12 +83,5 @@ const Button = styled.div`
   background: #2bc0ef;
   border-radius: 100px;
   cursor: pointer;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 140%;
-  /* identical to box height, or 20px */
-
-  /* Basic/White */
-
-  color: #ffffff;
+  color: ${(prop) => prop.theme.color.basic.white};
 `;

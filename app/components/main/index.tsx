@@ -12,8 +12,8 @@ export const Training = () => {
     const keyId = `${data.id_index}`;
     return (
       <Box to={`/training/${data.id}`} key={keyId}>
-        <Category>{data.lessonCategory.name}</Category>
-        <Title>{data.title}</Title>
+        <Category className='caption1_SB'>{data.lessonCategory.name}</Category>
+        <Title className='body1_BD'>{data.title}</Title>
         <Counts>
           <Count>
             <Img src='/icons/lesson/likes.svg' alt='lessonLikes' />
@@ -42,7 +42,7 @@ const Wrapper = styled.div`
 const Box = styled(Link)`
   width: 403px;
   height: 142px;
-  background: #ffffff;
+  background: ${(prop) => prop.theme.color.basic.white};
   border: 1px solid #efedea;
   border-radius: 8px;
   padding: 26px 24px;
@@ -62,16 +62,10 @@ const Category = styled.div`
   height: 29px;
   background: #dfffcc;
   border-radius: 4px;
-  font-weight: 600;
-  font-size: 12px;
-  line-height: 140%;
   color: #429510;
 `;
 const Title = styled.div`
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 140%;
-  color: #31302f;
+  color: ${(prop) => prop.theme.color.grayScale.gray_900};
 `;
 const Counts = styled.div`
   display: flex;
@@ -83,5 +77,5 @@ const Count = styled.div`
 `;
 const Img = styled.img``;
 const Text = styled.div`
-  color: black;
+  color: ${(prop) => prop.theme.color.basic.black};
 `;

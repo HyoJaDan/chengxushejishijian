@@ -26,11 +26,13 @@ export const LessonDetail = () => {
         <Header>
           {/* 카테고리 여 넣고 */}
           <Titles>
-            <Title>{data.title}</Title>
-            <Date>{data.updatedAt.substr(0, 10)}</Date>
+            <Title className='title4_BD'>{data.title}</Title>
+            <DateFontcaption1SB className='caption1_SB'>
+              {data.updatedAt.substr(0, 10)}
+            </DateFontcaption1SB>
           </Titles>
         </Header>
-        <Main>
+        <Main className='body2_MD'>
           {data.description}
           {/* <Tags>{hashTagList}</Tags> */}
         </Main>
@@ -45,7 +47,7 @@ const Wrapper = styled.div`
 const Box = styled.div`
   width: 1149px;
   height: 408px;
-  background: #ffffff;
+  background: ${(prop) => prop.theme.color.basic.white};
   border: 1px solid #efedea;
   border-radius: 8px;
   padding: 29px 31px 25px 24px;
@@ -56,10 +58,7 @@ const Titles = styled.div`
   justify-content: space-between;
 `;
 const Title = styled.div`
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 132%;
-  color: #31302f;
+  color: ${(prop) => prop.theme.color.grayScale.gray_900};
 `;
 const Header = styled.div`
   padding-bottom: 23px;
@@ -67,16 +66,10 @@ const Header = styled.div`
 `;
 const Main = styled.div`
   padding-top: 32px;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 140%;
   min-height: 154px;
-  color: #484746;
+  color: ${(prop) => prop.theme.color.grayScale.gray_800};
 `;
-const Date = styled.div`
-  font-weight: 600;
-  font-size: 12px;
-  line-height: 140%;
+const DateFontcaption1SB = styled.div`
   text-align: right;
   color: #c2c0bd;
 `;

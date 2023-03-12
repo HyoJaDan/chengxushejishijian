@@ -3,12 +3,12 @@ import styled from 'styled-components';
 export const OutputQuestionInfo = ({ value, isMain }) => {
   return (
     <Footer isMain={isMain}>
-      <Answer>답변</Answer>
-      <NumOfAnswers>{value.numOfAnswers}</NumOfAnswers>
+      <Answer className='body3_SB'>답변</Answer>
+      <NumOfAnswers className='body3_BD'>{value.numOfAnswers}</NumOfAnswers>
       <Border />
-      <NickName>{value.nickName}</NickName>
+      <NickName className='body3_SB'>{value.nickName}</NickName>
       <Border />
-      <Others>
+      <Others className='body3_MD'>
         <div>조회수</div>
         <div>{value.views}</div>
         <div>{value.date}</div>
@@ -23,50 +23,19 @@ const Footer = styled.div<{ isMain: boolean }>`
   ${({ isMain }) => isMain && `margin: 24px;`}
 `;
 const Answer = styled.div`
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 140%;
-  /* identical to box height, or 20px */
-
-  /* grayscale/700 */
-
-  color: #787573;
+  color: ${(prop) => prop.theme.color.grayScale.gray_700};
 `;
 const NumOfAnswers = styled.div`
-  font-style: normal;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 140%;
-  /* identical to box height, or 20px */
-
-  /* Secondary/Red */
-
   color: #f5564c;
 `;
 const Border = styled.div`
-  border: 1px solid #dddad7;
+  border: 1px solid ${(prop) => prop.theme.color.grayScale.gray_300};
 `;
 const NickName = styled.div`
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 140%;
-  /* identical to box height, or 20px */
-
-  /* grayscale/700 */
-
-  color: #787573;
+  color: ${(prop) => prop.theme.color.grayScale.gray_700};
 `;
 const Others = styled.div`
   display: flex;
   gap: 8px;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 140%;
-  /* identical to box height, or 20px */
-
-  /* grayscale/600 */
-
-  color: #959290;
+  color: ${(prop) => prop.theme.color.grayScale.gray_600};
 `;

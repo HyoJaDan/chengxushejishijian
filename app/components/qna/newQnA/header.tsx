@@ -44,7 +44,7 @@ const Header = () => {
   return (
     <Wrapper>
       <Div>
-        <HeaderText>새로운 질문</HeaderText>
+        <HeaderText className='title4_BD'>새로운 질문</HeaderText>
         {outputList()}
       </Div>
     </Wrapper>
@@ -62,12 +62,7 @@ const Div = styled.div`
 `;
 const HeaderText = styled.div`
   height: 32px;
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 132%;
-  color: #31302f;
+  color: ${(prop) => prop.theme.color.grayScale.gray_900};
 `;
 const List = styled.div<{ selected: boolean }>`
   cursor: pointer;

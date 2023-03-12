@@ -47,7 +47,7 @@ const Animi = styled(motion.div)`
   left: 0;
   right: 0;
   margin: 0 auto;
-  background-color: white;
+  background-color: ${(prop) => prop.theme.color.basic.white};
   border-radius: 20px;
   overflow-y: scroll;
 `;

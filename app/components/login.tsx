@@ -20,9 +20,11 @@ export const loader: LoaderFunction = async () => {
 function Header() {
   return (
     <Font>
-      <Insert>THE POOL에 입장하기</Insert>
-      <Ipsu>입수할 준비 되셨나요?</Ipsu>
-      <Go>같은 분야의 주니어들과 함께 집단지성에 기대보아요.</Go>
+      <div className='title1_BD'>THE POOL에 입장하기</div>
+      <Ipsu className='title4_BD'>입수할 준비 되셨나요?</Ipsu>
+      <div className='body1_MD'>
+        같은 분야의 주니어들과 함께 집단지성에 기대보아요.
+      </div>
     </Font>
   );
 }
@@ -37,7 +39,7 @@ export default function LoginComponent() {
       <X src='/icons/X.svg' alt='X' onClick={onclick} />
       <Img src='/icons/bording.svg' alt='bording' />
       <Header />
-      <Login>
+      <Login className='body1_BD'>
         <GithubLogin />
         <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
           <GoogleLogin />
@@ -56,14 +58,10 @@ const X = styled.img`
 `;
 const Wrapper = styled.div`
   padding-bottom: 64px;
-
-  font-family: 'Pretendard';
-  font-style: normal;
-  color: #000000;
+  color: ${(prop) => prop.theme.color.basic.black};
   text-align: center;
   display: flex;
   flex-direction: column;
-
   align-items: center;
   gap: 40px;
 `;
@@ -72,36 +70,19 @@ const Img = styled.img`
   margin-top: 64px;
 `;
 const Font = styled.div`
-  font-style: normal;
   line-height: 120%;
   text-align: center;
-  color: #31302f;
-`;
-
-const Insert = styled.div`
-  font-weight: 700;
-  font-size: 40px;
+  color: ${(prop) => prop.theme.color.grayScale.gray_900};
 `;
 
 const Ipsu = styled.div`
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 132%;
   margin: 24px 0 8px 0;
 `;
-const Go = styled.div`
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 140%;
-  margin-bottom: 20px;
-`;
+
 const Login = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 16px;
-  font-size: 20px;
-  line-height: 24px;
-  font-weight: 700;
 `;

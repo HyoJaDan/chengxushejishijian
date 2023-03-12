@@ -9,8 +9,8 @@ export default function IntroductionAndLink() {
   return (
     <Wrapper>
       <Wrap>
-        <Title>소개</Title>
-        <DefaultFont>{user.introduce}</DefaultFont>
+        <Title className='body1_BD'>소개</Title>
+        <DefaultFont className='body3_MD'>{user.introduce}</DefaultFont>
       </Wrap>
       <Line />
       <Wrap>
@@ -29,7 +29,7 @@ const Wrapper = styled.div`
   width: 936px;
   height: 500px;
   border: 1px solid #efedea;
-  background: #ffffff;
+  background: ${(prop) => prop.theme.color.basic.white};
   border-radius: 8px;
 
   display: flex;
@@ -43,22 +43,15 @@ const Wrap = styled.div`
   gap: 24px;
 `;
 const Line = styled.div`
-  border: 1px solid #dddad7;
+  border: 1px solid ${(prop) => prop.theme.color.grayScale.gray_300};
   margin: 32px 0;
 `;
 const DefaultFont = styled.div`
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 140%;
-  color: #31302f;
+  color: ${(prop) => prop.theme.color.grayScale.gray_900};
 `;
 
 const Title = styled(DefaultFont)`
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 140%;
-  color: #31302f;
+  color: ${(prop) => prop.theme.color.grayScale.gray_900};
 `;
 const Tag = styled.div`
   display: flex;

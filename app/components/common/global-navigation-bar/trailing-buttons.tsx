@@ -62,13 +62,11 @@ const IconLink = styled(Link)`
 `;
 const TextLink = styled.div`
   font-family: 'Noto Sans';
-  font-style: normal;
   font-weight: 300;
   font-size: 16px;
   line-height: 100%;
-  /* identical to box height, or 16px */
   cursor: pointer;
-  color: black;
+  color: ${(prop) => prop.theme.color.basic.black};
 `;
 const CircleLink = styled.div`
   display: grid;

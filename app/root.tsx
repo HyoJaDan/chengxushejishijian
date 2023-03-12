@@ -13,11 +13,12 @@ import {
 } from '@remix-run/react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { RecoilRoot } from 'recoil';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 
 import globalStyle from '~/styles/global.css';
 import { GlobalNavigationBar } from './components/common/global-navigation-bar';
 import { LoginWrapper } from './components/login-wrapper';
+import { theme } from './styles/theme';
 
 export const loader: LoaderFunction = async () => {
   return [process.env.GOOGLE_CLIENT_ID, process.env.KAKAO_JS_API];
@@ -50,16 +51,18 @@ export default function App() {
             {typeof document === 'undefined' ? '__STYLES__' : null}
           </head>
           <body>
-            <Wrapper>
-              <GlobalNavigationBar />
-              <ContentArea>
-                <Outlet />
-                <LoginWrapper />
-              </ContentArea>
-            </Wrapper>
-            <ScrollRestoration />
-            <Scripts />
-            <LiveReload />
+            <ThemeProvider theme={theme}>
+              <Wrapper>
+                <GlobalNavigationBar />
+                <ContentArea>
+                  <Outlet />
+                  <LoginWrapper />
+                </ContentArea>
+              </Wrapper>
+              <ScrollRestoration />
+              <Scripts />
+              <LiveReload />
+            </ThemeProvider>
           </body>
         </html>
       </QueryClientProvider>

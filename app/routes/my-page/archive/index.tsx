@@ -9,7 +9,7 @@ export default function Archive() {
   );
 }
 const Wrapper = styled.div`
-  background-color: #f8f6f4;
+  background-color: ${(prop) => prop.theme.color.grayScale.gray_100};
   display: flex;
   justify-content: center;
   min-height: 100vh;

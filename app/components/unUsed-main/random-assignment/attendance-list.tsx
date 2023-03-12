@@ -25,7 +25,7 @@ const Wrapper = styled.div`
 
 const OverlappedAvatar = styled(AttendanceAvatar)`
   position: relative;
-  background-color: white;
+  background-color: ${(prop) => prop.theme.color.basic.white};
   &:nth-child(2) {
     left: -12px;
   }

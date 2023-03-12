@@ -13,7 +13,7 @@ export default function Tempfun() {
   );
 }
 const Content = styled.div`
-  background-color: #f8f6f4;
+  background-color: ${(prop) => prop.theme.color.grayScale.gray_100};
   min-height: 100vh;
   margin-top: -144px;
   padding-top: 144px;

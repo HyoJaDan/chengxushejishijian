@@ -27,9 +27,10 @@ export default function InputUserName({
   return (
     <InputName>
       <Content>
-        <Header>닉네임</Header>
+        <div className='body1_BD'>닉네임</div>
         <CharacterRestriction>
           <InputText
+            className='body1_MD'
             {...register('userNickName', {
               required: '이름을 적어주세요',
               maxLength: 19,
@@ -44,6 +45,7 @@ export default function InputUserName({
           />
           <Errors>
             <NumOfLetters
+              className='body2_MD'
               overed={watch().userNickName.length >= 20}
               check={isValid}
             >
@@ -58,7 +60,11 @@ export default function InputUserName({
           </Errors>
         </CharacterRestriction>
       </Content>
-      <Massage overed={watch().userNickName.length >= 20} check={isValid}>
+      <Massage
+        className='body3_MD'
+        overed={watch().userNickName.length >= 20}
+        check={isValid}
+      >
         한글 10자, 영문 20자 이내로 입력해주세요.
       </Massage>
       <Errmessage>{errors.userNickName?.message}</Errmessage>
@@ -77,24 +83,16 @@ const Content = styled.div`
   align-items: flex-start;
   gap: 16px;
 `;
-export const Header = styled.div`
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 140%;
-`;
 const InputText = styled.input<{ overed: boolean; isValid: boolean }>`
   box-sizing: border-box;
   height: 56px;
   width: 472px;
   font-size: 17px;
-  background: #ffffff;
-  border: 1px solid #dddad7;
+  background: ${(prop) => prop.theme.color.basic.white};
+  border: 1px solid ${(prop) => prop.theme.color.grayScale.gray_300};
   border-radius: 8px;
   padding: 0.8em 6.5em 0.8em 1em;
-  font-weight: 500;
-  line-height: 140%;
-  font-size: 16px;
-  color: #484746;
+  color: ${(prop) => prop.theme.color.grayScale.gray_800};
   &::placeholder {
     font-weight: 400;
     font-size: 16px;
@@ -116,10 +114,7 @@ const Massage = styled.div<{ overed: boolean; check: boolean }>`
   justify-content: flex-end;
   text-align: right;
   width: 472px;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 140%;
-  color: #484746;
+  color: ${(prop) => prop.theme.color.grayScale.gray_800};
   padding-right: 20px;
   height: 18px;
   ${({ overed }) => overed && `color: #D30D00;`}
@@ -147,10 +142,6 @@ const Errors = styled.div`
 `;
 const NumOfLetters = styled.div<{ overed: boolean; check: boolean }>`
   color: #a4a2a0;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 140%;
   ${({ overed }) => overed && `color: #D30D00;`}
   ${({ check }) => check && `display:none`}
 `;

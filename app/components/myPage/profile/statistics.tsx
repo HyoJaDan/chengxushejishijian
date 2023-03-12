@@ -7,7 +7,7 @@ export default function Statistics() {
   return (
     <Wrapper>
       <Content>
-        <Title>과제 통계</Title>
+        <Title className='body1_BD'>과제 통계</Title>
       </Content>
     </Wrapper>
   );
@@ -15,7 +15,7 @@ export default function Statistics() {
 const Wrapper = styled.div`
   width: 296px;
   height: 160px;
-  background: #ffffff;
+  background: ${(prop) => prop.theme.color.basic.white};
   border: 1px solid #efedea;
   border-radius: 8px;
 `;
@@ -26,8 +26,5 @@ const Content = styled.div`
   gap: 18px;
 `;
 const Title = styled.div`
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 140%;
-  color: #484746;
+  color: ${(prop) => prop.theme.color.grayScale.gray_800};
 `;

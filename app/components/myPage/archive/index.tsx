@@ -10,8 +10,8 @@ const OutputArchive = () => {
     return (
       <Container key={id}>
         <Background src={data.previewUrl} />
-        <ArchiveDate>{data.date}</ArchiveDate>
-        <ArchiveName>{data.name}</ArchiveName>
+        <ArchiveDate className='body3_MD'>{data.date}</ArchiveDate>
+        <ArchiveName className='body1_BD'>{data.name}</ArchiveName>
       </Container>
     );
   });
@@ -31,7 +31,7 @@ export default function MypageArchive() {
 const Wrapper = styled.div`
   width: 1256px;
   margin: 40px 0 40px 0;
-  background: #ffffff;
+  background: ${(prop) => prop.theme.color.basic.white};
 `;
 const Content = styled.div`
   display: grid;
@@ -60,16 +60,12 @@ const ArchiveDate = styled.div`
   position: absolute;
   top: 16px;
   left: 16px;
-  font-weight: 500;
-  font-size: 14px;
   color: #efedea;
 `;
 const ArchiveName = styled.div`
   position: absolute;
   top: 40px;
   left: 16px;
-  font-weight: 700;
-  font-size: 20px;
   text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
-  color: white;
+  color: ${(prop) => prop.theme.color.basic.white};
 `;

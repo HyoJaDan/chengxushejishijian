@@ -44,7 +44,7 @@ const LoginBackground = styled.div`
   top: 50%;
   transform: translateY(-50%);
   margin: 0 auto;
-  background-color: white;
+  background-color: ${(prop) => prop.theme.color.basic.white};
   box-shadow: 0px 24px 40px rgba(0, 0, 0, 0.1);
   border-radius: 24px;
   z-index: 3;

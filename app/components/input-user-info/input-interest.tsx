@@ -4,7 +4,6 @@ import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { userData } from '~/recoils/user/user-data';
 import type { IUserData } from '~/routes/account-info';
-import { Header } from './input-name';
 
 interface InputInterestProps {
   register: UseFormRegister<IUserData>;
@@ -35,7 +34,7 @@ export default function InputUserInterests({ register }: InputInterestProps) {
       );
     };
     return (
-      <Gapcheckbox key={id}>
+      <Gapcheckbox className='body2_MD' key={id}>
         <Input
           {...register('userInterest')}
           type='checkbox'
@@ -44,7 +43,9 @@ export default function InputUserInterests({ register }: InputInterestProps) {
           onClick={onfocus}
         />
         <Label htmlFor={id}>
-          <Letter isClicked={isClicked[index].bool}>{value}</Letter>
+          <Letter className='body2_MD' isClicked={isClicked[index].bool}>
+            {value}
+          </Letter>
         </Label>
       </Gapcheckbox>
     );
@@ -52,7 +53,7 @@ export default function InputUserInterests({ register }: InputInterestProps) {
 
   return (
     <UserInterests>
-      <Header>관심사</Header>
+      <div className='body1_BD'>관심사</div>
       <GridCheckbox>{checkBoxes}</GridCheckbox>
     </UserInterests>
   );
@@ -75,18 +76,12 @@ const Gapcheckbox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 19px;
   cursor: pointer;
   padding: 10px;
 `;
 const Letter = styled.div<{ isClicked: boolean }>`
   padding: 8px;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 140%;
-  color: #787573;
+  color: ${(prop) => prop.theme.color.grayScale.gray_700};
   ${({ isClicked }) => isClicked && `color:#31302F`}
 `;
 const Label = styled.label`
@@ -95,8 +90,8 @@ const Label = styled.label`
 const Input = styled.input`
   width: 24px;
   height: 24px;
-  background: #dddad7;
-  border: 1px solid #dddad7;
+  background: ${(prop) => prop.theme.color.grayScale.gray_300};
+  border: 1px solid ${(prop) => prop.theme.color.grayScale.gray_300};
   border-radius: 4px;
   appearance: none;
   background-size: 70% 70%;

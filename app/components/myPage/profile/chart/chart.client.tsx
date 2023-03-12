@@ -12,7 +12,7 @@ export default function Chart() {
   return (
     <Wrapper>
       <Content>
-        <Title>활동 분석</Title>
+        <Title className='body1_BD'>활동 분석</Title>
         <ReactApexChart
           type='radar'
           height='240px'
@@ -71,7 +71,7 @@ export default function Chart() {
 const Wrapper = styled.div`
   width: 296px;
   height: 316px;
-  background: #ffffff;
+  background: ${(prop) => prop.theme.color.basic.white};
   border: 1px solid #efedea;
   border-radius: 8px;
 `;
@@ -79,13 +79,6 @@ const Content = styled.div`
   padding: 32px 41px 36px 16px;
 `;
 const Title = styled.div`
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 140%;
-  /* identical to box height, or 28px */
-
-  /* grayscale/800 */
-
-  color: #484746;
+  color: ${(prop) => prop.theme.color.grayScale.gray_800};
   margin-bottom: 10px;
 `;

@@ -42,7 +42,7 @@ function InputForm() {
     <Form onSubmit={handleSubmit(onValid)}>
       <Title>사용자 이름</Title>
       <Input {...register('userName')} placeholder={`${data.nickName}`} />
-      <Title>직무/분야</Title>
+      <Title className='body2_SB'>직무/분야</Title>
       <Input {...register('userJobPool')} placeholder={`${data.jobPool}`} />
       <Title>자기소개</Title>
       <InputInproduction
@@ -76,7 +76,7 @@ function InputForm() {
       <div />
       <Div>
         <div />
-        <SubmitBtn>저장하기</SubmitBtn>
+        <SubmitBtn className='caption2_RG'>저장하기</SubmitBtn>
       </Div>
     </Form>
   );
@@ -88,7 +88,9 @@ export default function ProfileSetting() {
         <InputForm />
       </Wrapper>
       <Button>
-        <Back to='/my-page/profile'>프로필로 돌아가기</Back>
+        <Back className='caption1_RG' to='/my-page/profile'>
+          프로필로 돌아가기
+        </Back>
       </Button>
     </Background>
   );
@@ -101,7 +103,7 @@ const Wrapper = styled.div`
   width: 936px;
   height: 860px;
 
-  background: #ffffff;
+  background: ${(prop) => prop.theme.color.basic.white};
   border-radius: 8px;
   display: flex;
   padding: 200px 0 20px 0;
@@ -115,10 +117,6 @@ const Form = styled.form`
 `;
 
 const Title = styled.div`
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 150%;
   color: #1f1f1f;
 `;
 
@@ -150,15 +148,14 @@ const SettingBtn = styled(motion.div)`
   gap: 8px;
   background: #2478f6;
   border-radius: 14px;
-  font-style: normal;
   font-weight: 500;
   font-size: 12px;
   line-height: 100%;
 
   cursor: pointer;
-  color: #ffffff;
+  color: ${(prop) => prop.theme.color.basic.white};
   &:hover {
-    color: black;
+    color: ${(prop) => prop.theme.color.basic.black};
   }
 `;
 const Button = styled.div`
@@ -171,48 +168,40 @@ const Back = styled(Link)`
   width: 220px;
   height: 54px;
 
-  background: #ffffff;
+  background: ${(prop) => prop.theme.color.basic.white};
   border-radius: 8px;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 150%;
 
   text-align: center;
 
-  color: black;
+  color: ${(prop) => prop.theme.color.basic.black};
   display: flex;
   align-items: center;
   justify-content: center;
   &:hover {
     background: #515151;
-    color: white;
+    color: ${(prop) => prop.theme.color.basic.white};
   }
 `;
 const SubmitBtn = styled.button`
   width: 220px;
   height: 54px;
   border-radius: 8px;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 150%;
 
   text-align: center;
 
-  color: black;
+  color: ${(prop) => prop.theme.color.basic.black};
   display: flex;
   align-items: center;
   justify-content: center;
   background: #515151;
-  color: white;
+  color: ${(prop) => prop.theme.color.basic.white};
   border: 1px solid transparent;
   cursor: pointer;
 
   &:hover {
-    color: black;
+    color: ${(prop) => prop.theme.color.basic.black};
   }
   &:active {
-    color: black;
+    color: ${(prop) => prop.theme.color.basic.black};
   }
 `;

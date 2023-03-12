@@ -21,10 +21,10 @@ export default function GithubLogin() {
 const Wrapper = styled.a`
   width: 330px;
   height: 72px;
-  background: #f8f6f4;
+  background: ${(prop) => prop.theme.color.grayScale.gray_100};
   border-radius: 8px;
 
-  color: #484746;
+  color: ${(prop) => prop.theme.color.grayScale.gray_800};
   display: flex;
   flex-direction: row;
   gap: 9.5px;

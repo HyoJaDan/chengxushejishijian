@@ -12,7 +12,7 @@ export const MainCategoryMenu: FC<MainCategoryProps> = ({ mainCategory }) => {
   const subCategories = useSubCategories(mainCategory);
   return (
     <Wrapper>
-      <CategoryHeader background={mainCategory.color}>
+      <CategoryHeader className='title4_BD' background={mainCategory.color}>
         {mainCategory.name}
       </CategoryHeader>
       <SubCategoryList subCategories={subCategories} />
@@ -35,8 +35,6 @@ const CategoryHeader = styled.h3<{ background: string }>`
   background-clip: text;
   -webkit-background-clip: text;
   -moz-background-clip: text;
-  font-weight: 700;
-  font-size: 24px;
   color: transparent;
   margin: 0;
 `;

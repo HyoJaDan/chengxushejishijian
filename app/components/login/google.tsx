@@ -29,6 +29,7 @@ export default function GoogleLogin() {
   return (
     <div>
       <Google
+        className='body1_BD'
         onClick={() => {
           login();
         }}
@@ -48,14 +49,11 @@ const Google = styled.div`
   gap: 8px;
   width: 330px;
   height: 72px;
-  background: #ffffff;
+  background: ${(prop) => prop.theme.color.basic.white};
   border: 1px solid #efedea;
   border-radius: 8px;
   cursor: pointer;
 
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 24px;
   text-align: center;
-  color: #484746;
+  color: ${(prop) => prop.theme.color.grayScale.gray_800};
 `;

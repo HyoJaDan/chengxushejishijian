@@ -11,7 +11,7 @@ export default function Solution() {
 }
 const Wrapper = styled.div``;
 const Temp = styled.div`
-  background-color: #f8f6f4;
+  background-color: ${(prop) => prop.theme.color.grayScale.gray_100};
   min-height: 100vh;
   margin-top: -112px;
   padding-top: 144px;

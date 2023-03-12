@@ -2,7 +2,6 @@
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { userJobPoolSelector } from '~/recoils/user/user-data';
-import { Header } from './input-name';
 
 interface IButton {
   name: string;
@@ -32,7 +31,7 @@ export default function InputUserArea() {
   });
   return (
     <InputArea>
-      <Header>직업 분야</Header>
+      <div className='body1_BD'>직업 분야</div>
       <InputUsrPool>{button}</InputUsrPool>
       {userJobpool === 'false' ? (
         <Errmessage>직업 분야를 선택해 주세요.</Errmessage>

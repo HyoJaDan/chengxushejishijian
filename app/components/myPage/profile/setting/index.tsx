@@ -38,7 +38,7 @@ export default function SettingPage({ clicked }: clickProps) {
   });
   return (
     <Wrapper>
-      <Header>사용 가능한 {clicked}</Header>
+      <Header className='title4_BD'>사용 가능한 {clicked}</Header>
       <Content>{skill}</Content>
     </Wrapper>
   );
@@ -50,9 +50,6 @@ const Wrapper = styled.div`
   gap: 20px;
 `;
 const Header = styled.div`
-  font-style: normal;
-  font-weight: 700;
-  font-size: 24px;
   color: #1f1f1f;
   display: flex;
   justify-content: center;

@@ -14,10 +14,12 @@ const UserInformation = () => {
     <Wrapper>
       <Content>
         <Header>
-          <Profile>프로필</Profile>
-          <Setting to='setting'>
+          <Profile className='body1_BD'>프로필</Profile>
+          <Setting className='body3_BD' to='setting'>
             <SettingImg src='/icons/my-page/setting.svg' alt='my-page' />
-            <SettingFont>수정하기</SettingFont>
+            <SettingFontBody3SB className='body3_SB'>
+              수정하기
+            </SettingFontBody3SB>
           </Setting>
         </Header>
         <Main>
@@ -27,9 +29,11 @@ const UserInformation = () => {
             ) : null}
           </ThumbnailBackground>
           <div>
-            <UserNickName>{user.nickname}</UserNickName>
-            <UserJobPool>{user.job}</UserJobPool>
-            <Follow>
+            <UserNickName className='body1_BD'>{user.nickname}</UserNickName>
+            <UserJobPoolFontBody2SB className='body2_SB'>
+              {user.job}
+            </UserJobPoolFontBody2SB>
+            <Follow className='caption1_RG'>
               <Follower>팔로워 {`${follow.numOfFollowers}`}명</Follower>
               <Following>팔로잉 {`${follow.numOfFollowings}`}명</Following>
             </Follow>
@@ -42,7 +46,7 @@ const UserInformation = () => {
 const Wrapper = styled.div`
   width: 1256px;
   height: 212px;
-  background: #ffffff;
+  background: ${(prop) => prop.theme.color.basic.white};
   border: 1px solid #efedea;
   border-radius: 8px;
   padding: 32px;
@@ -61,42 +65,25 @@ const Header = styled.div`
   height: 28px;
 `;
 const Profile = styled.div`
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 140%;
-  color: #31302f;
+  color: ${(prop) => prop.theme.color.grayScale.gray_900};
 `;
 const Main = styled.div`
   display: flex;
   gap: 24px;
 `;
 const UserNickName = styled.div`
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 140%;
-  /* identical to box height, or 28px */
-
   display: flex;
   align-items: center;
   text-align: center;
-
-  /* grayscale/900 */
-
-  color: #31302f;
+  color: ${(prop) => prop.theme.color.grayScale.gray_900};
 `;
-const UserJobPool = styled.div`
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 140%;
+const UserJobPoolFontBody2SB = styled.div`
   display: flex;
   align-items: flex-end;
-  color: #787573;
+  color: ${(prop) => prop.theme.color.grayScale.gray_700};
 `;
 const Follow = styled.div`
   margin-top: 16px;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 150%;
   display: flex;
   gap: 16px;
 `;
@@ -106,10 +93,6 @@ const Following = styled.div`
 `;
 const Follower = styled(Following)``;
 const Setting = styled(Link)`
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 150%;
-
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -126,11 +109,8 @@ const Setting = styled(Link)`
     color: #2478f6;
   }
 `;
-const SettingFont = styled.div`
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 140%;
-  color: black;
+const SettingFontBody3SB = styled.div`
+  color: ${(prop) => prop.theme.color.basic.black};
 `;
 const SettingImg = styled.img``;
 const ThumbnailBackground = styled.div`

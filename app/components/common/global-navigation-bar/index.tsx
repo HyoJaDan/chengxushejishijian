@@ -26,8 +26,9 @@ const Wrapper = styled.nav`
   top: 0;
   height: 72px;
   width: 100%;
-  background-color: #ffffff;
-  color: black;
+  background-color: ${(prop) => prop.theme.color.basic.white};
+
+  color: ${(prop) => prop.theme.color.basic.black};
   z-index: 1;
   border-bottom: 1px solid #efedea;
 `;

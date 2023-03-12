@@ -68,15 +68,15 @@ export default function Detail() {
     <Background>
       <Wrapper>
         <Head>
-          <HeadInfo>🤿 회원 정보 입력</HeadInfo>
-          <HeadBefore>입수 전 마지막 단계!</HeadBefore>
+          <HeadInfo className='title4_BD'>🤿 회원 정보 입력</HeadInfo>
+          <HeadBefore className='body2_SB'>입수 전 마지막 단계!</HeadBefore>
         </Head>
         <Form onSubmit={handleSubmit(onValid)}>
           <InputUserName register={register} errors={errors} watch={watch} />
           <InputUserArea />
           <InputUserInterests register={register} />
           <ButtonDiv>
-            <Btn>완료</Btn>
+            <Btn className='body1_BD'>완료</Btn>
           </ButtonDiv>
         </Form>
       </Wrapper>
@@ -101,11 +101,10 @@ const Wrapper = styled.div`
   margin: 74px 0;
   width: 640px;
   gap: 40px;
-  background: #ffffff;
+  background: ${(prop) => prop.theme.color.basic.white};
   box-shadow: 0px 24px 40px rgba(0, 0, 0, 0.1);
   border-radius: 24px;
-  font-style: normal;
-  color: #000000;
+  color: ${(prop) => prop.theme.color.basic.black};
   text-align: center;
 `;
 const Head = styled.div`
@@ -116,16 +115,10 @@ const Head = styled.div`
   gap: 20px;
 `;
 const HeadInfo = styled.div`
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 132%;
-  color: #31302f;
+  color: ${(prop) => prop.theme.color.grayScale.gray_900};
 `;
 const HeadBefore = styled.div`
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 140%;
-  color: #787573;
+  color: ${(prop) => prop.theme.color.grayScale.gray_700};
 `;
 
 const Form = styled.form`
@@ -150,13 +143,10 @@ const Btn = styled.button`
       rgba(45, 184, 243, 0.36),
       rgba(45, 184, 243, 0.36)
     ),
-    #ffffff;
+    ${(prop) => prop.theme.color.basic.white};
   border-radius: 100px;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 140%;
   text-align: center;
-  color: #ffffff;
+  color: ${(prop) => prop.theme.color.basic.white};
   cursor: pointer;
   &:hover {
     outline: 10px;

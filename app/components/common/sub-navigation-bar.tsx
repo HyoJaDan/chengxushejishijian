@@ -43,7 +43,7 @@ export default function MyPageHeader({ page }: IPage) {
       <FlexWrapper>
         <Gap>
           {page === 'Mypage' ? (
-            <Content>{MyPagelinks}</Content>
+            <Content className='body2_BD'>{MyPagelinks}</Content>
           ) : (
             <Content>{trainLinks}</Content>
           )}
@@ -58,7 +58,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #ffffff;
+  background-color: ${(prop) => prop.theme.color.basic.white};
   position: sticky;
 
   height: 62px;
@@ -80,9 +80,6 @@ const Blank = styled.div`
   width: 296px;
 `;
 const Content = styled.div`
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 140%;
   display: flex;
 `;
 const Link = styled(NavLink)`
@@ -90,7 +87,7 @@ const Link = styled(NavLink)`
   padding: 16px 13px;
 
   &.active {
-    color: #484746;
+    color: ${(prop) => prop.theme.color.grayScale.gray_800};
     border-bottom: 2px solid #2bc0ef;
   }
 `;

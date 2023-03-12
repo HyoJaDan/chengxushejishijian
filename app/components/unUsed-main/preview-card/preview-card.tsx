@@ -16,7 +16,7 @@ export const PreviewCard: FCClass<PreviewCardProps> = ({
 }) => (
   <Wrapper className={className}>
     <PreviewImage src={previewUrl} />
-    <PreviewInfo>
+    <PreviewInfo className='body3_MD'>
       <UserWrapper>{userId} user</UserWrapper>
       <MetaWrapper>
         <MetaItem>
@@ -57,9 +57,6 @@ const PreviewInfo = styled.div`
   flex-direction: row;
   justify-content: space-between;
   color: #1f1f1f;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 100%;
 `;
 
 const RowFlex = styled.div`

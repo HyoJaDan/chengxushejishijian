@@ -16,8 +16,8 @@ const ContentMain = () => {
     return (
       <ContentWrapper key={Idx}>
         <Head>
-          <Title>{value.title}</Title>
-          <Tags>{outputValues}</Tags>
+          <Title className='body1_SB'>{value.title}</Title>
+          <Tags className='body3_SB'>{outputValues}</Tags>
         </Head>
         <Line />
         <OutputQuestionInfo value={value} isMain />
@@ -51,15 +51,9 @@ const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-
   width: 576px;
   height: 172px;
-
-  /* Basic/White */
-
-  background: #ffffff;
-  /* grayscale/200 */
-
+  background: ${(prop) => prop.theme.color.basic.white};
   border: 1px solid #efedea;
   border-radius: 8px;
   &:hover {
@@ -68,27 +62,11 @@ const ContentWrapper = styled.div`
   }
 `;
 const Title = styled.div`
-  font-style: normal;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 140%;
-  /* identical to box height, or 28px */
-
-  /* grayscale/900 */
-
-  color: #31302f;
+  color: ${(prop) => prop.theme.color.grayScale.gray_900};
 `;
 const Tags = styled.div`
   display: flex;
   gap: 12px;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 140%;
-  /* identical to box height, or 20px */
-
-  /* primary/Blue500 */
-
   color: #2bc0ef;
 `;
 const Line = styled.div`

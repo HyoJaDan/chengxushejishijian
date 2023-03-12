@@ -28,7 +28,7 @@ export const RandomAssignmentSectionHeader: FC<
     <Info>
       <CategoryChip>{assignment?.category.name}</CategoryChip>
       <Title>{assignment?.title}</Title>
-      <Author>by {assignment?.author}</Author>
+      <Author className='body3_MD'>by {assignment?.author}</Author>
     </Info>
     <Meta>
       <Attendance>
@@ -62,7 +62,7 @@ const CategoryChip = styled.div`
   padding: 6px 8px;
   border-radius: 4px;
   background-color: #f2713b;
-  color: white;
+  color: ${(prop) => prop.theme.color.basic.white};
 `;
 
 const Title = styled.span`
@@ -75,9 +75,6 @@ const Title = styled.span`
 
 const Author = styled.span`
   display: block;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 100%;
   color: rgba(31, 31, 31, 0.8);
 `;
 

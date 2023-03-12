@@ -27,8 +27,8 @@ export default function Kakao() {
         });
       }}
     >
-      <img src='/icons//loginkakao.svg' alt='kakao' />
-      <Text>카카오톡으로 계속하기</Text>
+      <img src='/icons/login/kakao.svg' alt='kakao' />
+      <Text className='body1_BD'>카카오톡으로 계속하기</Text>
     </Wrapper>
   );
 }
@@ -42,16 +42,12 @@ const Wrapper = styled(KakaoLogin)`
   justify-content: center !important;
   align-items: center !important;
   gap: 8px;
-  font-style: normal !important;
   font-weight: 700 !important;
   font-size: 20px !important;
   line-height: 24px !important;
   cursor: pointer !important;
 `;
 const Text = styled.div`
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 24px;
   text-align: center;
-  color: #31302f;
+  color: ${(prop) => prop.theme.color.grayScale.gray_900};
 `;

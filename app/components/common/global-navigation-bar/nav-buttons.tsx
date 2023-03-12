@@ -34,9 +34,9 @@ export const NavButtons: FCClass = ({ className }) => {
   });
 
   return (
-    <Wrapper>
+    <Wrapper className='body1_BD'>
       {links}
-      <Temp>더풀 사용법</Temp>
+      <Body2SB className='body2_SB'>더풀 사용법</Body2SB>
     </Wrapper>
   );
 };
@@ -46,18 +46,12 @@ const Wrapper = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 28px;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 140%;
-  color: #ffffff;
+  color: ${(prop) => prop.theme.color.basic.white};
 `;
-const Temp = styled.div`
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 140%;
+const Body2SB = styled.div`
   color: #959290;
   padding-left: 28px;
-  border-left: 1px solid #959290;
+  border-left: 1px solid ${(prop) => prop.theme.color.grayScale.gray_600};
   cursor: pointer;
 `;
 const Link = styled(NavLink)<{ istrue: boolean }>`
