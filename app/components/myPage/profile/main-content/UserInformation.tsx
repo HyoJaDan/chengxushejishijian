@@ -109,10 +109,10 @@ const Setting = styled(Link)`
     color: #2478f6;
   }
 `;
+const SettingImg = styled.img``;
 const SettingFontBody3SB = styled.div`
   color: ${(prop) => prop.theme.color.basic.black};
 `;
-const SettingImg = styled.img``;
 const ThumbnailBackground = styled.div`
   width: 96px;
   height: 96px;
