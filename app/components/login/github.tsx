@@ -1,9 +1,9 @@
+import { useLoaderData } from '@remix-run/react';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 export default function GithubLogin() {
-  const GithubID = /*  useLoaderData()[2]; */ '7ac9ebbbfe9684ed54a6';
-
+  const GithubID = useLoaderData()[2];
   const [currentURL, setCurrentURL] = useState<string>();
   useEffect(() => {
     setCurrentURL(window.location.href);

@@ -1,5 +1,4 @@
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import type { LoaderFunction } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
@@ -7,15 +6,6 @@ import GoogleLogin from '~/components/login/google';
 import KakaoLogin from '~/components/login/kakao';
 import { loginStatus } from '~/recoils/user/login-information';
 import GithubLogin from './login/github';
-
-export const loader: LoaderFunction = async () => {
-  return [
-    process.env.GOOGLE_CLIENT_ID,
-    process.env.KAKAO_JS_API,
-    process.env.GITHUB_CLIENT_ID,
-    process.env.GITHUB_CLIENT_SECRET,
-  ];
-};
 
 function Header() {
   return (

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import MyPageHeader from '~/components/common/\bsub-navigation-bar';
 import Suspenses from '~/components/common/suspense';
+import { Banner } from '~/components/main/banner';
 import Radio from '~/components/main/radio';
 
 export default function Index() {
@@ -8,6 +9,7 @@ export default function Index() {
     <Wrapper>
       <MyPageHeader page='Training' />
       <Content>
+        <Banner />
         <Radio />
         <Suspenses pageName='Training' />
       </Content>

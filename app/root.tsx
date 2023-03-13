@@ -21,7 +21,12 @@ import { LoginWrapper } from './components/login-wrapper';
 import { theme } from './styles/theme';
 
 export const loader: LoaderFunction = async () => {
-  return [process.env.GOOGLE_CLIENT_ID, process.env.KAKAO_JS_API];
+  return [
+    process.env.GOOGLE_CLIENT_ID,
+    process.env.KAKAO_JS_API,
+    process.env.GITHUB_CLIENT_ID,
+    process.env.GITHUB_CLIENT_SECRET,
+  ];
 };
 export const meta: MetaFunction = () => ({
   charset: 'utf-8',

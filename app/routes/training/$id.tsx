@@ -4,12 +4,12 @@ import Suspenses from '~/components/common/suspense';
 
 export default function Tempfun() {
   return (
-    <Fuck>
+    <div>
       <MyPageHeader page='Training' />
       <Content>
         <Suspenses pageName='Detail' />
       </Content>
-    </Fuck>
+    </div>
   );
 }
 const Content = styled.div`
@@ -18,4 +18,3 @@ const Content = styled.div`
   margin-top: -144px;
   padding-top: 144px;
 `;
-const Fuck = styled.div``;
