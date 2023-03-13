@@ -1,10 +1,8 @@
 import styled from 'styled-components';
-import MyPageHeader from '~/components/common/\bsub-navigation-bar';
 
 export default function Solution() {
   return (
     <Wrapper>
-      <MyPageHeader page='Training' />
       <Temp />
     </Wrapper>
   );

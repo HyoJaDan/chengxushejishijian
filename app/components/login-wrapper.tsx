@@ -1,6 +1,6 @@
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { loginStatus } from '~/recoils/user/login-information';
+import { loginStatus } from '~/recoils/user/common/login-information';
 import LoginComponent from './login';
 
 export function LoginWrapper() {

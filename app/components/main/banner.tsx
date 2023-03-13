@@ -13,7 +13,7 @@ export const Banner: FC<HTMLProps<HTMLElement>> = ({ className }) => (
 
 const Wrapper = styled.div`
   max-width: 1256px;
-  margin: 0 auto 72px auto;
+  margin: 40px auto 80px auto;
 `;
 const Img = styled.img`
   width: 100%;

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { selector } from 'recoil';
-import { userId } from './common/user-id';
+import { userId } from './common/login-information';
 
 interface IFollow {
   numOfFollowers: number;

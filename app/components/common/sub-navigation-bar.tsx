@@ -17,10 +17,6 @@ export default function MyPageHeader({ page }: IPage) {
     { title: '제출한 풀이', link: 'setting' },
     { title: '좋아요', link: 'setting' },
   ];
-  const trainPages: IPageName[] = [
-    { title: '문제', link: '/' },
-    { title: '풀이', link: '/solution' },
-  ];
 
   const MyPagelinks = myPages.map(({ title, link }, index) => {
     const id = `${link}_${index}`;
@@ -30,23 +26,12 @@ export default function MyPageHeader({ page }: IPage) {
       </Link>
     );
   });
-  const trainLinks = trainPages.map(({ title, link }, index) => {
-    const id = `${link}_${index}`;
-    return (
-      <Link key={id} to={link}>
-        {title}
-      </Link>
-    );
-  });
+
   return (
     <Wrapper>
       <FlexWrapper>
         <Gap>
-          {page === 'Mypage' ? (
-            <Content className='body2_BD'>{MyPagelinks}</Content>
-          ) : (
-            <Content>{trainLinks}</Content>
-          )}
+          <Content className='body2_BD'>{MyPagelinks}</Content>
         </Gap>
         <Blank />
       </FlexWrapper>

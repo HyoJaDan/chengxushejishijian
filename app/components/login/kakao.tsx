@@ -2,9 +2,13 @@ import { useLoaderData, useNavigate } from '@remix-run/react';
 import KakaoLogin from 'react-kakao-login';
 import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { userAccessToken } from '~/recoils/user/common/user-accesstoken';
-import { userId } from '~/recoils/user/common/user-id';
-import { loginInformation, platform } from '~/recoils/user/login-information';
+import {
+  loginInformation,
+  platform,
+  userAccessToken,
+  userId,
+} from '~/recoils/user/common/login-information';
+
 import { loginProcess } from './platform-login-process';
 
 export default function Kakao() {

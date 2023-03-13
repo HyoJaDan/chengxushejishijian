@@ -1,42 +1,35 @@
-import { NavLink } from '@remix-run/react';
+import { Link } from '@remix-run/react';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import type { FCClass } from '../types/function-component';
 
-interface IPages {
-  title: string;
-  link: string;
-}
 export const NavButtons: FCClass = ({ className }) => {
-  const pages: IPages[] = [
-    { title: '트레이닝', link: '/' },
-    { title: '마이페이지', link: 'my-page/profile' },
-  ];
-
-  const [URL, setURL] = useState<String>();
+  const [isProblem, setIsProblem] = useState<boolean>(false);
+  const [isSolution, setIsSolution] = useState<boolean>(false);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    let [, , , temp] = window.location.href.split('/');
-    if (temp === 'solution') temp = '';
-    setURL(temp);
-  });
-
-  const links = pages.map(({ title, link }, index) => {
-    const id = `${link}_${index}`;
-    const [temp] = link.split('/');
-
-    return (
-      <Link istrue={URL === temp} key={id} to={link} end>
-        {title}
-      </Link>
-    );
+    const [, , , temp] = window.location.href.split('/');
+    if (temp === 'solution') {
+      setIsProblem(false);
+      setIsSolution(true);
+    } else if (temp === 'my-page') {
+      setIsProblem(false);
+      setIsSolution(false);
+    } else {
+      setIsProblem(true);
+      setIsSolution(false);
+    }
   });
 
   return (
     <Wrapper className='body1_BD'>
-      {links}
-      <Body2SB className='body2_SB'>더풀 사용법</Body2SB>
+      <LinkToProblem isProblem={isProblem} to='/'>
+        문제
+      </LinkToProblem>
+      <LinkToSolution isSolution={isSolution} to='/solution'>
+        풀이
+      </LinkToSolution>
     </Wrapper>
   );
 };
@@ -48,13 +41,11 @@ const Wrapper = styled.div`
   gap: 28px;
   color: ${(prop) => prop.theme.color.basic.white};
 `;
-const Body2SB = styled.div`
-  color: #959290;
-  padding-left: 28px;
-  border-left: 1px solid ${(prop) => prop.theme.color.grayScale.gray_600};
-  cursor: pointer;
-`;
-const Link = styled(NavLink)<{ istrue: boolean }>`
+const LinkToProblem = styled(Link)<{ isProblem: boolean }>`
   color: #a4a2a0;
-  ${({ istrue }) => istrue && `color:#31302F`}
+  ${({ isProblem }) => isProblem && `color:#31302F`}
+`;
+const LinkToSolution = styled(Link)<{ isSolution: boolean }>`
+  color: #a4a2a0;
+  ${({ isSolution }) => isSolution && `color:#31302F`}
 `;

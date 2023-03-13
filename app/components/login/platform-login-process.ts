@@ -25,10 +25,10 @@ export async function loginProcess({
       loginStatus: true,
       platform,
       name: data?.member.nickname,
+      accessToken: data?.accessToken,
       id: data?.member.id,
+      img: data?.member.thumbnail,
     });
-    setId(data?.member.id);
-    setAccessToken(data?.accessToken);
     if (data?.member.status === userStatus.PENDING) {
       navigate('/account-info');
     } else navigate('/');

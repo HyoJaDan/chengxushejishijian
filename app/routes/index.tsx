@@ -1,13 +1,11 @@
 import styled from 'styled-components';
-import MyPageHeader from '~/components/common/\bsub-navigation-bar';
 import Suspenses from '~/components/common/suspense';
 import { Banner } from '~/components/main/banner';
 import Radio from '~/components/main/radio';
 
-export default function Index() {
+export default function Main() {
   return (
     <Wrapper>
-      <MyPageHeader page='Training' />
       <Content>
         <Banner />
         <Radio />
@@ -20,6 +18,6 @@ const Wrapper = styled.div``;
 const Content = styled.div`
   background-color: ${(prop) => prop.theme.color.grayScale.gray_100};
   min-height: 100vh;
-  margin-top: -144px;
-  padding-top: 168px;
+  margin-top: -72px;
+  padding-top: 72px;
 `;

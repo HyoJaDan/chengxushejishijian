@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { atom, selector } from 'recoil';
 import { recoilKeySuffix } from '../../utils/recoil-key';
-import { userId } from './common/user-id';
+import { userId } from './common/login-information';
 
 export interface IValue {
   value: string;
