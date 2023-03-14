@@ -6,8 +6,6 @@ type LoginProcessProps = {
   platform: number;
   navigate: Function;
   setLoginInfo: Function;
-  setId: Function;
-  setAccessToken: Function;
 };
 
 export async function loginProcess({
@@ -15,8 +13,6 @@ export async function loginProcess({
   platform,
   navigate,
   setLoginInfo,
-  setId,
-  setAccessToken,
 }: LoginProcessProps) {
   const [isSucceed, data] = await setUser(OAuthresponse, platform);
 
@@ -35,8 +31,7 @@ export async function loginProcess({
   } else {
     // eslint-disable-next-line no-alert
     alert('해당 아이디가 존재하지 않습니다. 다시 시도해 주세요');
-    localStorage.removeItem('thePoolAccessToken');
-    setAccessToken('');
+    localStorage.removeItem('currentUser');
     setLoginInfo({
       loginStatus: false,
     });

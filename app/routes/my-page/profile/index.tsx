@@ -40,4 +40,3 @@ const Flex = styled.div`
 const SmallFlex = styled(Flex)`
   flex-direction: column;
 `;
-const Box = styled.div``;

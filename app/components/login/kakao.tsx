@@ -5,8 +5,6 @@ import styled from 'styled-components';
 import {
   loginInformation,
   platform,
-  userAccessToken,
-  userId,
 } from '~/recoils/user/common/login-information';
 
 import { loginProcess } from './platform-login-process';
@@ -15,8 +13,7 @@ export default function Kakao() {
   const KAKAO_API = useLoaderData()[1];
   const navigate = useNavigate();
   const setLoginInfo = useSetRecoilState(loginInformation);
-  const setId = useSetRecoilState(userId);
-  const setAccessToken = useSetRecoilState(userAccessToken);
+
   return (
     <Wrapper
       token={KAKAO_API}
@@ -26,8 +23,6 @@ export default function Kakao() {
           platform: platform.KAKAO,
           navigate,
           setLoginInfo,
-          setId,
-          setAccessToken,
         });
       }}
     >

@@ -62,7 +62,7 @@ export const userId = selector({
   },
 });
 export const userAccessToken = selector({
-  key: 'loginStatusSelector',
+  key: 'userAccessToken',
   get: ({ get }) => get(loginInformation).accessToken,
   set: ({ set }, newValue) => {
     set(loginInformation, (oldValue) => ({

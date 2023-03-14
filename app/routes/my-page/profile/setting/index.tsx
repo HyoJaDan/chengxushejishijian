@@ -1,9 +1,14 @@
 import { useNavigate } from '@remix-run/react';
+import axios from 'axios';
+import { Suspense } from 'react';
 import { useForm } from 'react-hook-form';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import type { IClickSetting } from '~/recoils/user/user-data';
-import { clickSetting, userData } from '~/recoils/user/user-data';
+import {
+  userAccessToken,
+  userId,
+} from '~/recoils/user/common/login-information';
+import { getUserData } from '~/recoils/user/user-data';
 
 interface IData {
   userName: string;
@@ -12,28 +17,32 @@ interface IData {
 }
 
 function InputForm() {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [clicked, setClicked] = useRecoilState(clickSetting);
-  const onClickSetting = (data: Exclude<IClickSetting, undefined>) => {
-    setClicked(data);
-  };
   const navigate = useNavigate();
-  const [data, setData] = useRecoilState(userData);
-
+  const data = useRecoilValue(getUserData);
+  const id = useRecoilValue(userId);
+  const accessToken = useRecoilValue(userAccessToken);
   const { register, handleSubmit } = useForm<IData>({
     defaultValues: {
       userName: data.nickName,
-      userJobPool: data.jobPool,
+      userJobPool: data.job,
       self_introduction: data.introduce,
     },
   });
   const onValid = (inputData: IData) => {
-    setData({
-      ...data,
-      nickName: inputData.userName,
-      jobPool: inputData.userJobPool,
-      introduce: inputData.self_introduction,
-    });
+    axios.patch(
+      `https://api.thepool.kr/api/members/${id}`,
+      {
+        nickname: inputData.userName,
+        introduce: inputData.self_introduction,
+        job: inputData.userJobPool,
+        status: 1,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
     navigate('/my-page/profile');
   };
   return (
@@ -54,7 +63,7 @@ function InputForm() {
           <InputName
             className='body3_SB'
             {...register('userName')}
-            placeholder={`${data.nickName}`}
+            placeholder={`${data.nickname}`}
           />
         </Content>
         <Content>
@@ -84,7 +93,9 @@ export default function ProfileSetting() {
   return (
     <Background>
       <Wrapper>
-        <InputForm />
+        <Suspense>
+          <InputForm />
+        </Suspense>
       </Wrapper>
     </Background>
   );

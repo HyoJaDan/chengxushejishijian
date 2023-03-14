@@ -58,9 +58,7 @@ export default function Detail() {
         },
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem(
-              'thePoolAccessToken'
-            )}`,
+            Authorization: `Bearer ${loginInfo.accessToken}`,
           },
         }
       );

@@ -65,12 +65,6 @@ export const userJobPoolSelector = selector({
   },
 });
 
-export type IClickSetting = 'skill' | 'interest' | 'tag' | undefined;
-export const clickSetting = atom<IClickSetting>({
-  key: `clickSetting${recoilKeySuffix}`,
-  default: undefined,
-});
-
 export const getUserData = selector({
   key: 'getUserData',
   get: async ({ get }) => {
