@@ -80,3 +80,10 @@ export const getUserData = selector({
     return userData;
   },
 });
+/* export const patchUserData = selectorFamily({
+  key: 'patchUserData',
+  set: (temp: number)({ set }, newValue)=> {
+  
+  }
+});
+ */

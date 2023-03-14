@@ -1,6 +1,6 @@
 import { useNavigate } from '@remix-run/react';
 import axios from 'axios';
-import { Suspense } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
@@ -14,6 +14,8 @@ interface IData {
   userName: string;
   userJobPool: string;
   self_introduction: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  image: any;
 }
 
 function InputForm() {
@@ -21,13 +23,22 @@ function InputForm() {
   const data = useRecoilValue(getUserData);
   const id = useRecoilValue(userId);
   const accessToken = useRecoilValue(userAccessToken);
-  const { register, handleSubmit } = useForm<IData>({
+  const { register, handleSubmit, watch } = useForm<IData>({
     defaultValues: {
-      userName: data.nickName,
+      userName: data.nickname,
       userJobPool: data.job,
       self_introduction: data.introduce,
     },
   });
+  const [avatarPreview, setAvatarPreview] = useState('');
+
+  const avatar = watch('image');
+  useEffect(() => {
+    if (avatar && avatar.length > 0) {
+      const file = avatar[0];
+      setAvatarPreview(URL.createObjectURL(file));
+    }
+  }, [avatar]);
   const onValid = (inputData: IData) => {
     axios.patch(
       `https://api.thepool.kr/api/members/${id}`,
@@ -35,6 +46,7 @@ function InputForm() {
         nickname: inputData.userName,
         introduce: inputData.self_introduction,
         job: inputData.userJobPool,
+        thumbnail: inputData.image[0].name,
         status: 1,
       },
       {
@@ -55,6 +67,21 @@ function InputForm() {
         </Setting>
       </Head>
       <Main>
+        <Content>
+          {avatarPreview ? (
+            <LabelDisplayNone htmlFor='image'>
+              <ImgThumbnailBackground src={avatarPreview} alt='img' />
+              <InputDisplayNone {...register('image')} type='file' id='image' />
+            </LabelDisplayNone>
+          ) : (
+            <ThumbnailBackground>
+              <Label htmlFor='image'>
+                <img src='/icons/my-page/thumnail.svg' alt='thumnail' />
+              </Label>
+              <InputDisplayNone {...register('image')} type='file' id='image' />
+            </ThumbnailBackground>
+          )}
+        </Content>
         <Content>
           <Title>
             <Body3BD className='body3_BD'>닉네임</Body3BD>
@@ -197,4 +224,34 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+`;
+const ThumbnailBackground = styled.div`
+  width: 96px;
+  height: 96px;
+  background: #d9d9d9;
+  border-radius: 48px;
+  display: flex;
+  justify-content: center;
+`;
+const ImgThumbnailBackground = styled.img`
+  width: 96px;
+  height: 96px;
+  border-radius: 48px;
+  cursor: pointer;
+`;
+const InputDisplayNone = styled.input`
+  display: none;
+`;
+const Label = styled.label`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: -webkit-fill-available;
+  cursor: pointer;
+`;
+const LabelDisplayNone = styled.label`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
 `;
