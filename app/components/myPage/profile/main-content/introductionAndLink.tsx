@@ -46,11 +46,14 @@ const Line = styled.div`
   border: 1px solid ${(prop) => prop.theme.color.grayScale.gray_300};
   margin: 32px 0;
 `;
-const DefaultFont = styled.div`
+const DefaultFont = styled.textarea`
   color: ${(prop) => prop.theme.color.grayScale.gray_900};
+  height: 112px;
+  outline: none;
+  border: none;
 `;
 
-const Title = styled(DefaultFont)`
+const Title = styled.div`
   color: ${(prop) => prop.theme.color.grayScale.gray_900};
 `;
 const Tag = styled.div`

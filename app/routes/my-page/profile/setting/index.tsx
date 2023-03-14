@@ -180,7 +180,6 @@ const InputInproduction = styled.textarea`
   border-radius: 8px;
   min-height: 229px;
   outline: none;
-  border: 1px solid ${(prop) => prop.theme.color.grayScale.gray_200};
   color: ${(prop) => prop.theme.color.grayScale.gray_900};
 `;
 const SettingFontBody3SB = styled.div`

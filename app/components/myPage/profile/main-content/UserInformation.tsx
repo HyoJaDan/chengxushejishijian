@@ -9,7 +9,7 @@ const UserInformation = () => {
   const user = useRecoilValue(getUserData);
   useIdentifyLogin(user);
   const follow = useRecoilValue(getFollower);
-  console.log(user);
+
   return (
     <Wrapper>
       <Content>
