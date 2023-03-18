@@ -8,6 +8,8 @@ import {
   userAccessToken,
   userId,
 } from '~/recoils/user/common/login-information';
+import type { IURLImage } from '~/recoils/user/url-image';
+import { getURLImage } from '~/recoils/user/url-image';
 import { getUserData } from '~/recoils/user/user-data';
 
 interface IData {
@@ -16,6 +18,7 @@ interface IData {
   self_introduction: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   image: any;
+  url: string;
 }
 
 function InputForm() {
@@ -23,6 +26,9 @@ function InputForm() {
   const data = useRecoilValue(getUserData);
   const id = useRecoilValue(userId);
   const accessToken = useRecoilValue(userAccessToken);
+  const URLImages = useRecoilValue(getURLImage);
+  const [nowURLImage, setNowURLImage] = useState<IURLImage>(URLImages[0]);
+  console.log(nowURLImage, 'hello');
   const { register, handleSubmit, watch } = useForm<IData>({
     defaultValues: {
       userName: data.nickname,
@@ -39,14 +45,30 @@ function InputForm() {
       setAvatarPreview(URL.createObjectURL(file));
     }
   }, [avatar]);
-  const onValid = (inputData: IData) => {
+
+  const onValid = async (inputData: IData) => {
+    if (inputData?.image[0]) {
+      const formData = new FormData();
+      formData.append('data', inputData?.image[0]);
+      await axios({
+        method: 'post',
+        url: ' https://api.thepool.kr/uploads/post',
+        data: formData,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }).then((res) => console.log('success', res));
+    }
+
+    console.log(inputData);
     axios.patch(
       `https://api.thepool.kr/api/members/${id}`,
       {
         nickname: inputData.userName,
         introduce: inputData.self_introduction,
         job: inputData.userJobPool,
-        thumbnail: inputData.image[0].name,
+        thumbnail: inputData?.image[0].name,
         status: 1,
       },
       {
@@ -95,7 +117,7 @@ function InputForm() {
         </Content>
         <Content>
           <Title>
-            <Body3BD className='body2_SB'>포지션</Body3BD>
+            <Body3BD className='body3_SB'>포지션</Body3BD>
             <Body1RG>글자 제한 한글 40글자</Body1RG>
           </Title>
           <Input
@@ -105,12 +127,23 @@ function InputForm() {
           />
         </Content>
         <Content>
-          <Body3BD>소개</Body3BD>
+          <Body3BD className='body3_BD'>소개</Body3BD>
           <InputInproduction
             className='body3_MD'
             {...register('self_introduction')}
             placeholder={`${data.introduce}`}
           />
+        </Content>
+        <Content>
+          <Body3BD className='body3_BD'>URL</Body3BD>
+          <URLs>
+            <URLImg>{nowURLImage.name}</URLImg>
+            <InputURL
+              className='body3_SB'
+              {...register('url')}
+              placeholder='https://'
+            />
+          </URLs>
         </Content>
       </Main>
     </Form>
@@ -253,4 +286,26 @@ const LabelDisplayNone = styled.label`
   justify-content: flex-start;
   align-items: center;
   cursor: pointer;
+`;
+const URLs = styled.div`
+  display: flex;
+  gap: 8px;
+`;
+const InputURL = styled(Input)`
+  width: 332px;
+`;
+const URLImg = styled.div`
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 8px;
+
+  width: 64px;
+  height: 40px;
+  background: ${(prop) => prop.theme.color.grayScale.gray_100};
+  border: 1px solid ${(props) => props.theme.color.grayScale.gray_200};
+  border-radius: 8px;
+  color: ${(prop) => prop.theme.color.grayScale.gray_900};
 `;
