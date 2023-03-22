@@ -7,7 +7,7 @@ export interface IURLImage {
   iconPath: string;
   iconUrl: string;
   id: number;
-  name: 'string';
+  name: string;
   updatedAt: string;
 }
 
@@ -17,7 +17,6 @@ export const getURLImage = selector<IURLImage[]>({
     const getUrlImg = await axios
       .get('https://api.thepool.kr/api/member-social-links')
       .then((res) => {
-        console.log(res.data.memberSocialLinks);
         return res.data.memberSocialLinks;
       });
     return getUrlImg;

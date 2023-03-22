@@ -1,24 +1,23 @@
 import { useNavigate } from '@remix-run/react';
 import axios from 'axios';
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
+import { Url } from '~/components/myPage/profile/setting/url';
 import {
   userAccessToken,
   userId,
 } from '~/recoils/user/common/login-information';
-import type { IURLImage } from '~/recoils/user/url-image';
-import { getURLImage } from '~/recoils/user/url-image';
 import { getUserData } from '~/recoils/user/user-data';
 
-interface IData {
+export interface IData {
   userName: string;
   userJobPool: string;
   self_introduction: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   image: any;
-  url: string;
+  url: [];
 }
 
 function InputForm() {
@@ -26,9 +25,8 @@ function InputForm() {
   const data = useRecoilValue(getUserData);
   const id = useRecoilValue(userId);
   const accessToken = useRecoilValue(userAccessToken);
-  const URLImages = useRecoilValue(getURLImage);
-  const [nowURLImage, setNowURLImage] = useState<IURLImage>(URLImages[0]);
-  console.log(nowURLImage, 'hello');
+  const ImgURL = useRef('');
+
   const { register, handleSubmit, watch } = useForm<IData>({
     defaultValues: {
       userName: data.nickname,
@@ -45,12 +43,12 @@ function InputForm() {
       setAvatarPreview(URL.createObjectURL(file));
     }
   }, [avatar]);
-
   const onValid = async (inputData: IData) => {
+    console.log('hello', inputData);
     if (inputData?.image[0]) {
       const formData = new FormData();
       formData.append('data', inputData?.image[0]);
-      await axios({
+      ImgURL.current = await axios({
         method: 'post',
         url: ' https://api.thepool.kr/uploads/post',
         data: formData,
@@ -58,17 +56,16 @@ function InputForm() {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${accessToken}`,
         },
-      }).then((res) => console.log('success', res));
+      }).then((res) => res.data.url);
     }
 
-    console.log(inputData);
     axios.patch(
       `https://api.thepool.kr/api/members/${id}`,
       {
         nickname: inputData.userName,
         introduce: inputData.self_introduction,
         job: inputData.userJobPool,
-        thumbnail: inputData?.image[0].name,
+        thumbnail: ImgURL.current,
         status: 1,
       },
       {
@@ -136,14 +133,7 @@ function InputForm() {
         </Content>
         <Content>
           <Body3BD className='body3_BD'>URL</Body3BD>
-          <URLs>
-            <URLImg>{nowURLImage.name}</URLImg>
-            <InputURL
-              className='body3_SB'
-              {...register('url')}
-              placeholder='https://'
-            />
-          </URLs>
+          <Url register={register} />
         </Content>
       </Main>
     </Form>
@@ -189,7 +179,7 @@ const Title = styled.div`
   align-items: center;
 `;
 
-const Input = styled.input`
+export const Input = styled.input`
   width: 856px;
   height: 40px;
   padding: 8px 12px;
@@ -256,6 +246,7 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+  position: relative;
 `;
 const ThumbnailBackground = styled.div`
   width: 96px;
@@ -286,26 +277,4 @@ const LabelDisplayNone = styled.label`
   justify-content: flex-start;
   align-items: center;
   cursor: pointer;
-`;
-const URLs = styled.div`
-  display: flex;
-  gap: 8px;
-`;
-const InputURL = styled(Input)`
-  width: 332px;
-`;
-const URLImg = styled.div`
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 8px 12px;
-  gap: 8px;
-
-  width: 64px;
-  height: 40px;
-  background: ${(prop) => prop.theme.color.grayScale.gray_100};
-  border: 1px solid ${(props) => props.theme.color.grayScale.gray_200};
-  border-radius: 8px;
-  color: ${(prop) => prop.theme.color.grayScale.gray_900};
 `;
