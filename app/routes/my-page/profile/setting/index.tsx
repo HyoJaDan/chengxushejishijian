@@ -1,15 +1,18 @@
 import { useNavigate } from '@remix-run/react';
 import axios from 'axios';
-import { Suspense, useEffect, useRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useEffect, useRef, useState } from 'react';
+import { useFieldArray, useForm } from 'react-hook-form';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
+import SSRSafeSuspense from '~/components/common/temp';
 import { Url } from '~/components/myPage/profile/setting/url';
 import {
   userAccessToken,
   userId,
 } from '~/recoils/user/common/login-information';
-import { getUserData } from '~/recoils/user/user-data';
+import type { IURLImage } from '~/recoils/user/url-image';
+import { getURLImage } from '~/recoils/user/url-image';
+import { useManageUserInformation } from '~/utils/manage-userinformation';
 
 export interface IData {
   userName: string;
@@ -18,24 +21,42 @@ export interface IData {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   image: any;
   url: [];
+  URL: {
+    adress: string;
+  }[];
+}
+export interface IURLs {
+  nowURLImage: IURLImage;
+  isTrue: boolean;
 }
 
 function InputForm() {
   const navigate = useNavigate();
-  const data = useRecoilValue(getUserData);
+  const data = useManageUserInformation();
   const id = useRecoilValue(userId);
   const accessToken = useRecoilValue(userAccessToken);
   const ImgURL = useRef('');
 
-  const { register, handleSubmit, watch } = useForm<IData>({
+  const { register, handleSubmit, watch, control } = useForm<IData>({
     defaultValues: {
       userName: data.nickname,
       userJobPool: data.job,
       self_introduction: data.introduce,
+      URL: [{ adress: '' }],
     },
   });
+  const { fields, append, remove } = useFieldArray({
+    name: 'URL',
+    control,
+  });
   const [avatarPreview, setAvatarPreview] = useState('');
-
+  const URLImages = useRecoilValue(getURLImage);
+  const [urls, setUrls] = useState<IURLs[]>([
+    {
+      nowURLImage: URLImages[0],
+      isTrue: true,
+    },
+  ]);
   const avatar = watch('image');
   useEffect(() => {
     if (avatar && avatar.length > 0) {
@@ -43,7 +64,9 @@ function InputForm() {
       setAvatarPreview(URL.createObjectURL(file));
     }
   }, [avatar]);
+  /* const temp = () => {}; */
   const onValid = async (inputData: IData) => {
+    console.log('vallow', urls);
     console.log('hello', inputData);
     if (inputData?.image[0]) {
       const formData = new FormData();
@@ -56,7 +79,10 @@ function InputForm() {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${accessToken}`,
         },
-      }).then((res) => res.data.url);
+      }).then((res) => {
+        console.log('res', res.data.url);
+        return res.data.url;
+      });
     }
 
     axios.patch(
@@ -87,6 +113,11 @@ function InputForm() {
       </Head>
       <Main>
         <Content>
+          {/*   {user.thumbnail === null ? (
+            <Thumbnail />
+          ) : (
+            <Thumbnail as='img' src={user.thumbnail} alt='userThumbnail' />
+          )} */}
           {avatarPreview ? (
             <LabelDisplayNone htmlFor='image'>
               <ImgThumbnailBackground src={avatarPreview} alt='img' />
@@ -95,7 +126,14 @@ function InputForm() {
           ) : (
             <ThumbnailBackground>
               <Label htmlFor='image'>
-                <img src='/icons/my-page/thumnail.svg' alt='thumnail' />
+                {data.thumbnail === null ? (
+                  <img src='/icons/my-page/thumnail.svg' alt='thumnail' />
+                ) : (
+                  <ThumbnailBackgroundWrapper>
+                    <Temp src={data.thumbnail} alt='temp' />
+                    <OnImg src='/icons/my-page/thumnail.svg' alt='thumnail' />
+                  </ThumbnailBackgroundWrapper>
+                )}
               </Label>
               <InputDisplayNone {...register('image')} type='file' id='image' />
             </ThumbnailBackground>
@@ -104,23 +142,34 @@ function InputForm() {
         <Content>
           <Title>
             <Body3BD className='body3_BD'>닉네임</Body3BD>
-            <Body1RG>글자 제한 한글 8글자</Body1RG>
+            <Body1RG overed={watch().userName.length > 8}>
+              글자 제한 한글 8글자
+            </Body1RG>
           </Title>
           <InputName
             className='body3_SB'
-            {...register('userName')}
+            {...register('userName', {
+              required: '이름을 적어주세요',
+              maxLength: 8,
+            })}
+            overed={watch().userName.length > 8}
             placeholder={`${data.nickname}`}
           />
         </Content>
         <Content>
           <Title>
             <Body3BD className='body3_SB'>포지션</Body3BD>
-            <Body1RG>글자 제한 한글 40글자</Body1RG>
+            <Body1RG overed={watch().userJobPool.length > 20}>
+              글자 제한 한글 20글자
+            </Body1RG>
           </Title>
           <Input
             className='body3_SB'
-            {...register('userJobPool')}
-            placeholder={`${data.jobPool}`}
+            {...register('userJobPool', {
+              maxLength: 20,
+            })}
+            overed={watch().userJobPool.length > 20}
+            placeholder={`${data.job}`}
           />
         </Content>
         <Content>
@@ -133,7 +182,15 @@ function InputForm() {
         </Content>
         <Content>
           <Body3BD className='body3_BD'>URL</Body3BD>
-          <Url register={register} />
+          <Url
+            register={register}
+            fields={fields}
+            append={append}
+            remove={remove}
+            urls={urls}
+            setUrls={setUrls}
+            URLImages={URLImages}
+          />
         </Content>
       </Main>
     </Form>
@@ -143,9 +200,9 @@ export default function ProfileSetting() {
   return (
     <Background>
       <Wrapper>
-        <Suspense>
+        <SSRSafeSuspense>
           <InputForm />
-        </Suspense>
+        </SSRSafeSuspense>
       </Wrapper>
     </Background>
   );
@@ -179,7 +236,7 @@ const Title = styled.div`
   align-items: center;
 `;
 
-export const Input = styled.input`
+export const Input = styled.input<{ overed: boolean }>`
   width: 856px;
   height: 40px;
   padding: 8px 12px;
@@ -188,9 +245,11 @@ export const Input = styled.input`
   border-radius: 8px;
   &:focus {
     outline: none;
-    border: 1px solid ${(prop) => prop.theme.color.grayScale.gray_200};
+    border: 1px solid ${(prop) => prop.theme.color.primary.blue.blue_500};
+    ${({ overed }) => overed && `border: 1px solid #eb2317;`}
   }
   color: ${(prop) => prop.theme.color.grayScale.gray_900};
+  ${({ overed }) => overed && `border: 1px solid #eb2317;`}
 `;
 const InputName = styled(Input)`
   width: 225px;
@@ -204,6 +263,9 @@ const InputInproduction = styled.textarea`
   min-height: 229px;
   outline: none;
   color: ${(prop) => prop.theme.color.grayScale.gray_900};
+  &:focus {
+    border: 1px solid ${(prop) => prop.theme.color.primary.blue.blue_500};
+  }
 `;
 const SettingFontBody3SB = styled.div`
   color: ${(prop) => prop.theme.color.basic.black};
@@ -236,11 +298,12 @@ const SettingImg = styled.img``;
 const Body3BD = styled.div`
   ${(prop) => prop.theme.color.grayScale.gray_800};
 `;
-const Body1RG = styled.div`
+const Body1RG = styled.div<{ overed: boolean }>`
   font-weight: 400;
   font-size: 12px;
   line-height: 140%;
   color: ${(prop) => prop.theme.color.grayScale.gray_700};
+  ${({ overed }) => overed && `color: #eb2317;`}
 `;
 const Content = styled.div`
   display: flex;
@@ -277,4 +340,22 @@ const LabelDisplayNone = styled.label`
   justify-content: flex-start;
   align-items: center;
   cursor: pointer;
+`;
+const ThumbnailBackgroundWrapper = styled.div`
+  position: relative;
+`;
+
+const OnImg = styled.img`
+  position: absolute;
+  top: 40px;
+  left: 40px;
+`;
+const Temp = styled.img`
+  width: 96px;
+  height: 96px;
+  background: #d9d9d9;
+  border-radius: 48px;
+  display: flex;
+  justify-content: center;
+  filter: brightness(0.5); /* 40% 밝기 */
 `;

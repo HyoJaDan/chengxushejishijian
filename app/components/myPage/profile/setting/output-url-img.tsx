@@ -7,15 +7,14 @@ interface IOutPutURLImg {
   isGood: boolean;
   urls: IURLs[];
   setURLs: Function;
-  id: number;
+  index: number;
 }
-
 export const OutputURLImg = ({
   image,
   isGood,
   urls,
   setURLs,
-  id,
+  index,
 }: IOutPutURLImg) => {
   const ImgMap = image.map((value: IURLImage) => {
     const keyId = `${value.id}_${value.name}`;
@@ -27,8 +26,7 @@ export const OutputURLImg = ({
         alt='icon'
         onClick={() => {
           // eslint-disable-next-line no-param-reassign
-          urls[id] = { isTrue: true, nowURLImage: value };
-          console.log(urls);
+          urls[index] = { isTrue: true, nowURLImage: value };
           setURLs(urls);
         }}
       />

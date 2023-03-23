@@ -1,24 +1,12 @@
 /* eslint-disable no-shadow */
 import axios from 'axios';
 import { atom, selector } from 'recoil';
+import type { IUserData, IUserDatatemp } from '~/models/user';
 import { recoilKeySuffix } from '../../utils/recoil-key';
 import { userId } from './common/login-information';
 
-export interface IValue {
-  value: string;
-  isTrue: boolean;
-}
-
-export interface IUserData {
-  nickName: string;
-  jobPool: string;
-  interest: IValue[];
-  introduce: string;
-  skill: IValue[];
-  tag: IValue[];
-}
 /** userData에는 닉네임, 직업분야, 관심분야가 담겨있다. */
-export const userData = atom<IUserData>({
+export const userData = atom<IUserDatatemp>({
   key: `UserData${recoilKeySuffix}`,
   default: {
     nickName: '배고플땐밥먹어',
@@ -65,7 +53,7 @@ export const userJobPoolSelector = selector({
   },
 });
 
-export const getUserData = selector({
+export const getUserData = selector<IUserData | false>({
   key: 'getUserData',
   get: async ({ get }) => {
     const id = get(userId);

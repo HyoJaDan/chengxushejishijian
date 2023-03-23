@@ -5,7 +5,6 @@ import OutputTags from '../outputTags';
 
 export default function IntroductionAndLink() {
   const user = useRecoilValue(getUserData);
-
   return (
     <Wrapper>
       <Wrap>

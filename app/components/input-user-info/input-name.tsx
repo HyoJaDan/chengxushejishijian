@@ -2,10 +2,10 @@
 import { useState } from 'react';
 import type { UseFormRegister } from 'react-hook-form';
 import styled from 'styled-components';
-import type { IUserData } from '~/routes/account-info';
+import type { IUserDataAccountInfo } from '~/models/user';
 
 interface inputUserNameProps {
-  register: UseFormRegister<IUserData>;
+  register: UseFormRegister<IUserDataAccountInfo>;
   errors: any;
   watch: any;
 }
@@ -33,12 +33,12 @@ export default function InputUserName({
             className='body1_MD'
             {...register('userNickName', {
               required: '이름을 적어주세요',
-              maxLength: 19,
+              maxLength: 8,
             })}
             onBlur={onblur}
             onFocus={onfocus}
             autoFocus
-            overed={watch().userNickName.length >= 20}
+            overed={watch().userNickName.length > 8}
             isValid={isValid}
             autoComplete='off'
             placeholder='사용자 이름을 입력해주세요.'
@@ -104,7 +104,6 @@ const InputText = styled.input<{ overed: boolean; isValid: boolean }>`
     outline: none;
     border: 1px solid #2db8f3;
     ${({ overed }) => overed && `border: 1px solid #D30D00;`}
-    ${({ isValid }) => isValid && `setIsValid(false)`}
   }
   ${({ isValid }) => isValid && `border: 1px solid #1BC20C;`}
   ${({ overed }) => overed && `border: 1px solid #D30D00;`}

@@ -5,22 +5,18 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import InputUserArea from '~/components/input-user-info/input-area-button';
 import InputUserInterests from '~/components/input-user-info/input-interest';
+import type { IUserDataAccountInfo } from '~/models/user';
 import {
   loginInformation,
   userId,
 } from '~/recoils/user/common/login-information';
 
-import { userData, userJobPoolSelector } from '~/recoils/user/user-data';
+import { userJobPoolSelector } from '~/recoils/user/user-data';
 import InputUserName from '../components/input-user-info/input-name';
 
-export interface IUserData {
-  userNickName: string;
-  userJobPool: string;
-  userInterest: [];
-}
 export default function Detail() {
   const navigate = useNavigate();
-  const [userDatas, setUserDatas] = useRecoilState(userData);
+
   const loginInfo = useRecoilValue(loginInformation);
   const [useUserJobPool, setUserJobPool] = useRecoilState(userJobPoolSelector);
   const id = useRecoilValue(userId);
@@ -29,26 +25,13 @@ export default function Detail() {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<IUserData>({
+  } = useForm<IUserDataAccountInfo>({
     defaultValues: {
       userNickName: loginInfo.name,
     },
   });
-  const onValid = (data: IUserData) => {
+  const onValid = (data: IUserDataAccountInfo) => {
     if (useUserJobPool !== 'false' && useUserJobPool !== '프로덕트 디자이너') {
-      const nextInterestData = JSON.parse(JSON.stringify(userDatas.interest));
-      if (data.userInterest.length > 0)
-        data.userInterest.forEach((index) => {
-          const Idx = userDatas.interest.findIndex((v) => v.value === index);
-          nextInterestData[Idx].isTrue = true;
-        });
-      setUserDatas({
-        ...userDatas,
-        nickName: data.userNickName,
-        jobPool: useUserJobPool,
-        interest: nextInterestData,
-      });
-
       axios.patch(
         `https://api.thepool.kr/api/members/${id}`,
         {

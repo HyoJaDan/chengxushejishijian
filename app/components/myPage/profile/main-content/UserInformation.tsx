@@ -1,13 +1,12 @@
+/* eslint-disable react/destructuring-assignment */
 import { Link } from '@remix-run/react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { useIdentifyLogin } from '~/hooks/userStatus/identify-login';
 import { getFollower } from '~/recoils/user/follow';
-import { getUserData } from '~/recoils/user/user-data';
+import { useManageUserInformation } from '~/utils/manage-userinformation';
 
 const UserInformation = () => {
-  const user = useRecoilValue(getUserData);
-  useIdentifyLogin(user);
+  const user = useManageUserInformation();
   const follow = useRecoilValue(getFollower);
 
   return (
@@ -23,11 +22,11 @@ const UserInformation = () => {
           </Setting>
         </Header>
         <Main>
-          <ThumbnailBackground>
-            {`${user.thumbnail}` === null ? (
-              <Thumbnail src={`${user.thumbnail}`} />
-            ) : null}
-          </ThumbnailBackground>
+          {user.thumbnail === null ? (
+            <Thumbnail />
+          ) : (
+            <Thumbnail as='img' src={user.thumbnail} alt='userThumbnail' />
+          )}
           <div>
             <UserNickName className='body1_BD'>{user.nickname}</UserNickName>
             <UserJobPoolFontBody2SB className='body2_SB'>
@@ -113,7 +112,7 @@ const SettingImg = styled.img``;
 const SettingFontBody3SB = styled.div`
   color: ${(prop) => prop.theme.color.basic.black};
 `;
-const ThumbnailBackground = styled.div`
+const Thumbnail = styled.div`
   width: 96px;
   height: 96px;
 
@@ -121,5 +120,5 @@ const ThumbnailBackground = styled.div`
 
   border-radius: 48px;
 `;
-const Thumbnail = styled.img``;
+
 export default UserInformation;

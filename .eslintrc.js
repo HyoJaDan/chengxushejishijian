@@ -17,6 +17,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'prettier',
   ],
+
   rules: {
     'arrow-body-style': 'off', // block body is more readable
     'react/prop-types': 0,

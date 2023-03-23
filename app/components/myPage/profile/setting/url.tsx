@@ -1,37 +1,40 @@
-import { useState } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { UseFormRegister } from 'react-hook-form';
-import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import type { IURLImage } from '~/recoils/user/url-image';
-import { getURLImage } from '~/recoils/user/url-image';
-import type { IData } from '~/routes/my-page/profile/setting';
+import type { IData, IURLs } from '~/routes/my-page/profile/setting';
 import { OutputURLImg } from './output-url-img';
 
-export interface IURLs {
-  nowURLImage: IURLImage;
-  isTrue: boolean;
+interface IURL {
+  register: UseFormRegister<IData>;
+  fields: any;
+  append: any;
+  remove: any;
+  urls: IURLs[];
+  setUrls: any;
+  URLImages: any;
 }
 
-export const Url = ({ register }: { register: UseFormRegister<IData> }) => {
-  const URLImages = useRecoilValue(getURLImage);
-  const [urls, setUrls] = useState<IURLs[]>([
-    {
-      nowURLImage: URLImages[0],
-      isTrue: true,
-    },
-  ]);
-
-  const content = urls.map((value, tempNumber) => {
-    const id = tempNumber;
+export const Url = ({
+  register,
+  fields,
+  append,
+  remove,
+  urls,
+  setUrls,
+  URLImages,
+}: IURL) => {
+  const content = fields.map((field: any, index: number) => {
+    const { id } = field;
+    const value = urls[index];
     return (
       <Component key={id}>
         <URLs>
           <URLImgBox
             onClick={() => {
               const temp: IURLs[] = JSON.parse(JSON.stringify(urls));
-              temp[id] = {
+              temp[index] = {
                 isTrue: !value.isTrue,
-                nowURLImage: temp[id].nowURLImage,
+                nowURLImage: temp[index].nowURLImage,
               };
               setUrls(temp);
             }}
@@ -45,7 +48,7 @@ export const Url = ({ register }: { register: UseFormRegister<IData> }) => {
           </URLImgBox>
           <InputURL
             className='body3_SB'
-            {...register('url')}
+            {...register(`URL.${index}.adress`)}
             placeholder='https://'
           />
           <Delete
@@ -53,7 +56,8 @@ export const Url = ({ register }: { register: UseFormRegister<IData> }) => {
             onClick={() => {
               const temp: IURLs[] = JSON.parse(JSON.stringify(urls));
               if (temp.length !== 1) {
-                temp.splice(id, 1);
+                remove(index);
+                temp.splice(index, 1);
                 setUrls(temp);
               }
             }}
@@ -66,7 +70,7 @@ export const Url = ({ register }: { register: UseFormRegister<IData> }) => {
           isGood={value.isTrue}
           urls={JSON.parse(JSON.stringify(urls))}
           setURLs={setUrls}
-          id={id}
+          index={index}
         />
       </Component>
     );
@@ -78,6 +82,7 @@ export const Url = ({ register }: { register: UseFormRegister<IData> }) => {
       <Add
         className='caption1_SB'
         onClick={() => {
+          append({});
           const temp: IURLs[] = JSON.parse(JSON.stringify(urls));
           temp.push({ nowURLImage: URLImages[0], isTrue: true });
           setUrls(temp);
@@ -105,7 +110,7 @@ const InputURL = styled.input`
   border-radius: 8px;
   &:focus {
     outline: none;
-    border: 1px solid ${(prop) => prop.theme.color.grayScale.gray_200};
+    border: 1px solid ${(prop) => prop.theme.color.primary.blue.blue_500};
   }
   color: ${(prop) => prop.theme.color.grayScale.gray_900};
 `;

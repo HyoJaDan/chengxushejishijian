@@ -1,5 +1,6 @@
 import { atom, selector } from 'recoil';
 import { recoilPersist } from 'recoil-persist';
+import type { ILoginInfo, loginType } from '~/models/user';
 
 const localStorage =
   typeof window !== `undefined` ? window.localStorage : undefined;
@@ -9,30 +10,10 @@ const { persistAtom } = recoilPersist({
 });
 
 /* eslint-disable no-shadow */
-export enum platform {
-  'Not_login' = 0,
-  'KAKAO' = 1,
-  'Google' = 2,
-  'APPLE' = 3,
-  'GITHUB' = 4,
-}
-/* undefined :확인한함 / false : 확인 → 아님 / true : logined 상태 */
-export type loginType = undefined | boolean | 'shutDown';
-export interface ILoginInfo<platform, loginType> {
-  loginStatus: loginType;
-  platform: platform;
-  name: string;
-  accessToken: string;
-  id: number;
-  img: string | null;
-}
-
-/** loginInformation에는 로그인 여부, 플랫폼, 사용자 이름 */
-export const loginInformation = atom<ILoginInfo<platform, loginType>>({
+export const loginInformation = atom<ILoginInfo<loginType>>({
   key: 'loginInformation',
   default: {
     loginStatus: undefined,
-    platform: platform.Not_login,
     name: '',
     accessToken: '',
     id: 0,
