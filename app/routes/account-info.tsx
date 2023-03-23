@@ -7,7 +7,7 @@ import InputUserArea from '~/components/input-user-info/input-area-button';
 import InputUserInterests from '~/components/input-user-info/input-interest';
 import type { IUserDataAccountInfo } from '~/models/user';
 import {
-  loginInformation,
+  localStorageData,
   userId,
 } from '~/recoils/user/common/login-information';
 
@@ -17,7 +17,7 @@ import InputUserName from '../components/input-user-info/input-name';
 export default function Detail() {
   const navigate = useNavigate();
 
-  const loginInfo = useRecoilValue(loginInformation);
+  const localData = useRecoilValue(localStorageData);
   const [useUserJobPool, setUserJobPool] = useRecoilState(userJobPoolSelector);
   const id = useRecoilValue(userId);
   const {
@@ -27,7 +27,7 @@ export default function Detail() {
     formState: { errors },
   } = useForm<IUserDataAccountInfo>({
     defaultValues: {
-      userNickName: loginInfo.name,
+      userNickName: localData.name,
     },
   });
   const onValid = (data: IUserDataAccountInfo) => {
@@ -41,7 +41,7 @@ export default function Detail() {
         },
         {
           headers: {
-            Authorization: `Bearer ${loginInfo.accessToken}`,
+            Authorization: `Bearer ${localData.accessToken}`,
           },
         }
       );

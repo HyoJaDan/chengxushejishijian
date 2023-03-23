@@ -10,10 +10,10 @@ const { persistAtom } = recoilPersist({
 });
 
 /* eslint-disable no-shadow */
-export const loginInformation = atom<ILoginInfo<loginType>>({
-  key: 'loginInformation',
+export const localStorageData = atom<ILoginInfo<loginType>>({
+  key: 'localStorageData',
   default: {
-    loginStatus: undefined,
+    loginStatus: 'unChecked',
     name: '',
     accessToken: '',
     id: 0,
@@ -24,19 +24,19 @@ export const loginInformation = atom<ILoginInfo<loginType>>({
 
 export const loginStatus = selector({
   key: 'loginStatusSelector',
-  get: ({ get }) => get(loginInformation).loginStatus,
+  get: ({ get }) => get(localStorageData).loginStatus,
   set: ({ set }, newValue) => {
-    set(loginInformation, (oldValue) => ({
+    set(localStorageData, (oldValue) => ({
       ...oldValue,
-      loginStatus: newValue as boolean | undefined,
+      loginStatus: newValue as loginType,
     }));
   },
 });
 export const userId = selector({
   key: 'userId',
-  get: ({ get }) => get(loginInformation).id,
+  get: ({ get }) => get(localStorageData).id,
   set: ({ set }, newValue) => {
-    set(loginInformation, (oldValue) => ({
+    set(localStorageData, (oldValue) => ({
       ...oldValue,
       id: newValue as number,
     }));
@@ -44,9 +44,9 @@ export const userId = selector({
 });
 export const userAccessToken = selector({
   key: 'userAccessToken',
-  get: ({ get }) => get(loginInformation).accessToken,
+  get: ({ get }) => get(localStorageData).accessToken,
   set: ({ set }, newValue) => {
-    set(loginInformation, (oldValue) => ({
+    set(localStorageData, (oldValue) => ({
       ...oldValue,
       accessToken: newValue as string,
     }));

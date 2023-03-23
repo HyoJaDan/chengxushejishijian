@@ -3,22 +3,22 @@ import styled from 'styled-components';
 import type { ILoginInfo, loginType } from '~/models/user';
 
 type IType = {
-  loginInformation: ILoginInfo<loginType>;
+  localStorageData: ILoginInfo<loginType>;
   setLogin: Function;
 };
 
-export const Login = ({ loginInformation, setLogin }: IType) => {
-  if (loginInformation.loginStatus) {
-    if (loginInformation.img === null)
+export const Login = ({ localStorageData, setLogin }: IType) => {
+  if (localStorageData.loginStatus === 'login') {
+    if (localStorageData.img === null)
       return <CircleLink className='body3_BD' to='/my-page/profile' />;
     return (
       <CircleLink to='/my-page/profile'>
-        <Img src={loginInformation.img} alt='img' />
+        <Img src={localStorageData.img} alt='img' />
       </CircleLink>
     );
   }
   return (
-    <TextLink className='body2_SB' onClick={() => setLogin(false)}>
+    <TextLink className='body2_SB' onClick={() => setLogin('unLogin')}>
       시작하기
     </TextLink>
   );

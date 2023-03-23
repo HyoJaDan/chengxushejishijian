@@ -3,13 +3,13 @@ import { useNavigate } from '@remix-run/react';
 import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { platform } from '~/models/platform';
-import { loginInformation } from '~/recoils/user/common/login-information';
+import { localStorageData } from '~/recoils/user/common/login-information';
 
 import { loginProcess } from './platform-login-process';
 
 export default function GoogleLogin() {
   const navigate = useNavigate();
-  const setLoginInfo = useSetRecoilState(loginInformation);
+  const setLocalData = useSetRecoilState(localStorageData);
 
   const login = useGoogleLogin({
     onSuccess: (response) => {
@@ -17,7 +17,7 @@ export default function GoogleLogin() {
         OAuthresponse: response.access_token,
         platform: platform.Google,
         navigate,
-        setLoginInfo,
+        setLocalData,
       });
     },
   });

@@ -1,27 +1,26 @@
 import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import type { IUserData } from '~/models/user';
-import { loginInformation } from '~/recoils/user/common/login-information';
+import { localStorageData } from '~/recoils/user/common/login-information';
 import { getUserData } from '~/recoils/user/user-data';
 
 export const useManageUserInformation = () => {
   const getData = useRecoilValue(getUserData);
-  const [userInformation, setUserInformation] =
-    useRecoilState(loginInformation);
+  const [localData, setLocalData] = useRecoilState(localStorageData);
   useEffect(() => {
     if (getData === false) {
       console.log('false');
-      setUserInformation({
-        ...userInformation,
-        loginStatus: false,
+      setLocalData({
+        ...localData,
+        loginStatus: 'unLogin',
       });
     } else {
-      setUserInformation({
-        ...userInformation,
+      setLocalData({
+        ...localData,
         id: getData.id,
         img: getData.thumbnail,
         name: getData.nickname,
-        loginStatus: true,
+        loginStatus: 'login',
       });
     }
 

@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import {
-  loginInformation,
+  localStorageData,
   loginStatus,
 } from '~/recoils/user/common/login-information';
 import { Login } from './login';
@@ -21,7 +21,7 @@ const menu: TrailingButtonMenu[] = [
 ];
 
 export const TrailingButtons: FC = () => {
-  const loginInfo = useRecoilValue(loginInformation);
+  const data = useRecoilValue(localStorageData);
   const setStatus = useSetRecoilState(loginStatus);
   const menuButtons = menu.map(({ src, to }) => {
     return (
@@ -33,7 +33,7 @@ export const TrailingButtons: FC = () => {
   return (
     <Wrapper>
       {menuButtons}
-      <Login loginInformation={loginInfo} setLogin={setStatus} />
+      <Login localStorageData={data} setLogin={setStatus} />
     </Wrapper>
   );
 };

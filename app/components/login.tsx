@@ -20,13 +20,11 @@ function Header() {
 }
 export default function LoginComponent() {
   const GOOGLE_CLIENT_ID = useLoaderData()[0];
-  const setType = useSetRecoilState(loginStatus);
-  const onclick = () => {
-    setType(undefined);
-  };
+  const setStatus = useSetRecoilState(loginStatus);
+
   return (
     <Wrapper>
-      <X src='/icons/X.svg' alt='X' onClick={onclick} />
+      <X src='/icons/X.svg' alt='X' onClick={() => setStatus('unChecked')} />
       <Img src='/icons/bording.svg' alt='bording' />
       <Header />
       <Login className='body1_BD'>

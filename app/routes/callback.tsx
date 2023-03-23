@@ -3,11 +3,11 @@ import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { loginProcess } from '~/components/login/platform-login-process';
 import { platform } from '~/models/platform';
-import { loginInformation } from '~/recoils/user/common/login-information';
+import { localStorageData } from '~/recoils/user/common/login-information';
 
 export default function Callback() {
   const navigate = useNavigate();
-  const setLoginInfo = useSetRecoilState(loginInformation);
+  const setLocalData = useSetRecoilState(localStorageData);
   useEffect(() => {
     const URLSearch = window.location.search;
     const [, AuthorizationCode] = URLSearch.split('=');
@@ -15,7 +15,7 @@ export default function Callback() {
       OAuthresponse: AuthorizationCode,
       platform: platform.GITHUB,
       navigate,
-      setLoginInfo,
+      setLocalData,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

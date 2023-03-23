@@ -8,11 +8,11 @@ export function LoginWrapper() {
 
   return (
     <div>
-      {type === false ? (
+      {type === 'unLogin' ? (
         <>
           <Overlay
             onClick={() => {
-              setType(undefined);
+              setType('unChecked');
             }}
           />
           <LoginBackground>

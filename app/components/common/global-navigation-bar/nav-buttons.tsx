@@ -24,10 +24,10 @@ export const NavButtons: FCClass = ({ className }) => {
 
   return (
     <Wrapper className='body1_BD'>
-      <LinkToProblem isproblem={isProblem} to='/'>
+      <LinkToProblem isproblem={isProblem ? 1 : 0} to='/'>
         문제
       </LinkToProblem>
-      <LinkToSolution issolution={isSolution} to='/solution'>
+      <LinkToSolution issolution={isSolution ? 1 : 0} to='/solution'>
         풀이
       </LinkToSolution>
     </Wrapper>
@@ -43,7 +43,9 @@ const Wrapper = styled.div`
 `;
 const LinkToProblem = styled(Link)<{ isproblem: boolean }>`
   color: #a4a2a0;
-  ${({ isproblem }) => isproblem && `color:#31302F`}
+  /* #31302f */
+
+  ${({ isproblem }) => isproblem && 'color:#31302f'}
 `;
 const LinkToSolution = styled(Link)<{ issolution: boolean }>`
   color: #a4a2a0;

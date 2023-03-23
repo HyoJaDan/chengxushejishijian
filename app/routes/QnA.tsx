@@ -2,10 +2,8 @@ import styled from 'styled-components';
 import { Navigaion } from '~/components/qna/navigation-bar';
 import QnaContent from '~/components/qna/newQnA';
 import PopularQnA from '~/components/qna/popularQnA';
-import { useIdentifyLogin } from '~/hooks/userStatus/identify-login';
 
 const QnA = () => {
-  useIdentifyLogin();
   return (
     <Wrappar>
       <Navigaion />

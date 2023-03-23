@@ -33,8 +33,8 @@ export interface IUserDatatemp {
   tag: IValue[];
 }
 
-/* undefined :확인한함 / false : 확인 → 아님 / true : logined 상태 */
-export type loginType = undefined | boolean | 'shutDown';
+/** unchecked : 확인 안함, login : 로그인해야됨, unLogin : 로그인함 */
+export type loginType = 'unChecked' | 'login' | 'unLogin';
 // eslint-disable-next-line no-shadow
 export interface ILoginInfo<loginType> {
   loginStatus: loginType;

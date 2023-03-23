@@ -5,21 +5,20 @@ type LoginProcessProps = {
   OAuthresponse: string;
   platform: number;
   navigate: Function;
-  setLoginInfo: Function;
+  setLocalData: Function;
 };
 
 export async function loginProcess({
   OAuthresponse,
   platform,
   navigate,
-  setLoginInfo,
+  setLocalData,
 }: LoginProcessProps) {
   const [isSucceed, data] = await setUser(OAuthresponse, platform);
 
   if (isSucceed) {
-    setLoginInfo({
-      loginStatus: true,
-      platform,
+    setLocalData({
+      loginStatus: 'login',
       name: data?.member.nickname,
       accessToken: data?.accessToken,
       id: data?.member.id,
@@ -32,8 +31,8 @@ export async function loginProcess({
     // eslint-disable-next-line no-alert
     alert('해당 아이디가 존재하지 않습니다. 다시 시도해 주세요');
     localStorage.removeItem('currentUser');
-    setLoginInfo({
-      loginStatus: false,
+    setLocalData({
+      loginStatus: 'unChecked',
     });
   }
 }

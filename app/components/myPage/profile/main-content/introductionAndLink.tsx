@@ -9,7 +9,7 @@ export default function IntroductionAndLink() {
     <Wrapper>
       <Wrap>
         <Title className='body1_BD'>소개</Title>
-        <DefaultFont className='body3_MD'>{user.introduce}</DefaultFont>
+        <DefaultFont className='body3_MD' defaultValue={user.introduce} />
       </Wrap>
       <Line />
       <Wrap>
