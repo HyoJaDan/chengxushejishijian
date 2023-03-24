@@ -6,13 +6,14 @@ import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import SSRSafeSuspense from '~/components/common/temp';
 import { Url } from '~/components/myPage/profile/setting/url';
-import { useManageUserInformation } from '~/hooks/manage-userinformation';
+import { memberDataAdress } from '~/data/constants/adress';
 import {
   userAccessToken,
   userId,
-} from '~/recoils/user/common/login-information';
-import type { IURLImage } from '~/recoils/user/url-image';
-import { getURLImage } from '~/recoils/user/url-image';
+} from '~/data/recoils/user/common/login-information';
+import type { IURLImage } from '~/data/recoils/user/url-image';
+import { getURLImage } from '~/data/recoils/user/url-image';
+import { useManageUserInformation } from '~/hooks/manage-userinformation';
 
 export interface IData {
   userName: string;
@@ -86,7 +87,7 @@ function InputForm() {
     }
 
     axios.patch(
-      `https://api.thepool.kr/api/members/${id}`,
+      `${memberDataAdress}/${id}`,
       {
         nickname: inputData.userName,
         introduce: inputData.self_introduction,

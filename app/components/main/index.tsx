@@ -2,7 +2,7 @@
 import { Link } from '@remix-run/react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { categoryId, getLessons } from '~/recoils/main/category';
+import { categoryId, getLessons } from '~/data/recoils/main/category';
 
 export const Training = () => {
   const sortBy = useRecoilValue(categoryId);

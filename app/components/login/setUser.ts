@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { memberDataAdress } from '~/data/constants/adress';
 
 interface IResponseData {
   member: {
@@ -27,7 +28,7 @@ export async function setUser(
   platform: number
 ): Promise<IResponse> {
   try {
-    const response = await axios.post('https://api.thepool.kr/api/members', {
+    const response = await axios.post(`${memberDataAdress}`, {
       oAuthToken: OAuthresponse,
       loginType: platform,
     });

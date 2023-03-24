@@ -1,6 +1,6 @@
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { getUserData } from '~/recoils/user/user-data';
+import { getUserData } from '~/data/recoils/user/user-data';
 import OutputTags from '../outputTags';
 
 export default function IntroductionAndLink() {

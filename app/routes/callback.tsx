@@ -2,8 +2,8 @@ import { useNavigate } from '@remix-run/react';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { loginProcess } from '~/components/login/platform-login-process';
+import { localStorageData } from '~/data/recoils/user/common/login-information';
 import { platform } from '~/models/platform';
-import { localStorageData } from '~/recoils/user/common/login-information';
 
 export default function Callback() {
   const navigate = useNavigate();

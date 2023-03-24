@@ -2,8 +2,8 @@ import { motion } from 'framer-motion';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import SettingPage from '~/components/myPage/profile/setting';
-import type { IClickSetting } from '~/recoils/user/user-data';
-import { clickSetting } from '~/recoils/user/user-data';
+import type { IClickSetting } from '~/data/recoils/user/user-data';
+import { clickSetting } from '~/data/recoils/user/user-data';
 
 interface clickedOverlayProp {
   clickedOverlay: Exclude<IClickSetting, undefined>;

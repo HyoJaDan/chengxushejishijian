@@ -2,8 +2,8 @@ import { useGoogleLogin } from '@react-oauth/google';
 import { useNavigate } from '@remix-run/react';
 import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
+import { localStorageData } from '~/data/recoils/user/common/login-information';
 import { platform } from '~/models/platform';
-import { localStorageData } from '~/recoils/user/common/login-information';
 
 import { loginProcess } from './platform-login-process';
 

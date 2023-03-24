@@ -5,13 +5,14 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import InputUserArea from '~/components/input-user-info/input-area-button';
 import InputUserInterests from '~/components/input-user-info/input-interest';
-import type { IUserDataAccountInfo } from '~/models/user';
 import {
   localStorageData,
   userId,
-} from '~/recoils/user/common/login-information';
+} from '~/data/recoils/user/common/login-information';
+import type { IUserDataAccountInfo } from '~/models/user';
 
-import { userJobPoolSelector } from '~/recoils/user/user-data';
+import { memberDataAdress } from '~/data/constants/adress';
+import { userJobPoolSelector } from '~/data/recoils/user/user-data';
 import InputUserName from '../components/input-user-info/input-name';
 
 export default function Detail() {
@@ -33,7 +34,7 @@ export default function Detail() {
   const onValid = (data: IUserDataAccountInfo) => {
     if (useUserJobPool !== 'false' && useUserJobPool !== '프로덕트 디자이너') {
       axios.patch(
-        `https://api.thepool.kr/api/members/${id}`,
+        `${memberDataAdress}/${id}`,
         {
           nickname: data.userNickName,
           job: useUserJobPool,

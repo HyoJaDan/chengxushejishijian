@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { userJobPoolSelector } from '~/recoils/user/user-data';
+import { userJobPoolSelector } from '~/data/recoils/user/user-data';
 
 interface IButton {
   name: string;

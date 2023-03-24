@@ -1,7 +1,10 @@
 import { useParams } from '@remix-run/react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { getLessonDetail, getLessonDetailTags } from '~/recoils/main/lesson';
+import {
+  getLessonDetail,
+  getLessonDetailTags,
+} from '~/data/recoils/main/lesson';
 
 interface ILessonHashtag {
   id: number;

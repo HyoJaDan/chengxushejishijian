@@ -3,9 +3,9 @@
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { getNewQnACategory } from '~/services/qna/getNewQnACategory';
-import type { IQuestionCategories } from '../../../recoils/qna/new-question/categories';
-import { questionCategories } from '../../../recoils/qna/new-question/categories';
+import { getNewQnACategory } from '~/data/mock/qna/getNewQnACategory';
+import type { IQuestionCategories } from '../../../data/recoils/qna/new-question/categories';
+import { questionCategories } from '../../../data/recoils/qna/new-question/categories';
 
 const Header = () => {
   const [newQuestionList, setnewQuestionList] =

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import type { IURLImage } from '~/recoils/user/url-image';
+import type { IURLImage } from '~/data/recoils/user/url-image';
 import type { IURLs } from './url';
 
 interface IOutPutURLImg {

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import {
   localStorageData,
   loginStatus,
-} from '~/recoils/user/common/login-information';
+} from '~/data/recoils/user/common/login-information';
 import { Login } from './login';
 
 type TrailingButtonMenu = {

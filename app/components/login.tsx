@@ -4,7 +4,7 @@ import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import GoogleLogin from '~/components/login/google';
 import KakaoLogin from '~/components/login/kakao';
-import { loginStatus } from '~/recoils/user/common/login-information';
+import { loginStatus } from '~/data/recoils/user/common/login-information';
 import GithubLogin from './login/github';
 
 function Header() {
