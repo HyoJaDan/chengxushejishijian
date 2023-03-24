@@ -2,8 +2,8 @@
 import { Link } from '@remix-run/react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
+import { useManageUserInformation } from '~/hooks/manage-userinformation';
 import { getFollower } from '~/recoils/user/follow';
-import { useManageUserInformation } from '~/utils/manage-userinformation';
 
 const UserInformation = () => {
   const user = useManageUserInformation();

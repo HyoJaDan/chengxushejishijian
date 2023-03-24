@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import styled from 'styled-components';
-import { useSubCategories } from '~/hooks/main/use-sub-categories';
+import { useSubCategories } from '~/hooks/unused/use-sub-categories';
 import type { MainCategory } from '~/services/categories/interface';
 import { SubCategoryList } from './sub-category-list';
 

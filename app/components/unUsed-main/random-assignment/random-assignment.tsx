@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import type { FC } from 'react';
-import { useHotSubmits } from '~/hooks/main/use-hot-submits';
-import { useRandomAssignment } from '~/hooks/main/use-random-assignment';
+import { useHotSubmits } from '~/hooks/unused/use-hot-submits';
+import { useRandomAssignment } from '~/hooks/unused/use-random-assignment';
 import { TwoColumnPreviewCard } from '../preview-card';
 import { PreviewSection } from '../preview-section';
 import { RandomAssignmentSectionHeader } from './section-header';

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import type { FCClass } from '~/components/common/types/function-component';
-import { useMainCategories } from '~/hooks/main/use-categories';
+import { useMainCategories } from '~/hooks/unused/use-categories';
 import { MainCategoryMenu } from './main-category-menu';
 
 export const CategorySideBar: FCClass = ({ className }) => {

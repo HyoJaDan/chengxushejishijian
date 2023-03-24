@@ -6,13 +6,13 @@ import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import SSRSafeSuspense from '~/components/common/temp';
 import { Url } from '~/components/myPage/profile/setting/url';
+import { useManageUserInformation } from '~/hooks/manage-userinformation';
 import {
   userAccessToken,
   userId,
 } from '~/recoils/user/common/login-information';
 import type { IURLImage } from '~/recoils/user/url-image';
 import { getURLImage } from '~/recoils/user/url-image';
-import { useManageUserInformation } from '~/utils/manage-userinformation';
 
 export interface IData {
   userName: string;
@@ -113,11 +113,6 @@ function InputForm() {
       </Head>
       <Main>
         <Content>
-          {/*   {user.thumbnail === null ? (
-            <Thumbnail />
-          ) : (
-            <Thumbnail as='img' src={user.thumbnail} alt='userThumbnail' />
-          )} */}
           {avatarPreview ? (
             <LabelDisplayNone htmlFor='image'>
               <ImgThumbnailBackground src={avatarPreview} alt='img' />

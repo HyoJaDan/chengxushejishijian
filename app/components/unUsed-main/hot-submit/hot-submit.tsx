@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { useHotSubmits } from '~/hooks/main/use-hot-submits';
+import { useHotSubmits } from '~/hooks/unused/use-hot-submits';
 import { TwoColumnPreviewCard } from '../preview-card';
 import { PreviewSection } from '../preview-section';
 
