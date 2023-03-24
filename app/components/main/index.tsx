@@ -5,11 +5,11 @@ import styled from 'styled-components';
 import { categoryId, getLessons } from '~/recoils/main/category';
 
 export const Training = () => {
-  const id = useRecoilValue(categoryId);
-  const lessons = useRecoilValue(getLessons(id));
+  const sortBy = useRecoilValue(categoryId);
+  const lessons = useRecoilValue(getLessons(sortBy));
 
   const lesson = lessons.map((data, index) => {
-    const keyId = `${data.id_index}`;
+    const keyId = `${data.id}_${index}`;
     return (
       <Box to={`/training/${data.id}`} key={keyId}>
         <Category className='caption1_SB'>{data.lessonCategory.name}</Category>

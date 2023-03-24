@@ -6,9 +6,8 @@ import { memberStatistics } from '~/recoils/user/statistics';
 export default function Chart() {
   const category = ['과제제출', '답변', '팔로워', '질문'];
   const real = useRecoilValue(memberStatistics);
-  const userData = Object.values(real);
-  const maxValue = Math.max(...userData, 10);
-
+  const userData = Object.values(real).map((value) => value + 1);
+  const maxValue = Math.max(...userData, 11);
   return (
     <Wrapper>
       <Content>
@@ -20,7 +19,7 @@ export default function Chart() {
           series={[
             {
               name: 'Series 1',
-              data: userData,
+              data: [1, 1, 1, 1],
             },
           ]}
           options={{

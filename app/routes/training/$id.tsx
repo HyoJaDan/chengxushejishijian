@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import MyPageHeader from '~/components/common/\bsub-navigation-bar';
 import Suspenses from '~/components/common/suspense';
 
-export default function Tempfun() {
+export default function TrainingFunction() {
   return (
     <div>
       <MyPageHeader page='Training' />
