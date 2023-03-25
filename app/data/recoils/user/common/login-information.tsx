@@ -17,7 +17,7 @@ export const localStorageData = atom<ILoginInfo<loginType>>({
     name: '',
     accessToken: '',
     id: 0,
-    img: null,
+    img: '',
   },
   effects_UNSTABLE: [persistAtom],
 });

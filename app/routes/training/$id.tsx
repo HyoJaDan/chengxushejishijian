@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import MyPageHeader from '~/components/common/\bsub-navigation-bar';
+import MyPageHeader from '~/components/common/sub-navigation-bar';
 import Suspenses from '~/components/common/suspense';
 
 export default function TrainingFunction() {

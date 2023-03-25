@@ -28,7 +28,7 @@ export default function Detail() {
     formState: { errors },
   } = useForm<IUserDataAccountInfo>({
     defaultValues: {
-      userNickName: localData.name,
+      userNickName: localData.name ? localData.name : '',
     },
   });
   const onValid = (data: IUserDataAccountInfo) => {

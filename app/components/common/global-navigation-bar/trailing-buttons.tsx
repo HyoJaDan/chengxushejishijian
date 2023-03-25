@@ -8,31 +8,15 @@ import {
 } from '~/data/recoils/user/common/login-information';
 import { Login } from './login';
 
-type TrailingButtonMenu = {
-  src: string;
-  to: string;
-};
-
-const menu: TrailingButtonMenu[] = [
-  {
-    to: '/',
-    src: '/icons/notification.svg',
-  },
-];
-
 export const TrailingButtons: FC = () => {
   const data = useRecoilValue(localStorageData);
   const setStatus = useSetRecoilState(loginStatus);
-  const menuButtons = menu.map(({ src, to }) => {
-    return (
-      <IconLink to={to} key={`menu-icon-buttons-${src}`}>
-        <Icon src={src} />
-      </IconLink>
-    );
-  });
+
   return (
     <Wrapper>
-      {menuButtons}
+      <IconLink to='/'>
+        <Icon src='/icons/notification.svg' />
+      </IconLink>
       <Login localStorageData={data} setLogin={setStatus} />
     </Wrapper>
   );
@@ -43,6 +27,7 @@ const Wrapper = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 16px;
+  position: relative;
 `;
 
 const IconLink = styled(Link)`

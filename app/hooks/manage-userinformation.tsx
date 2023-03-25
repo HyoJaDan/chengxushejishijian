@@ -9,7 +9,6 @@ export const useManageUserInformation = () => {
   const [localData, setLocalData] = useRecoilState(localStorageData);
   useEffect(() => {
     if (getData === false) {
-      console.log('false');
       setLocalData({
         ...localData,
         loginStatus: 'unLogin',

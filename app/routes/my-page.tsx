@@ -1,24 +1,12 @@
 import { Outlet } from '@remix-run/react';
-/* import { useScroll } from 'framer-motion';
-import { useRecoilValue } from 'recoil';
-import { clickSetting } from '~/recoils/user-info/atoms'; */
 import styled from 'styled-components';
-import MyPageHeader from '~/components/common/sub-navigation-bar';
+import MyPageHeader from '~/components/common/sub-navigation-bar';
 
 export default function DefaultMyPage() {
-  /* useIdentifyLogin(); */
-  /*   const clicked = useRecoilValue(clickSetting);
-  const { scrollY } = useScroll(); */
-
   return (
     <Wrapper>
       <MyPageHeader page='Mypage' />
       <Outlet />
-      {/* <AnimatePresence>
-        {clicked !== undefined ? (
-          <OutputOverlay clickedOverlay={clicked} scroll={scrollY.get()} />
-        ) : null}
-      </AnimatePresence> */}
     </Wrapper>
   );
 }

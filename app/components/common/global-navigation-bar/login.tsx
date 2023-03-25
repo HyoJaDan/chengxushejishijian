@@ -1,4 +1,5 @@
 import { Link } from '@remix-run/react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import type { ILoginInfo, loginType } from '~/models/user';
 
@@ -8,13 +9,20 @@ type IType = {
 };
 
 export const Login = ({ localStorageData, setLogin }: IType) => {
+  const [isTrue, setIsTrue] = useState<boolean>(true);
+  const clickFunction = () => {
+    setIsTrue(!isTrue);
+  };
   if (localStorageData.loginStatus === 'login') {
-    if (localStorageData.img === null)
+    if (localStorageData.img === '')
       return <CircleLink className='body3_BD' to='/my-page/profile' />;
     return (
-      <CircleLink to='/my-page/profile'>
-        <Img src={localStorageData.img} alt='img' />
-      </CircleLink>
+      <div>
+        <CircleLink to='/my-page/profile' onClick={clickFunction}>
+          <Img src={localStorageData.img} alt='' />
+        </CircleLink>
+        <Page isTrue={isTrue ? 1 : 0} />
+      </div>
     );
   }
   return (
@@ -39,4 +47,16 @@ const CircleLink = styled(Link)`
 `;
 const Img = styled.img`
   width: 100%;
+`;
+const Page = styled.div<{ isTrue: boolean }>`
+  position: absolute;
+  width: 256px;
+  height: 283px;
+  right: 135px;
+  top: 9.04px;
+
+  background: #d9d9d9;
+  border-radius: 8px;
+  z-index: 5;
+  ${({ isTrue }) => isTrue && `display:none;`}
 `;

@@ -1,10 +1,10 @@
+import SSRSafeSuspense from '../../hooks/ssr-safe-suspense';
 import { Training } from '../main';
 import { LessonDetail } from '../main/detail';
 import Chart from '../myPage/profile/chart/chart.client';
 import IntroductionAndLink from '../myPage/profile/main-content/introductionAndLink';
 import UserInformation from '../myPage/profile/main-content/UserInformation';
 import Statistics from '../myPage/profile/statistics';
-import SSRSafeSuspense from './temp';
 
 interface IPageName {
   pageName: string;

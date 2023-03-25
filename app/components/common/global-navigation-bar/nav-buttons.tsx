@@ -1,7 +1,7 @@
 import { Link } from '@remix-run/react';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import type { FCClass } from '../types/function-component';
+import type { FCClass } from '../../../models/function-component';
 
 export const NavButtons: FCClass = ({ className }) => {
   const [isProblem, setIsProblem] = useState<boolean>(false);

@@ -4,16 +4,17 @@ import { useEffect, useRef, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import SSRSafeSuspense from '~/components/common/temp';
 import { Url } from '~/components/myPage/profile/setting/url';
 import { memberDataAdress } from '~/data/constants/adress';
 import {
+  localStorageData,
   userAccessToken,
   userId,
 } from '~/data/recoils/user/common/login-information';
 import type { IURLImage } from '~/data/recoils/user/url-image';
 import { getURLImage } from '~/data/recoils/user/url-image';
 import { useManageUserInformation } from '~/hooks/manage-userinformation';
+import SSRSafeSuspense from '~/hooks/ssr-safe-suspense';
 
 export interface IData {
   userName: string;
@@ -36,13 +37,15 @@ function InputForm() {
   const data = useManageUserInformation();
   const id = useRecoilValue(userId);
   const accessToken = useRecoilValue(userAccessToken);
+  const localData = useRecoilValue(localStorageData);
   const ImgURL = useRef('');
-
+  console.log('render');
+  console.log(data);
   const { register, handleSubmit, watch, control } = useForm<IData>({
     defaultValues: {
-      userName: data.nickname,
-      userJobPool: data.job,
-      self_introduction: data.introduce,
+      userName: data.nickname ? data.nickname : '',
+      userJobPool: data.job ? data.job : '',
+      self_introduction: data.introduce ? data.introduce : '',
       URL: [{ adress: '' }],
     },
   });
@@ -65,7 +68,6 @@ function InputForm() {
       setAvatarPreview(URL.createObjectURL(file));
     }
   }, [avatar]);
-  /* const temp = () => {}; */
   const onValid = async (inputData: IData) => {
     console.log('vallow', urls);
     console.log('hello', inputData);
@@ -81,11 +83,12 @@ function InputForm() {
           Authorization: `Bearer ${accessToken}`,
         },
       }).then((res) => {
-        console.log('res', res.data.url);
+        /* console.log('res', res.data.url); */
         return res.data.url;
       });
+    } else if (localData.img !== '') {
+      ImgURL.current = localData.img as string;
     }
-
     axios.patch(
       `${memberDataAdress}/${id}`,
       {
@@ -122,12 +125,12 @@ function InputForm() {
           ) : (
             <ThumbnailBackground>
               <Label htmlFor='image'>
-                {data.thumbnail === null ? (
-                  <img src='/icons/my-page/thumnail.svg' alt='thumnail' />
+                {data.thumbnail === '' ? (
+                  <img src='/icons/my-page/thumnail.svg' alt='' />
                 ) : (
                   <ThumbnailBackgroundWrapper>
-                    <Temp src={data.thumbnail} alt='temp' />
-                    <OnImg src='/icons/my-page/thumnail.svg' alt='thumnail' />
+                    <ThumbnailWithoutImg src={data.thumbnail} alt='' />
+                    <OnImg src='/icons/my-page/thumnail.svg' alt='' />
                   </ThumbnailBackgroundWrapper>
                 )}
               </Label>
@@ -149,7 +152,7 @@ function InputForm() {
               maxLength: 8,
             })}
             overed={watch().userName.length > 8}
-            placeholder={`${data.nickname}`}
+            placeholder={data.nickname ? data.nickname : ''}
           />
         </Content>
         <Content>
@@ -165,7 +168,7 @@ function InputForm() {
               maxLength: 20,
             })}
             overed={watch().userJobPool.length > 20}
-            placeholder={`${data.job}`}
+            placeholder={data.job ? data.job : ''}
           />
         </Content>
         <Content>
@@ -173,7 +176,7 @@ function InputForm() {
           <InputInproduction
             className='body3_MD'
             {...register('self_introduction')}
-            placeholder={`${data.introduce}`}
+            placeholder={data.introduce ? data.introduce : ''}
           />
         </Content>
         <Content>
@@ -346,12 +349,12 @@ const OnImg = styled.img`
   top: 40px;
   left: 40px;
 `;
-const Temp = styled.img`
+const ThumbnailWithoutImg = styled.img`
   width: 96px;
   height: 96px;
   background: #d9d9d9;
   border-radius: 48px;
   display: flex;
   justify-content: center;
-  filter: brightness(0.5); /* 40% 밝기 */
+  filter: brightness(0.5);
 `;

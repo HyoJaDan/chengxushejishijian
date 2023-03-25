@@ -1,6 +1,6 @@
 import { Link } from '@remix-run/react';
 import styled from 'styled-components';
-import type { FCClass } from '~/components/common/types/function-component';
+import type { FCClass } from '~/models/function-component';
 import { NavButtons } from './nav-buttons';
 import { TrailingButtons } from './trailing-buttons';
 

@@ -46,14 +46,14 @@ export default function InputUserName({
           <Errors>
             <NumOfLetters
               className='body2_MD'
-              overed={watch().userNickName.length >= 20}
+              overed={watch().userNickName.length > 8}
               check={isValid}
             >
               {watch().userNickName.length}/20
             </NumOfLetters>
             <ImgWarn
               src='/icons/warning.svg'
-              overed={watch().userNickName.length >= 20}
+              overed={watch().userNickName.length > 8}
               alt='warning'
             />
             <ImgCheck src='/icons/check.svg' check={isValid} alt='check' />
