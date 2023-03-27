@@ -1,19 +1,26 @@
 import { ClientOnly } from 'remix-utils';
 import styled from 'styled-components';
-import Suspenses from '~/components/common/suspense';
+import Chart from '~/components/myPage/profile/chart/chart.client';
+import { ProfileFallback } from '~/components/myPage/profile/fallback';
+import IntroductionAndLink from '~/components/myPage/profile/main-content/introductionAndLink';
+import UserInformation from '~/components/myPage/profile/main-content/UserInformation';
+import Statistics from '~/components/myPage/profile/statistics';
+import SSRSafeSuspense from '~/hooks/ssr-safe-suspense';
 
-export default function Profile() {
+export default function ProfileDefault() {
   return (
     <Wrapper>
       <Content>
-        <Suspenses pageName='UserInformation' />
-        <Flex>
-          <Suspenses pageName='IntroductionAndLink' />
-          <SmallFlex>
-            <ClientOnly>{() => <Suspenses pageName='Chart' />}</ClientOnly>
-            <Suspenses pageName='Statistics' />
-          </SmallFlex>
-        </Flex>
+        <SSRSafeSuspense fallback={ProfileFallback()}>
+          <UserInformation />
+          <Flex>
+            <IntroductionAndLink />
+            <SmallFlex>
+              <ClientOnly>{() => <Chart />}</ClientOnly>
+              <Statistics />
+            </SmallFlex>
+          </Flex>
+        </SSRSafeSuspense>
       </Content>
     </Wrapper>
   );

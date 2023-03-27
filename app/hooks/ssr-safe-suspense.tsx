@@ -12,7 +12,7 @@ function useMounted() {
   return mounted;
 }
 
-export default function useSSRSafeSuspense(
+export default function SSRSafeSuspense(
   props: ComponentProps<typeof Suspense>
 ) {
   const isMounted = useMounted();
