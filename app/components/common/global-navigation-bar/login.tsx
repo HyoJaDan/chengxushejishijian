@@ -12,6 +12,7 @@ export const Login = ({ localStorageData, setLogin }: IType) => {
   const [isTrue, setIsTrue] = useState<boolean>(true);
   const clickFunction = () => {
     setIsTrue(!isTrue);
+    console.log(isTrue);
   };
   if (localStorageData.loginStatus === 'login') {
     if (localStorageData.img === '')
@@ -20,8 +21,8 @@ export const Login = ({ localStorageData, setLogin }: IType) => {
       <div>
         <CircleLink to='/my-page/profile' onClick={clickFunction}>
           <Img src={localStorageData.img} alt='' />
+          <Page isTrue={isTrue ? 1 : 0} />
         </CircleLink>
-        <Page isTrue={isTrue ? 1 : 0} />
       </div>
     );
   }
@@ -44,6 +45,7 @@ const CircleLink = styled(Link)`
   clip-path: circle(50%);
   color: ${(prop) => prop.theme.color.basic.black};
   cursor: pointer;
+  position: relative;
 `;
 const Img = styled.img`
   width: 100%;

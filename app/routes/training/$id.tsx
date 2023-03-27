@@ -1,20 +1,20 @@
 import styled from 'styled-components';
-import MyPageHeader from '~/components/common/sub-navigation-bar';
-import Suspenses from '~/components/common/suspense';
+import { TrainingMain } from '~/components/training';
+import { TrainingFallback } from '~/components/training/training-fallback';
+import SSRSafeSuspense from '../../hooks/ssr-safe-suspense';
 
-export default function TrainingFunction() {
+export default function TrainingDefault() {
   return (
-    <div>
-      <MyPageHeader page='Training' />
-      <Content>
-        <Suspenses pageName='Detail' />
-      </Content>
-    </div>
+    <Wrapper>
+      <SSRSafeSuspense fallback={TrainingFallback()}>
+        <TrainingMain />
+      </SSRSafeSuspense>
+    </Wrapper>
   );
 }
-const Content = styled.div`
+const Wrapper = styled.div`
   background-color: ${(prop) => prop.theme.color.grayScale.gray_100};
   min-height: 100vh;
-  margin-top: -144px;
-  padding-top: 144px;
+  margin-top: -82px;
+  padding-top: 82px;
 `;

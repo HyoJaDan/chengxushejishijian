@@ -1,6 +1,5 @@
 import SSRSafeSuspense from '../../hooks/ssr-safe-suspense';
 import { Training } from '../main';
-import { LessonDetail } from '../main/detail';
 import Chart from '../myPage/profile/chart/chart.client';
 import IntroductionAndLink from '../myPage/profile/main-content/introductionAndLink';
 import UserInformation from '../myPage/profile/main-content/UserInformation';
@@ -17,12 +16,6 @@ export default function Suspenses({ pageName }: IPageName) {
       </SSRSafeSuspense>
     );
   }
-  if (pageName === 'Detail')
-    return (
-      <SSRSafeSuspense>
-        <LessonDetail />
-      </SSRSafeSuspense>
-    );
   if (pageName === 'UserInformation') {
     return (
       <SSRSafeSuspense>

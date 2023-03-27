@@ -1,9 +1,11 @@
 import axios from 'axios';
 import { selectorFamily } from 'recoil';
 import { lessonAddress } from '~/data/constants/adress';
+import type { ILessonHashTags } from '~/models/hashtags';
+import type { ILesson } from '~/models/lesson/lesson';
 import { userAccessToken } from '../user/common/login-information';
 
-export const getLessonDetail = selectorFamily({
+export const getLessonDetail = selectorFamily<ILesson, string | undefined>({
   key: 'getLessonDetail',
   get:
     (id) =>
@@ -35,13 +37,13 @@ export const getLessonDetail = selectorFamily({
       return lessonDetail;
     },
 });
-export const getLessonDetailTags = selectorFamily({
+export const getLessonDetailTags = selectorFamily<ILessonHashTags, string>({
   key: 'getLessonDetailTags',
   get: (id) => async () => {
     const lessonDetail = await axios
       .get(`${lessonAddress}/${id}/hashtags`)
       .then((response) => {
-        return response.data.lessonHashtags;
+        return response.data;
       })
       .catch(() => {
         return false;

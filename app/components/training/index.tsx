@@ -5,47 +5,49 @@ import {
   getLessonDetail,
   getLessonDetailTags,
 } from '~/data/recoils/main/lesson';
+import { Category } from '../common/training';
+import { SimilerTraining } from './similer-training';
+import { WaitAnswer } from './wait';
 
-interface ILessonHashtag {
-  id: number;
-  tag: string;
-  createdAt: string;
-}
-
-export const LessonDetail = () => {
+export const TrainingMain = () => {
   const params = useParams();
-  const data = useRecoilValue(getLessonDetail(params.id));
-  const hashTags = useRecoilValue(getLessonDetailTags(params.id));
-
-  /* const hashTagList = hashTags.lessonHashtag.map(
-    ({ id, tag, createdAt }: ILessonHashtag) => {
-      const Id = `${id}_${createdAt}`;
-      return <Tag key={Id}>{tag}</Tag>;
-    }
-  ); */
+  const lessonData = useRecoilValue(getLessonDetail(params.id));
+  const hashTags = useRecoilValue(getLessonDetailTags(params.id as string));
+  const { name } = lessonData.lessonCategory;
+  const hashTagList = hashTags.lessonHashtags.map((value) => {
+    const { lessonHashtag } = value;
+    const { id, tag, createdAt } = lessonHashtag;
+    const Id = `${id}_${createdAt}`;
+    return <Tag key={Id}>#{tag}</Tag>;
+  });
   return (
     <Wrapper>
       <Box>
         <Header>
-          {/* 카테고리 여 넣고 */}
+          <Category className='caption1_SB'>{name}</Category>
           <Titles>
-            <Title className='title4_BD'>{data.title}</Title>
+            <Title className='title4_BD'>{lessonData.title}</Title>
             <DateFontcaption1SB className='caption1_SB'>
-              {data.updatedAt.substr(0, 10)}
+              {lessonData.updatedAt.substr(0, 10)}
             </DateFontcaption1SB>
           </Titles>
         </Header>
         <Main className='body2_MD'>
-          {data.description}
-          {/* <Tags>{hashTagList}</Tags> */}
+          <Content className='body2_MD' defaultValue={lessonData.description} />
+          <Tags>{hashTagList}</Tags>
         </Main>
       </Box>
+      <WaitAnswer />
+      <SimilerTraining id={lessonData.lessonCategory.id} />
     </Wrapper>
   );
 };
 const Wrapper = styled.div`
   max-width: 1256px;
-  margin: 67px auto; //
+  margin: 67px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 `;
 const Box = styled.div`
   width: 1149px;
@@ -64,6 +66,9 @@ const Title = styled.div`
   color: ${(prop) => prop.theme.color.grayScale.gray_900};
 `;
 const Header = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   padding-bottom: 23px;
   border-bottom: 1px solid #efedea;
 `;
@@ -85,4 +90,11 @@ const Tag = styled.div`
   font-size: 14px;
   line-height: 140%;
   color: #2bc0ef;
+`;
+const Content = styled.textarea`
+  outline: none;
+  border: none;
+  min-height: 200px;
+  width: 100%;
+  color: ${(prop) => prop.theme.color.grayScale.gray_800};
 `;

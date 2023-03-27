@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import styled from 'styled-components';
-import { Default } from './detail';
+import { Default } from '../training';
 
 export default function temp() {
   return (

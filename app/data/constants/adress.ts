@@ -22,5 +22,5 @@ export const manageFollowesAddress = {
   following: `${friendships}/followings`,
 };
 
-/** 과제를 담당한다. */
+/** https://api.thepool.kr/api/lessons : 과제를 담당한다. */
 export const lessonAddress = `${endpointBase}/api/lessons`;
