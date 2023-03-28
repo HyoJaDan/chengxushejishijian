@@ -1,18 +1,17 @@
 /* eslint-disable no-underscore-dangle */
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { categoryId, getLessons } from '~/data/recoils/main/lessons';
-/* import { categoryId, getLessons } from '~/data/recoils/main/category'; */
+import { categoryId, getProblems } from '~/data/recoils/main/problems';
 import { TrainBox } from '../common/training';
 
 export const Training = () => {
   const sortBy = useRecoilValue(categoryId);
-  const lessons = useRecoilValue(getLessons(sortBy));
+  const problems = useRecoilValue(getProblems(sortBy));
 
-  const lesson = lessons.map((data, index) => {
+  const problem = problems.map((data, index) => {
     return TrainBox(data, index);
   });
-  return <Wrapper>{lesson}</Wrapper>;
+  return <Wrapper>{problem}</Wrapper>;
 };
 const Wrapper = styled.div`
   display: flex;

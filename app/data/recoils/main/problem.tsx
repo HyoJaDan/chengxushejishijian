@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { selectorFamily } from 'recoil';
 import { lessonAddress } from '~/data/constants/adress';
-import type { ILessonHashTags } from '~/models/hashtags';
-import type { ILesson } from '~/models/lesson/lesson';
+import type { IProblemHashTags } from '~/models/hashtags';
+import type { IProblem } from '~/models/problem/problem';
 import { userAccessToken } from '../user/common/login-information';
 
-export const getLessonDetail = selectorFamily<ILesson, string | undefined>({
-  key: 'getLessonDetail',
+export const getProblemDetail = selectorFamily<IProblem, string | undefined>({
+  key: 'getProblemDetail',
   get:
     (id) =>
     async ({ get }) => {
@@ -37,8 +37,8 @@ export const getLessonDetail = selectorFamily<ILesson, string | undefined>({
       return lessonDetail;
     },
 });
-export const getLessonDetailTags = selectorFamily<ILessonHashTags, string>({
-  key: 'getLessonDetailTags',
+export const getProblemDetailTags = selectorFamily<IProblemHashTags, string>({
+  key: 'getProblemDetailTags',
   get: (id) => async () => {
     const lessonDetail = await axios
       .get(`${lessonAddress}/${id}/hashtags`)

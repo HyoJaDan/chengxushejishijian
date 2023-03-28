@@ -2,18 +2,18 @@ import { useParams } from '@remix-run/react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import {
-  getLessonDetail,
-  getLessonDetailTags,
-} from '~/data/recoils/main/lesson';
+  getProblemDetail,
+  getProblemDetailTags,
+} from '~/data/recoils/main/problem';
 import { Category } from '../common/training';
 import { SimilerTraining } from './similer-training';
 import { WaitAnswer } from './wait';
 
 export const TrainingMain = () => {
   const params = useParams();
-  const lessonData = useRecoilValue(getLessonDetail(params.id));
-  const hashTags = useRecoilValue(getLessonDetailTags(params.id as string));
-  const { name } = lessonData.lessonCategory;
+  const problemData = useRecoilValue(getProblemDetail(params.id));
+  const hashTags = useRecoilValue(getProblemDetailTags(params.id as string));
+  const { name } = problemData.lessonCategory;
   const hashTagList = hashTags.lessonHashtags.map((value) => {
     const { lessonHashtag } = value;
     const { id, tag, createdAt } = lessonHashtag;
@@ -26,19 +26,22 @@ export const TrainingMain = () => {
         <Header>
           <Category className='caption1_SB'>{name}</Category>
           <Titles>
-            <Title className='title4_BD'>{lessonData.title}</Title>
+            <Title className='title4_BD'>{problemData.title}</Title>
             <DateFontcaption1SB className='caption1_SB'>
-              {lessonData.updatedAt.substr(0, 10)}
+              {problemData.updatedAt.substr(0, 10)}
             </DateFontcaption1SB>
           </Titles>
         </Header>
         <Main className='body2_MD'>
-          <Content className='body2_MD' defaultValue={lessonData.description} />
+          <Content
+            className='body2_MD'
+            defaultValue={problemData.description}
+          />
           <Tags>{hashTagList}</Tags>
         </Main>
       </Box>
       <WaitAnswer />
-      <SimilerTraining id={lessonData.lessonCategory.id} />
+      <SimilerTraining id={problemData.lessonCategory.id} />
     </Wrapper>
   );
 };

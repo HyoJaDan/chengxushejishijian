@@ -2,20 +2,19 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { getLessonsById } from '~/data/recoils/main/lessons';
+import { getProblemsById } from '~/data/recoils/main/problems';
 import { TrainBox } from '../common/training';
 
 const offset = 3;
 export const SimilerTraining = ({ id }: { id: number }) => {
-  const lessons = useRecoilValue(getLessonsById(id));
-  console.log(lessons);
+  const problems = useRecoilValue(getProblemsById(id));
   const [index, setIndex] = useState(0);
   const [leaving, setLeaving] = useState<boolean>(false);
   const increaseIndex = () => {
     if (leaving) return;
     toggleLeaving();
-    const totalLessons = lessons.length;
-    const maxIndex = Math.floor(totalLessons / offset) - 1;
+    const totalProblems = problems.length;
+    const maxIndex = Math.floor(totalProblems / offset) - 1;
     setIndex((prev) => (prev === maxIndex ? 0 : prev + 1));
   };
   const toggleLeaving = () => setLeaving((prev) => !prev);
@@ -33,13 +32,13 @@ export const SimilerTraining = ({ id }: { id: number }) => {
             transition={{ type: 'tween', duration: 1 }}
             key={index}
           >
-            {lessons
+            {problems
               .slice(offset * index, offset * index + offset)
               .map((data, num) => TrainBox(data, num))}
           </Row>
         </AnimatePresence>
         <Button onClick={() => increaseIndex()} isLeaving={leaving}>
-          <img src='/icons/lesson/right.svg' alt='right' />
+          <img src='/icons/problem/right.svg' alt='right' />
         </Button>
       </Slider>
     </Wrapper>

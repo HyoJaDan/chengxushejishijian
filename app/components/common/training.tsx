@@ -1,8 +1,8 @@
 import { Link } from '@remix-run/react';
 import styled from 'styled-components';
-import type { ILessons } from '~/models/lesson/lessons';
+import type { IProblems } from '~/models/problem/problems';
 
-export const TrainBox = (data: ILessons, index: number) => {
+export const TrainBox = (data: IProblems, index: number) => {
   const { id, lessonCategory, title, _count } = data;
   const { name } = lessonCategory;
   const { lessonLikes, lessonComments, lessonSolutions } = _count;
@@ -14,15 +14,15 @@ export const TrainBox = (data: ILessons, index: number) => {
       <Title className='body1_BD'>{title}</Title>
       <Counts>
         <Count>
-          <Img src='/icons/lesson/likes.svg' alt='lessonLikes' />
+          <Img src='/icons/problem/likes.svg' alt='problemLike' />
           <Text>{lessonLikes}</Text>
         </Count>
         <Count>
-          <Img src='/icons/lesson/comments.svg' alt='lessonLikes' />
+          <Img src='/icons/problem/comments.svg' alt='problemComments' />
           <Text>{lessonComments}</Text>
         </Count>
         <Count>
-          <Img src='/icons/lesson/solutions.svg' alt='lessonLikes' />
+          <Img src='/icons/problem/solutions.svg' alt='problemSolutions' />
           <Text>{lessonSolutions}</Text>
         </Count>
       </Counts>

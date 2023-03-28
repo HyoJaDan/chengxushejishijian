@@ -1,7 +1,6 @@
-import type { ILessonCategory } from './lesson-category';
 import type { IMember } from './member';
 
-export interface ILessons {
+export interface IProblems {
   id: number;
   memberId: number;
   levelId: number;

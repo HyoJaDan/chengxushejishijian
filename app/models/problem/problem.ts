@@ -1,7 +1,7 @@
-import type { ILessonCategory } from './lesson-category';
 import type { IMember } from './member';
+import type { IProblemCategory } from './problem-category';
 
-export interface ILesson {
+export interface IProblem {
   createdAt: string;
   updatedAt: string;
   deletedAt: string;
@@ -9,7 +9,7 @@ export interface ILesson {
   description: string;
   hit: number;
   member: IMember;
-  lessonCategory: ILessonCategory;
+  lessonCategory: IProblemCategory;
   lessonLevel: {
     id: number;
     createdAt: string;

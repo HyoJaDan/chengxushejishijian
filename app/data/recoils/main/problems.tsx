@@ -1,14 +1,14 @@
 import axios from 'axios';
 import { atom, selectorFamily } from 'recoil';
 import { lessonAddress } from '~/data/constants/adress';
-import type { ILessons } from '~/models/lesson/lessons';
+import type { IProblems } from '~/models/problem/problems';
 
 export const categoryId = atom<string>({
   key: 'category-id',
   default: 'lessonSolutions',
 });
 
-export const getLessons = selectorFamily<ILessons[], string>({
+export const getProblems = selectorFamily<IProblems[], string>({
   key: 'getLesson',
   get: (sortBy: string) => async () => {
     const userData = await axios
@@ -22,8 +22,7 @@ export const getLessons = selectorFamily<ILessons[], string>({
     return userData;
   },
 });
-/*  https://api.thepool.kr/api/lessons?categoryId=1 */
-export const getLessonsById = selectorFamily<ILessons[], number>({
+export const getProblemsById = selectorFamily<IProblems[], number>({
   key: 'getLesson',
   get: (id: number) => async () => {
     const userData = await axios

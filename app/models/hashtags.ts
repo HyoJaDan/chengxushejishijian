@@ -1,4 +1,4 @@
-export interface ILessonHashTags {
+export interface IProblemHashTags {
   lessonHashtags: [
     {
       id: number;

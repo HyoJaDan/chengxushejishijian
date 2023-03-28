@@ -6,16 +6,13 @@ import Radio from '~/components/main/radio';
 export default function Main() {
   return (
     <Wrapper>
-      <Content>
-        <Banner />
-        <Radio />
-        <Suspenses pageName='Training' />
-      </Content>
+      <Banner />
+      <Radio />
+      <Suspenses pageName='Training' />
     </Wrapper>
   );
 }
-const Wrapper = styled.div``;
-const Content = styled.div`
+const Wrapper = styled.div`
   background-color: ${(prop) => prop.theme.color.grayScale.gray_100};
   min-height: 100vh;
   margin-top: -72px;
