@@ -3,7 +3,7 @@ import axios from 'axios';
 import { atom, selector } from 'recoil';
 import { memberDataAdress } from '~/data/constants/adress';
 import type { IUserData, IUserDatatemp } from '~/models/user';
-import { recoilKeySuffix } from '../../../utils/recoil-key';
+import { recoilKeySuffix } from '../../utils/recoil-key';
 import { userId } from './common/login-information';
 
 /** userData에는 닉네임, 직업분야, 관심분야가 담겨있다. */

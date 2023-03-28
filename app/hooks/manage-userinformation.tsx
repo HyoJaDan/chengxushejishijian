@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { localStorageData } from '~/data/recoils/user/common/login-information';
-import { getUserData } from '~/data/recoils/user/user-data';
+import { localStorageData } from '~/data/user/common/login-information';
+import { getUserData } from '~/data/user/user-data';
 import type { IUserData } from '~/models/user';
 
 export const useManageUserInformation = () => {

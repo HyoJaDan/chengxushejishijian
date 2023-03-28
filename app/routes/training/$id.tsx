@@ -1,13 +1,13 @@
 import styled from 'styled-components';
-import { TrainingMain } from '~/components/training';
-import { TrainingFallback } from '~/components/training/training-fallback';
+import { ProblemMain } from '~/components/problem';
+import { ProblemFallback } from '~/components/problem/problem-fallback';
 import SSRSafeSuspense from '../../hooks/ssr-safe-suspense';
 
 export default function TrainingDefault() {
   return (
     <Wrapper>
-      <SSRSafeSuspense fallback={TrainingFallback()}>
-        <TrainingMain />
+      <SSRSafeSuspense fallback={ProblemFallback()}>
+        <ProblemMain />
       </SSRSafeSuspense>
     </Wrapper>
   );
@@ -15,6 +15,4 @@ export default function TrainingDefault() {
 const Wrapper = styled.div`
   background-color: ${(prop) => prop.theme.color.grayScale.gray_100};
   min-height: 100vh;
-  margin-top: -82px;
-  padding-top: 82px;
 `;

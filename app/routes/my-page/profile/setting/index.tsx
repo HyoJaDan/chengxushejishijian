@@ -10,9 +10,9 @@ import {
   localStorageData,
   userAccessToken,
   userId,
-} from '~/data/recoils/user/common/login-information';
-import type { IURLImage } from '~/data/recoils/user/url-image';
-import { getURLImage } from '~/data/recoils/user/url-image';
+} from '~/data/user/common/login-information';
+import type { IURLImage } from '~/data/user/url-image';
+import { getURLImage } from '~/data/user/url-image';
 import { useManageUserInformation } from '~/hooks/manage-userinformation';
 import SSRSafeSuspense from '~/hooks/ssr-safe-suspense';
 
@@ -262,6 +262,7 @@ const InputInproduction = styled.textarea`
   min-height: 229px;
   outline: none;
   color: ${(prop) => prop.theme.color.grayScale.gray_900};
+  resize: none;
   &:focus {
     border: 1px solid ${(prop) => prop.theme.color.primary.blue.blue_500};
   }

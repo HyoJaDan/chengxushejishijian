@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { getProblemsById } from '~/data/recoils/main/problems';
+import { getProblemsById } from '~/data/problem/get-problems';
 import { TrainBox } from '../common/training';
 
 const offset = 3;
@@ -34,7 +34,7 @@ export const SimilerTraining = ({ id }: { id: number }) => {
           >
             {problems
               .slice(offset * index, offset * index + offset)
-              .map((data, num) => TrainBox(data, num))}
+              .map((data, num) => TrainBox(data, num, 1149))}
           </Row>
         </AnimatePresence>
         <Button onClick={() => increaseIndex()} isLeaving={leaving}>
@@ -48,6 +48,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+  margin-bottom: 142px;
 `;
 const Header = styled.div`
   color: ${(prop) => prop.theme.color.grayScale.gray_800};
@@ -88,6 +89,6 @@ const Button = styled.div<{ isLeaving: boolean }>`
   height: 48px;
   position: absolute;
   top: 46px;
-  right: 0px;
+  right: -10px;
   ${({ isLeaving }) => isLeaving && 'display:none'}
 `;

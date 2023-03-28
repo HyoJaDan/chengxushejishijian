@@ -2,7 +2,7 @@ import { useNavigate } from '@remix-run/react';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { loginProcess } from '~/components/login/platform-login-process';
-import { localStorageData } from '~/data/recoils/user/common/login-information';
+import { localStorageData } from '~/data/user/common/login-information';
 import { platform } from '~/models/platform';
 
 export default function Callback() {

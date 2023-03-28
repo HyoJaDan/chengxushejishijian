@@ -1,6 +1,6 @@
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { getUserData } from '~/data/recoils/user/user-data';
+import { getUserData } from '~/data/user/user-data';
 import OutputTags from '../outputTags';
 
 export default function IntroductionAndLink() {
@@ -50,6 +50,7 @@ const DefaultFont = styled.textarea`
   height: 112px;
   outline: none;
   border: none;
+  resize: none;
 `;
 
 const Title = styled.div`

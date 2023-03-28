@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { userArchiveSelector } from '~/data/recoils/user/archive';
+import { userArchiveSelector } from '~/data/user/archive';
 
 const OutputArchive = () => {
   const archive = useRecoilValue(userArchiveSelector);

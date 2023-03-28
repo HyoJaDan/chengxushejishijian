@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { categoryId, getProblems } from '~/data/recoils/main/problems';
+import { categoryId, getProblems } from '~/data/problem/get-problems';
 import { TrainBox } from '../common/training';
 
 export const Training = () => {
@@ -9,7 +9,7 @@ export const Training = () => {
   const problems = useRecoilValue(getProblems(sortBy));
 
   const problem = problems.map((data, index) => {
-    return TrainBox(data, index);
+    return TrainBox(data, index, 1256);
   });
   return <Wrapper>{problem}</Wrapper>;
 };

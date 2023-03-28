@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import axios from 'axios';
-import type { IQuestionCategories } from '~/data/recoils/qna/new-question/categories';
+import type { IQuestionCategories } from '~/data/qna/new-question/categories';
 
 export const getNewQnACategory = async () => {
   const newValue = await axios

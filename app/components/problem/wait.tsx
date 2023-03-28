@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {
   localStorageData,
   loginStatus,
-} from '~/data/recoils/user/common/login-information';
+} from '~/data/user/common/login-information';
 
 export const WaitAnswer = () => {
   const localData = useRecoilValue(localStorageData);

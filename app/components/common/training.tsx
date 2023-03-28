@@ -2,14 +2,14 @@ import { Link } from '@remix-run/react';
 import styled from 'styled-components';
 import type { IProblems } from '~/models/problem/problems';
 
-export const TrainBox = (data: IProblems, index: number) => {
+export const TrainBox = (data: IProblems, index: number, width: number) => {
   const { id, lessonCategory, title, _count } = data;
   const { name } = lessonCategory;
   const { lessonLikes, lessonComments, lessonSolutions } = _count;
   const keyId = `${id}_${index}`;
-
+  const maxWidth = Math.floor((width - 48) / 3);
   return (
-    <Box to={`/training/${id}`} key={keyId}>
+    <Box to={`/training/${id}`} key={keyId} maxwidth={maxWidth}>
       <Category className='caption1_SB'>{name}</Category>
       <Title className='body1_BD'>{title}</Title>
       <Counts>
@@ -30,8 +30,8 @@ export const TrainBox = (data: IProblems, index: number) => {
   );
 };
 
-const Box = styled(Link)`
-  width: 400px;
+const Box = styled(Link)<{ maxwidth: number }>`
+  width: ${(prop) => `${prop.maxwidth}px`};
   height: 142px;
   background: ${(prop) => prop.theme.color.basic.white};
   border: 1px solid #efedea;

@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { popularContentSelector } from '~/data/recoils/qna/popular';
+import { popularContentSelector } from '~/data/qna/popular';
 import { OutputQuestionInfo } from '../questioninfo-css';
 
 const QnA = () => {

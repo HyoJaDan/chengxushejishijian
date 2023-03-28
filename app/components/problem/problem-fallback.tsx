@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const TrainingFallback = () => {
+export const ProblemFallback = () => {
   return (
     <Wrapper>
       <Main />
@@ -11,12 +11,14 @@ export const TrainingFallback = () => {
         <Box />
         <Box />
       </Boxes>
+      <Commit />
     </Wrapper>
   );
 };
 const Wrapper = styled.div`
   max-width: 1256px;
-  margin: 67px auto;
+  margin: 0px auto;
+  padding-top: 67px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -50,7 +52,7 @@ const Boxes = styled.div`
   gap: 10px;
 `;
 const Box = styled.div`
-  width: 403px;
+  width: 367px;
   height: 142px;
   background: ${(prop) => prop.theme.color.basic.white};
   border: 1px solid #efedea;
@@ -60,4 +62,17 @@ const Box = styled.div`
   flex-direction: column;
   gap: 8px;
   cursor: pointer;
+`;
+const Commit = styled.div`
+  margin-top: 66px;
+  margin-bottom: 50px;
+  padding: 24px;
+  width: 1149px;
+  min-height: 164px;
+  background-color: ${(prop) => prop.theme.color.basic.white};
+  border: 1px solid ${(prop) => prop.theme.color.grayScale.gray_200};
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 `;

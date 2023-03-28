@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { mockContent } from '~/data/recoils/qna/new-question/content';
+import { mockContent } from '~/data/qna/new-question/content';
 import { OutputQuestionInfo } from '../questioninfo-css';
 
 const ContentMain = () => {

@@ -1,6 +1,6 @@
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { memberStatistics } from '~/data/recoils/user/statistics';
+import { memberStatistics } from '~/data/user/statistics';
 
 export default function Statistics() {
   const temp = useRecoilValue(memberStatistics);
