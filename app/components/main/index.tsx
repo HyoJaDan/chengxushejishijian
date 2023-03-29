@@ -19,4 +19,5 @@ const Wrapper = styled.div`
   gap: 24px;
   max-width: 1256px;
   margin: 28px auto;
+  padding-bottom: 40px;
 `;

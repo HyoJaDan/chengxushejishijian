@@ -16,7 +16,7 @@ import { RecoilRoot } from 'recoil';
 import styled, { ThemeProvider } from 'styled-components';
 
 import globalStyle from '~/styles/global.css';
-import { GlobalNavigationBar } from './components/common/global-navigation-bar';
+import { GlobalNavigationBar } from './components/global-navigation-bar';
 import { LoginWrapper } from './components/login-wrapper';
 import { theme } from './styles/theme';
 
