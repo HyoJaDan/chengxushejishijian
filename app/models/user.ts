@@ -42,4 +42,5 @@ export interface ILoginInfo<loginType> {
   accessToken: string;
   id: number;
   img: string;
+  job: string;
 }

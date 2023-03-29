@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { getProblemsById } from '~/data/problem/get-problems';
-import { TrainBox } from '../common/training';
+import { TrainBox } from './problem-box';
 
 const offset = 3;
 export const SimilerTraining = ({ id }: { id: number }) => {

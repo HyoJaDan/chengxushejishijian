@@ -1,23 +1,14 @@
-import { Link } from '@remix-run/react';
 import type { FC } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
-import {
-  localStorageData,
-  loginStatus,
-} from '~/data/user/common/login-information';
 import { Login } from './login';
 
 export const TrailingButtons: FC = () => {
-  const data = useRecoilValue(localStorageData);
-  const setStatus = useSetRecoilState(loginStatus);
-
   return (
     <Wrapper>
-      <IconLink to='/'>
+      {/*  <IconLink to='/'>
         <Icon src='/icons/notification.svg' />
-      </IconLink>
-      <Login localStorageData={data} setLogin={setStatus} />
+      </IconLink> */}
+      <Login />
     </Wrapper>
   );
 };
@@ -30,7 +21,7 @@ const Wrapper = styled.div`
   position: relative;
 `;
 
-const IconLink = styled(Link)`
+/* const IconLink = styled(Link)`
   display: block;
 `;
 
@@ -42,3 +33,4 @@ const Icon = styled.img.attrs({
   height: 24px;
   color: #c2c0bd;
 `;
+ */

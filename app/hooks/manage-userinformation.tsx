@@ -19,6 +19,7 @@ export const useManageUserInformation = () => {
         id: getData.id,
         img: getData.thumbnail,
         name: getData.nickname,
+        job: getData.job,
         loginStatus: 'login',
       });
     }

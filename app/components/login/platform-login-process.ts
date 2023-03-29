@@ -23,6 +23,7 @@ export async function loginProcess({
       accessToken: data?.accessToken,
       id: data?.member.id,
       img: data?.member.thumbnail,
+      job: data?.member.job,
     });
     if (data?.member.status === userStatus.PENDING) {
       navigate('/account-info');

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import type { IProblemHashTags } from '~/models/hashtags';
 import type { IProblem } from '~/models/problem/problem';
-import { Category } from '../common/training';
+import { Category } from './problem-box';
 
 interface ITemp {
   problemData: IProblem;

@@ -63,7 +63,7 @@ const Wrapper = styled.div`
   gap: 16px;
   position: sticky;
   top: 72px;
-  z-index: 50;
+  z-index: 2;
 `;
 const Flex = styled.div`
   display: flex;

@@ -2,7 +2,7 @@
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { categoryId, getProblems } from '~/data/problem/get-problems';
-import { TrainBox } from '../common/training';
+import { TrainBox } from '../problem/problem-box';
 
 export const Training = () => {
   const sortBy = useRecoilValue(categoryId);

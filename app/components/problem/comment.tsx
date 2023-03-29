@@ -5,12 +5,12 @@ import { useForm } from 'react-hook-form';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { lessonAddress } from '~/data/constants/adress';
-import { localStorageData } from '~/data/user/common/login-information';
+import { userAccessToken } from '~/data/user/common/login-information';
 
 export const Comment = ({ id }: { id: string }) => {
   const { register, handleSubmit } = useForm();
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
-  const localData = useRecoilValue(localStorageData);
+  const accessToken = useRecoilValue(userAccessToken);
   const navigate = useNavigate();
   const onValid = () => {
     if (textAreaRef.current !== null) {
@@ -21,7 +21,7 @@ export const Comment = ({ id }: { id: string }) => {
         },
         {
           headers: {
-            Authorization: `Bearer ${localData.accessToken}`,
+            Authorization: `Bearer ${accessToken}`,
           },
         }
       );

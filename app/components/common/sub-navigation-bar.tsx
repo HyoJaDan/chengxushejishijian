@@ -45,10 +45,8 @@ const Wrapper = styled.div`
   justify-content: center;
   background-color: ${(prop) => prop.theme.color.basic.white};
   position: sticky;
-
   height: 62px;
   top: 72px;
-  z-index: 1;
 `;
 const FlexWrapper = styled.div`
   width: min(100%, 1256px);
