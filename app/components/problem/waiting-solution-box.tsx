@@ -13,15 +13,15 @@ export const WaitAnswer = () => {
     <Wrapper>
       <Letters>
         <LineOne className='body1_BD'>
-          {localData.loginStatus
+          {localData.loginStatus !== 'unChecked'
             ? `${localData.name} 님의 풀이를 기다리고 있어요 `
-            : '더풀러들의 풀이를 기다리고 있어요.'}
+            : '로그인 후에 풀이를 제출할 수 있어요'}
         </LineOne>
         <LineTwo className='body3_MD'>
           나의 풀이를 제출하고 다른 사용자의 풀이를 살펴보세요
         </LineTwo>
       </Letters>
-      {localData.loginStatus ? (
+      {localData.loginStatus !== 'unChecked' ? (
         <Button
           className='body2_SB'
           onClick={() => {
@@ -37,7 +37,7 @@ export const WaitAnswer = () => {
             setLoginStatus('unLogin');
           }}
         >
-          풀이 제출하기
+          로그인하기
         </Button>
       )}
     </Wrapper>

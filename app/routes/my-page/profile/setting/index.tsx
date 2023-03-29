@@ -39,8 +39,6 @@ function InputForm() {
   const accessToken = useRecoilValue(userAccessToken);
   const localData = useRecoilValue(localStorageData);
   const ImgURL = useRef('');
-  console.log('render');
-  console.log(data);
   const { register, handleSubmit, watch, control } = useForm<IData>({
     defaultValues: {
       userName: data.nickname ? data.nickname : '',

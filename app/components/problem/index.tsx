@@ -10,13 +10,13 @@ import { Banner } from './banner';
 import { Comment } from './comment';
 import { MainContent } from './main-content';
 import { SimilerTraining } from './similer-problem';
-import { WaitAnswer } from './wait';
+import { WaitAnswer } from './waiting-solution-box';
 
 export const ProblemMain = () => {
   const params = useParams<string>();
   const problemData = useRecoilValue(getProblemDetail(params.id));
   const hashTags = useRecoilValue(getProblemDetailTags(params.id as string));
-  console.log(problemData.isBookmark);
+
   return (
     <Wrapper>
       <FlexBox>
