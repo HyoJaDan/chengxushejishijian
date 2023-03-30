@@ -3,14 +3,14 @@ import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import InputUserArea from '~/components/input-user-info/input-area-button';
-import InputUserInterests from '~/components/input-user-info/input-interest';
+import InputUserArea from '~/components/account-info/input-area-button';
+import InputUserInterests from '~/components/account-info/input-interest';
 import { localStorageData, userId } from '~/data/user/common/login-information';
 import type { IUserDataAccountInfo } from '~/models/user';
 
 import { memberDataAdress } from '~/data/constants/adress';
 import { userJobPoolSelector } from '~/data/user/user-data';
-import InputUserName from '../components/input-user-info/input-name';
+import InputUserName from '../components/account-info/input-name';
 
 export default function Detail() {
   const navigate = useNavigate();

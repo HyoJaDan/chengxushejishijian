@@ -3,7 +3,7 @@ import { ProblemMain } from '~/components/problem';
 import { ProblemFallback } from '~/components/problem/problem-fallback';
 import SSRSafeSuspense from '../../hooks/ssr-safe-suspense';
 
-export default function TrainingDefault() {
+export default function ProblemDefault() {
   return (
     <Wrapper>
       <SSRSafeSuspense fallback={ProblemFallback()}>

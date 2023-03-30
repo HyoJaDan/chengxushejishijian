@@ -9,7 +9,7 @@ export const TrainBox = (data: IProblems, index: number, width: number) => {
   const keyId = `${id}_${index}`;
   const maxWidth = Math.floor((width - 48) / 3);
   return (
-    <Box to={`/training/${id}`} key={keyId} maxwidth={maxWidth}>
+    <Box to={`/problem/${id}`} key={keyId} maxwidth={maxWidth}>
       <Category className='caption1_SB'>{name}</Category>
       <Title className='body1_BD'>{title}</Title>
       <Counts>

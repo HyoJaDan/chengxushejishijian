@@ -21,7 +21,7 @@ export const ProblemMain = () => {
     <Wrapper>
       <FlexBox>
         <MainContent problemData={problemData} hashTags={hashTags} />
-        <WaitAnswer />
+        <WaitAnswer id={params.id as string} />
         <SimilerTraining id={problemData.lessonCategory.id} />
         <Comment id={params.id as string} />
       </FlexBox>

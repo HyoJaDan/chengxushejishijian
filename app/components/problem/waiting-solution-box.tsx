@@ -1,3 +1,4 @@
+import { Link } from '@remix-run/react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import {
@@ -5,7 +6,7 @@ import {
   loginStatus,
 } from '~/data/user/common/login-information';
 
-export const WaitAnswer = () => {
+export const WaitAnswer = ({ id }: { id: string }) => {
   const localData = useRecoilValue(localStorageData);
   const setLoginStatus = useSetRecoilState(loginStatus);
 
@@ -22,14 +23,9 @@ export const WaitAnswer = () => {
         </LineTwo>
       </Letters>
       {localData.loginStatus !== 'unChecked' ? (
-        <Button
-          className='body2_SB'
-          onClick={() => {
-            console.log('hello');
-          }}
-        >
+        <SolutionButton to={`/solution/problem/${id}`} className='body2_SB'>
           풀이 제출하기
-        </Button>
+        </SolutionButton>
       ) : (
         <Button
           className='body2_SB'
@@ -60,6 +56,20 @@ const Letters = styled.div`
   gap: 4px;
 `;
 const Button = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 24px;
+  gap: 8px;
+  width: 135px;
+  height: 54px;
+  background: #ffffff;
+  border-radius: 100px;
+  color: ${(prop) => prop.theme.color.primary.blue.blue_600};
+  cursor: pointer;
+`;
+const SolutionButton = styled(Link)`
   display: flex;
   flex-direction: column;
   justify-content: center;
