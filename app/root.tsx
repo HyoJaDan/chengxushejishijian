@@ -14,8 +14,8 @@ import {
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { RecoilRoot } from 'recoil';
 import styled, { ThemeProvider } from 'styled-components';
-
 import globalStyle from '~/styles/global.css';
+import stylesUrl from '../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { GlobalNavigationBar } from './components/global-navigation-bar';
 import { LoginWrapper } from './components/login-wrapper';
 import { theme } from './styles/theme';
@@ -36,6 +36,7 @@ export const meta: MetaFunction = () => ({
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: globalStyle },
+  { rel: 'stylesheet', href: stylesUrl },
   {
     rel: 'preload',
     href: 'https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css',

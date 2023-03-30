@@ -317,3 +317,28 @@ a {
   transition: 0.1s ease-out;
   background-color: #d5d5d5;
 }
+.card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column-reverse;
+}
+.card-body {
+  width: 100%;
+  height: 100%;
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 140%;
+  color: #31302f;
+  padding: 32px 24px;
+}
+.card-toolbar {
+  border: none !important;
+  border-top: 1px solid #efedea !important ;
+  padding: 32px 24px !important;
+  display: flex !important;
+
+  gap: 10px !important;
+}

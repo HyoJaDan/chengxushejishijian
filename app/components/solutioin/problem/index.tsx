@@ -4,7 +4,7 @@ import { ClientOnly } from 'remix-utils';
 import styled from 'styled-components';
 import { Category } from '~/components/problem/problem-box';
 import { getProblemDetail } from '~/data/problem/get-problem';
-import MainEditor from './editor.client';
+import { MainEditor } from './editor.client';
 
 export const SolutionTraining = () => {
   const params = useParams<string>();
