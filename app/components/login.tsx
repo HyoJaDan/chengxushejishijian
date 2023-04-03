@@ -24,8 +24,12 @@ export default function LoginComponent() {
 
   return (
     <Wrapper>
-      <X src='/icons/X.svg' alt='X' onClick={() => setStatus('unChecked')} />
-      <Img src='/icons/bording.svg' alt='bording' />
+      <X
+        src='/icons/login/X.svg'
+        alt='X'
+        onClick={() => setStatus('unChecked')}
+      />
+      <Img src='/icons/login/bording.svg' alt='bording' />
       <Header />
       <Login className='body1_BD'>
         <GithubLogin />

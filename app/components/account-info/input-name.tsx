@@ -52,11 +52,15 @@ export default function InputUserName({
               {watch().userNickName.length}/20
             </NumOfLetters>
             <ImgWarn
-              src='/icons/warning.svg'
+              src='/icons/login/warning.svg'
               overed={watch().userNickName.length > 8}
               alt='warning'
             />
-            <ImgCheck src='/icons/check.svg' check={isValid} alt='check' />
+            <ImgCheck
+              src='/icons/login/check.svg'
+              check={isValid}
+              alt='check'
+            />
           </Errors>
         </CharacterRestriction>
       </Content>

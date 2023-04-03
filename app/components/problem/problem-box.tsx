@@ -14,16 +14,16 @@ export const TrainBox = (data: IProblems, index: number, width: number) => {
       <Title className='body1_BD'>{title}</Title>
       <Counts>
         <Count>
-          <Img src='/icons/problem/likes.svg' alt='problemLike' />
+          <Img src='/icons/problem/watch.png' alt='watch' />
           <Text>{lessonLikes}</Text>
+        </Count>
+        <Count>
+          <Img src='/icons/problem/like.svg' alt='icon' />
+          <Text>{lessonSolutions}</Text>
         </Count>
         <Count>
           <Img src='/icons/problem/comments.svg' alt='problemComments' />
           <Text>{lessonComments}</Text>
-        </Count>
-        <Count>
-          <Img src='/icons/problem/solutions.svg' alt='problemSolutions' />
-          <Text>{lessonSolutions}</Text>
         </Count>
       </Counts>
     </Box>

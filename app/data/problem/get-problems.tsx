@@ -11,6 +11,7 @@ export const categoryId = atom<string>({
 export const getProblems = selectorFamily<IProblems[], string>({
   key: 'getLesson',
   get: (sortBy: string) => async () => {
+    console.log(sortBy);
     const userData = await axios
       .get(`${lessonAddress}?sortBy=${sortBy}`)
       .then((response) => {
