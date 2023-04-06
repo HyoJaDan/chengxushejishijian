@@ -1,55 +1,68 @@
 import Editor from '@draft-js-plugins/editor';
-import createHashtagPlugin from '@draft-js-plugins/hashtag';
 import {
+  convertToRaw,
   EditorState,
   getDefaultKeyBinding,
   KeyBindingUtil,
   RichUtils,
 } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
 import { useState } from 'react';
 import styled from 'styled-components';
-
-const hashtagPlugin = createHashtagPlugin();
-/* class CustomButton extends Component {
-  toggleBold: Function = (): void => {
-    const { editorState, onChange } = this.props;
-    const contentState = editorState.getCurrentContent();
-    const selectionState = editorState.getSelection();
-    const newContentState = Modifier.setBlockType(
-      contentState,
-      selectionState,
-      'code-block'
-    );
-    onChange(
-      EditorState.push(editorState, newContentState, 'change-block-type')
-    );
-  };
-
-  render() {
-    return (
-      <Button>
-        <img src='/icons/code.svg' alt='code' />
-        <div onClick={this.toggleBold}>코드 추가</div>
-      </Button>
-    );
-  }
-} */
+import { createEmptyBlock } from './createEmtypBlock';
+import { SimpleHashtagEditor } from './hashtag';
 
 export const MainEditor = () => {
   const [editorState, setEditorState] = useState<EditorState>(
     EditorState.createEmpty()
   );
-  /* const [content, setContent] = useState<string>('');
-  console.log(content); */
-
+  const [content, setContent] = useState<string>('');
+  console.log(content);
   const onChange = (onChangeeditorState: EditorState) => {
     setEditorState(onChangeeditorState);
+    setContent(
+      draftToHtml(convertToRaw(onChangeeditorState.getCurrentContent()))
+    );
   };
 
-  /* 내가 무슨 커멘드를 입력했는지 확인하는 함수 */
+  /* 내가 언더라인 버튼을 클릭했는지 아는 함수 */
+  const onUnderlineClick = () => {
+    onChange(RichUtils.toggleInlineStyle(editorState, 'UNDERLINE'));
+  };
+
+  /* 코드 나오는 함수 */
+  const onToggleCode = () => {
+    onChange(RichUtils.toggleCode(editorState));
+  };
+
+  /* 1. 무슨 키를 입력했는지 나오는 함수 */
+  const myKeyBindingFn = (e: React.KeyboardEvent<{}>) => {
+    const { keyCode } = e;
+    if (keyCode === 49 && KeyBindingUtil.hasCommandModifier(e)) {
+      return 'h1';
+    }
+    if (keyCode === 13 && KeyBindingUtil.isSoftNewlineEvent(e)) {
+      return 'shift_enter';
+    }
+    if (keyCode === 13) {
+      return 'enter';
+    }
+    return getDefaultKeyBinding(e);
+  };
+
+  /* 2. 내가 무슨 커멘드를 입력했는지 확인하는 함수 */
   const handleKeyCommand = (command: string) => {
     console.log('커멘드가 입력되었습니다.', command);
-
+    if (command === 'enter') {
+      const newEditerState = createEmptyBlock(editorState);
+      onChange(newEditerState);
+      return 'handled';
+    }
+    if (command === 'shift_enter') {
+      console.log('shift_enter이 클릭되었습니다.');
+      onChange(RichUtils.insertSoftNewline(editorState));
+      return 'handled';
+    }
     if (command === 'h1') {
       onChange(RichUtils.toggleBlockType(editorState, 'h1'));
       console.log('커멘트 타입은 헤더 입니다.');
@@ -64,28 +77,9 @@ export const MainEditor = () => {
     return 'not-handled';
   };
 
-  /* 내가 언더라인 버튼을 클릭했는지 아는 함수 */
-  const onUnderlineClick = () => {
-    onChange(RichUtils.toggleInlineStyle(editorState, 'UNDERLINE'));
-  };
-
-  /* 코드 나오는 함수 */
-  const onToggleCode = () => {
-    onChange(RichUtils.toggleCode(editorState));
-  };
-
-  /* 무슨 키를 입력했는지 나오는 함수 */
-  const myKeyBindingFn = (e) => {
-    console.log('입력', e);
-    if (e.keyCode === 49 && KeyBindingUtil.hasCommandModifier(e)) {
-      return 'h1';
-    }
-    return getDefaultKeyBinding(e);
-  };
-
-  /* 박스의 스타일을 지정 */
-  const myBlockStyleFn = (contentBlock) => {
-    const type = contentBlock.getType();
+  /* 3. 박스의 스타일을 지정 */
+  const myBlockStyleFn = (innercontent) => {
+    const type = innercontent.getType();
     console.log('현제 블록 스타일', type);
     if (type === 'h1') {
       return 'headerFont';
@@ -96,19 +90,30 @@ export const MainEditor = () => {
   return (
     <Wrapper>
       <Container>
-        <Editor
-          wrapperClassName='card'
-          editorClassName='card-body'
-          toolbarClassName='card-toolbar'
-          editorState={editorState}
-          onChange={onChange}
-          handleKeyCommand={handleKeyCommand}
-          keyBindingFn={myKeyBindingFn}
-          blockStyleFn={myBlockStyleFn}
-          plugins={[hashtagPlugin]}
-        />
+        <EditorWrapper>
+          <Editor
+            /*  wrapperClassName='card'
+            editorClassName='card-body'
+            toolbarClassName='card-toolbar' */
+            editorState={editorState}
+            placeholder='내용을 입력해주세요.'
+            onChange={onChange}
+            handleKeyCommand={handleKeyCommand}
+            keyBindingFn={myKeyBindingFn}
+            blockStyleFn={myBlockStyleFn}
+          />
+        </EditorWrapper>
         <Headers>
-          <Button onClick={onToggleCode}>Code</Button>
+          <SimpleHashtagEditor />
+          <Buttons>
+            <Button>
+              <img src='/icons/code.svg' alt='code' />
+              <button type='button' onClick={onToggleCode}>
+                코드 추가
+              </button>
+            </Button>
+            <Button onClick={onUnderlineClick}>Underline</Button>
+          </Buttons>
           <Button onClick={onUnderlineClick}>Underline</Button>
         </Headers>
       </Container>
@@ -122,15 +127,28 @@ const Wrapper = styled.div`
   background: #ffffff;
   box-shadow: 0px 8px 40px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
+  padding: 24px;
 `;
 const Container = styled.div`
   width: 100%;
   height: 100%;
 `;
-const Headers = styled.div`
-  display: flex;
+const EditorWrapper = styled.div`
+  height: 424px;
+  overflow: scroll;
 `;
-
+const Headers = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 24px;
+  border-top: 1px solid ${(prop) => prop.theme.color.grayScale.gray_200};
+`;
+const Buttons = styled.div`
+  margin-left: 496px;
+  display: flex;
+  gap: 8px;
+`;
 const Button = styled.div`
   display: flex;
   flex-direction: row;
@@ -152,74 +170,3 @@ const Button = styled.div`
     border: none;
   }
 `;
-
-// eslint-disable-next-line no-lone-blocks
-{
-  /* <Editor
-  wrapperClassName='card'
-  editorClassName='card-body'
-  toolbarClassName='card-toolbar'
-  editorState={editorState}
-  onEditorStateChange={(newState) => {
-    setEditorState(newState);
-    setContent(draftToHtml(convertToRaw(newState.getCurrentContent())));
-  }}
-  toolbarCustomButtons={[<CustomButton key='1' />]}
-/> */
-}
-
-{
-  /* <SimpleHashtagEditor /> */
-}
-
-/* <Editor
-editorState={editorState}
-wrapperClassName='card'
-editorClassName='card-body'
-toolbarClassName='card-toolbar'
-  onEditorStateChange={(newState) => {
-    setEditorState(newState);
-    setContent(draftToHtml(convertToRaw(newState.getCurrentContent())));
-  }}
-  toolbar={{
-    colorPicker: { component: ColorPic },
-  }}
-  mention={{
-    separator: ' ',
-    trigger: '@',
-    suggestions: [
-      { text: 'APPLE', value: 'apple', url: 'apple' },
-      { text: 'BANANA', value: 'banana', url: 'banana' },
-      { text: 'CHERRY', value: 'cherry', url: 'cherry' },
-      { text: 'DURIAN', value: 'durian', url: 'durian' },
-      { text: 'EGGFRUIT', value: 'eggfruit', url: 'eggfruit' },
-      { text: 'FIG', value: 'fig', url: 'fig' },
-      { text: 'GRAPEFRUIT', value: 'grapefruit', url: 'grapefruit' },
-      { text: 'HONEYDEW', value: 'honeydew', url: 'honeydew' },
-    ],
-  }}
-/> */
-/* toolbar={{
-            options: ['blockType'],
-            blockType: {
-              inDropdown: false,
-              options: ['Code'],
-            },
-            image: {
-              icon: image,
-              className: undefined,
-              component: undefined,
-              popupClassName: undefined,
-              urlEnabled: true,
-              uploadEnabled: true,
-              alignmentEnabled: true,
-              uploadCallback: undefined,
-              previewImage: false,
-              inputAccept: 'image/gif,image/jpeg,image/jpg,image/png,image/svg',
-              alt: { present: false, mandatory: false },
-              defaultSize: {
-                height: 'auto',
-                width: 'auto',
-              },
-            },
-          }} */
