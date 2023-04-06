@@ -1,5 +1,6 @@
-import Editor from '@draft-js-plugins/editor';
+import Editor, { composeDecorators } from '@draft-js-plugins/editor';
 import {
+  convertFromRaw,
   convertToRaw,
   EditorState,
   getDefaultKeyBinding,
@@ -7,15 +8,95 @@ import {
   RichUtils,
 } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import styled from 'styled-components';
+
+import createAlignmentPlugin from '@draft-js-plugins/alignment';
+import createBlockDndPlugin from '@draft-js-plugins/drag-n-drop';
+import createFocusPlugin from '@draft-js-plugins/focus';
+import createImagePlugin from '@draft-js-plugins/image';
+import createResizeablePlugin from '@draft-js-plugins/resizeable';
 import { createEmptyBlock } from './createEmtypBlock';
 import { SimpleHashtagEditor } from './hashtag';
 
+const alignmentPlugin = createAlignmentPlugin();
+const { AlignmentTool } = alignmentPlugin;
+
+const focusPlugin = createFocusPlugin();
+
+const resizeablePlugin = createResizeablePlugin();
+const blockDndPlugin = createBlockDndPlugin();
+
+const decorator = composeDecorators(
+  resizeablePlugin.decorator,
+  alignmentPlugin.decorator,
+  focusPlugin.decorator,
+  blockDndPlugin.decorator
+);
+/* const colorBlockPlugin = createColorBlockPlugin({ decorator }); */
+const imagePlugin = createImagePlugin({ decorator });
+
+/* const dragNDropFileUploadPlugin = createDragNDropUploadPlugin({
+  handleUpload: Upload,
+  addImage: imagePlugin.addImage,
+});
+ */
+const plugins = [
+  /* dragNDropFileUploadPlugin, */
+  /* colorBlockPlugin, */
+  blockDndPlugin,
+  imagePlugin,
+  resizeablePlugin,
+  alignmentPlugin,
+  focusPlugin,
+];
+const initialState = {
+  entityMap: {
+    0: {
+      type: 'IMAGE',
+      mutability: 'IMMUTABLE',
+      data: {
+        src: '/icons/banner-area.png',
+      },
+    },
+  },
+  blocks: [
+    {
+      key: 'ov7r',
+      text: ' ',
+      type: 'atomic',
+      depth: 0,
+      inlineStyleRanges: [],
+      entityRanges: [
+        {
+          offset: 0,
+          length: 1,
+          key: 0,
+        },
+      ],
+      data: {},
+    },
+    {
+      key: 'e23a8',
+      text: 'See advanced examples further down …',
+      type: 'unstyled',
+      depth: 0,
+      inlineStyleRanges: [],
+      entityRanges: [],
+      data: {},
+    },
+  ],
+};
 export const MainEditor = () => {
   const [editorState, setEditorState] = useState<EditorState>(
-    EditorState.createEmpty()
+    /* EditorState.createEmpty() */
+    EditorState.createWithContent(convertFromRaw(initialState))
   );
+  const editorRef = useRef();
+  const focusEditor = () => {
+    editorRef.current.focus();
+  };
+
   const [content, setContent] = useState<string>('');
   console.log(content);
   const onChange = (onChangeeditorState: EditorState) => {
@@ -78,39 +159,57 @@ export const MainEditor = () => {
   };
 
   /* 3. 박스의 스타일을 지정 */
-  const myBlockStyleFn = (innercontent) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const myBlockStyleFn = (innercontent: any) => {
     const type = innercontent.getType();
     console.log('현제 블록 스타일', type);
     if (type === 'h1') {
       return 'headerFont';
     }
+    /* if (type === 'atomic') {
+      const contentState = editorState.getCurrentContent();
+      const entity = contentState.getEntity(innercontent.getEntityAt(0));
+      const temp = entity.getType();
+      console.log('Vallue');
+      if (temp === 'colorBlock') {
+        console.log('Hello');
+        return {
+          component,
+          editable: false,
+        };
+      }
+    } */
     return null;
   };
 
   return (
     <Wrapper>
       <Container>
-        <EditorWrapper>
+        <EditorWrapper onClick={focusEditor}>
           <Editor
             /*  wrapperClassName='card'
             editorClassName='card-body'
             toolbarClassName='card-toolbar' */
+            wrapperClassName='card'
             editorState={editorState}
             placeholder='내용을 입력해주세요.'
             onChange={onChange}
             handleKeyCommand={handleKeyCommand}
             keyBindingFn={myKeyBindingFn}
             blockStyleFn={myBlockStyleFn}
+            plugins={plugins}
+            ref={editorRef}
           />
+          <AlignmentTool />
         </EditorWrapper>
         <Headers>
           <SimpleHashtagEditor />
           <Buttons>
             <Button>
               <img src='/icons/code.svg' alt='code' />
-              <button type='button' onClick={onToggleCode}>
+              <ButtonNoneStyle type='button' onClick={onToggleCode}>
                 코드 추가
-              </button>
+              </ButtonNoneStyle>
             </Button>
             <Button onClick={onUnderlineClick}>Underline</Button>
           </Buttons>
@@ -123,19 +222,25 @@ export const MainEditor = () => {
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 540px;
+  min-height: 540px;
+  margin-bottom: 60px;
+  padding: 24px;
   background: #ffffff;
   box-shadow: 0px 8px 40px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  padding: 24px;
+`;
+
+const ButtonNoneStyle = styled.button`
+  border: 0;
+  background-color: transparent;
 `;
 const Container = styled.div`
   width: 100%;
   height: 100%;
 `;
 const EditorWrapper = styled.div`
-  height: 424px;
-  overflow: scroll;
+  min-height: 424px;
+  margin-bottom: 20px;
 `;
 const Headers = styled.div`
   position: relative;
