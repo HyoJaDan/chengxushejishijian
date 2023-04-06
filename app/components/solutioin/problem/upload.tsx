@@ -1,15 +1,19 @@
 export default function mockUpload(data, success, failed, progress) {
-  function doProgress(percent) {
-    progress(percent || 1);
-    if (percent === 100) {
-      // Start reading the file
-      Promise.all(data.files.map(readFile)).then((files) =>
-        success(files, { retainSrc: true })
-      );
-    } else {
-      setTimeout(doProgress, 250, (percent || 0) + 10);
-    }
-  }
+  console.log('hello', data.files);
+  const mockResult = data.files.map((f) => ({ name: f.name, src: f.name }));
 
-  doProgress();
+  let intervalId = -1;
+  let currentProgress = 0;
+
+  intervalId = setInterval(() => {
+    if (currentProgress < 100) {
+      currentProgress += 10;
+      progress(currentProgress, mockResult[0]);
+    }
+
+    if (currentProgress === 100) {
+      clearInterval(intervalId);
+      success(mockResult /* , { retainSrc: true } */);
+    }
+  }, 1000);
 }

@@ -13,11 +13,13 @@ import styled from 'styled-components';
 
 import createAlignmentPlugin from '@draft-js-plugins/alignment';
 import createBlockDndPlugin from '@draft-js-plugins/drag-n-drop';
+import createDragNDropUploadPlugin from '@draft-js-plugins/drag-n-drop-upload';
 import createFocusPlugin from '@draft-js-plugins/focus';
 import createImagePlugin from '@draft-js-plugins/image';
 import createResizeablePlugin from '@draft-js-plugins/resizeable';
 import { createEmptyBlock } from './createEmtypBlock';
 import { SimpleHashtagEditor } from './hashtag';
+import mockUpload from './upload';
 
 const alignmentPlugin = createAlignmentPlugin();
 const { AlignmentTool } = alignmentPlugin;
@@ -36,14 +38,14 @@ const decorator = composeDecorators(
 /* const colorBlockPlugin = createColorBlockPlugin({ decorator }); */
 const imagePlugin = createImagePlugin({ decorator });
 
-/* const dragNDropFileUploadPlugin = createDragNDropUploadPlugin({
-  handleUpload: Upload,
+const dragNDropFileUploadPlugin = createDragNDropUploadPlugin({
+  handleUpload: mockUpload,
   addImage: imagePlugin.addImage,
 });
- */
+
 const plugins = [
-  /* dragNDropFileUploadPlugin, */
   /* colorBlockPlugin, */
+  dragNDropFileUploadPlugin,
   blockDndPlugin,
   imagePlugin,
   resizeablePlugin,
@@ -166,19 +168,6 @@ export const MainEditor = () => {
     if (type === 'h1') {
       return 'headerFont';
     }
-    /* if (type === 'atomic') {
-      const contentState = editorState.getCurrentContent();
-      const entity = contentState.getEntity(innercontent.getEntityAt(0));
-      const temp = entity.getType();
-      console.log('Vallue');
-      if (temp === 'colorBlock') {
-        console.log('Hello');
-        return {
-          component,
-          editable: false,
-        };
-      }
-    } */
     return null;
   };
 
