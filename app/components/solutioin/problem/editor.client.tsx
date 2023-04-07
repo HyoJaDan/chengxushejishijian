@@ -42,8 +42,7 @@ const plugins = [
   alignmentPlugin,
   focusPlugin,
 ];
-const Image = (props) => {
-  const { src } = props;
+const Image = ({ src }) => {
   return <img src={src} alt='img' style={styles.media} />;
 };
 export const MainEditor = () => {
@@ -126,27 +125,34 @@ export const MainEditor = () => {
     }
     return null;
   };
-  const handleInsertImage = () => {
-    const contentState = editorState.getCurrentContent();
-    const contentStateWithEntity = contentState.createEntity(
-      'IMAGE',
-      'IMMUTABLE',
-      {
-        src: 'data:image/png;base64,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', // Replace with actual image URL
-        alt: 'Image', // Replace with actual alt text
-      }
-    );
-    const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+  const handleInsertImage = (e) => {
+    const file = e.target.files[0]; // Get the selected image file
+    const reader = new FileReader();
+    console.log(file, reader);
+    reader.onload = (event) => {
+      // Create a new entity for the image
+      const contentState = editorState.getCurrentContent();
+      const contentStateWithEntity = contentState.createEntity(
+        'IMAGE',
+        'IMMUTABLE',
+        {
+          src: event.target.result,
+          alt: 'Example Image',
+        }
+      );
+      const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
 
-    // Insert the image into the editor as an atomic block
-    const newEditorState = AtomicBlockUtils.insertAtomicBlock(
-      editorState,
-      entityKey,
-      ' '
-    );
+      // Insert the image into the editor as an atomic block
+      const newEditorState = AtomicBlockUtils.insertAtomicBlock(
+        editorState,
+        entityKey,
+        ' '
+      );
 
-    // Update the editor state
-    setEditorState(newEditorState);
+      // Update the editor state
+      setEditorState(newEditorState);
+    };
+    reader.readAsDataURL(file);
   };
 
   const Media = (props) => {
@@ -201,7 +207,16 @@ export const MainEditor = () => {
                 코드 추가
               </ButtonNoneStyle>
             </Button>
-            <Button onClick={handleInsertImage}>사진 추가</Button>
+            <ButtonStyle>
+              <Label htmlFor='ex_file'>
+                사진 추가
+                <FileNoneStyle
+                  type='file'
+                  id='ex_file'
+                  onChange={handleInsertImage}
+                />
+              </Label>
+            </ButtonStyle>
           </Buttons>
           <Button onClick={onUnderlineClick}>제출하기</Button>
         </Headers>
@@ -224,6 +239,17 @@ const ButtonNoneStyle = styled.button`
   border: 0;
   background-color: transparent;
 `;
+const FileNoneStyle = styled.input`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+`;
+const Label = styled.label``;
 const Container = styled.div`
   width: 100%;
   height: 100%;
@@ -231,6 +257,7 @@ const Container = styled.div`
 const EditorWrapper = styled.div`
   min-height: 424px;
   margin-bottom: 20px;
+  cursor: text;
 `;
 const Headers = styled.div`
   position: relative;
@@ -255,6 +282,29 @@ const Button = styled.div`
   height: 44px;
   background: #f8f6f4;
   border-radius: 100px;
+  &:hover {
+    background-color: ${(prop) => prop.theme.color.basic.white};
+    border: 1px solid #a4a2a0;
+  }
+  &:active {
+    background: #ffffff;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
+    border: none;
+  }
+`;
+const ButtonStyle = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  gap: 12px;
+  width: 128px;
+  height: 44px;
+  background: #f8f6f4;
+  border-radius: 100px;
+  border: 0;
+
   &:hover {
     background-color: ${(prop) => prop.theme.color.basic.white};
     border: 1px solid #a4a2a0;
