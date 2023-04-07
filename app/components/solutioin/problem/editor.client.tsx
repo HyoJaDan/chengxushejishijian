@@ -233,6 +233,7 @@ const Wrapper = styled.div`
   background: #ffffff;
   box-shadow: 0px 8px 40px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
+  z-index: 0;
 `;
 
 const ButtonNoneStyle = styled.button`

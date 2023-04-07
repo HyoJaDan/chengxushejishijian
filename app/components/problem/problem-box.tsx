@@ -18,7 +18,7 @@ export const TrainBox = (data: IProblems, index: number, width: number) => {
           <Text>{lessonLikes}</Text>
         </Count>
         <Count>
-          <Img src='/icons/problem/like.svg' alt='icon' />
+          <Img src='/icons/problem/likes.svg' alt='icon' />
           <Text>{lessonSolutions}</Text>
         </Count>
         <Count>
