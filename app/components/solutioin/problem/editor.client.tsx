@@ -1,6 +1,6 @@
 import Editor, { composeDecorators } from '@draft-js-plugins/editor';
 import {
-  convertFromRaw,
+  AtomicBlockUtils,
   convertToRaw,
   EditorState,
   getDefaultKeyBinding,
@@ -13,13 +13,11 @@ import styled from 'styled-components';
 
 import createAlignmentPlugin from '@draft-js-plugins/alignment';
 import createBlockDndPlugin from '@draft-js-plugins/drag-n-drop';
-import createDragNDropUploadPlugin from '@draft-js-plugins/drag-n-drop-upload';
 import createFocusPlugin from '@draft-js-plugins/focus';
 import createImagePlugin from '@draft-js-plugins/image';
 import createResizeablePlugin from '@draft-js-plugins/resizeable';
 import { createEmptyBlock } from './createEmtypBlock';
 import { SimpleHashtagEditor } from './hashtag';
-import mockUpload from './upload';
 
 const alignmentPlugin = createAlignmentPlugin();
 const { AlignmentTool } = alignmentPlugin;
@@ -35,64 +33,22 @@ const decorator = composeDecorators(
   focusPlugin.decorator,
   blockDndPlugin.decorator
 );
-/* const colorBlockPlugin = createColorBlockPlugin({ decorator }); */
 const imagePlugin = createImagePlugin({ decorator });
 
-const dragNDropFileUploadPlugin = createDragNDropUploadPlugin({
-  handleUpload: mockUpload,
-  addImage: imagePlugin.addImage,
-});
-
 const plugins = [
-  /* colorBlockPlugin, */
-  dragNDropFileUploadPlugin,
   blockDndPlugin,
   imagePlugin,
   resizeablePlugin,
   alignmentPlugin,
   focusPlugin,
 ];
-const initialState = {
-  entityMap: {
-    0: {
-      type: 'IMAGE',
-      mutability: 'IMMUTABLE',
-      data: {
-        src: '/icons/banner-area.png',
-      },
-    },
-  },
-  blocks: [
-    {
-      key: 'ov7r',
-      text: ' ',
-      type: 'atomic',
-      depth: 0,
-      inlineStyleRanges: [],
-      entityRanges: [
-        {
-          offset: 0,
-          length: 1,
-          key: 0,
-        },
-      ],
-      data: {},
-    },
-    {
-      key: 'e23a8',
-      text: 'See advanced examples further down …',
-      type: 'unstyled',
-      depth: 0,
-      inlineStyleRanges: [],
-      entityRanges: [],
-      data: {},
-    },
-  ],
+const Image = (props) => {
+  const { src } = props;
+  return <img src={src} alt='img' style={styles.media} />;
 };
 export const MainEditor = () => {
   const [editorState, setEditorState] = useState<EditorState>(
-    /* EditorState.createEmpty() */
-    EditorState.createWithContent(convertFromRaw(initialState))
+    EditorState.createEmpty()
   );
   const editorRef = useRef();
   const focusEditor = () => {
@@ -170,15 +126,59 @@ export const MainEditor = () => {
     }
     return null;
   };
+  const handleInsertImage = () => {
+    const contentState = editorState.getCurrentContent();
+    const contentStateWithEntity = contentState.createEntity(
+      'IMAGE',
+      'IMMUTABLE',
+      {
+        src: 'data:image/png;base64,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', // Replace with actual image URL
+        alt: 'Image', // Replace with actual alt text
+      }
+    );
+    const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
 
+    // Insert the image into the editor as an atomic block
+    const newEditorState = AtomicBlockUtils.insertAtomicBlock(
+      editorState,
+      entityKey,
+      ' '
+    );
+
+    // Update the editor state
+    setEditorState(newEditorState);
+  };
+
+  const Media = (props) => {
+    console.log(props, 'helo');
+    const entity = props.contentState.getEntity(props.block.getEntityAt(0));
+    const { src } = entity.getData();
+    const type = entity.getType();
+
+    let media;
+    if (type === 'image') {
+      media = <Image src={src} />;
+    }
+
+    return media;
+  };
+
+  const mediaBlockRenderer = (block) => {
+    if (block.getType() === 'atomic') {
+      console.log('hello! atomic');
+      return {
+        component: Media,
+        editable: false,
+      };
+    }
+
+    return null;
+  };
   return (
     <Wrapper>
       <Container>
         <EditorWrapper onClick={focusEditor}>
           <Editor
-            /*  wrapperClassName='card'
-            editorClassName='card-body'
-            toolbarClassName='card-toolbar' */
             wrapperClassName='card'
             editorState={editorState}
             placeholder='내용을 입력해주세요.'
@@ -186,6 +186,7 @@ export const MainEditor = () => {
             handleKeyCommand={handleKeyCommand}
             keyBindingFn={myKeyBindingFn}
             blockStyleFn={myBlockStyleFn}
+            blockRendererFn={mediaBlockRenderer}
             plugins={plugins}
             ref={editorRef}
           />
@@ -200,9 +201,9 @@ export const MainEditor = () => {
                 코드 추가
               </ButtonNoneStyle>
             </Button>
-            <Button onClick={onUnderlineClick}>Underline</Button>
+            <Button onClick={handleInsertImage}>사진 추가</Button>
           </Buttons>
-          <Button onClick={onUnderlineClick}>Underline</Button>
+          <Button onClick={onUnderlineClick}>제출하기</Button>
         </Headers>
       </Container>
     </Wrapper>
