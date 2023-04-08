@@ -19,8 +19,10 @@ export const Url = ({
   fields,
   append,
   remove,
+  /** 왼쪽에 내가 선택한 이모티콘들 을 나타낸다. */
   urls,
   setUrls,
+  /** 받아온 이미지가 뭐뭐가 있는지. */
   URLImages,
 }: IURL) => {
   const content = fields.map((field: any, index: number) => {

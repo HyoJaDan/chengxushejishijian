@@ -1,22 +1,23 @@
 import { useNavigate } from '@remix-run/react';
 import axios from 'axios';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import InputUserArea from '~/components/account-info/input-area-button';
-import InputUserInterests from '~/components/account-info/input-interest';
-import { localStorageData, userId } from '~/data/user/common/login-information';
-import type { IUserDataAccountInfo } from '~/models/user';
-
 import { memberDataAdress } from '~/data/constants/adress';
-import { userJobPoolSelector } from '~/data/user/user-data';
+import { localStorageData, userId } from '~/data/user/common/login-information';
+
+import type { IUserDataAccountInfo } from '~/models/user';
 import InputUserName from '../components/account-info/input-name';
 
 export default function Detail() {
   const navigate = useNavigate();
-
   const localData = useRecoilValue(localStorageData);
-  const [useUserJobPool, setUserJobPool] = useRecoilState(userJobPoolSelector);
+  const [userJobPool, setUserJobPool] = useState<
+    '개발' | '디자인' | 'false' | 'initialData'
+  >('initialData');
+  console.log(userJobPool);
   const id = useRecoilValue(userId);
   const {
     register,
@@ -29,12 +30,12 @@ export default function Detail() {
     },
   });
   const onValid = (data: IUserDataAccountInfo) => {
-    if (useUserJobPool !== 'false' && useUserJobPool !== '프로덕트 디자이너') {
+    if (userJobPool !== 'initialData') {
       axios.patch(
         `${memberDataAdress}/${id}`,
         {
           nickname: data.userNickName,
-          job: useUserJobPool,
+          job: userJobPool,
           status: 1,
         },
         {
@@ -44,7 +45,9 @@ export default function Detail() {
         }
       );
       navigate('/');
-    } else setUserJobPool('false');
+    } else {
+      setUserJobPool('false');
+    }
   };
   return (
     <Background>
@@ -55,8 +58,10 @@ export default function Detail() {
         </Head>
         <Form onSubmit={handleSubmit(onValid)}>
           <InputUserName register={register} errors={errors} watch={watch} />
-          <InputUserArea />
-          <InputUserInterests register={register} />
+          <InputUserArea
+            userJobPool={userJobPool}
+            setUserJobPool={setUserJobPool}
+          />
           <ButtonDiv>
             <Btn className='body1_BD'>완료</Btn>
           </ButtonDiv>

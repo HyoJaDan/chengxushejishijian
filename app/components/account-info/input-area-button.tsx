@@ -1,14 +1,15 @@
 /* eslint-disable no-param-reassign */
-import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { userJobPoolSelector } from '~/data/user/user-data';
 
 interface IButton {
   name: string;
 }
-
-export default function InputUserArea() {
-  const [userJobpool, setUserJobPool] = useRecoilState(userJobPoolSelector);
+interface IData {
+  userJobPool: '개발' | '디자인' | 'false' | 'initialData';
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  setUserJobPool: any;
+}
+export default function InputUserArea({ userJobPool, setUserJobPool }: IData) {
   const buttons: IButton[] = [{ name: '개발' }, { name: '디자인' }];
   const button = buttons.map(({ name }, index) => {
     const id = `button_${index}`;
@@ -17,7 +18,7 @@ export default function InputUserArea() {
         key={id}
         type='button'
         className={
-          userJobpool === name
+          userJobPool === name
             ? 'chooseAreaButtonActive'
             : 'chooseAreaButtonNotActive'
         }
@@ -29,11 +30,12 @@ export default function InputUserArea() {
       </Pool>
     );
   });
+  console.log(userJobPool);
   return (
     <InputArea>
       <div className='body1_BD'>직업 분야</div>
       <InputUsrPool>{button}</InputUsrPool>
-      {userJobpool === 'false' ? (
+      {userJobPool === 'false' ? (
         <Errmessage>직업 분야를 선택해 주세요.</Errmessage>
       ) : (
         <Errmessage />

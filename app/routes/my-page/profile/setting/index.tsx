@@ -6,12 +6,9 @@ import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { Url } from '~/components/myPage/profile/setting/url';
 import { memberDataAdress } from '~/data/constants/adress';
-import {
-  localStorageData,
-  userAccessToken,
-  userId,
-} from '~/data/user/common/login-information';
+import { userAccessToken, userId } from '~/data/user/common/login-information';
 import type { IURLImage } from '~/data/user/url-image';
+import { getURLImage } from '~/data/user/url-image';
 import { useManageUserInformation } from '~/hooks/manage-userinformation';
 import SSRSafeSuspense from '~/hooks/ssr-safe-suspense';
 
@@ -54,69 +51,7 @@ function InputForm() {
     control,
   });
   const [avatarPreview, setAvatarPreview] = useState('');
-  /* const URLImages = useRecoilValue(getURLImage); */
-  const URLImages = [
-    {
-      id: 1,
-      socialDomain: '',
-      name: 'etc',
-      iconPath: 'uploads/member-sns-icon/etc.svg',
-      createdAt: '2023-04-08T05:52:31.690Z',
-      updatedAt: '2023-04-08T05:52:31.690Z',
-      deletedAt: null,
-      iconUrl: 'https://api.thepool.kr/uploads/member-sns-icon/etc.svg',
-    },
-    {
-      id: 2,
-      socialDomain: 'https://instagram.com',
-      name: 'instagram',
-      iconPath: 'uploads/member-sns-icon/instagram.svg',
-      createdAt: '2023-04-08T05:52:31.690Z',
-      updatedAt: '2023-04-08T05:52:31.690Z',
-      deletedAt: null,
-      iconUrl: 'https://api.thepool.kr/uploads/member-sns-icon/instagram.svg',
-    },
-    {
-      id: 3,
-      socialDomain: 'https://behance.net',
-      name: 'behance',
-      iconPath: 'uploads/member-sns-icon/behance.svg',
-      createdAt: '2023-04-08T05:52:31.690Z',
-      updatedAt: '2023-04-08T05:52:31.690Z',
-      deletedAt: null,
-      iconUrl: 'https://api.thepool.kr/uploads/member-sns-icon/behance.svg',
-    },
-    {
-      id: 4,
-      socialDomain: 'https://notion.so',
-      name: 'notion',
-      iconPath: 'uploads/member-sns-icon/notion.svg',
-      createdAt: '2023-04-08T05:52:31.690Z',
-      updatedAt: '2023-04-08T05:52:31.690Z',
-      deletedAt: null,
-      iconUrl: 'https://api.thepool.kr/uploads/member-sns-icon/notion.svg',
-    },
-    {
-      id: 5,
-      socialDomain: 'https://linkedin.com',
-      name: 'linkedin',
-      iconPath: 'uploads/member-sns-icon/linkedin.svg',
-      createdAt: '2023-04-08T05:52:31.690Z',
-      updatedAt: '2023-04-08T05:52:31.690Z',
-      deletedAt: null,
-      iconUrl: 'https://api.thepool.kr/uploads/member-sns-icon/linkedin.svg',
-    },
-    {
-      id: 6,
-      socialDomain: 'https://github.com',
-      name: 'github',
-      iconPath: 'uploads/member-sns-icon/github.svg',
-      createdAt: '2023-04-08T05:52:31.690Z',
-      updatedAt: '2023-04-08T05:52:31.690Z',
-      deletedAt: null,
-      iconUrl: 'https://api.thepool.kr/uploads/member-sns-icon/github.svg',
-    },
-  ];
+  const URLImages = useRecoilValue(getURLImage);
   const [urls, setUrls] = useState<IURLs[]>([
     {
       nowURLImage: URLImages[0],
