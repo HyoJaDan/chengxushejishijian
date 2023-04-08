@@ -210,6 +210,7 @@ export const MainEditor = () => {
             <ButtonStyle>
               <Label htmlFor='ex_file'>
                 사진 추가
+                <img src='/icons/problem/ic.svg' alt='temp' />
                 <FileNoneStyle
                   type='file'
                   id='ex_file'

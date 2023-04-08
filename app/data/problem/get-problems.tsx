@@ -5,7 +5,7 @@ import type { IProblems } from '~/models/problem/problems';
 
 export const categoryId = atom<string>({
   key: 'category-id',
-  default: 'lessonSolutions',
+  default: 'createdAt',
 });
 
 export const getProblems = selectorFamily<IProblems[], string>({

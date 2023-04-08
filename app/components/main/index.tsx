@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { categoryId, getProblems } from '~/data/problem/get-problems';

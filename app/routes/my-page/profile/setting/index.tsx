@@ -12,7 +12,6 @@ import {
   userId,
 } from '~/data/user/common/login-information';
 import type { IURLImage } from '~/data/user/url-image';
-import { getURLImage } from '~/data/user/url-image';
 import { useManageUserInformation } from '~/hooks/manage-userinformation';
 import SSRSafeSuspense from '~/hooks/ssr-safe-suspense';
 
@@ -31,13 +30,16 @@ export interface IURLs {
   nowURLImage: IURLImage;
   isTrue: boolean;
 }
-
+interface IURL {
+  type: number;
+  url: string;
+}
 function InputForm() {
   const navigate = useNavigate();
   const data = useManageUserInformation();
   const id = useRecoilValue(userId);
+  console.log(data);
   const accessToken = useRecoilValue(userAccessToken);
-  const localData = useRecoilValue(localStorageData);
   const ImgURL = useRef('');
   const { register, handleSubmit, watch, control } = useForm<IData>({
     defaultValues: {
@@ -52,7 +54,69 @@ function InputForm() {
     control,
   });
   const [avatarPreview, setAvatarPreview] = useState('');
-  const URLImages = useRecoilValue(getURLImage);
+  /* const URLImages = useRecoilValue(getURLImage); */
+  const URLImages = [
+    {
+      id: 1,
+      socialDomain: '',
+      name: 'etc',
+      iconPath: 'uploads/member-sns-icon/etc.svg',
+      createdAt: '2023-04-08T05:52:31.690Z',
+      updatedAt: '2023-04-08T05:52:31.690Z',
+      deletedAt: null,
+      iconUrl: 'https://api.thepool.kr/uploads/member-sns-icon/etc.svg',
+    },
+    {
+      id: 2,
+      socialDomain: 'https://instagram.com',
+      name: 'instagram',
+      iconPath: 'uploads/member-sns-icon/instagram.svg',
+      createdAt: '2023-04-08T05:52:31.690Z',
+      updatedAt: '2023-04-08T05:52:31.690Z',
+      deletedAt: null,
+      iconUrl: 'https://api.thepool.kr/uploads/member-sns-icon/instagram.svg',
+    },
+    {
+      id: 3,
+      socialDomain: 'https://behance.net',
+      name: 'behance',
+      iconPath: 'uploads/member-sns-icon/behance.svg',
+      createdAt: '2023-04-08T05:52:31.690Z',
+      updatedAt: '2023-04-08T05:52:31.690Z',
+      deletedAt: null,
+      iconUrl: 'https://api.thepool.kr/uploads/member-sns-icon/behance.svg',
+    },
+    {
+      id: 4,
+      socialDomain: 'https://notion.so',
+      name: 'notion',
+      iconPath: 'uploads/member-sns-icon/notion.svg',
+      createdAt: '2023-04-08T05:52:31.690Z',
+      updatedAt: '2023-04-08T05:52:31.690Z',
+      deletedAt: null,
+      iconUrl: 'https://api.thepool.kr/uploads/member-sns-icon/notion.svg',
+    },
+    {
+      id: 5,
+      socialDomain: 'https://linkedin.com',
+      name: 'linkedin',
+      iconPath: 'uploads/member-sns-icon/linkedin.svg',
+      createdAt: '2023-04-08T05:52:31.690Z',
+      updatedAt: '2023-04-08T05:52:31.690Z',
+      deletedAt: null,
+      iconUrl: 'https://api.thepool.kr/uploads/member-sns-icon/linkedin.svg',
+    },
+    {
+      id: 6,
+      socialDomain: 'https://github.com',
+      name: 'github',
+      iconPath: 'uploads/member-sns-icon/github.svg',
+      createdAt: '2023-04-08T05:52:31.690Z',
+      updatedAt: '2023-04-08T05:52:31.690Z',
+      deletedAt: null,
+      iconUrl: 'https://api.thepool.kr/uploads/member-sns-icon/github.svg',
+    },
+  ];
   const [urls, setUrls] = useState<IURLs[]>([
     {
       nowURLImage: URLImages[0],
@@ -84,9 +148,20 @@ function InputForm() {
         /* console.log('res', res.data.url); */
         return res.data.url;
       });
-    } else if (localData.img !== '') {
-      ImgURL.current = localData.img as string;
+    } else if (data.thumbnail !== '') {
+      ImgURL.current = data.thumbnail as string;
     }
+    const URLs: IURL[] = [];
+    inputData.URL.forEach(({ adress }, idx) => {
+      if (adress !== '') {
+        console.log(adress, idx);
+        URLs.push({
+          type: urls[idx].nowURLImage.id,
+          url: adress,
+        });
+      }
+    });
+    console.log(URLs);
     axios.patch(
       `${memberDataAdress}/${id}`,
       {
@@ -95,6 +170,7 @@ function InputForm() {
         job: inputData.userJobPool,
         thumbnail: ImgURL.current,
         status: 1,
+        memberSocialLinks: URLs,
       },
       {
         headers: {
