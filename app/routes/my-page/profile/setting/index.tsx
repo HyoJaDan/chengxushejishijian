@@ -27,37 +27,52 @@ export interface IURLs {
   nowURLImage: IURLImage;
   isTrue: boolean;
 }
-interface IURL {
+interface InputOnValidURL {
   type: number;
   url: string;
 }
 function InputForm() {
+  /** 유저의 정보 */
   const navigate = useNavigate();
   const data = useManageUserInformation();
+  const { memberSocialLinkMappings } = data;
   const id = useRecoilValue(userId);
-  console.log(data);
   const accessToken = useRecoilValue(userAccessToken);
-  const ImgURL = useRef('');
+
+  /** URL의 이미지 정보 */
+  const URLImages = useRecoilValue(getURLImage);
+  const initialURL: IURLs[] = [{ nowURLImage: URLImages[0], isTrue: true }];
+  /** 유저의 정보와 URL 이미지 정보 가공 */
+  const initialURLAdress: [{ adress: string }] = [{ adress: '' }];
+  for (let i = 0; i < memberSocialLinkMappings.length; i += 1) {
+    initialURL[i] = {
+      nowURLImage:
+        URLImages[memberSocialLinkMappings[i].memberSocialLinkId - 1],
+      isTrue: true,
+    };
+    initialURLAdress[i] = { adress: memberSocialLinkMappings[i].url };
+  }
+  /** URL 이미지 초기화 */
+  const [urls, setUrls] = useState<IURLs[]>(initialURL);
+
+  /** react-hook-form 사용 */
   const { register, handleSubmit, watch, control } = useForm<IData>({
     defaultValues: {
       userName: data.nickname ? data.nickname : '',
       userJobPool: data.job ? data.job : '',
       self_introduction: data.introduce ? data.introduce : '',
-      URL: [{ adress: '' }],
+      /** URL 주소 초기화 */
+      URL: initialURLAdress,
     },
   });
   const { fields, append, remove } = useFieldArray({
     name: 'URL',
     control,
   });
+
+  /** 이미지 사용 */
+  const ImgURL = useRef('');
   const [avatarPreview, setAvatarPreview] = useState('');
-  const URLImages = useRecoilValue(getURLImage);
-  const [urls, setUrls] = useState<IURLs[]>([
-    {
-      nowURLImage: URLImages[0],
-      isTrue: true,
-    },
-  ]);
   const avatar = watch('image');
   useEffect(() => {
     if (avatar && avatar.length > 0) {
@@ -65,9 +80,9 @@ function InputForm() {
       setAvatarPreview(URL.createObjectURL(file));
     }
   }, [avatar]);
+
+  /** 입력받았을떄 */
   const onValid = async (inputData: IData) => {
-    console.log('vallow', urls);
-    console.log('hello', inputData);
     if (inputData?.image[0]) {
       const formData = new FormData();
       formData.append('data', inputData?.image[0]);
@@ -80,23 +95,20 @@ function InputForm() {
           Authorization: `Bearer ${accessToken}`,
         },
       }).then((res) => {
-        /* console.log('res', res.data.url); */
         return res.data.url;
       });
     } else if (data.thumbnail !== '') {
       ImgURL.current = data.thumbnail as string;
     }
-    const URLs: IURL[] = [];
+    const URLs: InputOnValidURL[] = [];
     inputData.URL.forEach(({ adress }, idx) => {
       if (adress !== '') {
-        console.log(adress, idx);
         URLs.push({
           type: urls[idx].nowURLImage.id,
           url: adress,
         });
       }
     });
-    console.log(URLs);
     axios.patch(
       `${memberDataAdress}/${id}`,
       {

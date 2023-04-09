@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import type { IURLImage } from '~/data/user/url-image';
-import type { IURLs } from './url';
+import type { IURLs } from '~/routes/my-page/profile/setting';
 
 interface IOutPutURLImg {
   image: IURLImage[];
@@ -18,7 +18,6 @@ export const OutputURLImg = ({
 }: IOutPutURLImg) => {
   const ImgMap = image.map((value: IURLImage) => {
     const keyId = `${value.id}_${value.name}`;
-
     return (
       <Img
         key={keyId}

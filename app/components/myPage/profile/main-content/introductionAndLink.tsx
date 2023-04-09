@@ -1,10 +1,26 @@
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
+import { getURLImage } from '~/data/user/url-image';
 import { getUserData } from '~/data/user/user-data';
 
 export default function IntroductionAndLink() {
   const user = useRecoilValue(getUserData);
-  if (user !== false)
+  const URLImages = useRecoilValue(getURLImage);
+  if (user !== false) {
+    const { memberSocialLinkMappings } = user;
+    const outputLinks = memberSocialLinkMappings.map(
+      ({ id, memberSocialLinkId, url }, index) => {
+        const idx = `${id}_${index}`;
+        return (
+          <Box key={idx}>
+            <Image src={URLImages[memberSocialLinkId - 1].iconUrl} alt='icon' />
+            <Border />
+            <Link href={url}>{url}</Link>
+          </Box>
+        );
+      }
+    );
+
     return (
       <Wrapper>
         <Wrap>
@@ -12,11 +28,13 @@ export default function IntroductionAndLink() {
           <DefaultFont className='body3_MD' defaultValue={user.introduce} />
         </Wrap>
         <Line />
-        <Wrap>
+        <LinkWrap>
           <Title className='body1_BD'>링크</Title>
-        </Wrap>
+          <LinkWrapper className='caption1_SB'>{outputLinks}</LinkWrapper>
+        </LinkWrap>
       </Wrapper>
     );
+  }
 }
 
 const Wrapper = styled.div`
@@ -31,10 +49,13 @@ const Wrapper = styled.div`
   padding: 32px;
 `;
 const Wrap = styled.div`
-  min-height: 164px;
+  min-height: 180px;
   display: flex;
   flex-direction: column;
   gap: 24px;
+`;
+const LinkWrap = styled(Wrap)`
+  min-height: 140px;
 `;
 const Line = styled.div`
   border: 1px solid ${(prop) => prop.theme.color.grayScale.gray_300};
@@ -50,4 +71,34 @@ const DefaultFont = styled.textarea`
 
 const Title = styled.div`
   color: ${(prop) => prop.theme.color.grayScale.gray_900};
+`;
+const Box = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 8px;
+
+  width: fit-content;
+  height: 36px;
+
+  background: #ffffff;
+  /* grayscale/300 */
+
+  border: 1px solid #dddad7;
+  border-radius: 8px;
+`;
+const LinkWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+const Image = styled.img``;
+const Link = styled.a`
+  color: ${(prop) => prop.theme.color.primary.blue.blue_600};
+`;
+const Border = styled.div`
+  background: #d9d9d9;
+  width: 1px;
+  height: 20px;
 `;

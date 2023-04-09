@@ -12,6 +12,15 @@ export interface IUserData {
   createdAt: string;
   updatedAt: string;
   deletedAt: null;
+  memberSocialLinkMappings: [
+    {
+      id: number;
+      createdAt: string;
+      memberId: number;
+      memberSocialLinkId: number;
+      url: string;
+    }
+  ];
 }
 
 export interface IUserDataAccountInfo {

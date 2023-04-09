@@ -29,7 +29,7 @@ const Wrapper = styled.nav`
   background-color: ${(prop) => prop.theme.color.basic.white};
 
   color: ${(prop) => prop.theme.color.basic.black};
-  z-index: 1;
+  z-index: 2;
   border-bottom: 1px solid #efedea;
 `;
 

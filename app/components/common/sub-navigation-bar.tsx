@@ -47,7 +47,7 @@ const Wrapper = styled.div`
   position: sticky;
   height: 62px;
   top: 72px;
-  z-index: 5;
+  z-index: 1;
 `;
 const FlexWrapper = styled.div`
   width: min(100%, 1256px);

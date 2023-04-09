@@ -101,7 +101,7 @@ const Page = styled.div<{ isTrue: boolean }>`
   border-radius: 8px;
   background: #ffffff;
   box-shadow: 5px 5px 4px #d9d9d9, 5px 5px 18px #d9d9d9;
-  z-index: 3;
+  z-index: 10;
 
   &:before {
     border-bottom: 26px solid #ffffff;

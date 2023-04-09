@@ -43,7 +43,7 @@ export const userId = selector({
     }));
   },
 });
-export const userAccessToken = selector({
+export const userAccessToken = selector<string>({
   key: 'userAccessToken',
   get: ({ get }) => get(localStorageData).accessToken,
   set: ({ set }, newValue) => {
