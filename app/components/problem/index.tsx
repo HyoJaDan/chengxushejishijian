@@ -23,7 +23,7 @@ export const ProblemMain = () => {
         <MainContent problemData={problemData} hashTags={hashTags} />
         <WaitAnswer id={params.id as string} />
         <SimilerTraining id={problemData.lessonCategory.id} />
-        <Comment id={params.id as string} />
+        <Comment problemId={params.id as string} />
       </FlexBox>
       <Banner
         isBookmark={problemData.isBookmark as boolean}

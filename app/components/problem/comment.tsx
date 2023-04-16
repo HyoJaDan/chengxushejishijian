@@ -1,40 +1,80 @@
-import { useNavigate } from '@remix-run/react';
 import axios from 'axios';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { lessonAddress } from '~/data/constants/adress';
-import { userAccessToken } from '~/data/user/common/login-information';
+import { commentAtom } from '~/data/problem/commits';
+import {
+  loginStatus,
+  userAccessToken,
+} from '~/data/user/common/login-information';
+import type { IComments } from '~/models/problem/comments';
+import { otherComments } from './comment-other';
 
-export const Comment = ({ id }: { id: string }) => {
+export const Comment = ({ problemId }: { problemId: string }) => {
   const { register, handleSubmit } = useForm();
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
   const accessToken = useRecoilValue(userAccessToken);
-  const navigate = useNavigate();
-  const onValid = () => {
-    if (textAreaRef.current !== null) {
-      axios.post(
-        `${lessonAddress}/${id}/comments`,
-        {
-          description: textAreaRef.current.value,
-        },
-        {
+  const [comments, setComments] = useRecoilState(commentAtom);
+  const setLoginStatus = useSetRecoilState(loginStatus);
+  const outputComments = otherComments(comments);
+  useEffect(() => {
+    async function constructor() {
+      const inputedComments: IComments[] = await axios
+        .get(`${lessonAddress}/${problemId}/comments`, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
-        }
-      );
+        })
+        .then((response) => {
+          return response.data.lessonComments;
+        })
+        .catch(() => {
+          return false;
+        });
+      setComments(inputedComments);
     }
-    textAreaRef.current = null;
-    navigate(`/training/${id}`);
+    constructor();
+  }, []);
+
+  const onValid = async () => {
+    if (textAreaRef.current !== null) {
+      const inputedValue = textAreaRef.current.value;
+      await axios
+        .post(
+          `${lessonAddress}/${problemId}/comments`,
+          {
+            description: inputedValue,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        )
+        .then((res) => {
+          const tempComments = JSON.parse(JSON.stringify(comments));
+          tempComments.unshift(res.data.lessonComment);
+          setComments(tempComments);
+          textAreaRef.current.style.height = 'auto';
+          textAreaRef.current.value = '';
+        })
+        .catch((error) => {
+          if (error.request.status === 401) {
+            setLoginStatus('unLogin');
+          }
+        });
+    }
   };
+
   const handleResizeHeight = () => {
     if (textAreaRef.current !== null) {
       textAreaRef.current.style.height = 'auto';
       textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
     }
   };
+
   return (
     <Wrapper>
       <Header className='body1_BD'>댓글</Header>
@@ -51,6 +91,7 @@ export const Comment = ({ id }: { id: string }) => {
           <Button className='body3_SB'>댓글 등록</Button>
         </ButtonFlex>
       </Form>
+      <OtherComment>{outputComments}</OtherComment>
     </Wrapper>
   );
 };
@@ -96,9 +137,9 @@ const ButtonFlex = styled.div`
   width: -webkit-fill-available;
 `;
 const Button = styled.button`
+  justify-content: center;
   display: flex;
   align-items: center;
-  justify-content: center;
   padding: 8px 16px;
   gap: 8px;
   border: 1px solid ${(prop) => prop.theme.color.grayScale.gray_300};
@@ -111,4 +152,9 @@ const Button = styled.button`
   &:hover {
     color: #2478f6;
   }
+`;
+const OtherComment = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 `;
