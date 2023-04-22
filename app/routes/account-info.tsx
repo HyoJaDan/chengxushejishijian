@@ -17,7 +17,6 @@ export default function Detail() {
   const [userJobPool, setUserJobPool] = useState<
     '개발' | '디자인' | 'false' | 'initialData'
   >('initialData');
-  console.log(userJobPool);
   const id = useRecoilValue(userId);
   const {
     register,

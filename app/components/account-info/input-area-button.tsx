@@ -30,7 +30,7 @@ export default function InputUserArea({ userJobPool, setUserJobPool }: IData) {
       </Pool>
     );
   });
-  console.log(userJobPool);
+
   return (
     <InputArea>
       <div className='body1_BD'>직업 분야</div>

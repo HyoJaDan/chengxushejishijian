@@ -9,7 +9,7 @@ export const otherComments = (comments: IComments[]) => {
     const uploadTime = `${kstDate.getFullYear()}.${
       kstDate.getMonth() + 1
     }.${kstDate.getDate()} ${kstDate.getHours()}:${kstDate.getMinutes()}`;
-    console.log(description);
+
     const { nickname, job, thumbnail } = member;
     const CommentImg = () => {
       if (thumbnail === null) {
@@ -17,7 +17,7 @@ export const otherComments = (comments: IComments[]) => {
       }
       return <Img src={thumbnail} alt='thumbnail' />;
     };
-    console.log('des', description);
+
     return (
       <OtherCommentWrapper key={Idx}>
         {CommentImg()}

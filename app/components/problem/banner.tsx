@@ -15,14 +15,13 @@ export const Banner = ({ isBookmark, isLike, id }: IGetData) => {
   const localData = useRecoilValue(localStorageData);
   const clickBookmark = () => {
     if (isLike) {
-      console.log(isLike, localData);
       axios.delete(`${lessonAddress}/${id}/likes`, {
         headers: {
           Authorization: `Bearer ${localData.accessToken}`,
         },
       });
     }
-    console.log(isLike, localData);
+
     axios.post(`${lessonAddress}/${id}/likes`, {
       headers: {
         Authorization: `Bearer ${localData.accessToken}`,
