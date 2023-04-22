@@ -17,6 +17,7 @@ export const otherComments = (comments: IComments[]) => {
       }
       return <Img src={thumbnail} alt='thumbnail' />;
     };
+    console.log('des', description);
     return (
       <OtherCommentWrapper key={Idx}>
         {CommentImg()}
@@ -26,11 +27,7 @@ export const otherComments = (comments: IComments[]) => {
             <Job>·</Job>
             <Job className='caption1_RG'>{job}</Job>
           </OtherCommentName>
-          <OtherCommentDescription
-            className='body3_MD'
-            defaultValue={description}
-            /* style={{ height: '243px' }} */
-          />
+          <PreWrap className='body3_MD'>{description}</PreWrap>
           <OtherCommentDate className='caption2_RG'>
             {uploadTime}
           </OtherCommentDate>
@@ -59,14 +56,7 @@ const OtherCommentName = styled.div`
   align-items: center;
   gap: 4px;
 `;
-const OtherCommentDescription = styled.textarea`
-  color: ${(prop) => prop.theme.color.grayScale.gray_800};
-  outline: none;
-  border: none;
-  resize: none;
-  height: auto;
-  overflow: visible;
-`;
+
 const ThumbnailWrapper = styled.div`
   width: 36px;
   height: 36px;
@@ -80,4 +70,8 @@ const Img = styled.img`
 `;
 const Job = styled.div`
   color: ${(prop) => prop.theme.color.grayScale.gray_700};
+`;
+
+const PreWrap = styled.div`
+  white-space: pre-wrap;
 `;

@@ -25,7 +25,7 @@ export default function IntroductionAndLink() {
       <Wrapper>
         <Wrap>
           <Title className='body1_BD'>소개</Title>
-          <DefaultFont className='body3_MD' defaultValue={user.introduce} />
+          <PreWrap className='body3_MD'>{user.introduce}</PreWrap>
         </Wrap>
         <Line />
         <LinkWrap>
@@ -68,7 +68,9 @@ const DefaultFont = styled.textarea`
   border: none;
   resize: none;
 `;
-
+const PreWrap = styled.div`
+  white-space: pre-wrap;
+`;
 const Title = styled.div`
   color: ${(prop) => prop.theme.color.grayScale.gray_900};
 `;
