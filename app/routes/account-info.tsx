@@ -2,7 +2,7 @@ import { useNavigate } from '@remix-run/react';
 import axios from 'axios';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import InputUserArea from '~/components/account-info/input-area-button';
 import { memberDataAdress } from '~/data/constants/adress';
@@ -13,7 +13,7 @@ import InputUserName from '../components/account-info/input-name';
 
 export default function Detail() {
   const navigate = useNavigate();
-  const localData = useRecoilValue(localStorageData);
+  const [localData, setLocalData] = useRecoilState(localStorageData);
   const [userJobPool, setUserJobPool] = useState<
     '개발' | '디자인' | 'false' | 'initialData'
   >('initialData');
@@ -43,6 +43,7 @@ export default function Detail() {
           },
         }
       );
+      setLocalData({ ...localData, job: userJobPool, name: data.userNickName });
       navigate('/');
     } else {
       setUserJobPool('false');

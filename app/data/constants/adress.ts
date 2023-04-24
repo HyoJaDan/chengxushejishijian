@@ -12,7 +12,7 @@ export const AssingmentEndpoint = {
 };
 /* .get(`https://api.thepool.kr/api/lessons?sortBy=${sortBy}`) */
 
-/** 유저의 정보을 가져온다. https://api.thepoo.kr/api/members */
+/** 유저의 정보을 가져온다. https://api.thepool.kr/api/members */
 export const memberDataAdress = `${endpointBase}/api/members`;
 
 /** 유저의 팔로우를 관리한다 */
