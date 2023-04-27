@@ -209,8 +209,8 @@ export const MainEditor = () => {
             </Button>
             <ButtonStyle>
               <Label htmlFor='ex_file'>
+                <img src='/icons/problem/picture.svg' alt='' />
                 사진 추가
-                <img src='/icons/problem/ic.svg' alt='temp' />
                 <FileNoneStyle
                   type='file'
                   id='ex_file'
@@ -251,7 +251,11 @@ const FileNoneStyle = styled.input`
   clip: rect(0, 0, 0, 0);
   border: 0;
 `;
-const Label = styled.label``;
+const Label = styled.label`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
 const Container = styled.div`
   width: 100%;
   height: 100%;
