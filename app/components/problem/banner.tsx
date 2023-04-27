@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import axios from 'axios';
+import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { lessonAddress } from '~/data/constants/adress';
@@ -13,43 +14,69 @@ interface IGetData {
 }
 export const Banner = ({ isBookmark, isLike, id }: IGetData) => {
   const localData = useRecoilValue(localStorageData);
+  const [isCopy, setIsCopy] = useState<boolean>(false);
   const clickBookmark = () => {
     if (isLike) {
-      axios.delete(`${lessonAddress}/${id}/likes`, {
+      axios.post(
+        `${lessonAddress}/${id}/likes`,
+        /* {
+          isBookmark: false,
+        }, */
+        {
+          headers: {
+            Authorization: `Bearer ${localData.accessToken}`,
+          },
+        }
+      );
+    } else {
+      axios.post(`${lessonAddress}/${id}/likes`, {
         headers: {
           Authorization: `Bearer ${localData.accessToken}`,
         },
       });
     }
-
-    axios.post(`${lessonAddress}/${id}/likes`, {
-      headers: {
-        Authorization: `Bearer ${localData.accessToken}`,
-      },
-    });
+  };
+  const ClickFunk = () => {
+    const el = document.createElement('textarea');
+    el.value = window.location.href;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    setIsCopy(true);
   };
   return (
     <Sticky>
       <Wrapper>
         <Flex>
-          {isBookmark ? (
+          {/* {isBookmark ? (
             <Img
               src='/icons/problem/saved.svg'
               alt='temp'
               onClick={clickBookmark}
             />
           ) : (
+            )} */}
+          <Img
+            src='/icons/problem/not-saved.svg'
+            alt='temp'
+            onClick={clickBookmark}
+          />
+          <Title className='body3_MD'>저장하기</Title>
+        </Flex>
+        <Flex>
+          <Circle onClick={ClickFunk}>
             <Img
-              src='/icons/problem/not-saved.svg'
+              src='/icons/problem/link.svg'
               alt='temp'
               onClick={clickBookmark}
             />
+          </Circle>
+          {isCopy ? (
+            <Title className='body3_MD'>복사완료!</Title>
+          ) : (
+            <Title className='body3_MD'>링크복사</Title>
           )}
-          <Title className='body3_MD'>북마크</Title>
-        </Flex>
-        <Flex>
-          <Circle />
-          <Title className='body3_MD'>좋아요</Title>
         </Flex>
       </Wrapper>
     </Sticky>
@@ -75,6 +102,10 @@ const Circle = styled.div`
   background: ${(prop) => prop.theme.color.basic.white};
   border: 1px solid ${(prop) => prop.theme.color.grayScale.gray_200};
   border-radius: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 `;
 const Title = styled.div`
   color: ${(prop) => prop.theme.color.grayScale.gray_600};
