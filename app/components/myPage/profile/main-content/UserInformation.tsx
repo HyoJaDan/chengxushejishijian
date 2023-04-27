@@ -1,14 +1,19 @@
 /* eslint-disable react/destructuring-assignment */
 import { Link } from '@remix-run/react';
+import type { SetterOrUpdater } from 'recoil';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { getFollower } from '~/data/user/follow';
 import { useManageUserInformation } from '~/hooks/manage-userinformation';
+import type { ILoginInfo, IUserData, loginType } from '~/models/user';
 
 const UserInformation = () => {
-  const user = useManageUserInformation();
+  const [, LocalStorageData]: [
+    IUserData,
+    ILoginInfo<loginType>,
+    SetterOrUpdater<ILoginInfo<loginType>>
+  ] = useManageUserInformation();
   const follow = useRecoilValue(getFollower);
-
   return (
     <Wrapper>
       <Content>
@@ -22,15 +27,17 @@ const UserInformation = () => {
           </Setting>
         </Header>
         <Main>
-          {user.thumbnail === null ? (
+          {LocalStorageData.img === null ? (
             <Thumbnail />
           ) : (
-            <Thumbnail as='img' src={user.thumbnail} alt='userThumbnail' />
+            <Thumbnail as='img' src={LocalStorageData.img} alt='' />
           )}
           <div>
-            <UserNickName className='body1_BD'>{user.nickname}</UserNickName>
+            <UserNickName className='body1_BD'>
+              {LocalStorageData.name}
+            </UserNickName>
             <UserJobPoolFontBody2SB className='body2_SB'>
-              {user.job}
+              {LocalStorageData.job}
             </UserJobPoolFontBody2SB>
             <Follow className='caption1_RG'>
               <Follower>팔로워 {`${follow.numOfFollowers}`}명</Follower>

@@ -2,39 +2,38 @@ import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { getURLImage } from '~/data/user/url-image';
 import { getUserData } from '~/data/user/user-data';
+import type { IUserData } from '~/models/user';
 
 export default function IntroductionAndLink() {
-  const user = useRecoilValue(getUserData);
+  const user: IUserData = useRecoilValue(getUserData);
   const URLImages = useRecoilValue(getURLImage);
-  if (user !== false) {
-    const { memberSocialLinkMappings } = user;
-    const outputLinks = memberSocialLinkMappings.map(
-      ({ id, memberSocialLinkId, url }, index) => {
-        const idx = `${id}_${index}`;
-        return (
-          <Box key={idx}>
-            <Image src={URLImages[memberSocialLinkId - 1].iconUrl} alt='icon' />
-            <Border />
-            <Link href={url}>{url}</Link>
-          </Box>
-        );
-      }
-    );
 
-    return (
-      <Wrapper>
-        <Wrap>
-          <Title className='body1_BD'>소개</Title>
-          <PreWrap className='body3_MD'>{user.introduce}</PreWrap>
-        </Wrap>
-        <Line />
-        <LinkWrap>
-          <Title className='body1_BD'>링크</Title>
-          <LinkWrapper className='caption1_SB'>{outputLinks}</LinkWrapper>
-        </LinkWrap>
-      </Wrapper>
-    );
-  }
+  const { memberSocialLinkMappings } = user;
+  const outputLinks = memberSocialLinkMappings.map(
+    ({ id, memberSocialLinkId, url }, index) => {
+      const idx = `${id}_${index}`;
+      return (
+        <Box key={idx}>
+          <Image src={URLImages[memberSocialLinkId - 1].iconUrl} alt='icon' />
+          <Border />
+          <Link href={url}>{url}</Link>
+        </Box>
+      );
+    }
+  );
+  return (
+    <Wrapper>
+      <Wrap>
+        <Title className='body1_BD'>소개</Title>
+        <PreWrap className='body3_MD'>{user.introduce}</PreWrap>
+      </Wrap>
+      <Line />
+      <LinkWrap>
+        <Title className='body1_BD'>링크</Title>
+        <LinkWrapper className='caption1_SB'>{outputLinks}</LinkWrapper>
+      </LinkWrap>
+    </Wrapper>
+  );
 }
 
 const Wrapper = styled.div`

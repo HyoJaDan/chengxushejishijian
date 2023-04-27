@@ -1,14 +1,13 @@
-import { useNavigate } from '@remix-run/react';
 import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import type { SetterOrUpdater } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { Url } from '~/components/myPage/profile/setting/url';
 import { memberDataAdress } from '~/data/constants/adress';
 import {
   changedLocalValue,
-  localStorageData,
   userAccessToken,
   userId,
 } from '~/data/user/common/login-information';
@@ -16,6 +15,7 @@ import type { IURLImage } from '~/data/user/url-image';
 import { getURLImage } from '~/data/user/url-image';
 import { useManageUserInformation } from '~/hooks/manage-userinformation';
 import SSRSafeSuspense from '~/hooks/ssr-safe-suspense';
+import type { ILoginInfo, IUserData, loginType } from '~/models/user';
 
 export interface IData {
   userName: string;
@@ -38,12 +38,16 @@ interface InputOnValidURL {
 }
 function InputForm() {
   /** 유저의 정보 */
-  const navigate = useNavigate();
-  const data = useManageUserInformation();
+  const [data, localData, setLocalData]: [
+    IUserData,
+    ILoginInfo<loginType>,
+    SetterOrUpdater<ILoginInfo<loginType>>
+  ] = useManageUserInformation();
+
   const { memberSocialLinkMappings } = data;
   const id = useRecoilValue(userId);
   const accessToken = useRecoilValue(userAccessToken);
-  const [localData, setLocalData] = useRecoilState(localStorageData);
+  /* const [localData, setLocalData] = useRecoilState(localStorageData); */
   const setChangedLocalValue = useSetRecoilState(changedLocalValue);
   /** URL의 이미지 정보 */
   const URLImages = useRecoilValue(getURLImage);
@@ -115,15 +119,6 @@ function InputForm() {
         });
       }
     });
-    console.log(
-      'Hello',
-      localData.loginStatus,
-      localData.accessToken,
-      localData.id,
-      inputData.userJobPool,
-      ImgURL.current,
-      inputData.userName
-    );
     setLocalData({
       ...localData,
       job: inputData.userJobPool,
@@ -131,7 +126,6 @@ function InputForm() {
       name: inputData.userName,
     });
     setChangedLocalValue(true);
-    console.log(localData);
     axios.patch(
       `${memberDataAdress}/${id}`,
       {
@@ -148,7 +142,9 @@ function InputForm() {
         },
       }
     );
-    navigate('/my-page/profile');
+    if (window !== null) {
+      window.location.replace('/my-page/profile');
+    }
   };
   return (
     <Form onSubmit={handleSubmit(onValid)}>

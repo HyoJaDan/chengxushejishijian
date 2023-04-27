@@ -5,33 +5,35 @@ import {
   localStorageData,
 } from '~/data/user/common/login-information';
 import { getUserData } from '~/data/user/user-data';
-import type { IUserData } from '~/models/user';
+import type { ILoginInfo, IUserData, loginType } from '~/models/user';
 
 export const useManageUserInformation = () => {
-  const getData = useRecoilValue(getUserData);
+  const userData = useRecoilValue(getUserData);
   const [localData, setLocalData] = useRecoilState(localStorageData);
   const [isChanged, setIsChanged] = useRecoilState(changedLocalValue);
   useEffect(() => {
-    if (getData === false) {
+    if (userData === false) {
       setLocalData({
         ...localData,
         loginStatus: 'unLogin',
       });
     } else if (isChanged) {
-      /* empty */
       setIsChanged(false);
     } else {
       setLocalData({
         ...localData,
-        id: getData.id,
-        img: getData.thumbnail,
-        name: getData.nickname,
-        job: getData.job,
+        id: userData.id,
+        img: userData.thumbnail,
+        name: userData.nickname,
+        job: userData.job,
         loginStatus: 'login',
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  return getData as IUserData;
+  return [
+    userData as IUserData,
+    localData as ILoginInfo<loginType>,
+    setLocalData,
+  ];
 };

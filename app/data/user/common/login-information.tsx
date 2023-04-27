@@ -9,7 +9,7 @@ const { persistAtom } = recoilPersist({
   storage: localStorage,
 });
 
-/* eslint-disable no-shadow */
+/** 로컬스토리지에 저장한 유저의 정보 */
 export const localStorageData = atom<ILoginInfo<loginType>>({
   key: 'localStorageData',
   default: {
