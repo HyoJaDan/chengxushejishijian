@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { selector } from 'recoil';
+import { endpointBase } from '~/data/constants/adress';
 import { userId } from './common/login-information';
 
 interface IStatistics {
@@ -13,8 +14,9 @@ export const memberStatistics = selector<IStatistics>({
   key: 'memberStatistics',
   get: async ({ get }) => {
     const id = get(userId);
+
     const statistics = await axios(
-      `https://api.thepool.kr/api/member-statistics/${id}`
+      `${endpointBase}/api/member-statistics/${id}`
     ).then((res) => {
       return {
         lessonCount: res.data.memberStatistics.lessonCount,

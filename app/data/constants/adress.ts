@@ -1,4 +1,4 @@
-const endpointBase = 'https://api.thepool.kr';
+export const endpointBase = 'https://api.thepool.kr';
 
 const SubmitEndpointBase = `${endpointBase}/assignments/submits`;
 export const SubmitEndpoint = {

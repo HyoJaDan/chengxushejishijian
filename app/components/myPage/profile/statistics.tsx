@@ -1,13 +1,35 @@
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { memberStatistics } from '~/data/user/statistics';
+import { problemStatistics } from '~/data/user/problem.statistics';
 
 export default function Statistics() {
-  const temp = useRecoilValue(memberStatistics);
+  const data = useRecoilValue(problemStatistics);
+  console.log(data, 'temp');
   return (
     <Wrapper>
       <Content>
         <Title className='body1_BD'>과제 통계</Title>
+        <MainContent>
+          <FlexColumn>
+            <Sqare>
+              <AllDay>전체</AllDay>
+            </Sqare>
+            <Flex>
+              <Day className='body2_MD'>{data.totalDay}일</Day>
+              <Number className='body2_BD'>{data.totalCount}개</Number>
+            </Flex>
+          </FlexColumn>
+          <Line />
+          <FlexColumn>
+            <Sqare>
+              <ThisMonth>이번 달</ThisMonth>
+            </Sqare>
+            <Flex>
+              <Day className='body2_MD'>{data.specificMonthDay}일</Day>
+              <Number className='body2_BD'>{data.specificMonthCount}개</Number>
+            </Flex>
+          </FlexColumn>
+        </MainContent>
       </Content>
     </Wrapper>
   );
@@ -24,7 +46,59 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   gap: 18px;
+  height: 100%;
 `;
 const Title = styled.div`
   color: ${(prop) => prop.theme.color.grayScale.gray_800};
+`;
+const AllDay = styled.div`
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 144%;
+  text-align: center;
+  color: ${(prop) => prop.theme.color.grayScale.gray_700};
+`;
+const ThisMonth = styled(AllDay)`
+  color: ${(prop) => prop.theme.color.primary.blue.blue_600};
+`;
+const Sqare = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1px 4px;
+  gap: 10px;
+
+  width: fit-content;
+  height: 19px;
+  background: ${(prop) => prop.theme.color.grayScale.gray_100};
+  border-radius: 4px;
+`;
+const Line = styled.div`
+  /* grayscale/200 */
+
+  border: 1px solid #efedea;
+  transform: rotate(-90deg);
+  height: fit-content;
+`;
+const MainContent = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  height: 100%;
+`;
+const Day = styled.div`
+  color: ${(prop) => prop.theme.color.grayScale.gray_700};
+`;
+const Number = styled.div`
+  color: ${(prop) => prop.theme.color.grayScale.gray_800};
+`;
+const Flex = styled.div`
+  display: flex;
+  gap: 8px;
+`;
+const FlexColumn = styled.div`
+  display: flex;
+  gap: 9px;
+  flex-direction: column;
+  align-items: center;
 `;

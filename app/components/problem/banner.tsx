@@ -13,12 +13,15 @@ interface IGetData {
   id: string;
 }
 export const Banner = ({ isBookmark, isLike, id }: IGetData) => {
+  console.log(isBookmark, isLike, id);
   const localData = useRecoilValue(localStorageData);
   const [isCopy, setIsCopy] = useState<boolean>(false);
+  console.log(localData.accessToken);
   const clickBookmark = () => {
     if (isLike) {
-      axios.post(
-        `${lessonAddress}/${id}/likes`,
+      console.log('delte');
+      axios.delete(
+        `${lessonAddress}/${id}/bookmarks`,
         /* {
           isBookmark: false,
         }, */
@@ -29,7 +32,8 @@ export const Banner = ({ isBookmark, isLike, id }: IGetData) => {
         }
       );
     } else {
-      axios.post(`${lessonAddress}/${id}/likes`, {
+      console.log('hello');
+      axios.post(`${lessonAddress}/${id}/bookmarks`, null, {
         headers: {
           Authorization: `Bearer ${localData.accessToken}`,
         },

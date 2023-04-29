@@ -1,7 +1,7 @@
 import ReactApexChart from 'react-apexcharts';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { memberStatistics } from '~/data/user/statistics';
+import { memberStatistics } from '~/data/user/member-statistics';
 
 export default function Chart() {
   const category = ['과제제출', '답변', '팔로워', '질문'];
@@ -80,4 +80,5 @@ const Content = styled.div`
 const Title = styled.div`
   color: ${(prop) => prop.theme.color.grayScale.gray_800};
   margin-bottom: 10px;
+  padding-left: 13px;
 `;

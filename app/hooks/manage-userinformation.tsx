@@ -6,7 +6,7 @@ import {
   localStorageData,
 } from '~/data/user/common/login-information';
 import { getUserData } from '~/data/user/user-data';
-import type { ILoginInfo, IUserData, loginType } from '~/models/user';
+import type { ILoginInfo, IUserData, loginType } from '~/models/user/user';
 
 export const useManageUserInformation = (): [
   IUserData,

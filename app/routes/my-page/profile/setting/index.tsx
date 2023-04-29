@@ -15,7 +15,7 @@ import type { IURLImage } from '~/data/user/url-image';
 import { getURLImage } from '~/data/user/url-image';
 import { useManageUserInformation } from '~/hooks/manage-userinformation';
 import SSRSafeSuspense from '~/hooks/ssr-safe-suspense';
-import type { ILoginInfo, IUserData, loginType } from '~/models/user';
+import type { ILoginInfo, IUserData, loginType } from '~/models/user/user';
 
 export interface IData {
   userName: string;

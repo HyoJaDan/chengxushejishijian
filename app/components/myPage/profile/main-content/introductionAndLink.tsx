@@ -2,7 +2,7 @@ import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { getURLImage } from '~/data/user/url-image';
 import { getUserData } from '~/data/user/user-data';
-import type { IUserData } from '~/models/user';
+import type { IUserData } from '~/models/user/user';
 
 export default function IntroductionAndLink() {
   const user: IUserData = useRecoilValue(getUserData);

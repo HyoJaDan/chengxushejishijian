@@ -1,6 +1,6 @@
 import { atom, selector } from 'recoil';
 import { recoilPersist } from 'recoil-persist';
-import type { ILoginInfo, loginType } from '~/models/user';
+import type { ILoginInfo, loginType } from '~/models/user/user';
 
 const localStorage =
   typeof window !== `undefined` ? window.localStorage : undefined;

@@ -5,7 +5,7 @@ import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { getFollower } from '~/data/user/follow';
 import { useManageUserInformation } from '~/hooks/manage-userinformation';
-import type { ILoginInfo, IUserData, loginType } from '~/models/user';
+import type { ILoginInfo, IUserData, loginType } from '~/models/user/user';
 
 const UserInformation = () => {
   const [, LocalStorageData]: [
