@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import type { SetterOrUpdater } from 'recoil';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   changedLocalValue,
@@ -7,7 +8,11 @@ import {
 import { getUserData } from '~/data/user/user-data';
 import type { ILoginInfo, IUserData, loginType } from '~/models/user';
 
-export const useManageUserInformation = () => {
+export const useManageUserInformation = (): [
+  IUserData,
+  ILoginInfo<loginType>,
+  SetterOrUpdater<ILoginInfo<loginType>>
+] => {
   const userData = useRecoilValue(getUserData);
   const [localData, setLocalData] = useRecoilState(localStorageData);
   const [isChanged, setIsChanged] = useRecoilState(changedLocalValue);
