@@ -10,7 +10,7 @@ export default function Statistics() {
       <Content>
         <Title className='body1_BD'>과제 통계</Title>
         <MainContent>
-          <FlexColumn>
+          <FlexColumnPlusLine>
             <Sqare>
               <AllDay>전체</AllDay>
             </Sqare>
@@ -18,8 +18,7 @@ export default function Statistics() {
               <Day className='body2_MD'>{data.totalDay}일</Day>
               <Number className='body2_BD'>{data.totalCount}개</Number>
             </Flex>
-          </FlexColumn>
-          <Line />
+          </FlexColumnPlusLine>
           <FlexColumn>
             <Sqare>
               <ThisMonth>이번 달</ThisMonth>
@@ -76,14 +75,10 @@ const Sqare = styled.div`
 `;
 const Line = styled.div`
   /* grayscale/200 */
-
-  border: 1px solid #efedea;
-  transform: rotate(-90deg);
-  height: fit-content;
 `;
 const MainContent = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
   height: 100%;
 `;
 const Day = styled.div`
@@ -101,4 +96,9 @@ const FlexColumn = styled.div`
   gap: 9px;
   flex-direction: column;
   align-items: center;
+  padding: 0 28px;
+`;
+const FlexColumnPlusLine = styled(FlexColumn)`
+  border-right: 1px solid #efedea;
+  height: fit-content;
 `;
