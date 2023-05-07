@@ -73,9 +73,6 @@ const Sqare = styled.div`
   background: ${(prop) => prop.theme.color.grayScale.gray_100};
   border-radius: 4px;
 `;
-const Line = styled.div`
-  /* grayscale/200 */
-`;
 const MainContent = styled.div`
   display: flex;
   /* justify-content: space-evenly; */

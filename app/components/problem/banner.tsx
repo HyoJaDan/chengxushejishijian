@@ -13,26 +13,22 @@ interface IGetData {
   id: string;
 }
 export const Banner = ({ isBookmark, isLike, id }: IGetData) => {
-  console.log(isBookmark, isLike, id);
   const localData = useRecoilValue(localStorageData);
   const [isCopy, setIsCopy] = useState<boolean>(false);
-  console.log(localData.accessToken);
+  const [isBookmarked, setIsBookmarked] = useState<boolean>(isBookmark);
+  const toggleBookmark = () => {
+    setIsBookmarked(!isBookmarked);
+  };
+
   const clickBookmark = () => {
-    if (isLike) {
-      console.log('delte');
-      axios.delete(
-        `${lessonAddress}/${id}/bookmarks`,
-        /* {
-          isBookmark: false,
-        }, */
-        {
-          headers: {
-            Authorization: `Bearer ${localData.accessToken}`,
-          },
-        }
-      );
+    toggleBookmark();
+    if (isBookmarked) {
+      axios.delete(`${lessonAddress}/${id}/bookmarks`, {
+        headers: {
+          Authorization: `Bearer ${localData.accessToken}`,
+        },
+      });
     } else {
-      console.log('hello');
       axios.post(`${lessonAddress}/${id}/bookmarks`, null, {
         headers: {
           Authorization: `Bearer ${localData.accessToken}`,
@@ -40,7 +36,7 @@ export const Banner = ({ isBookmark, isLike, id }: IGetData) => {
       });
     }
   };
-  const ClickFunk = () => {
+  const clickCopyLink = () => {
     const el = document.createElement('textarea');
     el.value = window.location.href;
     document.body.appendChild(el);
@@ -53,28 +49,18 @@ export const Banner = ({ isBookmark, isLike, id }: IGetData) => {
     <Sticky>
       <Wrapper>
         <Flex>
-          {/* {isBookmark ? (
-            <Img
-              src='/icons/problem/saved.svg'
-              alt='temp'
-              onClick={clickBookmark}
-            />
+          <Circle onClick={clickBookmark}>
+            <div className={`cross ${isBookmarked ? 'checked' : ''}`} />
+          </Circle>
+          {isBookmarked ? (
+            <Title className='body3_MD'>저장완료!</Title>
           ) : (
-            )} */}
-          <Img
-            src='/icons/problem/not-saved.svg'
-            alt='temp'
-            onClick={clickBookmark}
-          />
-          <Title className='body3_MD'>저장하기</Title>
+            <Title className='body3_MD'>저장하기</Title>
+          )}{' '}
         </Flex>
         <Flex>
-          <Circle onClick={ClickFunk}>
-            <Img
-              src='/icons/problem/link.svg'
-              alt='temp'
-              onClick={clickBookmark}
-            />
+          <Circle onClick={clickCopyLink}>
+            <Img src='/icons/problem/link.svg' alt='temp' />
           </Circle>
           {isCopy ? (
             <Title className='body3_MD'>복사완료!</Title>
