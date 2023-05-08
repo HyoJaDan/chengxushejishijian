@@ -9,17 +9,15 @@ import { localStorageData } from '~/data/user/common/login-information';
 
 interface IGetData {
   isBookmark: boolean;
-  isLike: boolean;
   id: string;
 }
-export const Banner = ({ isBookmark, isLike, id }: IGetData) => {
+export const Banner = ({ isBookmark, id }: IGetData) => {
   const localData = useRecoilValue(localStorageData);
   const [isCopy, setIsCopy] = useState<boolean>(false);
   const [isBookmarked, setIsBookmarked] = useState<boolean>(isBookmark);
   const toggleBookmark = () => {
     setIsBookmarked(!isBookmarked);
   };
-
   const clickBookmark = () => {
     toggleBookmark();
     if (isBookmarked) {

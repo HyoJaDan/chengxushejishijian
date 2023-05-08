@@ -12,6 +12,7 @@ export const Login = () => {
   const [localData, setLocalData] = useRecoilState(localStorageData);
   const setLogin = useSetRecoilState(loginStatus);
   const [isTrue, setIsTrue] = useState<boolean>(true);
+  const myPageURL = `/my-page/${localData.name}/profile`;
   if (localData.loginStatus === 'login') {
     if (localData.img === '') return <Circle className='body3_BD' />;
     return (
@@ -35,7 +36,7 @@ export const Login = () => {
                 <UserJob className='caption1_RG'>{localData.job}</UserJob>
               </UserFlex>
               <MyPage
-                to='/my-page/profile'
+                to={myPageURL}
                 className='caption1_RG'
                 onClick={() => setIsTrue(true)}
               >

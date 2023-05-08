@@ -1,6 +1,7 @@
-import { useParams } from '@remix-run/react';
-import { useRecoilValue } from 'recoil';
+import { useNavigate, useParams } from '@remix-run/react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
+import { myPageId } from '~/data/my-page/mypage-id';
 import {
   getProblemDetail,
   getProblemDetailTags,
@@ -16,18 +17,22 @@ export const ProblemMain = () => {
   const params = useParams<string>();
   const problemData = useRecoilValue(getProblemDetail(params.id));
   const hashTags = useRecoilValue(getProblemDetailTags(params.id as string));
-
+  const navigate = useNavigate();
+  const setMyPageId = useSetRecoilState(myPageId);
   return (
     <Wrapper>
       <FlexBox>
         <MainContent problemData={problemData} hashTags={hashTags} />
         <WaitAnswer id={params.id as string} />
         <SimilerTraining id={problemData.lessonCategory.id} />
-        <Comment problemId={params.id as string} />
+        <Comment
+          problemId={params.id as string}
+          navigate={navigate}
+          setMyPageId={setMyPageId}
+        />
       </FlexBox>
       <Banner
         isBookmark={problemData.isBookmark as boolean}
-        isLike={problemData.isLike as boolean}
         id={params.id as string}
       />
     </Wrapper>

@@ -1,21 +1,8 @@
 import { Suspense } from 'react';
-import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { userArchiveSelector } from '~/data/user/archive';
 
 const OutputArchive = () => {
-  const archive = useRecoilValue(userArchiveSelector);
-  const output = archive.map((data, index) => {
-    const id = `${data}_${index}`;
-    return (
-      <Container key={id}>
-        <Background src={data.previewUrl} />
-        <ArchiveDate className='body3_MD'>{data.date}</ArchiveDate>
-        <ArchiveName className='body1_BD'>{data.name}</ArchiveName>
-      </Container>
-    );
-  });
-  return <Content>{output}</Content>;
+  /* const problems = useRecoilValue(getProblemsByBookmark(id)); */
 };
 
 export default function MypageArchive() {

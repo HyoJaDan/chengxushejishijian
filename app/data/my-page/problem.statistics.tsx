@@ -2,7 +2,7 @@ import axios from 'axios';
 import { selector } from 'recoil';
 import type { IProblemStatistics } from '~/models/user/problemStatistics';
 import { memberDataAdress } from '../constants/adress';
-import { userId } from './common/login-information';
+import { userId } from '../user/common/login-information';
 
 export const problemStatistics = selector<IProblemStatistics>({
   key: 'problemStatistics',

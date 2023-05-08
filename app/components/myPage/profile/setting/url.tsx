@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { UseFormRegister } from 'react-hook-form';
 import styled from 'styled-components';
-import type { IData, IURLs } from '~/routes/my-page/profile/setting';
+import type { IData, IURLs } from '~/routes/my-page/$nickname/profile/setting';
 import { OutputURLImg } from './output-url-img';
 
 interface IURL {

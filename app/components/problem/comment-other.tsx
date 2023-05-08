@@ -2,20 +2,25 @@ import styled from 'styled-components';
 import type { IComments } from '~/models/problem/comments';
 import { convertUTCtoKST } from './convertUTCtoKST';
 
-export const otherComments = (comments: IComments[]) => {
+export const otherComments = (
+  comments: IComments[],
+  navigate: Function,
+  setMyPageId: Function
+) => {
+  console.log(comments);
+
   return comments.map(({ updatedAt, description, id, member }, index) => {
     const Idx = `${id}_${index}`;
     const kstDate = convertUTCtoKST(updatedAt);
     const uploadTime = `${kstDate.getFullYear()}.${
       kstDate.getMonth() + 1
     }.${kstDate.getDate()} ${kstDate.getHours()}:${kstDate.getMinutes()}`;
-
     const { nickname, job, thumbnail } = member;
     const CommentImg = () => {
       if (thumbnail === null) {
-        return <ThumbnailWrapper />;
+        return <ThumbnailWrapper className='hoverNickName' />;
       }
-      return <Img src={thumbnail} alt='thumbnail' />;
+      return <Img className='hoverNickName' src={thumbnail} alt='thumbnail' />;
     };
 
     return (
@@ -23,7 +28,14 @@ export const otherComments = (comments: IComments[]) => {
         {CommentImg()}
         <OtherCommentContent>
           <OtherCommentName className='body3_MD'>
-            <div>{nickname}</div>
+            <HoverNickName
+              onClick={() => {
+                setMyPageId(member.id);
+                navigate(`/my-page/${member.nickname}/profile`);
+              }}
+            >
+              {nickname}
+            </HoverNickName>
             <Job>·</Job>
             <Job className='caption1_RG'>{job}</Job>
           </OtherCommentName>
@@ -74,4 +86,11 @@ const Job = styled.div`
 
 const PreWrap = styled.div`
   white-space: pre-wrap;
+`;
+
+const HoverNickName = styled.div`
+  cursor: pointer;
+  :hover {
+    color: ${(prop) => prop.theme.color.primary.blue.blue_600};
+  }
 `;

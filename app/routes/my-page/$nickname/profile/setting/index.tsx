@@ -43,7 +43,7 @@ function InputForm() {
     ILoginInfo<loginType>,
     SetterOrUpdater<ILoginInfo<loginType>>
   ] = useManageUserInformation();
-
+  const myPageURL = `/my-page/${localData.name}/profile`;
   const { memberSocialLinkMappings } = data;
   const id = useRecoilValue(userId);
   const accessToken = useRecoilValue(userAccessToken);
@@ -143,7 +143,7 @@ function InputForm() {
       }
     );
     if (window !== null) {
-      window.location.replace('/my-page/profile');
+      window.location.replace(myPageURL);
     }
   };
   return (

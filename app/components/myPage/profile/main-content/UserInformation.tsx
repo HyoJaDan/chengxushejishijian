@@ -3,41 +3,46 @@ import { Link } from '@remix-run/react';
 import type { SetterOrUpdater } from 'recoil';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { getFollower } from '~/data/user/follow';
+import { getFollower } from '~/data/my-page/follow';
 import { useManageUserInformation } from '~/hooks/manage-userinformation';
 import type { ILoginInfo, IUserData, loginType } from '~/models/user/user';
 
 const UserInformation = () => {
-  const [, LocalStorageData]: [
+  const [userData, , , isMe]: [
     IUserData,
     ILoginInfo<loginType>,
-    SetterOrUpdater<ILoginInfo<loginType>>
+    SetterOrUpdater<ILoginInfo<loginType>>,
+    boolean
   ] = useManageUserInformation();
-  const follow = useRecoilValue(getFollower);
+  const myPageURL = `/my-page/${userData.nickname}/profile/setting`;
+  const follow = useRecoilValue(getFollower(userData.id));
+
   return (
     <Wrapper>
       <Content>
         <Header>
           <Profile className='body1_BD'>프로필</Profile>
-          <Setting className='body3_BD' to='setting'>
-            <SettingImg src='/icons/my-page/setting.svg' alt='my-page' />
-            <SettingFontBody3SB className='body3_SB'>
-              수정하기
-            </SettingFontBody3SB>
-          </Setting>
+          {isMe ? (
+            <Setting className='body3_BD' to={myPageURL}>
+              <SettingImg src='/icons/my-page/setting.svg' alt='my-page' />
+              <SettingFontBody3SB className='body3_SB'>
+                수정하기
+              </SettingFontBody3SB>
+            </Setting>
+          ) : null}
         </Header>
         <Main>
-          {LocalStorageData.img === null ? (
+          {userData.thumbnail === null ? (
             <Thumbnail />
           ) : (
-            <Thumbnail as='img' src={LocalStorageData.img} alt='' />
+            <Thumbnail as='img' src={userData.thumbnail} alt='' />
           )}
           <div>
             <UserNickName className='body1_BD'>
-              {LocalStorageData.name}
+              {userData.nickname}
             </UserNickName>
             <UserJobPoolFontBody2SB className='body2_SB'>
-              {LocalStorageData.job}
+              {userData.nickname}
             </UserJobPoolFontBody2SB>
             <Follow className='caption1_RG'>
               <Follower>팔로워 {`${follow.numOfFollowers}`}명</Follower>

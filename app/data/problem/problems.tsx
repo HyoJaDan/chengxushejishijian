@@ -36,3 +36,17 @@ export const getProblemsById = selectorFamily<IProblems[], number>({
     return userData;
   },
 });
+export const getProblemsByBookmark = selectorFamily<IProblems[], number>({
+  key: 'getLesson',
+  get: (id: number) => async () => {
+    const userData = await axios
+      .get(`${lessonAddress}?isBookMark=true`)
+      .then((response) => {
+        return response.data.lessons;
+      })
+      .catch(() => {
+        return false;
+      });
+    return userData;
+  },
+});

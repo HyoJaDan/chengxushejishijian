@@ -1,11 +1,13 @@
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
+import { myPageId } from '~/data/my-page/mypage-id';
 import { getURLImage } from '~/data/user/url-image';
 import { getUserData } from '~/data/user/user-data';
 import type { IUserData } from '~/models/user/user';
 
 export default function IntroductionAndLink() {
-  const user: IUserData = useRecoilValue(getUserData);
+  const userId = useRecoilValue(myPageId);
+  const user: IUserData = useRecoilValue(getUserData(userId));
   const URLImages = useRecoilValue(getURLImage);
 
   const { memberSocialLinkMappings } = user;

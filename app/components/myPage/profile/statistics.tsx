@@ -1,10 +1,9 @@
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { problemStatistics } from '~/data/user/problem.statistics';
+import { problemStatistics } from '~/data/my-page/problem.statistics';
 
 export default function Statistics() {
   const data = useRecoilValue(problemStatistics);
-  console.log(data, 'temp');
   return (
     <Wrapper>
       <Content>

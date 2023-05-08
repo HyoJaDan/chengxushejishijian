@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { selector } from 'recoil';
 import { endpointBase } from '~/data/constants/adress';
-import { userId } from './common/login-information';
+import { userId } from '../user/common/login-information';
 
 interface IStatistics {
   lessonCount: number;

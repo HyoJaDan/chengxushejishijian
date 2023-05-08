@@ -1,7 +1,7 @@
 import ReactApexChart from 'react-apexcharts';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { memberStatistics } from '~/data/user/member-statistics';
+import { memberStatistics } from '~/data/my-page/member-statistics';
 
 export default function Chart() {
   const category = ['과제제출', '답변', '팔로워', '질문'];

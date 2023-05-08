@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import type { IURLImage } from '~/data/user/url-image';
-import type { IURLs } from '~/routes/my-page/profile/setting';
+import type { IURLs } from '~/routes/my-page/$nickname/profile/setting';
 
 interface IOutPutURLImg {
   image: IURLImage[];
