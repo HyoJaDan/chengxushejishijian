@@ -1,55 +1,44 @@
-import { useEffect } from 'react';
-import type { SetterOrUpdater } from 'recoil';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { myPageId } from '~/data/my-page/mypage-id';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { getUserData, localUserData } from '~/data/my-page/user-data';
 import {
   changedLocalValue,
   localStorageData,
 } from '~/data/user/common/login-information';
-import { getMyData, getUserData } from '~/data/user/user-data';
 import type { ILoginInfo, IUserData, loginType } from '~/models/user/user';
 
-export const useManageUserInformation = (): [
-  IUserData,
-  ILoginInfo<loginType>,
-  SetterOrUpdater<ILoginInfo<loginType>>,
-  boolean
-] => {
+export const useManageUserInformation = (userId: string) => {
+  /* const [temp]: [
+    IUserData,
+    ILoginInfo<loginType>,
+    SetterOrUpdater<ILoginInfo<loginType>>,
+    boolean
+  ]; */
+  console.log('5. manage-userInformation에서 반환된 유저 id', userId);
   const [localData, setLocalData] = useRecoilState(localStorageData);
   const [isChanged, setIsChanged] = useRecoilState(changedLocalValue);
-  const MyData = useRecoilValue(getMyData);
-  const userId = useRecoilValue(myPageId);
-  const userData = useRecoilValue(getUserData(userId));
-  useEffect(() => {
-    if (localData.id === userData.id) {
-      if (MyData === false) {
-        setLocalData({
-          ...localData,
-          loginStatus: 'unLogin',
-        });
-      } else if (isChanged) {
-        setIsChanged(false);
-      } else {
-        setLocalData({
-          ...localData,
-          id: MyData.id,
-          img: MyData.thumbnail,
-          name: MyData.nickname,
-          job: MyData.job,
-          loginStatus: 'login',
-        });
-      }
+  const setLocalUserData = useSetRecoilState(localUserData);
+  const userData = useRecoilValue(getUserData(userId as unknown as string));
+  console.log('hello', userData);
+
+  /** 지금 구하고자 하는 유저의 정보가 본인일 경우 */
+  if (localData.id === userData.id) {
+    /** 마이페이지 수정하기에서 값이 바뀐 경우, 거기서 이미 내 정보를 수정했으니 아무것도 안한다. */
+    if (isChanged) {
+      setIsChanged(false);
+    } else {
+      /** 새 정보를 받아오고, 이게 본인인경우, localData를 업데이트 시킨다. localUserData도 업데이트 시켜 값을 다시 받는것을 방지한다. */
+      setLocalData({
+        ...localData,
+        id: userData.id,
+        img: userData.thumbnail,
+        name: userData.nickname,
+        job: userData.job,
+        loginStatus: 'login',
+      });
+      /* setLocalUserData(); */
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  if (userId === null) {
-    return [
-      MyData as IUserData,
-      localData as ILoginInfo<loginType>,
-      setLocalData,
-      true,
-    ];
   }
+
   return [
     userData as IUserData,
     localData as ILoginInfo<loginType>,

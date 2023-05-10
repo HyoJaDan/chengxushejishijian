@@ -15,18 +15,16 @@ import { otherComments } from './comment-other';
 export const Comment = ({
   problemId,
   navigate,
-  setMyPageId,
 }: {
   problemId: string;
   navigate: Function;
-  setMyPageId: Function;
 }) => {
   const { register, handleSubmit } = useForm();
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
   const accessToken = useRecoilValue(userAccessToken);
   const [comments, setComments] = useRecoilState(commentAtom);
   const setLoginStatus = useSetRecoilState(loginStatus);
-  const outputComments = otherComments(comments, navigate, setMyPageId);
+  const outputComments = otherComments(comments, navigate);
   useEffect(() => {
     async function constructor() {
       const inputedComments: IComments[] = await axios

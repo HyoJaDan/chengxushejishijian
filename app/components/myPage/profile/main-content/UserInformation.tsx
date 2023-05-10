@@ -1,58 +1,54 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/destructuring-assignment */
 import { Link } from '@remix-run/react';
-import type { SetterOrUpdater } from 'recoil';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { getFollower } from '~/data/my-page/follow';
-import { useManageUserInformation } from '~/hooks/manage-userinformation';
-import type { ILoginInfo, IUserData, loginType } from '~/models/user/user';
+import { localUserData } from '~/data/my-page/user-data';
+import { useCustomHook } from './customHook';
 
-const UserInformation = () => {
-  const [userData, , , isMe]: [
-    IUserData,
-    ILoginInfo<loginType>,
-    SetterOrUpdater<ILoginInfo<loginType>>,
-    boolean
-  ] = useManageUserInformation();
+const UserInformation = (nickName: string) => {
+  const userData = useRecoilValue(localUserData);
+  console.log('val', userData);
+  const [isMe, follow] = useCustomHook(nickName);
   const myPageURL = `/my-page/${userData.nickname}/profile/setting`;
-  const follow = useRecoilValue(getFollower(userData.id));
-
-  return (
-    <Wrapper>
-      <Content>
-        <Header>
-          <Profile className='body1_BD'>프로필</Profile>
-          {isMe ? (
-            <Setting className='body3_BD' to={myPageURL}>
-              <SettingImg src='/icons/my-page/setting.svg' alt='my-page' />
-              <SettingFontBody3SB className='body3_SB'>
-                수정하기
-              </SettingFontBody3SB>
-            </Setting>
-          ) : null}
-        </Header>
-        <Main>
-          {userData.thumbnail === null ? (
-            <Thumbnail />
-          ) : (
-            <Thumbnail as='img' src={userData.thumbnail} alt='' />
-          )}
-          <div>
-            <UserNickName className='body1_BD'>
-              {userData.nickname}
-            </UserNickName>
-            <UserJobPoolFontBody2SB className='body2_SB'>
-              {userData.nickname}
-            </UserJobPoolFontBody2SB>
-            <Follow className='caption1_RG'>
-              <Follower>팔로워 {`${follow.numOfFollowers}`}명</Follower>
-              <Following>팔로잉 {`${follow.numOfFollowings}`}명</Following>
-            </Follow>
-          </div>
-        </Main>
-      </Content>
-    </Wrapper>
-  );
+  if (follow !== undefined)
+    return (
+      <Wrapper>
+        <Content>
+          <Header>
+            <Profile className='body1_BD'>프로필</Profile>
+            {isMe ? (
+              <Setting className='body3_BD' to={myPageURL}>
+                <SettingImg src='/icons/my-page/setting.svg' alt='my-page' />
+                <SettingFontBody3SB className='body3_SB'>
+                  수정하기
+                </SettingFontBody3SB>
+              </Setting>
+            ) : null}
+          </Header>
+          <Main>
+            {userData.thumbnail === null ? (
+              <Thumbnail />
+            ) : (
+              <Thumbnail as='img' src={userData.thumbnail} alt='' />
+            )}
+            <div>
+              <UserNickName className='body1_BD'>
+                {userData.nickname}
+              </UserNickName>
+              <UserJobPoolFontBody2SB className='body2_SB'>
+                {userData.nickname}
+              </UserJobPoolFontBody2SB>
+              <Follow className='caption1_RG'>
+                <Follower>팔로워 {`${follow.numOfFollowers}`}명</Follower>
+                <Following>팔로잉 {`${follow.numOfFollowings}`}명</Following>
+              </Follow>
+            </div>
+          </Main>
+        </Content>
+      </Wrapper>
+    );
+  return <Wrapper />;
 };
 const Wrapper = styled.div`
   width: 1256px;
@@ -62,6 +58,7 @@ const Wrapper = styled.div`
   border-radius: 8px;
   padding: 32px;
 `;
+
 const Content = styled.div`
   display: flex;
   flex-direction: column;

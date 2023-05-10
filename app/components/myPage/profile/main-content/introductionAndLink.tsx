@@ -1,16 +1,14 @@
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { myPageId } from '~/data/my-page/mypage-id';
+import { localUserData } from '~/data/my-page/user-data';
 import { getURLImage } from '~/data/user/url-image';
-import { getUserData } from '~/data/user/user-data';
-import type { IUserData } from '~/models/user/user';
 
 export default function IntroductionAndLink() {
-  const userId = useRecoilValue(myPageId);
-  const user: IUserData = useRecoilValue(getUserData(userId));
+  /* const userId = useRecoilValue(myPageId); */
+  const userData = useRecoilValue(localUserData);
   const URLImages = useRecoilValue(getURLImage);
-
-  const { memberSocialLinkMappings } = user;
+  console.log(userData, 'hellouser');
+  const { memberSocialLinkMappings } = userData;
   const outputLinks = memberSocialLinkMappings.map(
     ({ id, memberSocialLinkId, url }, index) => {
       const idx = `${id}_${index}`;
@@ -27,7 +25,7 @@ export default function IntroductionAndLink() {
     <Wrapper>
       <Wrap>
         <Title className='body1_BD'>소개</Title>
-        <PreWrap className='body3_MD'>{user.introduce}</PreWrap>
+        <PreWrap className='body3_MD'>{userData.introduce}</PreWrap>
       </Wrap>
       <Line />
       <LinkWrap>

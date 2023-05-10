@@ -2,11 +2,7 @@ import styled from 'styled-components';
 import type { IComments } from '~/models/problem/comments';
 import { convertUTCtoKST } from './convertUTCtoKST';
 
-export const otherComments = (
-  comments: IComments[],
-  navigate: Function,
-  setMyPageId: Function
-) => {
+export const otherComments = (comments: IComments[], navigate: Function) => {
   console.log(comments);
 
   return comments.map(({ updatedAt, description, id, member }, index) => {
@@ -30,7 +26,6 @@ export const otherComments = (
           <OtherCommentName className='body3_MD'>
             <HoverNickName
               onClick={() => {
-                setMyPageId(member.id);
                 navigate(`/my-page/${member.nickname}/profile`);
               }}
             >
