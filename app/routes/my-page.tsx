@@ -1,4 +1,5 @@
 import { Outlet, useNavigate, useParams } from '@remix-run/react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import MyPageHeader from '~/components/common/sub-navigation-bar';
 import UserInformation from '~/components/myPage/profile/main-content/UserInformation';
@@ -7,12 +8,20 @@ export default function DefaultMyPage() {
   const { nickname } = useParams();
   const navigate = useNavigate();
   if (nickname === undefined) navigate('/');
+  const [isSetting, setIsSetting] = useState(false);
+  useEffect(() => {
+    const [, , , , , , d] = window.location.href.split('/');
+    if (d === 'setting') setIsSetting(true);
+  });
+
   return (
     <Wrapper>
       <MyPageHeader page={nickname} />
-      <CommonWrapper>
-        <UserInformation nickName={nickname} />
-      </CommonWrapper>
+      {isSetting ? null : (
+        <CommonWrapper>
+          <UserInformation nickName={nickname} />
+        </CommonWrapper>
+      )}
       <Outlet />
     </Wrapper>
   );

@@ -1,20 +1,15 @@
 import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
-import type { SetterOrUpdater } from 'recoil';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { Url } from '~/components/myPage/profile/setting/url';
 import { memberDataAdress } from '~/data/constants/adress';
-import {
-  changedLocalValue,
-  userAccessToken,
-  userId,
-} from '~/data/user/common/login-information';
+import { getUserData } from '~/data/my-page/user-data';
+import { localStorageData, userId } from '~/data/user/common/login-information';
 import type { IURLImage } from '~/data/user/url-image';
 import { getURLImage } from '~/data/user/url-image';
 import SSRSafeSuspense from '~/hooks/ssr-safe-suspense';
-import type { ILoginInfo, IUserData, loginType } from '~/models/user/user';
 
 export interface IData {
   userName: string;
@@ -36,18 +31,11 @@ interface InputOnValidURL {
   url: string;
 }
 function InputForm() {
-  /** 유저의 정보 */
-  const [data, localData, setLocalData]: [
-    IUserData,
-    ILoginInfo<loginType>,
-    SetterOrUpdater<ILoginInfo<loginType>>
-  ] = useManageUserInformation();
-  const myPageURL = `/my-page/${localData.name}/profile`;
+  const [localData, setLocalData] = useRecoilState(localStorageData);
+  const data = useRecoilValue(getUserData(localData.id as unknown as string));
   const { memberSocialLinkMappings } = data;
   const id = useRecoilValue(userId);
-  const accessToken = useRecoilValue(userAccessToken);
-  /* const [localData, setLocalData] = useRecoilState(localStorageData); */
-  const setChangedLocalValue = useSetRecoilState(changedLocalValue);
+  /* const setChangedLocalValue = useSetRecoilState(changedLocalValue); */
   /** URL의 이미지 정보 */
   const URLImages = useRecoilValue(getURLImage);
   const initialURL: IURLs[] = [{ nowURLImage: URLImages[0], isTrue: true }];
@@ -92,6 +80,7 @@ function InputForm() {
 
   /** 입력받았을떄 */
   const onValid = async (inputData: IData) => {
+    const myPageURL = `/my-page/${inputData.userName}/profile`;
     if (inputData?.image[0]) {
       const formData = new FormData();
       formData.append('data', inputData?.image[0]);
@@ -101,7 +90,7 @@ function InputForm() {
         data: formData,
         headers: {
           'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${localData.accessToken}`,
         },
       }).then((res) => {
         return res.data.url;
@@ -124,7 +113,7 @@ function InputForm() {
       img: ImgURL.current,
       name: inputData.userName,
     });
-    setChangedLocalValue(true);
+    /* setChangedLocalValue(true); */
     axios.patch(
       `${memberDataAdress}/${id}`,
       {
@@ -137,7 +126,7 @@ function InputForm() {
       },
       {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${localData.accessToken}`,
         },
       }
     );

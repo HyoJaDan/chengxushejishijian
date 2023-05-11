@@ -30,7 +30,7 @@ export const useConvertNickNameToUserData = async ({
     .then((response) => {
       return response.data.member;
     });
-  /*  .catch(() => {
+  /* .catch(() => {
       return defaultUserData;
     }); */
   const numOfFollowers = await axios(
