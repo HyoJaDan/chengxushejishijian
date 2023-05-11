@@ -13,7 +13,6 @@ export function useCustomHook(nickName: string): [boolean, IFollow] {
   useEffect(() => {
     async function FetchAndSetUser() {
       const returnedValue = await useConvertNickNameToUserData(nickName);
-      console.log('4. 반환된id', returnedValue);
       const [userData, tempFollowValue] = returnedValue;
       setFollow(tempFollowValue);
       setUserData(userData);
@@ -36,6 +35,6 @@ export function useCustomHook(nickName: string): [boolean, IFollow] {
     }
     FetchAndSetUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [nickName]);
   return [isMe, follow as IFollow];
 }

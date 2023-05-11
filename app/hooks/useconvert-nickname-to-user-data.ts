@@ -16,7 +16,6 @@ export const useConvertNickNameToUserData = async ({
 }: {
   nickName: string;
 }): Promise<[IUserData, IFollow]> => {
-  console.log('2. useConvertNickNameToID에서 받은 유저 닉네임', nickName);
   const userId = await axios(`${endpointBase}/api/member-statistics`).then(
     (res) => {
       const temp = (data: { member: { nickname: string } }) =>
@@ -25,7 +24,6 @@ export const useConvertNickNameToUserData = async ({
       return res.data.memberStatisticsList[index].member.id;
     }
   );
-  console.log('3. 반환한 ID', userId);
 
   const userData = await axios
     .get(`${memberDataAdress}/${userId}`)

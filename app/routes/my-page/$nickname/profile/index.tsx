@@ -9,9 +9,7 @@ import { localUserData } from '~/data/my-page/user-data';
 import SSRSafeSuspense from '~/hooks/ssr-safe-suspense';
 
 export default function ProfileDefault() {
-  console.log('Hello');
   const userData = useRecoilValue(localUserData);
-  console.log(userData);
   return (
     <Wrapper>
       <Content>

@@ -6,7 +6,6 @@ import { getURLImage } from '~/data/user/url-image';
 export default function IntroductionAndLink() {
   const userData = useRecoilValue(localUserData);
   const URLImages = useRecoilValue(getURLImage);
-  console.log(userData, 'hellouser');
   const { memberSocialLinkMappings } = userData;
   const outputLinks = memberSocialLinkMappings.map(
     ({ id, memberSocialLinkId, url }, index) => {

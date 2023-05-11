@@ -3,8 +3,6 @@ import type { IComments } from '~/models/problem/comments';
 import { convertUTCtoKST } from './convertUTCtoKST';
 
 export const otherComments = (comments: IComments[], navigate: Function) => {
-  console.log(comments);
-
   return comments.map(({ updatedAt, description, id, member }, index) => {
     const Idx = `${id}_${index}`;
     const kstDate = convertUTCtoKST(updatedAt);

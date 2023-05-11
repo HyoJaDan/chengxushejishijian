@@ -11,7 +11,6 @@ export default function MyPageHeader({ page }: { page: string }) {
   useEffect(() => {
     const [, , , , , location] = window.location.href.split('/');
     setWhichLocation(location);
-    console.log('asdfasfd');
   });
   const myPages: IPageName[] = [
     { title: '프로필', link: `${page}/profile` },
