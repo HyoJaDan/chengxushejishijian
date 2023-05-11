@@ -49,7 +49,7 @@ const UserInformation = (nickName: string) => {
     );
   return (
     <FallbackWrapper>
-      <FallbackUserInformation>fallbackForMain</FallbackUserInformation>
+      <FallbackUserInformation />
     </FallbackWrapper>
   );
 };

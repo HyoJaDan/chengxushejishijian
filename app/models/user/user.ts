@@ -1,5 +1,5 @@
 export interface IUserData {
-  id: number;
+  id: number | string;
   majorId: number;
   account: string;
   nickname: string;

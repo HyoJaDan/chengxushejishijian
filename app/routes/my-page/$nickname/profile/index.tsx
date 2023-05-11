@@ -3,6 +3,7 @@ import { ClientOnly } from 'remix-utils';
 import styled from 'styled-components';
 import Chart from '~/components/myPage/profile/chart/chart.client';
 import { ProfileFallback } from '~/components/myPage/profile/fallback';
+import IntroductionAndLink from '~/components/myPage/profile/main-content/introductionAndLink';
 import Statistics from '~/components/myPage/profile/statistics';
 import { localUserData } from '~/data/my-page/user-data';
 import SSRSafeSuspense from '~/hooks/ssr-safe-suspense';
@@ -14,10 +15,10 @@ export default function ProfileDefault() {
   return (
     <Wrapper>
       <Content>
-        <SSRSafeSuspense /* fallback={ProfileFallback()} */>
+        <SSRSafeSuspense>
           {userData.id !== 0 ? (
             <Flex>
-              {/* <IntroductionAndLink /> */}
+              <IntroductionAndLink />
               <SmallFlex>
                 <ClientOnly>{() => <Chart />}</ClientOnly>
                 <Statistics />
@@ -26,13 +27,6 @@ export default function ProfileDefault() {
           ) : (
             <ProfileFallback />
           )}
-          {/* <Flex> */}
-          {/* <IntroductionAndLink /> */}
-          {/* <SmallFlex>
-              <ClientOnly>{() => <Chart />}</ClientOnly>
-              <Statistics />
-            </SmallFlex>
-          </Flex> */}
         </SSRSafeSuspense>
       </Content>
     </Wrapper>

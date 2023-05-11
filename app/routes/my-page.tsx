@@ -9,7 +9,7 @@ export default function DefaultMyPage() {
   if (nickname === undefined) navigate('/');
   return (
     <Wrapper>
-      <MyPageHeader page='Mypage' />
+      <MyPageHeader page={nickname} />
       <CommonWrapper>
         <UserInformation nickName={nickname} />
       </CommonWrapper>

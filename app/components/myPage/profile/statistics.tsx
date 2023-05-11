@@ -5,9 +5,7 @@ import { localUserData } from '~/data/my-page/user-data';
 
 export default function Statistics() {
   const userData = useRecoilValue(localUserData);
-  console.log('Statistics-userData', userData);
-
-  const data = useRecoilValue(problemStatistics);
+  const data = useRecoilValue(problemStatistics(userData.id as string));
   return (
     <Wrapper>
       <Content>
@@ -78,7 +76,6 @@ const Sqare = styled.div`
 `;
 const MainContent = styled.div`
   display: flex;
-  /* justify-content: space-evenly; */
   height: 100%;
 `;
 const Day = styled.div`

@@ -1,13 +1,11 @@
 import axios from 'axios';
-import { selector } from 'recoil';
+import { selectorFamily } from 'recoil';
 import type { IProblemStatistics } from '~/models/user/problemStatistics';
 import { memberDataAdress } from '../constants/adress';
-import { userId } from '../user/common/login-information';
 
-export const problemStatistics = selector<IProblemStatistics>({
+export const problemStatistics = selectorFamily<IProblemStatistics, string>({
   key: 'problemStatistics',
-  get: async ({ get }) => {
-    const id = get(userId);
+  get: (id: string) => async () => {
     const statistics = await axios(
       `${memberDataAdress}/${id}/lesson-solution-statistics`
     ).then((res) => {

@@ -1,29 +1,34 @@
-import { NavLink } from '@remix-run/react';
+import { Link } from '@remix-run/react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 interface IPageName {
   title: string;
   link: string;
 }
-
-type whichPage = 'Mypage' | 'Training';
-interface IPage {
-  page: whichPage;
-}
-export default function MyPageHeader({ page }: IPage) {
+export default function MyPageHeader({ page }: { page: string }) {
+  const [whichLocation, setWhichLocation] = useState('profile');
+  useEffect(() => {
+    const [, , , , , location] = window.location.href.split('/');
+    setWhichLocation(location);
+    console.log('asdfasfd');
+  });
   const myPages: IPageName[] = [
-    { title: '프로필', link: 'profile' },
-    { title: '저장한 문제', link: 'archive' },
-    { title: '제출한 풀이', link: 'setting' },
-    { title: '좋아요', link: 'setting' },
+    { title: '프로필', link: `${page}/profile` },
+    { title: '저장한 문제', link: `${page}/archive` },
+    { title: '제출한 풀이', link: `${page}/setting` },
+    { title: '좋아요', link: `${page}/setting` },
   ];
 
   const MyPagelinks = myPages.map(({ title, link }, index) => {
     const id = `${link}_${index}`;
+    const [, nowLink] = link.split('/');
+    let isTrue;
+    nowLink === whichLocation ? (isTrue = true) : (isTrue = false);
     return (
-      <Link key={id} to={link}>
+      <Links key={id} to={link} isactive={isTrue ? 1 : 0}>
         {title}
-      </Link>
+      </Links>
     );
   });
 
@@ -66,7 +71,7 @@ const Blank = styled.div`
 const Content = styled.div`
   display: flex;
 `;
-const Link = styled(NavLink)`
+const Links = styled(Link)<{ isActive: boolean }>`
   color: #a4a2a0;
   padding: 16px 13px;
 
@@ -74,4 +79,8 @@ const Link = styled(NavLink)`
     color: ${(prop) => prop.theme.color.grayScale.gray_800};
     border-bottom: 2px solid #2bc0ef;
   }
+  ${({ isactive }) =>
+    isactive &&
+    `color: grey;
+    border-bottom: 2px solid #2bc0ef;`}
 `;

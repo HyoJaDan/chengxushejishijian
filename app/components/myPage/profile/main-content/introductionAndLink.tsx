@@ -4,7 +4,6 @@ import { localUserData } from '~/data/my-page/user-data';
 import { getURLImage } from '~/data/user/url-image';
 
 export default function IntroductionAndLink() {
-  /* const userId = useRecoilValue(myPageId); */
   const userData = useRecoilValue(localUserData);
   const URLImages = useRecoilValue(getURLImage);
   console.log(userData, 'hellouser');
@@ -60,13 +59,7 @@ const Line = styled.div`
   border: 1px solid ${(prop) => prop.theme.color.grayScale.gray_300};
   margin: 32px 0;
 `;
-const DefaultFont = styled.textarea`
-  color: ${(prop) => prop.theme.color.grayScale.gray_900};
-  height: 112px;
-  outline: none;
-  border: none;
-  resize: none;
-`;
+
 const PreWrap = styled.div`
   white-space: pre-wrap;
 `;
@@ -84,8 +77,6 @@ const Box = styled.div`
   height: 36px;
 
   background: #ffffff;
-  /* grayscale/300 */
-
   border: 1px solid #dddad7;
   border-radius: 8px;
 `;
