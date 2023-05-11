@@ -2,7 +2,6 @@ import { Outlet, useNavigate, useParams } from '@remix-run/react';
 import styled from 'styled-components';
 import MyPageHeader from '~/components/common/sub-navigation-bar';
 import UserInformation from '~/components/myPage/profile/main-content/UserInformation';
-import SSRSafeSuspense from '~/hooks/ssr-safe-suspense';
 
 export default function DefaultMyPage() {
   const { nickname } = useParams();
@@ -11,11 +10,9 @@ export default function DefaultMyPage() {
   return (
     <Wrapper>
       <MyPageHeader page='Mypage' />
-      <SSRSafeSuspense>
-        <CommonWrapper>
-          <UserInformation nickName={nickname} />
-        </CommonWrapper>
-      </SSRSafeSuspense>
+      <CommonWrapper>
+        <UserInformation nickName={nickname} />
+      </CommonWrapper>
       <Outlet />
     </Wrapper>
   );

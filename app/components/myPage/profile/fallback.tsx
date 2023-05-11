@@ -3,31 +3,20 @@ import styled from 'styled-components';
 export const ProfileFallback = () => {
   return (
     <Wrapper>
-      <UserInformation />
+      <IntroductionAndLink />
       <Flex>
-        <IntroductionAndLink />
-        <SmallFlex>
-          <Chart />
-          <Statistics />
-        </SmallFlex>
+        <Chart />
+        <Statistics />
       </Flex>
     </Wrapper>
   );
 };
+
 const Wrapper = styled.div`
   display: flex;
-  justify-content: center;
-  flex-direction: column;
   gap: 24px;
 `;
-const UserInformation = styled.div`
-  width: 1256px;
-  height: 212px;
-  background: ${(prop) => prop.theme.color.basic.white};
-  border: 1px solid #efedea;
-  border-radius: 8px;
-  padding: 32px;
-`;
+
 const IntroductionAndLink = styled.div`
   width: 936px;
   height: 500px;
@@ -54,10 +43,6 @@ const Statistics = styled.div`
   border-radius: 8px;
 `;
 
-const Flex = styled.div`
-  display: flex;
-  gap: 24px;
-`;
-const SmallFlex = styled(Flex)`
+const Flex = styled(Wrapper)`
   flex-direction: column;
 `;

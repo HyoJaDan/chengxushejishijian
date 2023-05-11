@@ -7,9 +7,8 @@ import { localUserData } from '~/data/my-page/user-data';
 import { useCustomHook } from './customHook';
 
 const UserInformation = (nickName: string) => {
-  const userData = useRecoilValue(localUserData);
-  console.log('val', userData);
   const [isMe, follow] = useCustomHook(nickName);
+  const userData = useRecoilValue(localUserData);
   const myPageURL = `/my-page/${userData.nickname}/profile/setting`;
   if (follow !== undefined)
     return (
@@ -48,7 +47,11 @@ const UserInformation = (nickName: string) => {
         </Content>
       </Wrapper>
     );
-  return <Wrapper />;
+  return (
+    <FallbackWrapper>
+      <FallbackUserInformation>fallbackForMain</FallbackUserInformation>
+    </FallbackWrapper>
+  );
 };
 const Wrapper = styled.div`
   width: 1256px;
@@ -131,3 +134,16 @@ const Thumbnail = styled.div`
 `;
 
 export default UserInformation;
+const FallbackWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+`;
+const FallbackUserInformation = styled.div`
+  width: 1256px;
+  height: 212px;
+  background: ${(prop) => prop.theme.color.basic.white};
+  border: 1px solid #efedea;
+  border-radius: 8px;
+  padding: 56px 32px 32px 32px;
+`;
