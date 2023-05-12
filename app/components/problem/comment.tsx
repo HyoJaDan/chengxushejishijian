@@ -151,7 +151,7 @@ const Button = styled.button`
   border: 1px solid ${(prop) => prop.theme.color.grayScale.gray_300};
   border-radius: 100px;
   background-color: ${(prop) => prop.theme.color.basic.white};
-  width: 84px;
+  width: fit-content;
   height: 36px;
   color: ${(prop) => prop.theme.color.grayScale.gray_800};
   cursor: pointer;

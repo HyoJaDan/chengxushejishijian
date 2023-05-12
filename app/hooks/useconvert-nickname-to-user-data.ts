@@ -24,7 +24,7 @@ export const useConvertNickNameToUserData = async ({
       return res.data.memberStatisticsList[index].member.id;
     }
   );
-
+  console.log(userId);
   const userData = await axios
     .get(`${memberDataAdress}/${userId}`)
     .then((response) => {
@@ -33,6 +33,7 @@ export const useConvertNickNameToUserData = async ({
   /* .catch(() => {
       return defaultUserData;
     }); */
+
   const numOfFollowers = await axios(
     `${manageFollowesAddress.follow}?memberId=${userId}`
   ).then((response) => {
