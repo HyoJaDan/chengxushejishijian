@@ -24,7 +24,6 @@ export const useConvertNickNameToUserData = async ({
       return res.data.memberStatisticsList[index].member.id;
     }
   );
-  console.log(userId);
   const userData = await axios
     .get(`${memberDataAdress}/${userId}`)
     .then((response) => {

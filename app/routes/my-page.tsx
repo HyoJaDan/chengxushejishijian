@@ -11,10 +11,10 @@ export default function DefaultMyPage() {
   const [isSetting, setIsSetting] = useState(false);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    const [, , , , , , d] = window.location.href.split('/');
-    if (d === 'setting') setIsSetting(true);
+    const [, , , , , , adress] = window.location.href.split('/');
+    if (adress === 'setting') setIsSetting(true);
+    else setIsSetting(false);
   });
-
   return (
     <Wrapper>
       <MyPageHeader page={nickname as string} />
