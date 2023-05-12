@@ -41,7 +41,6 @@ const Google = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 24px 80px;
   gap: 8px;
   width: 330px;
   height: 72px;

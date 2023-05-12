@@ -9,6 +9,7 @@ export default function DefaultMyPage() {
   const navigate = useNavigate();
   if (nickname === undefined) navigate('/');
   const [isSetting, setIsSetting] = useState(false);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const [, , , , , , d] = window.location.href.split('/');
     if (d === 'setting') setIsSetting(true);
@@ -16,7 +17,7 @@ export default function DefaultMyPage() {
 
   return (
     <Wrapper>
-      <MyPageHeader page={nickname} />
+      <MyPageHeader page={nickname as string} />
       {isSetting ? null : (
         <CommonWrapper>
           <UserInformation nickName={nickname} />

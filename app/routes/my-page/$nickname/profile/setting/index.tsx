@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { Url } from '~/components/myPage/profile/setting/url';
 import { memberDataAdress } from '~/data/constants/adress';
 import { getUserData } from '~/data/my-page/user-data';
-import { localStorageData, userId } from '~/data/user/common/login-information';
+import { localStorageData } from '~/data/user/common/login-information';
 import type { IURLImage } from '~/data/user/url-image';
 import { getURLImage } from '~/data/user/url-image';
 import SSRSafeSuspense from '~/hooks/ssr-safe-suspense';
@@ -34,8 +34,6 @@ function InputForm() {
   const [localData, setLocalData] = useRecoilState(localStorageData);
   const data = useRecoilValue(getUserData(localData.id as unknown as string));
   const { memberSocialLinkMappings } = data;
-  const id = useRecoilValue(userId);
-  /* const setChangedLocalValue = useSetRecoilState(changedLocalValue); */
   /** URL의 이미지 정보 */
   const URLImages = useRecoilValue(getURLImage);
   const initialURL: IURLs[] = [{ nowURLImage: URLImages[0], isTrue: true }];
@@ -113,9 +111,8 @@ function InputForm() {
       img: ImgURL.current,
       name: inputData.userName,
     });
-    /* setChangedLocalValue(true); */
     axios.patch(
-      `${memberDataAdress}/${id}`,
+      `${memberDataAdress}/${localData.id}`,
       {
         nickname: inputData.userName,
         introduce: inputData.self_introduction,

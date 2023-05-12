@@ -49,7 +49,7 @@ export const Category = styled.div`
   align-items: center;
   padding: 6px 8px;
   gap: 4px;
-  width: 68px;
+  width: fit-content;
   height: 29px;
   background: #dfffcc;
   border-radius: 4px;
