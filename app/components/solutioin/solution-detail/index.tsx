@@ -1,32 +1,29 @@
 import { useNavigate, useParams } from '@remix-run/react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import {
-  getProblemDetail,
-  getProblemDetailTags,
-} from '~/data/problem/get-problem-detail';
+import { getProblemDetailTags } from '~/data/problem/get-problem-detail';
 
-import { Banner } from '~/components/problem/banner';
 import { getSolutionDetail } from '~/data/solution/get-solution-detail';
 import { Comment } from './comment';
 import { SolutionMainContent } from './main-content';
+import { SolutionBanner } from './solution-banner';
 
 export const SolutionMain = () => {
   const params = useParams<string>();
   const navigate = useNavigate();
-  const problemData = useRecoilValue(getProblemDetail(params.id));
   const hashTags = useRecoilValue(getProblemDetailTags(params.id as string));
   const solutionData = useRecoilValue(getSolutionDetail(params.id as string));
-
   return (
     <Wrapper>
       <FlexBox>
         <SolutionMainContent solutionData={solutionData} hashTags={hashTags} />
         <Comment solutionId={params.id as string} navigate={navigate} />
       </FlexBox>
-      <Banner
-        isBookmark={problemData.isBookmark as boolean}
+      <SolutionBanner
+        isBookmark={solutionData.isLike as boolean}
+        thumbnail={solutionData.thumbnail}
         id={params.id as string}
+        navigate={navigate}
       />
     </Wrapper>
   );
@@ -41,5 +38,5 @@ const Wrapper = styled.div`
 const FlexBox = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 24px;
 `;
