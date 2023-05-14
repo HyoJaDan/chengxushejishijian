@@ -2,10 +2,13 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import axios from 'axios';
 import { useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { lessonAddress } from '~/data/constants/adress';
-import { localStorageData } from '~/data/user/common/login-information';
+import {
+  localStorageData,
+  loginStatus,
+} from '~/data/user/common/login-information';
 
 interface IGetData {
   isBookmark: boolean;
@@ -13,25 +16,27 @@ interface IGetData {
 }
 export const Banner = ({ isBookmark, id }: IGetData) => {
   const localData = useRecoilValue(localStorageData);
+  const setLoginStatus = useSetRecoilState(loginStatus);
   const [isCopy, setIsCopy] = useState<boolean>(false);
   const [isBookmarked, setIsBookmarked] = useState<boolean>(isBookmark);
-  const toggleBookmark = () => {
-    setIsBookmarked(!isBookmarked);
-  };
+
   const clickBookmark = () => {
-    toggleBookmark();
-    if (isBookmarked) {
-      axios.delete(`${lessonAddress}/${id}/bookmarks`, {
-        headers: {
-          Authorization: `Bearer ${localData.accessToken}`,
-        },
-      });
-    } else {
-      axios.post(`${lessonAddress}/${id}/bookmarks`, null, {
-        headers: {
-          Authorization: `Bearer ${localData.accessToken}`,
-        },
-      });
+    if (localData.loginStatus === 'unChecked') setLoginStatus('unLogin');
+    else {
+      setIsBookmarked(!isBookmarked);
+      if (isBookmarked) {
+        axios.delete(`${lessonAddress}/${id}/bookmarks`, {
+          headers: {
+            Authorization: `Bearer ${localData.accessToken}`,
+          },
+        });
+      } else {
+        axios.post(`${lessonAddress}/${id}/bookmarks`, null, {
+          headers: {
+            Authorization: `Bearer ${localData.accessToken}`,
+          },
+        });
+      }
     }
   };
   const clickCopyLink = () => {
