@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { selectorFamily } from 'recoil';
 import { solutionAddress } from '~/data/constants/adress';
-import type { ISolutions } from '~/models/solution/solutions';
+import type { ISolutions } from '~/models/problem-and-solution/solution/solutions';
 
 /* export const categoryId = atom<string>({
   key: 'category-id',
@@ -14,7 +14,6 @@ export const getSolutions = selectorFamily<ISolutions[], string>({
     const userData = await axios
       .get(`${solutionAddress}`)
       .then((response) => {
-        console.log(response);
         return response.data.solutions;
       })
       .catch(() => {

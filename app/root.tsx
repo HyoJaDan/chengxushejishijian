@@ -17,7 +17,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import globalStyle from '~/styles/global.css';
 import stylesUrl from '../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { GlobalNavigationBar } from './components/global-navigation-bar';
-import { LoginWrapper } from './components/login-wrapper';
+import { LoginWrapper } from './components/login-common-used/login-wrapper';
 import { theme } from './styles/theme';
 
 export const loader: LoaderFunction = async () => {

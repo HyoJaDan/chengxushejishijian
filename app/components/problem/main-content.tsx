@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import type { IProblemHashTags } from '~/models/hashtags';
-import type { IProblem } from '~/models/problem/problem';
+import type { IProblem } from '~/models/problem-and-solution/problem/problem';
 import { Category } from './problem-box';
 
 interface ITemp {
   problemData: IProblem;
   hashTags: IProblemHashTags;
 }
-export const MainContent = ({ problemData, hashTags }: ITemp) => {
+export const ProblemMainContent = ({ problemData, hashTags }: ITemp) => {
   const { name } = problemData.lessonCategory;
   const hashTagList = hashTags.lessonHashtags.map((value) => {
     const { lessonHashtag } = value;

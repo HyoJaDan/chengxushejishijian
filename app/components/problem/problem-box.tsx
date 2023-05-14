@@ -1,9 +1,8 @@
 import { Link } from '@remix-run/react';
 import styled from 'styled-components';
-import type { IProblems } from '~/models/problem/problems';
+import type { IProblems } from '~/models/problem-and-solution/problem/problems';
 
 export const TrainBox = (data: IProblems, index: number, width: number) => {
-  console.log(data);
   const { id, lessonCategory, title, _count } = data;
   const { name } = lessonCategory;
   const { lessonLikes, lessonComments, lessonSolutions } = _count;

@@ -1,5 +1,5 @@
-import type { IMember } from '../member';
-import type { IProblemCategory } from './problem-category';
+import type { IMember } from '../../member';
+import type { IProblemCategory } from '../common-used/problem-category';
 
 export interface IProblems {
   id: number;

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { selectorFamily } from 'recoil';
 import { lessonAddress } from '~/data/constants/adress';
 import type { IProblemHashTags } from '~/models/hashtags';
-import type { IProblem } from '~/models/problem/problem';
+import type { IProblem } from '~/models/problem-and-solution/problem/problem';
 import { userAccessToken } from '../user/common/login-information';
 
 export const getProblemDetail = selectorFamily<IProblem, string | undefined>({

@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import type { UseFormRegister } from 'react-hook-form';
 import styled from 'styled-components';
-import type { IUserDataAccountInfo } from '~/models/user/user';
+import type { IUserDataAccountInfo } from '~/models/my-page/user';
 
 interface inputUserNameProps {
   register: UseFormRegister<IUserDataAccountInfo>;

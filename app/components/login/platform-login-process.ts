@@ -1,4 +1,4 @@
-import { userStatus } from '~/models/user/userStatus';
+import { userStatus } from '~/models/my-page/userStatus';
 import { setUser } from './setUser';
 
 type LoginProcessProps = {

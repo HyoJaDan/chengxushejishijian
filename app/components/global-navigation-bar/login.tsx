@@ -74,7 +74,7 @@ const TextLink = styled.div`
   cursor: pointer;
   color: ${(prop) => prop.theme.color.grayScale.gray_800};
 `;
-const Circle = styled.div`
+export const Circle = styled.div`
   display: grid;
   place-content: center;
   width: 32px;

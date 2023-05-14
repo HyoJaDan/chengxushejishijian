@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import type { IComments } from '~/models/problem/comments';
+import type { IComments } from '~/models/problem-and-solution/problem/comments';
 import { convertUTCtoKST } from './convertUTCtoKST';
 
 export const otherComments = (comments: IComments[], navigate: Function) => {

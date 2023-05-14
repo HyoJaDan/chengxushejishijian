@@ -8,7 +8,7 @@ import InputUserArea from '~/components/account-info/input-area-button';
 import { memberDataAdress } from '~/data/constants/adress';
 import { localStorageData, userId } from '~/data/user/common/login-information';
 
-import type { IUserDataAccountInfo } from '~/models/user/user';
+import type { IUserDataAccountInfo } from '~/models/my-page/user';
 import InputUserName from '../components/account-info/input-name';
 
 export default function Detail() {

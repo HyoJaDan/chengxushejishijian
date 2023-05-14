@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { atom, selectorFamily } from 'recoil';
-import type { IComments } from '~/models/problem/comments';
+import type { IComments } from '~/models/problem-and-solution/problem/comments';
 import { lessonAddress } from '../constants/adress';
 import { userAccessToken } from '../user/common/login-information';
 

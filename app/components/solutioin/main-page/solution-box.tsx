@@ -1,9 +1,9 @@
 import { Link } from '@remix-run/react';
 import styled from 'styled-components';
-import type { ISolutions } from '~/models/solution/solutions';
+import { Circle } from '~/components/global-navigation-bar/login';
+import type { ISolutions } from '~/models/problem-and-solution/solution/solutions';
 
 export const SolutionBox = (data: ISolutions, index: number, width: number) => {
-  console.log(data);
   const { id, description, member, _count } = data;
   const { lessonSolutionComments, lessonSolutionLikes } = _count;
   const { thumbnail, nickname } = member;
@@ -12,12 +12,12 @@ export const SolutionBox = (data: ISolutions, index: number, width: number) => {
   const outputThumbnail = () => {
     if (thumbnail !== '') {
       return (
-        <Circle>
+        <ThumbnailBackground>
           <Img src={thumbnail} alt='' />
-        </Circle>
+        </ThumbnailBackground>
       );
     }
-    return <Circle />;
+    return <ThumbnailBackground />;
   };
   return (
     <Box to={`/solution/${id}`} key={keyId} maxwidth={maxWidth}>
@@ -104,17 +104,8 @@ const User = styled.div`
 const Name = styled.div`
   color: ${(prop) => prop.theme.color.grayScale.gray_700};
 `;
-const Circle = styled.div`
-  display: grid;
-  place-content: center;
-  width: 32px;
-  height: 32px;
-  background-color: #c2c0bd;
-  clip-path: circle(50%);
-  color: ${(prop) => prop.theme.color.basic.black};
-  cursor: pointer;
-  position: relative;
-`;
+
+const ThumbnailBackground = styled(Circle)``;
 const Img = styled.img`
   width: 100%;
 `;

@@ -5,26 +5,24 @@ import {
   getProblemDetail,
   getProblemDetailTags,
 } from '~/data/problem/get-problem-detail';
-import { Banner } from './banner';
 
+import { Banner } from '~/components/problem/banner';
+import { getSolutionDetail } from '~/data/solution/get-solution-detail';
 import { Comment } from './comment';
-import { ProblemMainContent } from './main-content';
-import { SimilerTraining } from './similer-problem';
-import { WaitAnswer } from './waiting-solution-box';
+import { SolutionMainContent } from './main-content';
 
-export const ProblemMain = () => {
+export const SolutionMain = () => {
   const params = useParams<string>();
+  const navigate = useNavigate();
   const problemData = useRecoilValue(getProblemDetail(params.id));
   const hashTags = useRecoilValue(getProblemDetailTags(params.id as string));
-  const navigate = useNavigate();
+  const solutionData = useRecoilValue(getSolutionDetail(params.id as string));
 
   return (
     <Wrapper>
       <FlexBox>
-        <ProblemMainContent problemData={problemData} hashTags={hashTags} />
-        <WaitAnswer id={params.id as string} />
-        <SimilerTraining id={problemData.lessonCategory.id} />
-        <Comment problemId={params.id as string} navigate={navigate} />
+        <SolutionMainContent solutionData={solutionData} hashTags={hashTags} />
+        <Comment solutionId={params.id as string} navigate={navigate} />
       </FlexBox>
       <Banner
         isBookmark={problemData.isBookmark as boolean}
@@ -43,5 +41,5 @@ const Wrapper = styled.div`
 const FlexBox = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 40px;
 `;

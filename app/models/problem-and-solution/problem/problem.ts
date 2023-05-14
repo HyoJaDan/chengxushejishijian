@@ -1,5 +1,6 @@
-import type { IMember } from '../member';
-import type { IProblemCategory } from './problem-category';
+import type { IMember } from '../../member';
+import type { ILessonLevel } from '../common-used/lesson-level';
+import type { IProblemCategory } from '../common-used/problem-category';
 
 export interface IProblem {
   createdAt: string;
@@ -10,11 +11,7 @@ export interface IProblem {
   hit: number;
   member: IMember;
   lessonCategory: IProblemCategory;
-  lessonLevel: {
-    id: number;
-    createdAt: string;
-    level: string;
-  };
+  lessonLevel: ILessonLevel;
   isBookmark: boolean;
   isLike: boolean;
 }

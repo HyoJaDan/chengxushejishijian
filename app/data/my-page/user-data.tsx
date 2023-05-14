@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { atom, selectorFamily } from 'recoil';
 import { memberDataAdress } from '~/data/constants/adress';
-import type { IUserData } from '~/models/user/user';
+import type { IUserData } from '~/models/my-page/user';
 
 const defaultUserData: IUserData = {
   id: 0,

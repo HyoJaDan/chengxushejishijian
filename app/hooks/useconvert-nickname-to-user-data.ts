@@ -4,7 +4,7 @@ import {
   manageFollowesAddress,
   memberDataAdress,
 } from '~/data/constants/adress';
-import type { IUserData } from '~/models/user/user';
+import type { IUserData } from '~/models/my-page/user';
 
 export interface IFollow {
   numOfFollowers: number;

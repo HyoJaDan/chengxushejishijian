@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { selectorFamily } from 'recoil';
-import type { IProblemStatistics } from '~/models/user/problemStatistics';
+import type { IProblemStatistics } from '~/models/my-page/problemStatistics';
 import { memberDataAdress } from '../constants/adress';
 
 export const problemStatistics = selectorFamily<IProblemStatistics, string>({

@@ -1,4 +1,4 @@
-import type { IMember } from '../member';
+import type { IMember } from '../../member';
 
 export interface ISolutions {
   id: number;

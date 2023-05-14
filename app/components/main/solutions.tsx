@@ -2,7 +2,7 @@ import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { categoryId } from '~/data/problem/get-problems';
 import { getSolutions } from '~/data/solution/get-solutions';
-import { SolutionBox } from '../solutioin/solution-box';
+import { SolutionBox } from '../solutioin/main-page/solution-box';
 
 export const Solution = () => {
   const sortBy = useRecoilValue(categoryId);

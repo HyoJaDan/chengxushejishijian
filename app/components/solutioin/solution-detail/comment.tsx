@@ -3,20 +3,20 @@ import { useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { lessonAddress } from '~/data/constants/adress';
+import { otherComments } from '~/components/problem/comment-other';
+import { solutionAddress } from '~/data/constants/adress';
 import { commentAtom } from '~/data/problem/commits';
 import {
   loginStatus,
   userAccessToken,
 } from '~/data/user/common/login-information';
 import type { IComments } from '~/models/problem-and-solution/problem/comments';
-import { otherComments } from './comment-other';
 
 export const Comment = ({
-  problemId,
+  solutionId,
   navigate,
 }: {
-  problemId: string;
+  solutionId: string;
   navigate: Function;
 }) => {
   const { register, handleSubmit } = useForm();
@@ -28,13 +28,13 @@ export const Comment = ({
   useEffect(() => {
     async function constructor() {
       const inputedComments: IComments[] = await axios
-        .get(`${lessonAddress}/${problemId}/comments`, {
+        .get(`${solutionAddress}/${solutionId}/comments`, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
         })
         .then((response) => {
-          return response.data.lessonComments;
+          return response.data.solutionComments;
         })
         .catch(() => {
           return false;
@@ -49,7 +49,7 @@ export const Comment = ({
       const inputedValue = textAreaRef.current.value;
       await axios
         .post(
-          `${lessonAddress}/${problemId}/comments`,
+          `${solutionAddress}/${solutionId}/comments`,
           {
             description: inputedValue,
           },
@@ -61,7 +61,7 @@ export const Comment = ({
         )
         .then((res) => {
           const tempComments = JSON.parse(JSON.stringify(comments));
-          tempComments.unshift(res.data.lessonComment);
+          tempComments.unshift(res.data.solutionComment);
           setComments(tempComments);
           textAreaRef.current.style.height = 'auto';
           textAreaRef.current.value = '';
@@ -102,8 +102,7 @@ export const Comment = ({
   );
 };
 const Wrapper = styled.div`
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin-bottom: 24px;
   padding: 24px;
   width: 1149px;
   min-height: 164px;
