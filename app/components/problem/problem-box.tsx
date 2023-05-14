@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import type { IProblems } from '~/models/problem/problems';
 
 export const TrainBox = (data: IProblems, index: number, width: number) => {
+  console.log(data);
   const { id, lessonCategory, title, _count } = data;
   const { name } = lessonCategory;
   const { lessonLikes, lessonComments, lessonSolutions } = _count;
@@ -58,6 +59,7 @@ export const Category = styled.div`
 const Title = styled.div`
   color: ${(prop) => prop.theme.color.grayScale.gray_900};
 `;
+const Img = styled.img``;
 const Counts = styled.div`
   display: flex;
   gap: 16px;
@@ -66,7 +68,6 @@ const Count = styled.div`
   display: flex;
   gap: 4px;
 `;
-const Img = styled.img``;
 const Text = styled.div`
   color: ${(prop) => prop.theme.color.basic.black};
 `;

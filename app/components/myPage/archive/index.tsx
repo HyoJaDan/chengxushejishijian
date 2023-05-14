@@ -17,7 +17,7 @@ export default function MypageArchive() {
 
 const Wrapper = styled.div`
   width: 1256px;
-  margin: 40px 0 40px 0;
+  margin: 24px 0 24px 0;
   background: ${(prop) => prop.theme.color.basic.white};
 `;
 const Content = styled.div`

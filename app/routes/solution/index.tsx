@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Suspenses from '~/components/common/suspense';
 import { Banner } from '~/components/main/banner';
 import Radios from '~/components/main/radio';
 
@@ -7,6 +8,7 @@ export default function Solution() {
     <Wrapper>
       <Banner />
       <Radios />
+      <Suspenses pageName='Solution' />
     </Wrapper>
   );
 }

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import {
   getProblemDetail,
   getProblemDetailTags,
-} from '~/data/problem/get-problem';
+} from '~/data/problem/get-problem-detail';
 import { Banner } from './banner';
 
 import { Comment } from './comment';

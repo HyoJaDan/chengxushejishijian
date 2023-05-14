@@ -234,7 +234,7 @@ export default function ProfileSetting() {
 const Background = styled.div`
   min-height: 100vh;
   margin-top: -134px;
-  padding: 244px 0 88px 0;
+  padding: 158px 0 24px 0;
   background-color: ${(prop) => prop.theme.color.grayScale.gray_100};
 `;
 const Wrapper = styled.div`

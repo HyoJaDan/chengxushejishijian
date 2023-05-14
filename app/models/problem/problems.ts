@@ -1,4 +1,5 @@
-import type { IMember } from './member';
+import type { IMember } from '../member';
+import type { IProblemCategory } from './problem-category';
 
 export interface IProblems {
   id: number;
@@ -13,7 +14,7 @@ export interface IProblems {
   thumbnail: string;
   title: string;
   member: IMember;
-  lessonCategory: ILessonCategory;
+  lessonCategory: IProblemCategory;
   _count: {
     lessonComments: number;
     lessonLikes: number;

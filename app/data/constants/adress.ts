@@ -24,3 +24,6 @@ export const manageFollowesAddress = {
 
 /** https://api.thepool.kr/api/lessons : 과제를 담당한다. */
 export const lessonAddress = `${endpointBase}/api/lessons`;
+
+/** https://api.thepool.kr/api/solutions : 풀이를 담당한다. */
+export const solutionAddress = `${endpointBase}/api/solutions`;
