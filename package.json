@@ -2,7 +2,7 @@
   "private": true,
   "sideEffects": false,
   "scripts": {
-    "build": "node --require @lukalabs/esbuild-inject-plugin -- ./node_modules/.bin/remix build",
+    "build": "remix build",
     "dev": "RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED=false node --require @lukalabs/esbuild-inject-plugin -- ./node_modules/.bin/remix dev",
     "test": "RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED=false vitest",
     "test:ui": "RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED=false vitest --ui",
