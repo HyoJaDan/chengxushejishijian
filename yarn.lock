@@ -1792,6 +1792,13 @@
     set-cookie-parser "^2.4.8"
     source-map "^0.7.3"
 
+"@remix-run/v1-route-convention@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@remix-run/v1-route-convention/-/v1-route-convention-0.1.1.tgz#7639fcdbdfd2d685f9a3fd1972cdf5bddc6f50d5"
+  integrity sha512-jmy/TbdwWdJnDaYVN0byyyKPUHlsJvZ+pUiXQqLouCEcjo7aQgF5gBGwRQP5bxlWJaIqYD4oNHiSVq/RkTziRA==
+  dependencies:
+    minimatch "^7.4.3"
+
 "@remix-run/vercel@^1.7.2":
   version "1.7.5"
   resolved "https://registry.yarnpkg.com/@remix-run/vercel/-/vercel-1.7.5.tgz#6124f273e2352d881b017d63205142035d960924"
@@ -2901,6 +2908,13 @@ brace-expansion@^1.1.7:
   dependencies:
     balanced-match "^1.0.0"
     concat-map "0.0.1"
+
+brace-expansion@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/brace-expansion/-/brace-expansion-2.0.1.tgz#1edc459e0f0c548486ecf9fc99f2221364b9a0ae"
+  integrity sha512-XnAIvQ8eM+kC6aULx6wuQiwVsnzsi9d3WxzV3FpWTGA19F621kwdbsAcFKXgKUHZWsy+mY6iL1sHTxWEFCytDA==
+  dependencies:
+    balanced-match "^1.0.0"
 
 braces@^2.3.1:
   version "2.3.2"
@@ -7424,6 +7438,13 @@ minimatch@^3.0.2, minimatch@^3.0.4, minimatch@^3.0.5, minimatch@^3.1.1, minimatc
   integrity sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==
   dependencies:
     brace-expansion "^1.1.7"
+
+minimatch@^7.4.3:
+  version "7.4.6"
+  resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-7.4.6.tgz#845d6f254d8f4a5e4fd6baf44d5f10c8448365fb"
+  integrity sha512-sBz8G/YjVniEz6lKPNpKxXwazJe4c19fEfV2GDMX6AjFz+MX9uDWIZW8XreVhkFW3fkIdTv/gxWr/Kks5FFAVw==
+  dependencies:
+    brace-expansion "^2.0.1"
 
 minimist@^1.2.0, minimist@^1.2.3, minimist@^1.2.6:
   version "1.2.7"
