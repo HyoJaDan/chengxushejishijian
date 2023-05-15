@@ -40,5 +40,5 @@ const B = styled.div`
 const FlexBox = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 40px;
 `;

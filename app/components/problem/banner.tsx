@@ -9,16 +9,17 @@ import {
   localStorageData,
   loginStatus,
 } from '~/data/user/common/login-information';
-import { CopyLink } from './copy-link';
 
 interface IGetData {
   isBookmark: boolean;
   id: string;
 }
-export const ProblemBanner = ({ isBookmark, id }: IGetData) => {
+export const Banner = ({ isBookmark, id }: IGetData) => {
   const localData = useRecoilValue(localStorageData);
   const setLoginStatus = useSetRecoilState(loginStatus);
+  const [isCopy, setIsCopy] = useState<boolean>(false);
   const [isBookmarked, setIsBookmarked] = useState<boolean>(isBookmark);
+
   const clickBookmark = () => {
     if (localData.loginStatus === 'unChecked') setLoginStatus('unLogin');
     else {
@@ -38,7 +39,15 @@ export const ProblemBanner = ({ isBookmark, id }: IGetData) => {
       }
     }
   };
-
+  const clickCopyLink = () => {
+    const el = document.createElement('textarea');
+    el.value = window.location.href;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    setIsCopy(true);
+  };
   return (
     <Sticky>
       <Wrapper>
@@ -49,11 +58,18 @@ export const ProblemBanner = ({ isBookmark, id }: IGetData) => {
           {isBookmarked ? (
             <Title className='body3_MD'>저장완료!</Title>
           ) : (
-            <Title className='body3_MD'>문제 저장</Title>
-          )}
+            <Title className='body3_MD'>저장하기</Title>
+          )}{' '}
         </Flex>
         <Flex>
-          <CopyLink />
+          <Circle onClick={clickCopyLink}>
+            <Img src='/icons/problem/link.svg' alt='temp' />
+          </Circle>
+          {isCopy ? (
+            <Title className='body3_MD'>복사완료!</Title>
+          ) : (
+            <Title className='body3_MD'>링크복사</Title>
+          )}
         </Flex>
       </Wrapper>
     </Sticky>
@@ -86,4 +102,7 @@ const Circle = styled.div`
 `;
 const Title = styled.div`
   color: ${(prop) => prop.theme.color.grayScale.gray_600};
+`;
+const Img = styled.img`
+  cursor: pointer;
 `;
