@@ -1,6 +1,4 @@
 import type { IMember } from '~/models/member';
-import type { ILessonLevel } from '../common-used/lesson-level';
-import type { IProblemCategory } from '../common-used/problem-category';
 
 export interface ISolutionDetail {
   createdAt: string;
@@ -8,12 +6,9 @@ export interface ISolutionDetail {
   deletedAt: string;
   title: string;
   description: string;
-  hit: number;
   member: IMember;
-  lessonCategory: IProblemCategory;
-  lessonLevel: ILessonLevel;
-  isBookmark: boolean;
   isLike: boolean;
   id: number;
-  thumbnail: string;
+  lessonId: number;
+  relatedLink: string;
 }

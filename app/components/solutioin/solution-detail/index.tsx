@@ -24,6 +24,8 @@ export const SolutionMain = () => {
         <Comment solutionId={params.id as string} navigate={navigate} />
       </FlexBox>
       <SolutionBanner
+        navigate={navigate}
+        lessonId={solutionData.lessonId}
         isBookmark={solutionData.isLike as boolean}
         id={params.id as string}
       />

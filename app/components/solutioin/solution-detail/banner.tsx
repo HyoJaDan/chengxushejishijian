@@ -5,33 +5,40 @@ import { useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { CopyLink } from '~/components/common/copy-link';
-import { lessonAddress } from '~/data/constants/adress';
+import { solutionAddress } from '~/data/constants/adress';
 import {
   localStorageData,
   loginStatus,
 } from '~/data/user/common/login-information';
 
 interface IGetData {
+  navigate: Function;
+  lessonId: number;
   isBookmark: boolean;
   id: string;
 }
-export const SolutionBanner = ({ isBookmark, id }: IGetData) => {
+export const SolutionBanner = ({
+  navigate,
+  lessonId,
+  isBookmark,
+  id,
+}: IGetData) => {
   const localData = useRecoilValue(localStorageData);
   const setLoginStatus = useSetRecoilState(loginStatus);
   const [isBookmarked, setIsBookmarked] = useState<boolean>(isBookmark);
-
+  const Adress = `/problem/${lessonId}`;
   const clickBookmark = () => {
     if (localData.loginStatus === 'unChecked') setLoginStatus('unLogin');
     else {
       setIsBookmarked(!isBookmarked);
       if (isBookmarked) {
-        axios.delete(`${lessonAddress}/${id}/bookmarks`, {
+        axios.delete(`${solutionAddress}/${id}/likes`, {
           headers: {
             Authorization: `Bearer ${localData.accessToken}`,
           },
         });
       } else {
-        axios.post(`${lessonAddress}/${id}/bookmarks`, null, {
+        axios.post(`${solutionAddress}/${id}/likes`, null, {
           headers: {
             Authorization: `Bearer ${localData.accessToken}`,
           },
@@ -39,10 +46,16 @@ export const SolutionBanner = ({ isBookmark, id }: IGetData) => {
       }
     }
   };
-
+  const clickProblem = () => {
+    navigate(Adress);
+  };
   return (
     <Sticky>
       <Wrapper>
+        <Flex>
+          <ProblemCircle onClick={clickProblem} />
+          <Title className='body3_MD'>문제</Title>
+        </Flex>
         <Flex>
           <Circle onClick={clickBookmark}>
             <div className={`cross ${isBookmarked ? 'checked' : ''}`} />
@@ -88,6 +101,7 @@ const Circle = styled.div`
 const Title = styled.div`
   color: ${(prop) => prop.theme.color.grayScale.gray_600};
 `;
-const Img = styled.img`
-  cursor: pointer;
+
+const ProblemCircle = styled(Circle)`
+  background-color: ${(prop) => prop.theme.color.grayScale.gray_300};
 `;
