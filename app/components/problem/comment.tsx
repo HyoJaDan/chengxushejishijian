@@ -104,8 +104,6 @@ export const Comment = ({
   );
 };
 const Wrapper = styled.div`
-  margin-top: 50px;
-  margin-bottom: 50px;
   padding: 24px;
   width: 1149px;
   min-height: 164px;

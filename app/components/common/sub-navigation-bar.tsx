@@ -15,8 +15,8 @@ export default function MyPageHeader({ page }: { page: string }) {
   const myPages: IPageName[] = [
     { title: '프로필', link: `${page}/profile` },
     { title: '저장한 문제', link: `${page}/archive` },
+    { title: '저장한 풀이', link: `${page}/setting` },
     { title: '제출한 풀이', link: `${page}/setting` },
-    { title: '좋아요', link: `${page}/setting` },
   ];
 
   const MyPagelinks = myPages.map(({ title, link }, index) => {

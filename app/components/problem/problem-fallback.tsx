@@ -18,7 +18,7 @@ export const ProblemFallback = () => {
 const Wrapper = styled.div`
   max-width: 1256px;
   margin: 0px auto;
-  padding-top: 67px;
+  padding: 40px 0px;
   display: flex;
   flex-direction: column;
   gap: 16px;
