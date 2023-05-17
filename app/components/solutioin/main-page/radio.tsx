@@ -9,8 +9,7 @@ interface radioName {
 
 export default function SolutionRadio() {
   const name: radioName[] = [
-    { en: 'createdAt', kor: '최신 순' },
-    { en: 'lessonSolutions', kor: '제출 많은 순' },
+    { en: 'id', kor: '최신 순' },
     { en: 'lessonSolutionLikes', kor: '공감 순' },
     { en: 'lessonSolutionComments', kor: '댓글 순' },
   ];

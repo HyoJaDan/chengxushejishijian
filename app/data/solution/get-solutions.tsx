@@ -5,7 +5,7 @@ import type { ISolutions } from '~/models/problem-and-solution/solution/solution
 
 export const solutionCategoryId = atom<string>({
   key: 'solutionCategory-id',
-  default: 'lessonSolutionLikes',
+  default: 'id',
 });
 
 export const getSolutionList = selectorFamily<ISolutions[], string>({
