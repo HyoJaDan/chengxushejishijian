@@ -4,18 +4,18 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
+import { CopyLink } from '~/components/common/copy-link';
 import { lessonAddress } from '~/data/constants/adress';
 import {
   localStorageData,
   loginStatus,
 } from '~/data/user/common/login-information';
-import { CopyLink } from '../common/copy-link';
 
 interface IGetData {
   isBookmark: boolean;
   id: string;
 }
-export const ProblemBanner = ({ isBookmark, id }: IGetData) => {
+export const SolutionBanner = ({ isBookmark, id }: IGetData) => {
   const localData = useRecoilValue(localStorageData);
   const setLoginStatus = useSetRecoilState(loginStatus);
   const [isBookmarked, setIsBookmarked] = useState<boolean>(isBookmark);

@@ -5,7 +5,7 @@ import {
   getProblemDetail,
   getProblemDetailTags,
 } from '~/data/problem/get-problem-detail';
-import { Banner } from './banner';
+import { ProblemBanner } from './banner';
 
 import { Comment } from './comment';
 import { ProblemMainContent } from './main-content';
@@ -26,7 +26,7 @@ export const ProblemMain = () => {
         <SimilerTraining id={problemData.lessonCategory.id} />
         <Comment problemId={params.id as string} navigate={navigate} />
       </FlexBox>
-      <Banner
+      <ProblemBanner
         isBookmark={problemData.isBookmark as boolean}
         id={params.id as string}
       />

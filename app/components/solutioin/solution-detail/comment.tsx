@@ -43,7 +43,7 @@ export const Comment = ({
     }
     constructor();
   }, []);
-  console.log(comments.length, 'connents');
+
   const onValid = async () => {
     if (textAreaRef.current !== null) {
       const inputedValue = textAreaRef.current.value;
