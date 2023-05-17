@@ -13,8 +13,7 @@ export const SolutionMain = () => {
   /* const problemData = useRecoilValue(getProblemDetail(params.id)); */
   /* const hashTags = useRecoilValue(getProblemDetailTags(params.id as string)); */
   const solutionData = useRecoilValue(getSolutionDetail(params.id as string));
-  console.log(solutionData, 'solutionData');
-  /* console.log(problemData, 'problemData'); */
+
   return (
     <Wrapper>
       <FlexBox>
