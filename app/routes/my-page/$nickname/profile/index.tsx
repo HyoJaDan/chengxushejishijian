@@ -32,7 +32,6 @@ export default function ProfileDefault() {
 }
 const Wrapper = styled.div`
   background-color: ${(prop) => prop.theme.color.grayScale.gray_100};
-  min-height: 100vh;
 `;
 const Content = styled.div`
   width: 1256px;

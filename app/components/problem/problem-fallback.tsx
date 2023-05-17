@@ -11,7 +11,7 @@ export const ProblemFallback = () => {
         <Box />
         <Box />
       </Boxes>
-      <Commit />
+      <Comment />
     </Wrapper>
   );
 };
@@ -63,12 +63,12 @@ const Box = styled.div`
   gap: 8px;
   cursor: pointer;
 `;
-const Commit = styled.div`
-  margin-top: 66px;
+const Comment = styled.div`
+  margin-top: 59px;
   margin-bottom: 50px;
   padding: 24px;
   width: 1149px;
-  min-height: 164px;
+  min-height: 200px;
   background-color: ${(prop) => prop.theme.color.basic.white};
   border: 1px solid ${(prop) => prop.theme.color.grayScale.gray_200};
   border-radius: 8px;
