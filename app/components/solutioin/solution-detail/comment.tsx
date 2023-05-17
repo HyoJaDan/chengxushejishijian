@@ -104,10 +104,9 @@ export const Comment = ({
   );
 };
 const Wrapper = styled.div`
-  margin-bottom: 24px;
   padding: 24px;
   width: 1149px;
-  min-height: 164px;
+  min-height: 200px;
   background-color: ${(prop) => prop.theme.color.basic.white};
   border: 1px solid ${(prop) => prop.theme.color.grayScale.gray_200};
   border-radius: 8px;

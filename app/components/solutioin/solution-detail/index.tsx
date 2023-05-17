@@ -34,8 +34,8 @@ export const SolutionMain = () => {
 };
 const Wrapper = styled.div`
   max-width: 1256px;
-  margin: 0 auto 50px auto;
-  padding-top: 67px;
+  margin: 0 auto;
+  padding: 40px 0;
   display: flex;
   gap: 38px;
 `;

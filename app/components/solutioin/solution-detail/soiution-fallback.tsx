@@ -10,10 +10,11 @@ export const SolutionFallBack = () => {
     </Wrapper>
   );
 };
+
 const Wrapper = styled.div`
   max-width: 1256px;
-  margin: 0 auto 50px auto;
-  padding-top: 67px;
+  margin: 0 auto;
+  padding: 40px 0;
   display: flex;
   gap: 38px;
 `;
@@ -26,10 +27,9 @@ const A = styled.div`
   padding: 29px 31px 25px 24px;
 `;
 const B = styled.div`
-  margin-bottom: 24px;
   padding: 24px;
   width: 1149px;
-  min-height: 164px;
+  min-height: 200px;
   background-color: ${(prop) => prop.theme.color.basic.white};
   border: 1px solid ${(prop) => prop.theme.color.grayScale.gray_200};
   border-radius: 8px;

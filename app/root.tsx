@@ -84,6 +84,7 @@ const Wrapper = styled.div`
 export const ContentArea = styled.div`
   position: relative;
   min-height: 100vh;
+  background-color: ${(prop) => prop.theme.color.grayScale.gray_100};
   margin: -72px 0 0 0;
   padding: 72px 0 0 0;
 `;

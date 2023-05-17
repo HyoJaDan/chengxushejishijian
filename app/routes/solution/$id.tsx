@@ -13,6 +13,6 @@ export default function SolutionDefault() {
   );
 }
 const Wrapper = styled.div`
-  background-color: ${(prop) => prop.theme.color.grayScale.gray_100};
-  min-height: 100vh;
+  /* background-color: ${(prop) => prop.theme.color.grayScale.gray_100};
+  min-height: 100vh; */
 `;
