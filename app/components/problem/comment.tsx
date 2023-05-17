@@ -97,7 +97,9 @@ export const Comment = ({
           <Button className='body3_SB'>댓글 등록</Button>
         </ButtonFlex>
       </Form>
-      <OtherComment>{outputComments}</OtherComment>
+      {outputComments.length !== 0 ? (
+        <OtherComment>{outputComments}</OtherComment>
+      ) : null}
     </Wrapper>
   );
 };

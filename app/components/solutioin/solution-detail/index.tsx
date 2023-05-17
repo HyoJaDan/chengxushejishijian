@@ -1,12 +1,8 @@
 import { useNavigate, useParams } from '@remix-run/react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import {
-  getProblemDetail,
-  getProblemDetailTags,
-} from '~/data/problem/get-problem-detail';
+import { getProblemDetailTags } from '~/data/problem/get-problem-detail';
 
-import { Banner } from '~/components/problem/banner';
 import { getSolutionDetail } from '~/data/solution/get-solution-detail';
 import { Comment } from './comment';
 import { SolutionMainContent } from './main-content';
@@ -14,21 +10,21 @@ import { SolutionMainContent } from './main-content';
 export const SolutionMain = () => {
   const params = useParams<string>();
   const navigate = useNavigate();
-  const problemData = useRecoilValue(getProblemDetail(params.id));
+  /* const problemData = useRecoilValue(getProblemDetail(params.id)); */
   const hashTags = useRecoilValue(getProblemDetailTags(params.id as string));
   const solutionData = useRecoilValue(getSolutionDetail(params.id as string));
   console.log(solutionData, 'solutionData');
-  console.log(problemData, 'problemData');
+  /* console.log(problemData, 'problemData'); */
   return (
     <Wrapper>
       <FlexBox>
         <SolutionMainContent solutionData={solutionData} hashTags={hashTags} />
         <Comment solutionId={params.id as string} navigate={navigate} />
       </FlexBox>
-      <Banner
+      {/* <Banner
         isBookmark={problemData.isBookmark as boolean}
         id={params.id as string}
-      />
+      /> */}
     </Wrapper>
   );
 };

@@ -17,7 +17,7 @@ export const getSolutionDetail = selectorFamily<ISolutionDetail, string>({
           },
         })
         .then((response) => {
-          return response.data.lesson;
+          return response.data.solution;
         });
       return solutionDetail;
     },

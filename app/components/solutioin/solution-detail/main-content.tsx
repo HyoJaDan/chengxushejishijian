@@ -2,14 +2,12 @@ import styled from 'styled-components';
 import { Circle } from '~/components/global-navigation-bar/login';
 import type { IProblemHashTags } from '~/models/hashtags';
 import type { ISolutionDetail } from '~/models/problem-and-solution/solution/solution-detail';
-import { Category } from '../main-page/solution-box';
 
 interface ITemp {
   solutionData: ISolutionDetail;
   hashTags: IProblemHashTags;
 }
 export const SolutionMainContent = ({ solutionData, hashTags }: ITemp) => {
-  const { name } = solutionData.lessonCategory;
   const { id, nickname, job, thumbnail } = solutionData.member;
 
   /*   const hashTagList = hashTags.lessonHashtags.map((value) => {
@@ -31,7 +29,6 @@ export const SolutionMainContent = ({ solutionData, hashTags }: ITemp) => {
   return (
     <Wrapper>
       <Header>
-        <Category className='caption1_SB'>{name}</Category>
         <Titles>
           <Title className='title4_BD'>{solutionData.title}</Title>
         </Titles>
