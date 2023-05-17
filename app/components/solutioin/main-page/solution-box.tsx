@@ -4,7 +4,7 @@ import { Circle } from '~/components/global-navigation-bar/login';
 import type { ISolutions } from '~/models/problem-and-solution/solution/solutions';
 
 export const SolutionBox = (data: ISolutions, index: number, width: number) => {
-  const { id, description, member, _count } = data;
+  const { id, description, member, _count, title } = data;
   const { lessonSolutionComments, lessonSolutionLikes } = _count;
   const { thumbnail, nickname } = member;
   const keyId = `${index}_${id}`;
@@ -24,8 +24,7 @@ export const SolutionBox = (data: ISolutions, index: number, width: number) => {
       <Content className='body2_BD'>{description}</Content>
       <TeskInformaion>
         <Header>
-          <Category className='caption1_SB'>category</Category>
-          <Title className='body1_BD'>task_title</Title>
+          <Title className='body1_BD'>{title}</Title>
         </Header>
         <SubContent>
           <User>

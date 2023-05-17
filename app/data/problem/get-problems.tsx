@@ -3,8 +3,8 @@ import { atom, selectorFamily } from 'recoil';
 import { lessonAddress } from '~/data/constants/adress';
 import type { IProblems } from '~/models/problem-and-solution/problem/problems';
 
-export const categoryId = atom<string>({
-  key: 'category-id',
+export const ProblemCategoryId = atom<string>({
+  key: 'ProblemCategoryId',
   default: 'createdAt',
 });
 

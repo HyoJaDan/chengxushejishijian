@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { selectorFamily } from 'recoil';
 import type { ISolutionDetail } from '~/models/problem-and-solution/solution/solution-detail';
-import { lessonAddress } from '../constants/adress';
+import { solutionAddress } from '../constants/adress';
 import { userAccessToken } from '../user/common/login-information';
 
 export const getSolutionDetail = selectorFamily<ISolutionDetail, string>({
@@ -11,7 +11,7 @@ export const getSolutionDetail = selectorFamily<ISolutionDetail, string>({
     async ({ get }) => {
       const token = get(userAccessToken);
       const solutionDetail = await axios
-        .get(`${lessonAddress}/${id}`, {
+        .get(`${solutionAddress}/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

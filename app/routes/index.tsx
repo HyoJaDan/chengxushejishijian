@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import Suspenses from '~/components/common/suspense';
 import { Banner } from '~/components/main/banner';
-import Radio from '~/components/main/radio';
+import ProblemRadio from '~/components/main/radio';
 
 export default function Main() {
   return (
     <Wrapper>
       <Banner />
-      <Radio />
+      <ProblemRadio />
       <Suspenses pageName='Training' />
     </Wrapper>
   );

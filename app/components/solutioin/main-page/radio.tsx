@@ -1,22 +1,21 @@
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { ProblemCategoryId } from '~/data/problem/get-problems';
+import { solutionCategoryId } from '~/data/solution/get-solutions';
 
 interface radioName {
   en: string;
   kor: string;
 }
 
-export default function ProblemRadio() {
+export default function SolutionRadio() {
   const name: radioName[] = [
     { en: 'createdAt', kor: '최신 순' },
     { en: 'lessonSolutions', kor: '제출 많은 순' },
-    { en: 'lessonLikes', kor: '공감 순' },
-    { en: 'lessonComments', kor: '댓글 순' },
+    { en: 'lessonSolutionLikes', kor: '공감 순' },
+    { en: 'lessonSolutionComments', kor: '댓글 순' },
   ];
 
-  const [selectData, setSelectData] = useRecoilState(ProblemCategoryId);
-
+  const [selectData, setSelectData] = useRecoilState(solutionCategoryId);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleChange = (e: any) => {
     const nowValue = e.target.value;

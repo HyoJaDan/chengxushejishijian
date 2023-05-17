@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import Suspenses from '~/components/common/suspense';
 import { Banner } from '~/components/main/banner';
-import Radios from '~/components/main/radio';
+import SolutionRadio from '~/components/solutioin/main-page/radio';
 
 export default function Solution() {
   return (
     <Wrapper>
       <Banner />
-      <Radios />
+      <SolutionRadio />
       <Suspenses pageName='Solution' />
     </Wrapper>
   );

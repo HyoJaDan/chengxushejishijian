@@ -1,10 +1,10 @@
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { categoryId, getProblems } from '~/data/problem/get-problems';
+import { ProblemCategoryId, getProblems } from '~/data/problem/get-problems';
 import { TrainBox } from '../problem/problem-box';
 
 export const Training = () => {
-  const sortBy = useRecoilValue(categoryId);
+  const sortBy = useRecoilValue(ProblemCategoryId);
   const problems = useRecoilValue(getProblems(sortBy));
 
   const problem = problems.map((data, index) => {

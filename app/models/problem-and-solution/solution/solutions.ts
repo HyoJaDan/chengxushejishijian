@@ -1,6 +1,7 @@
 import type { IMember } from '../../member';
 
 export interface ISolutions {
+  title: string;
   id: number;
   createdAt: string;
   deletedAt: string | null;
