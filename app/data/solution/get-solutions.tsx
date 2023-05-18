@@ -21,19 +21,18 @@ export const getSolutionList = selectorFamily<ISolutions[], string>({
       });
     return solutions;
   },
-}); /* 
-export const getProblemsById = selectorFamily<IProblems[], number>({
-  key: 'getLesson',
-  get: (id: number) => async () => {
-    const userData = await axios
-      .get(`${lessonAddress}?categoryId=${id}`)
+});
+export const getSolutionListById = selectorFamily<ISolutions[], string>({
+  key: 'getSolution',
+  get: (id: string) => async () => {
+    const solutions = await axios
+      .get(`${solutionAddress}?lessonId=${id}`)
       .then((response) => {
-        return response.data.lessons;
+        return response.data.solutions;
       })
       .catch(() => {
         return false;
       });
-    return userData;
+    return solutions;
   },
 });
- */

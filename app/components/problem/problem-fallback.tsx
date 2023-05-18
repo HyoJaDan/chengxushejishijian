@@ -7,9 +7,15 @@ export const ProblemFallback = () => {
       <WaitAnswer />
       <Header className='body1_BD'>유사한 트레이닝 문제</Header>
       <Boxes>
-        <Box />
-        <Box />
-        <Box />
+        <SimilarBox />
+        <SimilarBox />
+        <SimilarBox />
+      </Boxes>
+      <Header className='body1_BD'>다른 스위머의 풀이</Header>
+      <Boxes>
+        <OtherSolutionBox />
+        <OtherSolutionBox />
+        <OtherSolutionBox />
       </Boxes>
       <Comment />
     </Wrapper>
@@ -49,9 +55,9 @@ const Header = styled.div`
 `;
 const Boxes = styled.div`
   display: flex;
-  gap: 10px;
+  gap: 24px;
 `;
-const Box = styled.div`
+const SimilarBox = styled.div`
   width: 367px;
   height: 142px;
   background: ${(prop) => prop.theme.color.basic.white};
@@ -64,8 +70,6 @@ const Box = styled.div`
   cursor: pointer;
 `;
 const Comment = styled.div`
-  margin-top: 59px;
-  margin-bottom: 50px;
   padding: 24px;
   width: 1149px;
   min-height: 200px;
@@ -75,4 +79,7 @@ const Comment = styled.div`
   display: flex;
   flex-direction: column;
   gap: 32px;
+`;
+const OtherSolutionBox = styled(SimilarBox)`
+  height: 309px;
 `;

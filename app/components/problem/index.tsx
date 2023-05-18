@@ -9,6 +9,7 @@ import { ProblemBanner } from './banner';
 
 import { Comment } from './comment';
 import { ProblemMainContent } from './main-content';
+import { OtherSolution } from './other-solution';
 import { SimilerTraining } from './similer-problem';
 import { WaitAnswer } from './waiting-solution-box';
 
@@ -17,13 +18,13 @@ export const ProblemMain = () => {
   const problemData = useRecoilValue(getProblemDetail(params.id));
   const hashTags = useRecoilValue(getProblemDetailTags(params.id as string));
   const navigate = useNavigate();
-
   return (
     <Wrapper>
       <FlexBox>
         <ProblemMainContent problemData={problemData} hashTags={hashTags} />
         <WaitAnswer id={params.id as string} />
         <SimilerTraining id={problemData.lessonCategory.id} />
+        <OtherSolution id={problemData.lessonCategory.id} />
         <Comment problemId={params.id as string} navigate={navigate} />
       </FlexBox>
       <ProblemBanner

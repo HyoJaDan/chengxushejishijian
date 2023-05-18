@@ -2,26 +2,27 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { getProblemsById } from '~/data/problem/get-problems';
-import { TrainBox } from './problem-box';
+import { getSolutionListById } from '~/data/solution/get-solutions';
+import { SolutionBox } from '../solutioin/main-page/solution-box';
 
 const offset = 3;
-export const SimilerTraining = ({ id }: { id: number }) => {
-  const problems = useRecoilValue(getProblemsById(id));
+export const OtherSolution = ({ id }: { id: number }) => {
+  const solutionList = useRecoilValue(getSolutionListById(id as string));
+
   const [index, setIndex] = useState(0);
   const [leaving, setLeaving] = useState<boolean>(false);
   const increaseIndex = () => {
     if (leaving) return;
     toggleLeaving();
-    const totalProblems = problems.length;
-    const maxIndex = Math.floor(totalProblems / offset) - 1;
+    const totalSolutions = solutionList.length;
+    const maxIndex = Math.floor(totalSolutions / offset) - 1;
     setIndex((prev) => (prev === maxIndex ? 0 : prev + 1));
   };
   const toggleLeaving = () => setLeaving((prev) => !prev);
 
   return (
     <Wrapper>
-      <Header className='body1_BD'>유사한 트레이닝 문제</Header>
+      <Header className='body1_BD'>다른 스위머의 풀이</Header>
       <Slider>
         <AnimatePresence onExitComplete={toggleLeaving} initial={false}>
           <Row
@@ -32,9 +33,9 @@ export const SimilerTraining = ({ id }: { id: number }) => {
             transition={{ type: 'tween', duration: 1 }}
             key={index}
           >
-            {problems
+            {solutionList
               .slice(offset * index, offset * index + offset)
-              .map((data, num) => TrainBox(data, num, 1149))}
+              .map((data, num) => SolutionBox(data, num, 1149))}
           </Row>
         </AnimatePresence>
         <Button onClick={() => increaseIndex()} isLeaving={leaving}>
@@ -48,7 +49,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-bottom: 142px;
+  margin-bottom: 309px;
 `;
 const Header = styled.div`
   color: ${(prop) => prop.theme.color.grayScale.gray_800};
@@ -87,7 +88,7 @@ const Button = styled.div<{ isLeaving: boolean }>`
   width: 48px;
   height: 48px;
   position: absolute;
-  top: 46px;
+  top: 130px;
   right: -22px;
   ${({ isLeaving }) => isLeaving && 'display:none'}
 `;
