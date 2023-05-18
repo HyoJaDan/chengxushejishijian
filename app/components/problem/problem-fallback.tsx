@@ -79,6 +79,7 @@ const Comment = styled.div`
   display: flex;
   flex-direction: column;
   gap: 32px;
+  margin-top: 8px;
 `;
 const OtherSolutionBox = styled(SimilarBox)`
   height: 309px;
