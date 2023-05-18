@@ -98,7 +98,7 @@ const Head = styled.div`
   display: flex;
   align-items: baseline;
   width: -webkit-fill-available;
-  margin: 40px 0 0 80px;
+  margin: 40px 0;
   gap: 20px;
 `;
 const HeadInfo = styled.div`
