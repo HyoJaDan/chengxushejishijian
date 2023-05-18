@@ -17,7 +17,8 @@ export interface IProblems {
   lessonCategory: IProblemCategory;
   _count: {
     lessonComments: number;
-    lessonLikes: number;
+    lessonBookMarks: number;
     lessonSolutions: number;
+    lessonLikes: number;
   };
 }

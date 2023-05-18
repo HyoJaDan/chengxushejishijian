@@ -7,7 +7,9 @@ import { SolutionBox } from '../solutioin/main-page/solution-box';
 
 const offset = 3;
 export const OtherSolution = ({ id }: { id: number }) => {
-  const solutionList = useRecoilValue(getSolutionListById(id as string));
+  const solutionList = useRecoilValue(
+    getSolutionListById(id as unknown as string)
+  );
 
   const [index, setIndex] = useState(0);
   const [leaving, setLeaving] = useState<boolean>(false);

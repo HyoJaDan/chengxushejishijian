@@ -5,7 +5,7 @@ import type { IProblems } from '~/models/problem-and-solution/problem/problems';
 export const TrainBox = (data: IProblems, index: number, width: number) => {
   const { id, lessonCategory, title, _count } = data;
   const { name } = lessonCategory;
-  const { lessonLikes, lessonComments, lessonSolutions } = _count;
+  const { lessonBookMarks, lessonComments, lessonSolutions } = _count;
   const keyId = `${id}_${index}`;
   const maxWidth = Math.floor((width - 48) / 3);
   return (
@@ -19,7 +19,7 @@ export const TrainBox = (data: IProblems, index: number, width: number) => {
         </Count>
         <Count>
           <Img src='/icons/problem/likes.svg' alt='likes' />
-          <Text>{lessonLikes}</Text>
+          <Text>{lessonBookMarks}</Text>
         </Count>
         <Count>
           <Img src='/icons/problem/comments.svg' alt='comments' />
