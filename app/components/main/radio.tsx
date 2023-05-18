@@ -11,7 +11,7 @@ export default function ProblemRadio() {
   const name: radioName[] = [
     { en: 'createdAt', kor: '최신 순' },
     { en: 'lessonSolutions', kor: '제출 많은 순' },
-    { en: 'lessonLikes', kor: '공감 순' },
+    { en: 'lessonBookMarks', kor: '공감 순' },
     { en: 'lessonComments', kor: '댓글 순' },
   ];
 
