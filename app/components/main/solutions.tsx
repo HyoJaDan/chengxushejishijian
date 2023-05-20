@@ -1,7 +1,8 @@
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import {
   getSolutionList,
+  numOfSolution,
   solutionCategoryId,
 } from '~/data/solution/get-solutions';
 import { SolutionBox } from '../solutioin/main-page/solution-box';
@@ -9,6 +10,8 @@ import { SolutionBox } from '../solutioin/main-page/solution-box';
 export const Solution = () => {
   const sortBy = useRecoilValue(solutionCategoryId);
   const solutionList = useRecoilValue(getSolutionList(sortBy));
+  const setNumOfSolution = useSetRecoilState(numOfSolution);
+  setNumOfSolution(solutionList.length);
   const solution = solutionList.map((data, index) => {
     return SolutionBox(data, index, 1256);
   });

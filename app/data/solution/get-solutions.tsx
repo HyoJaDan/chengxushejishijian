@@ -7,7 +7,10 @@ export const solutionCategoryId = atom<string>({
   key: 'solutionCategory-id',
   default: 'id',
 });
-
+export const numOfSolution = atom<number>({
+  key: 'numOfSolution',
+  default: 0,
+});
 export const getSolutionList = selectorFamily<ISolutions[], string>({
   key: 'getSolution',
   get: (sortBy: string) => async () => {

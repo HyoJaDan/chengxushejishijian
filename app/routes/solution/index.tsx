@@ -1,14 +1,18 @@
 import styled from 'styled-components';
-import Suspenses from '~/components/common/suspense';
 import { Banner } from '~/components/main/banner';
+import { SolutionFallback } from '~/components/main/solution-fallback';
+import { Solution } from '~/components/main/solutions';
 import SolutionRadio from '~/components/solutioin/main-page/radio';
+import SSRSafeSuspense from '~/hooks/ssr-safe-suspense';
 
-export default function Solution() {
+export default function SolutionDefault() {
   return (
     <Wrapper>
       <Banner />
       <SolutionRadio />
-      <Suspenses pageName='Solution' />
+      <SSRSafeSuspense fallback={<SolutionFallback />}>
+        <Solution />
+      </SSRSafeSuspense>
     </Wrapper>
   );
 }

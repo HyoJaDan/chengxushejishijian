@@ -7,6 +7,10 @@ export const ProblemCategoryId = atom<string>({
   key: 'ProblemCategoryId',
   default: 'createdAt',
 });
+export const numOfProblems = atom<number>({
+  key: 'numOfProblems',
+  default: 0,
+});
 
 export const getProblems = selectorFamily<IProblems[], string>({
   key: 'getLesson',

@@ -1,14 +1,18 @@
 import styled from 'styled-components';
-import Suspenses from '~/components/common/suspense';
+import { Training } from '~/components/main';
 import { Banner } from '~/components/main/banner';
+import { ProblemFallback } from '~/components/main/proble-fallback';
 import ProblemRadio from '~/components/main/radio';
+import SSRSafeSuspense from '~/hooks/ssr-safe-suspense';
 
 export default function Main() {
   return (
     <Wrapper>
       <Banner />
       <ProblemRadio />
-      <Suspenses pageName='Training' />
+      <SSRSafeSuspense fallback={<ProblemFallback />}>
+        <Training />
+      </SSRSafeSuspense>
     </Wrapper>
   );
 }
