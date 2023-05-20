@@ -61,9 +61,9 @@ export const SolutionBanner = ({
             <div className={`cross ${isBookmarked ? 'checked' : ''}`} />
           </Circle>
           {isBookmarked ? (
-            <Title className='body3_MD'>저장완료!</Title>
+            <Title className='body3_MD'>좋아요 완료</Title>
           ) : (
-            <Title className='body3_MD'>저장하기</Title>
+            <Title className='body3_MD'>좋아요 하기</Title>
           )}{' '}
         </Flex>
         <Flex>

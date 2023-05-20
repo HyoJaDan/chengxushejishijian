@@ -6,7 +6,6 @@ import { TrainBox } from '../problem/problem-box';
 export const Training = () => {
   const sortBy = useRecoilValue(ProblemCategoryId);
   const problems = useRecoilValue(getProblems(sortBy));
-  console.log(problems);
   const problem = problems.map((data, index) => {
     return TrainBox(data, index, 1256);
   });
