@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import BookmarkedProblem from '~/components/myPage/archive';
+import BookmarkedProblem from '~/components/myPage/bookmarked-problem';
 import SSRSafeSuspense from '~/hooks/ssr-safe-suspense';
 
 export default function BookmarkedProblemDefault() {

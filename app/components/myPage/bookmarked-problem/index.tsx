@@ -15,6 +15,7 @@ export default function BookmarkedProblem() {
 }
 
 const Wrapper = styled.div`
+  width: -webkit-fill-available;
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
