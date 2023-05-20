@@ -14,7 +14,9 @@ export default function IntroductionAndLink() {
         <Box key={idx}>
           <Image src={URLImages[memberSocialLinkId - 1].iconUrl} alt='icon' />
           <Border />
-          <Link href={url}>{url}</Link>
+          <Link href={url} target='_blank'>
+            {url}
+          </Link>
         </Box>
       );
     }
