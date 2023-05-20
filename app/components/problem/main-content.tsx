@@ -27,7 +27,7 @@ export const ProblemMainContent = ({ problemData, hashTags }: ITemp) => {
         </Titles>
       </Header>
       <Main className='body2_MD'>
-        <Content className='body2_MD' defaultValue={problemData.description} />
+        <PreWrap className='body2_MD'>{problemData.description}</PreWrap>
         <Tags>{hashTagList}</Tags>
       </Main>
     </Wrapper>
@@ -72,12 +72,14 @@ const Tags = styled.div`
 const Content = styled.textarea`
   outline: none;
   border: none;
-  min-height: 200px;
+`;
+const PreWrap = styled.div`
+  white-space: pre-wrap;
+  /* min-height: 200px;
   width: 100%;
   color: ${(prop) => prop.theme.color.grayScale.gray_800};
-  resize: none;
+  resize: none; */
 `;
-
 const Tag = styled.div`
   font-weight: 600;
   font-size: 14px;

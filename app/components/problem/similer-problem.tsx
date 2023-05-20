@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { getProblemsById } from '~/data/problem/get-problems';
+import { getProblemsById } from '~/data/problem/get-problemList';
 import { TrainBox } from './problem-box';
 
 const offset = 3;

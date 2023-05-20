@@ -62,7 +62,7 @@ export const SolutionMainContent = ({
         </SolutionUserInformation>
       </Header>
       <Main className='body2_MD'>
-        <Content className='body2_MD' defaultValue={solutionData.description} />
+        <PreWrap className='body2_MD'>{solutionData.description}</PreWrap>
         {/* <Tags>{hashTagList}</Tags> */}
       </Main>
     </Wrapper>
@@ -111,6 +111,9 @@ const Content = styled.textarea`
   width: 100%;
   color: ${(prop) => prop.theme.color.grayScale.gray_800};
   resize: none;
+`;
+const PreWrap = styled.div`
+  white-space: pre-wrap;
 `;
 
 const Tag = styled.div`

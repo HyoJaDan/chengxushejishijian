@@ -1,6 +1,6 @@
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { ProblemCategoryId } from '~/data/problem/get-problems';
+import { ProblemCategoryId } from '~/data/problem/get-problemList';
 
 interface radioName {
   en: string;

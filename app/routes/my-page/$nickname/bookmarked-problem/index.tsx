@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import MypageArchive from '~/components/myPage/archive';
+import BookmarkedProblem from '~/components/myPage/archive';
 import SSRSafeSuspense from '~/hooks/ssr-safe-suspense';
 
-export default function Archive() {
+export default function BookmarkedProblemDefault() {
   return (
     <Wrapper>
       <SSRSafeSuspense>
-        <MypageArchive />
+        <BookmarkedProblem />
       </SSRSafeSuspense>
     </Wrapper>
   );

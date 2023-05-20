@@ -1,24 +1,20 @@
-import { Suspense } from 'react';
 import styled from 'styled-components';
+import { TrainBox } from '~/components/problem/problem-box';
 
-const OutputArchive = () => {
-  /* const problems = useRecoilValue(getProblemsByBookmark(id)); */
-};
-
-export default function MypageArchive() {
-  return (
-    <Wrapper>
-      <Suspense fallback={<div>Loading...</div>}>
-        <OutputArchive />
-      </Suspense>
-    </Wrapper>
-  );
+export default function BookmarkedProblem() {
+  const problems = [];
+  const problem = problems.map((data, index) => {
+    return TrainBox(data, index, 1256);
+  });
+  return <Wrapper>{problem}</Wrapper>;
 }
 
 const Wrapper = styled.div`
-  width: 1256px;
-  margin: 24px 0 24px 0;
   background: ${(prop) => prop.theme.color.basic.white};
+  width: 1256px;
+  margin: 24px 0;
+  border: 1px solid #efedea;
+  border-radius: 8px;
 `;
 const Content = styled.div`
   display: grid;
