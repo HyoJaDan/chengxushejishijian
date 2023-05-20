@@ -7,6 +7,7 @@ export const ProblemCategoryId = atom<string>({
   key: 'ProblemCategoryId',
   default: 'createdAt',
 });
+
 export const numOfProblems = atom<number>({
   key: 'numOfProblems',
   default: 0,
@@ -31,6 +32,21 @@ export const getProblemsById = selectorFamily<IProblems[], number>({
   get: (id: number) => async () => {
     const userData = await axios
       .get(`${lessonAddress}?categoryId=${id}`)
+      .then((response) => {
+        return response.data.lessons;
+      })
+      .catch(() => {
+        return false;
+      });
+    return userData;
+  },
+});
+/* https://api.thepool.kr/api/lessons?bookmarkedMemberId=1 */
+export const getBookmarkedProblemList = selectorFamily<IProblems[], number>({
+  key: 'getLesson',
+  get: (id: number) => async () => {
+    const userData = await axios
+      .get(`${lessonAddress}?bookmarkedMemberId=${id}`)
       .then((response) => {
         return response.data.lessons;
       })

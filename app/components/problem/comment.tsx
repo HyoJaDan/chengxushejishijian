@@ -7,7 +7,7 @@ import { lessonAddress } from '~/data/constants/adress';
 import { commentAtom } from '~/data/problem/commits';
 import {
   loginStatus,
-  userAccessToken,
+  myAccessToken,
 } from '~/data/user/common/login-information';
 import type { IComments } from '~/models/problem-and-solution/problem/comments';
 import { otherComments } from './comment-other';
@@ -21,7 +21,7 @@ export const Comment = ({
 }) => {
   const { register, handleSubmit } = useForm();
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
-  const accessToken = useRecoilValue(userAccessToken);
+  const accessToken = useRecoilValue(myAccessToken);
   const [comments, setComments] = useRecoilState(commentAtom);
   const setLoginStatus = useSetRecoilState(loginStatus);
   const outputComments = otherComments(comments, navigate);

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { localUserData } from '~/data/my-page/user-data';
+import { userId } from '~/data/my-page/user-id';
 import { localStorageData } from '~/data/user/common/login-information';
 import type { IFollow } from '~/hooks/useconvert-nickname-to-user-data';
 import { useConvertNickNameToUserData } from '~/hooks/useconvert-nickname-to-user-data';
@@ -10,10 +11,12 @@ export function useCustomHook(nickName: string): [boolean, IFollow] {
   const setUserData = useSetRecoilState(localUserData);
   const [isMe, setIsMe] = useState(false);
   const [follow, setFollow] = useState<IFollow>();
+  const setUserId = useSetRecoilState(userId);
   useEffect(() => {
     async function FetchAndSetUser() {
       const returnedValue = await useConvertNickNameToUserData(nickName);
-      const [userData, tempFollowValue] = returnedValue;
+      const [userData, tempFollowValue, id] = returnedValue;
+      setUserId(id);
       setFollow(tempFollowValue);
       setUserData(userData);
       if (localData.id === userData.id) {

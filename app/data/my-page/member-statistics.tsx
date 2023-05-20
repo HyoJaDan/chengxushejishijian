@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { selector } from 'recoil';
 import { endpointBase } from '~/data/constants/adress';
-import { userId } from '../user/common/login-information';
+import { myId } from '../user/common/login-information';
 
 interface IStatistics {
   lessonCount: number;
@@ -13,7 +13,7 @@ interface IStatistics {
 export const memberStatistics = selector<IStatistics>({
   key: 'memberStatistics',
   get: async ({ get }) => {
-    const id = get(userId);
+    const id = get(myId);
 
     const statistics = await axios(
       `${endpointBase}/api/member-statistics/${id}`

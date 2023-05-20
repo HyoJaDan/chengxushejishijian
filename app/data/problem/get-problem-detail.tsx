@@ -3,14 +3,14 @@ import { selectorFamily } from 'recoil';
 import { lessonAddress } from '~/data/constants/adress';
 import type { IProblemHashTags } from '~/models/hashtags';
 import type { IProblem } from '~/models/problem-and-solution/problem/problem';
-import { userAccessToken } from '../user/common/login-information';
+import { myAccessToken } from '../user/common/login-information';
 
 export const getProblemDetail = selectorFamily<IProblem, string | undefined>({
   key: 'getProblemDetail',
   get:
     (id) =>
     async ({ get }) => {
-      const token = get(userAccessToken);
+      const token = get(myAccessToken);
       if (id === null) {
         const lessonDetail = await axios
           .get(`${lessonAddress}/${id}`)

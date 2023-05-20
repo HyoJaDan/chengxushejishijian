@@ -2,7 +2,7 @@ import axios from 'axios';
 import { atom, selectorFamily } from 'recoil';
 import type { IComments } from '~/models/problem-and-solution/problem/comments';
 import { lessonAddress } from '../constants/adress';
-import { userAccessToken } from '../user/common/login-information';
+import { myAccessToken } from '../user/common/login-information';
 
 export const commentAtom = atom<IComments[]>({
   key: 'commentAtom',
@@ -14,7 +14,7 @@ export const getComments = selectorFamily<IComments[], string>({
   get:
     (id) =>
     async ({ get }) => {
-      const token = get(userAccessToken);
+      const token = get(myAccessToken);
       const comments = await axios
         .get(`${lessonAddress}/${id}/comments`, {
           headers: {

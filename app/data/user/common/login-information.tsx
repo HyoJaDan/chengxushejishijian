@@ -33,8 +33,8 @@ export const loginStatus = selector({
     }));
   },
 });
-export const userId = selector({
-  key: 'userId',
+export const myId = selector({
+  key: 'myId',
   get: ({ get }) => get(localStorageData).id,
   set: ({ set }, newValue) => {
     set(localStorageData, (oldValue) => ({
@@ -44,8 +44,8 @@ export const userId = selector({
   },
 });
 
-export const userAccessToken = selector<string>({
-  key: 'userAccessToken',
+export const myAccessToken = selector<string>({
+  key: 'myAccessToken',
   get: ({ get }) => get(localStorageData).accessToken,
   set: ({ set }, newValue) => {
     set(localStorageData, (oldValue) => ({

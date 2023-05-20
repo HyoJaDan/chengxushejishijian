@@ -6,7 +6,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import InputUserArea from '~/components/account-info/input-area-button';
 import { memberDataAdress } from '~/data/constants/adress';
-import { localStorageData, userId } from '~/data/user/common/login-information';
+import { localStorageData, myId } from '~/data/user/common/login-information';
 
 import type { IUserDataAccountInfo } from '~/models/my-page/user';
 import InputUserName from '../components/account-info/input-name';
@@ -17,7 +17,7 @@ export default function Detail() {
   const [userJobPool, setUserJobPool] = useState<
     '개발' | '디자인' | 'false' | 'initialData'
   >('initialData');
-  const id = useRecoilValue(userId);
+  const id = useRecoilValue(myId);
   const {
     register,
     handleSubmit,

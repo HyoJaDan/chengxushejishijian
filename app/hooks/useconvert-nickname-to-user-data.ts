@@ -15,7 +15,7 @@ export const useConvertNickNameToUserData = async ({
   nickName,
 }: {
   nickName: string;
-}): Promise<[IUserData, IFollow]> => {
+}): Promise<[IUserData, IFollow, number]> => {
   const userId = await axios(`${endpointBase}/api/member-statistics`).then(
     (res) => {
       const temp = (data: { member: { nickname: string } }) =>
@@ -24,6 +24,7 @@ export const useConvertNickNameToUserData = async ({
       return res.data.memberStatisticsList[index].member.id;
     }
   );
+
   const userData = await axios
     .get(`${memberDataAdress}/${userId}`)
     .then((response) => {
@@ -42,5 +43,5 @@ export const useConvertNickNameToUserData = async ({
     `${manageFollowesAddress.following}?memberId${userId}`
   ).then((response) => response.data.totalCount);
 
-  return [userData, { numOfFollowers, numOfFollowings }];
+  return [userData, { numOfFollowers, numOfFollowings }, userId];
 };
