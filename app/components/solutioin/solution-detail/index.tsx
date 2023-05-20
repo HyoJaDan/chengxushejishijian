@@ -18,7 +18,8 @@ export const SolutionMain = () => {
     <Wrapper>
       <FlexBox>
         <SolutionMainContent
-          solutionData={solutionData} /* hashTags={hashTags} */
+          solutionData={solutionData}
+          navigate={navigate} /* hashTags={hashTags} */
         />
         <Comment solutionId={params.id as string} navigate={navigate} />
       </FlexBox>

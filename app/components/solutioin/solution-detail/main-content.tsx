@@ -6,8 +6,13 @@ import type { ISolutionDetail } from '~/models/problem-and-solution/solution/sol
 interface ITemp {
   solutionData: ISolutionDetail;
   hashTags: IProblemHashTags;
+  navigate: Function;
 }
-export const SolutionMainContent = ({ solutionData, hashTags }: ITemp) => {
+export const SolutionMainContent = ({
+  solutionData,
+  hashTags,
+  navigate,
+}: ITemp) => {
   const { id, nickname, job, thumbnail } = solutionData.member;
 
   /*   const hashTagList = hashTags.lessonHashtags.map((value) => {
@@ -19,7 +24,11 @@ export const SolutionMainContent = ({ solutionData, hashTags }: ITemp) => {
   const outputThumbnail = () => {
     if (thumbnail !== '') {
       return (
-        <ThumbnailBackground>
+        <ThumbnailBackground
+          onClick={() => {
+            navigate(`/my-page/${nickname}/profile`);
+          }}
+        >
           <Img src={thumbnail} alt='' />
         </ThumbnailBackground>
       );
@@ -36,7 +45,14 @@ export const SolutionMainContent = ({ solutionData, hashTags }: ITemp) => {
           <User>
             {outputThumbnail()}
             <NameAndPosition>
-              <NickName className='body3_BD'>{nickname}</NickName>
+              <NickName
+                onClick={() => {
+                  navigate(`/my-page/${nickname}/profile`);
+                }}
+                className='body3_BD'
+              >
+                {nickname}
+              </NickName>
               <Job className='caption1_RG'>{job}</Job>
             </NameAndPosition>
           </User>
@@ -122,6 +138,10 @@ const NameAndPosition = styled.div`
 `;
 const NickName = styled.div`
   color: ${(prop) => prop.theme.color.grayScale.gray_900};
+  :hover {
+    color: ${(prop) => prop.theme.color.primary.blue.blue_600};
+  }
+  cursor: pointer;
 `;
 const Job = styled.div`
   color: ${(prop) => prop.theme.color.grayScale.gray_700};

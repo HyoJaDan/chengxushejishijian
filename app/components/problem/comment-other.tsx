@@ -12,9 +12,25 @@ export const otherComments = (comments: IComments[], navigate: Function) => {
     const { nickname, job, thumbnail } = member;
     const CommentImg = () => {
       if (thumbnail === null) {
-        return <ThumbnailWrapper className='hoverNickName' />;
+        return (
+          <ThumbnailWrapper
+            onClick={() => {
+              navigate(`/my-page/${member.nickname}/profile`);
+            }}
+            className='hoverNickName'
+          />
+        );
       }
-      return <Img className='hoverNickName' src={thumbnail} alt='thumbnail' />;
+      return (
+        <Img
+          onClick={() => {
+            navigate(`/my-page/${member.nickname}/profile`);
+          }}
+          className='hoverNickName'
+          src={thumbnail}
+          alt='thumbnail'
+        />
+      );
     };
 
     return (
@@ -67,11 +83,13 @@ const ThumbnailWrapper = styled.div`
   height: 36px;
   background: ${(prop) => prop.theme.color.grayScale.gray_700};
   border-radius: 99px;
+  cursor: pointer;
 `;
 const Img = styled.img`
   width: 36px;
   height: 36px;
   border-radius: 99px;
+  cursor: pointer;
 `;
 const Job = styled.div`
   color: ${(prop) => prop.theme.color.grayScale.gray_700};
