@@ -61,7 +61,7 @@ const Box = styled(Link)<{ maxwidth: number }>`
 const Content = styled.div`
   color: ${(prop) => prop.theme.color.grayScale.gray_900};
   background-color: ${(prop) => prop.theme.color.primary.blue.blue_100};
-  height: -webkit-fill-available;
+  height: inherit;
 `;
 const TeskInformaion = styled.div`
   height: 109px;
