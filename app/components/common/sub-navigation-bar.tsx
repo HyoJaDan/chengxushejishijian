@@ -16,7 +16,7 @@ export default function MyPageHeader({ page }: { page: string }) {
     { title: '프로필', link: `${page}/profile` },
     { title: '저장한 문제', link: `${page}/bookmarked-problem` },
     { title: '좋아요한 풀이', link: `${page}/liked-solution` },
-    { title: '제출한 풀이', link: `${page}/solved-solution` },
+    { title: '제출한 풀이', link: `${page}/submitted-solution` },
   ];
 
   const MyPagelinks = myPages.map(({ title, link }, index) => {

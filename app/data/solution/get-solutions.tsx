@@ -39,12 +39,27 @@ export const getSolutionListById = selectorFamily<ISolutions[], string>({
     return solutions;
   },
 });
-/* https://api.thepool.kr/api/solutions?likedMemberId=1' */
+
 export const getLikedSolution = selectorFamily<ISolutions[], string>({
   key: 'getLikedSolution',
   get: (id: string) => async () => {
     const solutions = await axios
       .get(`${solutionAddress}?likedMemberId=${id}`)
+      .then((response) => {
+        return response.data.solutions;
+      })
+      .catch(() => {
+        return false;
+      });
+    return solutions;
+  },
+});
+
+export const getSubmittedSolution = selectorFamily<ISolutions[], string>({
+  key: 'getSubmittedSolution',
+  get: (id: string) => async () => {
+    const solutions = await axios
+      .get(`${solutionAddress}?memberId=${id}`)
       .then((response) => {
         return response.data.solutions;
       })
