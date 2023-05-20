@@ -21,6 +21,6 @@ const Wrapper = styled.div`
   flex-wrap: wrap;
   gap: 24px;
   max-width: 1256px;
-  margin: 28px auto;
+  margin: 24px auto;
   padding-bottom: 40px;
 `;
