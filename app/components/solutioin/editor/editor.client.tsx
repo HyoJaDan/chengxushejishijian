@@ -17,6 +17,7 @@ import createFocusPlugin from '@draft-js-plugins/focus';
 import createImagePlugin from '@draft-js-plugins/image';
 import createResizeablePlugin from '@draft-js-plugins/resizeable';
 import { createEmptyBlock } from './createEmtypBlock';
+import { SimpleHashtagEditor } from './hashtag';
 
 const alignmentPlugin = createAlignmentPlugin();
 const { AlignmentTool } = alignmentPlugin;
@@ -231,7 +232,7 @@ export const MainEditor = () => {
           <AlignmentTool />
         </EditorWrapper>
         <Headers>
-          {/* <SimpleHashtagEditor /> */}
+          <SimpleHashtagEditor />
           <Footer>
             <AddCodeButton
               onClick={() => {
@@ -253,7 +254,7 @@ export const MainEditor = () => {
               </Label>
             </AddPirtureButton>
           </Footer>
-          <div>제출하기</div>
+          <AddCodeButton>제출하기</AddCodeButton>
         </Headers>
       </Container>
     </Wrapper>
