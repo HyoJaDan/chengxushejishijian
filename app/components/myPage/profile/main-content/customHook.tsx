@@ -12,6 +12,7 @@ export function useCustomHook(nickName: string): [boolean, IFollow] {
   const [isMe, setIsMe] = useState(false);
   const [follow, setFollow] = useState<IFollow>();
   const setUserId = useSetRecoilState(userId);
+
   useEffect(() => {
     async function FetchAndSetUser() {
       const returnedValue = await useConvertNickNameToUserData(nickName);

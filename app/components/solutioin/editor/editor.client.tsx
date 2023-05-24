@@ -1,13 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Editor, { composeDecorators } from '@draft-js-plugins/editor';
 import {
   AtomicBlockUtils,
-  convertToRaw,
   EditorState,
   getDefaultKeyBinding,
   KeyBindingUtil,
+  Modifier,
   RichUtils,
 } from 'draft-js';
-import draftToHtml from 'draftjs-to-html';
 import { useRef, useState } from 'react';
 import styled from 'styled-components';
 
@@ -17,7 +17,6 @@ import createFocusPlugin from '@draft-js-plugins/focus';
 import createImagePlugin from '@draft-js-plugins/image';
 import createResizeablePlugin from '@draft-js-plugins/resizeable';
 import { createEmptyBlock } from './createEmtypBlock';
-import { SimpleHashtagEditor } from './hashtag';
 
 const alignmentPlugin = createAlignmentPlugin();
 const { AlignmentTool } = alignmentPlugin;
@@ -45,32 +44,47 @@ const plugins = [
 const Image = ({ src }) => {
   return <img src={src} alt='img' style={styles.media} />;
 };
+
 export const MainEditor = () => {
   const [editorState, setEditorState] = useState<EditorState>(
     EditorState.createEmpty()
   );
+
+  const [currentBlockType, setCurrentBlockType] = useState();
   const editorRef = useRef();
   const focusEditor = () => {
     editorRef.current.focus();
   };
 
-  const [content, setContent] = useState<string>('');
-  console.log(content);
+  /* const [content, setContent] = useState<string>(''); */
+  /* console.log(content); */
+  const handlePastedText = (text: string) => {
+    const contentState = editorState.getCurrentContent();
+    const currentSelection = editorState.getSelection();
+
+    // 붙여넣은 텍스트를 현재 블록의 스타일과 일치하도록 처리
+    const styledContentState = Modifier.replaceText(
+      contentState,
+      currentSelection,
+      text,
+      editorState.getCurrentInlineStyle()
+    );
+
+    const newEditorState = EditorState.push(
+      editorState,
+      styledContentState,
+      'insert-characters'
+    );
+
+    setEditorState(newEditorState);
+    return 'handled';
+  };
+
   const onChange = (onChangeeditorState: EditorState) => {
     setEditorState(onChangeeditorState);
-    setContent(
+    /* setContent(
       draftToHtml(convertToRaw(onChangeeditorState.getCurrentContent()))
-    );
-  };
-
-  /* 내가 언더라인 버튼을 클릭했는지 아는 함수 */
-  const onUnderlineClick = () => {
-    onChange(RichUtils.toggleInlineStyle(editorState, 'UNDERLINE'));
-  };
-
-  /* 코드 나오는 함수 */
-  const onToggleCode = () => {
-    onChange(RichUtils.toggleCode(editorState));
+    ); */
   };
 
   /* 1. 무슨 키를 입력했는지 나오는 함수 */
@@ -85,6 +99,10 @@ export const MainEditor = () => {
     if (keyCode === 13) {
       return 'enter';
     }
+    if (keyCode === 191) {
+      console.log('slash');
+      return 'slash';
+    }
     return getDefaultKeyBinding(e);
   };
 
@@ -92,13 +110,23 @@ export const MainEditor = () => {
   const handleKeyCommand = (command: string) => {
     console.log('커멘드가 입력되었습니다.', command);
     if (command === 'enter') {
-      const newEditerState = createEmptyBlock(editorState);
-      onChange(newEditerState);
+      console.log('enter이 클릭되었습니다.');
+      if (currentBlockType === 'code-block') {
+        onChange(RichUtils.insertSoftNewline(editorState));
+      } else {
+        const newEditerState = createEmptyBlock(editorState);
+        onChange(newEditerState);
+      }
       return 'handled';
     }
     if (command === 'shift_enter') {
       console.log('shift_enter이 클릭되었습니다.');
-      onChange(RichUtils.insertSoftNewline(editorState));
+      if (currentBlockType === 'code-block') {
+        const newEditerState = createEmptyBlock(editorState);
+        onChange(newEditerState);
+      } else {
+        onChange(RichUtils.insertSoftNewline(editorState));
+      }
       return 'handled';
     }
     if (command === 'h1') {
@@ -107,7 +135,7 @@ export const MainEditor = () => {
       return 'handled';
     }
     const newState = RichUtils.handleKeyCommand(editorState, command);
-    console.log('커멘트 타입은', newState, '입니다.');
+    console.log('마아아아아지막 커멘트 타입은', newState, '입니다.');
     if (newState) {
       onChange(newState);
       return 'handled';
@@ -116,16 +144,19 @@ export const MainEditor = () => {
   };
 
   /* 3. 박스의 스타일을 지정 */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const myBlockStyleFn = (innercontent: any) => {
     const type = innercontent.getType();
-    console.log('현제 블록 스타일', type);
+    setCurrentBlockType(type);
+    console.log('현재 블록 스타일', type);
     if (type === 'h1') {
       return 'headerFont';
     }
+    if (type === 'code-block') {
+      return 'code-block-css';
+    }
     return null;
   };
-  const handleInsertImage = (e) => {
+  const handleInsertImage = (e: any) => {
     const file = e.target.files[0]; // Get the selected image file
     const reader = new FileReader();
     console.log(file, reader);
@@ -185,29 +216,32 @@ export const MainEditor = () => {
       <Container>
         <EditorWrapper onClick={focusEditor}>
           <Editor
-            wrapperClassName='card'
+            /* wrapperClassName='card' */
             editorState={editorState}
-            placeholder='내용을 입력해주세요.'
+            placeholder='명령어는 `/` 를 입력해주세요'
             onChange={onChange}
             handleKeyCommand={handleKeyCommand}
             keyBindingFn={myKeyBindingFn}
             blockStyleFn={myBlockStyleFn}
             blockRendererFn={mediaBlockRenderer}
+            handlePastedText={handlePastedText}
             plugins={plugins}
             ref={editorRef}
           />
           <AlignmentTool />
         </EditorWrapper>
         <Headers>
-          <SimpleHashtagEditor />
-          <Buttons>
-            <Button>
+          {/* <SimpleHashtagEditor /> */}
+          <Footer>
+            <AddCodeButton
+              onClick={() => {
+                onChange(RichUtils.toggleBlockType(editorState, 'code-block'));
+              }}
+            >
               <img src='/icons/code.svg' alt='code' />
-              <ButtonNoneStyle type='button' onClick={onToggleCode}>
-                코드 추가
-              </ButtonNoneStyle>
-            </Button>
-            <ButtonStyle>
+              <div>코드 추가</div>
+            </AddCodeButton>
+            <AddPirtureButton>
               <Label htmlFor='ex_file'>
                 <img src='/icons/problem/picture.svg' alt='' />
                 사진 추가
@@ -217,9 +251,9 @@ export const MainEditor = () => {
                   onChange={handleInsertImage}
                 />
               </Label>
-            </ButtonStyle>
-          </Buttons>
-          <Button onClick={onUnderlineClick}>제출하기</Button>
+            </AddPirtureButton>
+          </Footer>
+          <div>제출하기</div>
         </Headers>
       </Container>
     </Wrapper>
@@ -237,10 +271,6 @@ const Wrapper = styled.div`
   z-index: 0;
 `;
 
-const ButtonNoneStyle = styled.button`
-  border: 0;
-  background-color: transparent;
-`;
 const FileNoneStyle = styled.input`
   position: absolute;
   width: 1px;
@@ -272,12 +302,12 @@ const Headers = styled.div`
   padding-top: 24px;
   border-top: 1px solid ${(prop) => prop.theme.color.grayScale.gray_200};
 `;
-const Buttons = styled.div`
+const Footer = styled.div`
   margin-left: 496px;
   display: flex;
   gap: 8px;
 `;
-const Button = styled.div`
+const AddCodeButton = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -298,7 +328,7 @@ const Button = styled.div`
     border: none;
   }
 `;
-const ButtonStyle = styled.div`
+const AddPirtureButton = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;

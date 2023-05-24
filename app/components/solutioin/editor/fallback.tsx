@@ -11,7 +11,7 @@ export const SolutionTrainingFallback = () => {
 
 const Content = styled.div`
   max-width: 1256px;
-  margin: 60px auto;
+  margin: 40px auto;
   display: flex;
   flex-direction: column;
   gap: 12px;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { SolutionTraining } from '~/components/solutioin/problem';
-import { SolutionTrainingFallback } from '~/components/solutioin/problem/fallback';
+import { SolutionTraining } from '~/components/solutioin/editor';
+import { SolutionTrainingFallback } from '~/components/solutioin/editor/fallback';
 import SSRSafeSuspense from '~/hooks/ssr-safe-suspense';
 
 export default function SolutionTrainingDefault() {
