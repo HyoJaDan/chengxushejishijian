@@ -492,3 +492,6 @@ pre > pre {
   border-right: 0;
   transform: rotate(-45deg);
 }
+.my-custom-block-style {
+  padding: 3px 2px;
+}

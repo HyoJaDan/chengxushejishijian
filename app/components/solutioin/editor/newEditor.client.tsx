@@ -8,6 +8,7 @@ import {
 } from 'draft-js';
 import { useRef, useState } from 'react';
 import styled from 'styled-components';
+import { createEmptyBlock } from './createEmtypBlock';
 import { getBlockType } from './get-block-type';
 
 export const SubEditor = () => {
@@ -50,10 +51,10 @@ export const SubEditor = () => {
     if (keyCode === 49 && KeyBindingUtil.hasCommandModifier(e)) {
       return 'h1';
     }
-    /* if (keyCode === 13 && KeyBindingUtil.isSoftNewlineEvent(e)) {
+    if (keyCode === 13 && KeyBindingUtil.isSoftNewlineEvent(e)) {
       return 'shift_enter';
     }
-    if (keyCode === 13) {
+    /* if (keyCode === 13) {
       return 'enter';
     } */
     if (keyCode === 191) {
@@ -69,8 +70,18 @@ export const SubEditor = () => {
     const blockType = getBlockType(editorState);
     console.log('blockTYPE이다!!', blockType);
     if (command === 'split-block' && blockType === 'code-block') {
-      console.log('SEX');
+      console.log('codeBlock+Enter');
       onChange(RichUtils.insertSoftNewline(editorState));
+      return 'handled';
+    }
+    if (command === 'shift_enter') {
+      console.log('shift_enter이 클릭되었습니다.');
+      if (blockType === 'code-block') {
+        const newEditerState = createEmptyBlock(editorState);
+        onChange(newEditerState);
+      } else {
+        onChange(RichUtils.insertSoftNewline(editorState));
+      }
       return 'handled';
     }
     /* if (command === 'enter') {
@@ -117,11 +128,15 @@ export const SubEditor = () => {
   /* 3. 박스의 스타일을 지정 */
   const myBlockStyleFn = (innercontent: any) => {
     const type = innercontent.getType();
+    console.log('type???', type);
     if (type === 'h1') {
       return 'headerFont';
     }
     if (type === 'code-block') {
       return 'code-block-css';
+    }
+    if (type === 'unstyled') {
+      return 'my-custom-block-style';
     }
     return null;
   };
@@ -129,7 +144,12 @@ export const SubEditor = () => {
   const focusEditor = () => {
     editorRef.current.focus();
   };
-
+  /* const myBlockRendefFn = () => {
+    return {
+      component: MyBlockStyle,
+      props: {},
+    };
+  }; */
   return (
     <Wrapper>
       <Container>
@@ -141,6 +161,7 @@ export const SubEditor = () => {
             handleKeyCommand={handleKeyCommand}
             keyBindingFn={myKeyBindingFn}
             blockStyleFn={myBlockStyleFn}
+            /* blockRendererFn={myBlockRendefFn} */
             /* handleReturn={handleReturn} */
             ref={editorRef}
           />
