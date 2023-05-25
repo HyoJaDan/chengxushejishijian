@@ -1,5 +1,5 @@
 import { ContentBlock, EditorState, genKey } from 'draft-js';
-
+/* 
 export function createEmptyBlock(editorState: EditorState) {
   const contentState = editorState.getCurrentContent();
   const selection = editorState.getSelection();
@@ -27,6 +27,34 @@ export function createEmptyBlock(editorState: EditorState) {
     editorState,
     newContentState,
     'insert-fragment'
+  );
+  return newEditorState;
+} */
+export function createEmptyBlock(editorState: EditorState) {
+  const contentState = editorState.getCurrentContent();
+  const selection = editorState.getSelection();
+  const newBlock = contentState.getBlockMap().first().merge({
+    text: '',
+    type: 'unstyled',
+    data: {},
+    key: genKey(),
+    characterList: [],
+  });
+  const newContentState = contentState.merge({
+    blockMap: contentState.getBlockMap().set(newBlock.key, newBlock),
+    selectionAfter: selection.merge({
+      anchorKey: newBlock.key,
+      anchorOffset: 0,
+      focusKey: newBlock.key,
+      focusOffset: 0,
+      isBackward: false,
+      hasFocus: true,
+    }),
+  });
+  const newEditorState = EditorState.push(
+    editorState,
+    newContentState,
+    'insert-characters'
   );
   return newEditorState;
 }

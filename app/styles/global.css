@@ -403,7 +403,7 @@ pre > pre {
   tab-size: 2;
   padding: 34px 16px 32px 32px;
   min-height: 1em;
-  margin-bottom: 10px;
+  margin: 10px 0px;
 }
 .leftHalf {
   width: 45%;

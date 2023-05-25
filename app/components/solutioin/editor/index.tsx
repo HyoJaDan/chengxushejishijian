@@ -4,7 +4,7 @@ import { ClientOnly } from 'remix-utils';
 import styled from 'styled-components';
 import { Category } from '~/components/problem/problem-box';
 import { getProblemDetail } from '~/data/problem/get-problem-detail';
-import { MainEditor } from './editor.client';
+import { SubEditor } from './newEditor.client';
 
 export const SolutionTraining = () => {
   const params = useParams<string>();
@@ -25,7 +25,8 @@ export const SolutionTraining = () => {
           </Titles>
         </Head>
       </Header>
-      <ClientOnly>{() => <MainEditor />}</ClientOnly>
+      {/*       <ClientOnly>{() => <MainEditor />}</ClientOnly> */}
+      <ClientOnly>{() => <SubEditor />}</ClientOnly>
     </Wrapper>
   );
 };

@@ -16,7 +16,6 @@ import createBlockDndPlugin from '@draft-js-plugins/drag-n-drop';
 import createFocusPlugin from '@draft-js-plugins/focus';
 import createImagePlugin from '@draft-js-plugins/image';
 import createResizeablePlugin from '@draft-js-plugins/resizeable';
-import { createEmptyBlock } from './createEmtypBlock';
 import { SimpleHashtagEditor } from './hashtag';
 
 const alignmentPlugin = createAlignmentPlugin();
@@ -94,12 +93,12 @@ export const MainEditor = () => {
     if (keyCode === 49 && KeyBindingUtil.hasCommandModifier(e)) {
       return 'h1';
     }
-    if (keyCode === 13 && KeyBindingUtil.isSoftNewlineEvent(e)) {
+    /*  if (keyCode === 13 && KeyBindingUtil.isSoftNewlineEvent(e)) {
       return 'shift_enter';
-    }
-    if (keyCode === 13) {
+    } */
+    /* if (keyCode === 13) {
       return 'enter';
-    }
+    } */
     if (keyCode === 191) {
       console.log('slash');
       return 'slash';
@@ -110,7 +109,7 @@ export const MainEditor = () => {
   /* 2. 내가 무슨 커멘드를 입력했는지 확인하는 함수 */
   const handleKeyCommand = (command: string) => {
     console.log('커멘드가 입력되었습니다.', command);
-    if (command === 'enter') {
+    /* if (command === 'enter') {
       console.log('enter이 클릭되었습니다.');
       if (currentBlockType === 'code-block') {
         onChange(RichUtils.insertSoftNewline(editorState));
@@ -119,8 +118,13 @@ export const MainEditor = () => {
         onChange(newEditerState);
       }
       return 'handled';
+    } */
+    if (command === 'split-block' && currentBlockType === 'code-block') {
+      console.log('특별');
+      onChange(RichUtils.insertSoftNewline(editorState));
+      return 'handled';
     }
-    if (command === 'shift_enter') {
+    /* if (command === 'shift_enter') {
       console.log('shift_enter이 클릭되었습니다.');
       if (currentBlockType === 'code-block') {
         const newEditerState = createEmptyBlock(editorState);
@@ -129,12 +133,13 @@ export const MainEditor = () => {
         onChange(RichUtils.insertSoftNewline(editorState));
       }
       return 'handled';
-    }
+    } */
     if (command === 'h1') {
       onChange(RichUtils.toggleBlockType(editorState, 'h1'));
       console.log('커멘트 타입은 헤더 입니다.');
       return 'handled';
     }
+
     const newState = RichUtils.handleKeyCommand(editorState, command);
     console.log('마아아아아지막 커멘트 타입은', newState, '입니다.');
     if (newState) {
@@ -212,6 +217,7 @@ export const MainEditor = () => {
 
     return null;
   };
+
   return (
     <Wrapper>
       <Container>
@@ -242,16 +248,14 @@ export const MainEditor = () => {
               <img src='/icons/code.svg' alt='code' />
               <div>코드 추가</div>
             </AddCodeButton>
-            <AddPirtureButton>
-              <Label htmlFor='ex_file'>
-                <img src='/icons/problem/picture.svg' alt='' />
-                사진 추가
-                <FileNoneStyle
-                  type='file'
-                  id='ex_file'
-                  onChange={handleInsertImage}
-                />
-              </Label>
+            <AddPirtureButton htmlFor='ex_file'>
+              <img src='/icons/problem/picture.svg' alt='' />
+              사진 추가
+              <FileNoneStyle
+                type='file'
+                id='ex_file'
+                onChange={handleInsertImage}
+              />
             </AddPirtureButton>
           </Footer>
           <AddCodeButton>제출하기</AddCodeButton>
@@ -281,11 +285,6 @@ const FileNoneStyle = styled.input`
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
-`;
-const Label = styled.label`
-  display: flex;
-  align-items: center;
-  gap: 8px;
 `;
 const Container = styled.div`
   width: 100%;
@@ -329,7 +328,8 @@ const AddCodeButton = styled.div`
     border: none;
   }
 `;
-const AddPirtureButton = styled.div`
+
+const AddPirtureButton = styled.label`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -351,4 +351,7 @@ const AddPirtureButton = styled.div`
     box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
     border: none;
   }
+  display: flex;
+  align-items: center;
+  gap: 8px;
 `;
