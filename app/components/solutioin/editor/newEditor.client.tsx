@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Editor from '@draft-js-plugins/editor';
-import axios from 'axios';
 import {
-  convertToRaw,
   EditorState,
   getDefaultKeyBinding,
   KeyBindingUtil,
@@ -11,10 +9,11 @@ import {
 import { useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { solutionAddress } from '~/data/constants/adress';
 import { myAccessToken } from '~/data/user/common/login-information';
 import { createEmptyBlock2 } from './createEmtypBlock';
 import { getBlockType } from './get-block-type';
+import { myBlockStyleFn } from './my-block-style-function';
+import { submitFunc } from './submit';
 
 export const SubEditor = ({ params }: { params: string }) => {
   const accessToken = useRecoilValue(myAccessToken);
@@ -26,6 +25,10 @@ export const SubEditor = ({ params }: { params: string }) => {
   const onChange = (onChangeeditorState: EditorState) => {
     setEditorState(onChangeeditorState);
   };
+  const focusEditor = () => {
+    editorRef.current.focus();
+  };
+
   console.log('-------------------------------');
 
   /* 1. 무슨 키를 입력했는지 나오는 함수 */
@@ -94,50 +97,6 @@ export const SubEditor = ({ params }: { params: string }) => {
     return 'not-handled';
   };
 
-  /* 3. 박스의 스타일을 지정 */
-  const myBlockStyleFn = (innercontent: any) => {
-    const type = innercontent.getType();
-    if (type === 'h1') {
-      return 'headerFont';
-    }
-    if (type === 'code-block') {
-      return 'code-block-css';
-    }
-    if (type === 'unstyled') {
-      return 'my-custom-block-style';
-    }
-    return null;
-  };
-
-  const focusEditor = () => {
-    editorRef.current.focus();
-  };
-  const submitFunc = async () => {
-    const contentState = editorState.getCurrentContent();
-    const rawContentState = convertToRaw(contentState);
-
-    // JSON 객체를 문자열로 변환
-    const jsonString = JSON.stringify(rawContentState);
-    console.log(rawContentState, '1');
-    console.log(jsonString, '2');
-    const response = await axios.post(
-      `${solutionAddress}`,
-      {
-        title: '안녕',
-        lessonId: Number(params),
-        description: jsonString,
-        relatedLink: 'https://github.com/the-pool/the-pool-api',
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
-    if (window !== null) {
-      window.location.replace('/solution');
-    }
-  };
   return (
     <Wrapper>
       <Container>
@@ -149,7 +108,6 @@ export const SubEditor = ({ params }: { params: string }) => {
             handleKeyCommand={handleKeyCommand}
             keyBindingFn={myKeyBindingFn}
             blockStyleFn={myBlockStyleFn}
-            /* handleReturn={handleReturn} */
             ref={editorRef}
           />
         </EditorWrapper>
@@ -164,7 +122,13 @@ export const SubEditor = ({ params }: { params: string }) => {
               <div>코드 추가</div>
             </AddCodeButton>
           </Footer>
-          <AddCodeButton onClick={submitFunc}>제출하기</AddCodeButton>
+          <AddCodeButton
+            onClick={() => {
+              submitFunc(editorState, params, accessToken);
+            }}
+          >
+            제출하기
+          </AddCodeButton>
         </Headers>
       </Container>
     </Wrapper>

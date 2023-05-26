@@ -4,6 +4,7 @@ import { EditorState, convertFromRaw } from 'draft-js';
 import styled from 'styled-components';
 import { Circle } from '~/components/global-navigation-bar/login';
 import type { ISolutions } from '~/models/problem-and-solution/solution/solutions';
+import { myBlockStyleFn } from '../editor/my-block-style-function';
 
 export const SolutionBox = (data: ISolutions, index: number, width: number) => {
   const { id, description, member, _count, title } = data;
@@ -29,19 +30,7 @@ export const SolutionBox = (data: ISolutions, index: number, width: number) => {
   const restoredContentState = convertFromRaw(contentState);
   const restoredEditorState =
     EditorState.createWithContent(restoredContentState);
-  const myBlockStyleFn = (innercontent: any) => {
-    const type = innercontent.getType();
-    if (type === 'h1') {
-      return 'headerFont';
-    }
-    if (type === 'code-block') {
-      return 'code-block-css';
-    }
-    if (type === 'unstyled') {
-      return 'my-custom-block-style';
-    }
-    return null;
-  };
+
   return (
     <Box to={`/solution/${id}`} key={keyId} maxwidth={maxWidth}>
       <Content className='body2_BD'>

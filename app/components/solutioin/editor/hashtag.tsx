@@ -1,7 +1,6 @@
 import Editor from '@draft-js-plugins/editor';
 import createHashtagPlugin from '@draft-js-plugins/hashtag';
 import '@draft-js-plugins/hashtag/lib/plugin.css';
-import type { ContentBlock } from 'draft-js';
 import {
   convertToRaw,
   EditorState,
@@ -12,6 +11,7 @@ import draftToHtml from 'draftjs-to-html';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { createEmptyBlock } from './createEmtypBlock';
+import { myBlockStyleFn } from './my-block-style-function';
 
 const hashtagPlugin = createHashtagPlugin();
 
@@ -61,15 +61,6 @@ export function SimpleHashtagEditor() {
     return 'not-handled';
   };
 
-  /* 3. 박스의 스타일을 지정 */
-  const myBlockStyleFn = (contentBlock: ContentBlock) => {
-    const type = contentBlock.getType();
-    console.log('블록 스타일', type);
-    if (type === 'enter') {
-      return 'enter';
-    }
-    return null;
-  };
   const handleClick = () => {
     setIsClicked(true);
   };

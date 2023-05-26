@@ -17,6 +17,7 @@ import createFocusPlugin from '@draft-js-plugins/focus';
 import createImagePlugin from '@draft-js-plugins/image';
 import createResizeablePlugin from '@draft-js-plugins/resizeable';
 import { SimpleHashtagEditor } from './hashtag';
+import { myBlockStyleFn } from './my-block-style-function';
 
 const alignmentPlugin = createAlignmentPlugin();
 const { AlignmentTool } = alignmentPlugin;
@@ -149,19 +150,6 @@ export const MainEditor = () => {
     return 'not-handled';
   };
 
-  /* 3. 박스의 스타일을 지정 */
-  const myBlockStyleFn = (innercontent: any) => {
-    const type = innercontent.getType();
-    setCurrentBlockType(type);
-    console.log('현재 블록 스타일', type);
-    if (type === 'h1') {
-      return 'headerFont';
-    }
-    if (type === 'code-block') {
-      return 'code-block-css';
-    }
-    return null;
-  };
   const handleInsertImage = (e: any) => {
     const file = e.target.files[0]; // Get the selected image file
     const reader = new FileReader();

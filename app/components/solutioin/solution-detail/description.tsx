@@ -1,5 +1,6 @@
 import Editor from '@draft-js-plugins/editor';
 import { EditorState, convertFromRaw } from 'draft-js';
+import { myBlockStyleFn } from '../editor/my-block-style-function';
 
 export const SolutionDescription = ({
   description,
@@ -17,19 +18,7 @@ export const SolutionDescription = ({
   const restoredEditorState =
     EditorState.createWithContent(restoredContentState);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const myBlockStyleFn = (innercontent: any) => {
-    const type = innercontent.getType();
-    if (type === 'h1') {
-      return 'headerFont';
-    }
-    if (type === 'code-block') {
-      return 'code-block-css';
-    }
-    if (type === 'unstyled') {
-      return 'my-custom-block-style';
-    }
-    return null;
-  };
+
   return (
     <Editor editorState={restoredEditorState} blockStyleFn={myBlockStyleFn} />
   );
