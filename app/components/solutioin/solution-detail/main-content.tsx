@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Circle } from '~/components/global-navigation-bar/login';
 import type { IProblemHashTags } from '~/models/hashtags';
 import type { ISolutionDetail } from '~/models/problem-and-solution/solution/solution-detail';
+import { SolutionDescription } from './description';
 
 interface ITemp {
   solutionData: ISolutionDetail;
@@ -62,7 +63,7 @@ export const SolutionMainContent = ({
         </SolutionUserInformation>
       </Header>
       <Main className='body2_MD'>
-        <PreWrap className='body2_MD'>{solutionData.description}</PreWrap>
+        <SolutionDescription description={solutionData.description} />
         {/* <Tags>{hashTagList}</Tags> */}
       </Main>
     </Wrapper>
@@ -70,7 +71,7 @@ export const SolutionMainContent = ({
 };
 const Wrapper = styled.div`
   width: 1149px;
-  height: 408px;
+  min-height: 408px;
   background: ${(prop) => prop.theme.color.basic.white};
   border: 1px solid #efedea;
   border-radius: 8px;
@@ -111,9 +112,6 @@ const Content = styled.textarea`
   width: 100%;
   color: ${(prop) => prop.theme.color.grayScale.gray_800};
   resize: none;
-`;
-const PreWrap = styled.div`
-  white-space: pre-wrap;
 `;
 
 const Tag = styled.div`

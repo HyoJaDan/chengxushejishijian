@@ -10,7 +10,6 @@ export const OtherSolution = ({ id }: { id: number }) => {
   const solutionList = useRecoilValue(
     getSolutionListById(id as unknown as string)
   );
-
   const [index, setIndex] = useState(0);
   const [leaving, setLeaving] = useState<boolean>(false);
   const increaseIndex = () => {

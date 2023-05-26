@@ -1,4 +1,6 @@
+import Editor from '@draft-js-plugins/editor';
 import { Link } from '@remix-run/react';
+import { EditorState, convertFromRaw } from 'draft-js';
 import styled from 'styled-components';
 import { Circle } from '~/components/global-navigation-bar/login';
 import type { ISolutions } from '~/models/problem-and-solution/solution/solutions';
@@ -19,9 +21,36 @@ export const SolutionBox = (data: ISolutions, index: number, width: number) => {
     }
     return <ThumbnailBackground />;
   };
+  const parsedJson = JSON.parse(description);
+  const contentState = {
+    entityMap: parsedJson.entityMap,
+    blocks: parsedJson.blocks,
+  };
+  const restoredContentState = convertFromRaw(contentState);
+  const restoredEditorState =
+    EditorState.createWithContent(restoredContentState);
+  const myBlockStyleFn = (innercontent: any) => {
+    const type = innercontent.getType();
+    if (type === 'h1') {
+      return 'headerFont';
+    }
+    if (type === 'code-block') {
+      return 'code-block-css';
+    }
+    if (type === 'unstyled') {
+      return 'my-custom-block-style';
+    }
+    return null;
+  };
   return (
     <Box to={`/solution/${id}`} key={keyId} maxwidth={maxWidth}>
-      <Content className='body2_BD'>{description}</Content>
+      <Content className='body2_BD'>
+        <Editor
+          editorState={restoredEditorState}
+          blockStyleFn={myBlockStyleFn}
+        />
+      </Content>
+
       <TeskInformaion>
         <Header>
           <Title className='body1_BD'>{title}</Title>
@@ -60,9 +89,12 @@ const Box = styled(Link)<{ maxwidth: number }>`
 `;
 const Content = styled.div`
   color: ${(prop) => prop.theme.color.grayScale.gray_900};
-  background-color: ${(prop) => prop.theme.color.primary.blue.blue_100};
-  height: inherit;
+  background-color: #f0fbff;
+  height: 200px;
+  overflow: hidden;
+  padding: 24px;
 `;
+
 const TeskInformaion = styled.div`
   height: 109px;
   padding: 20px 24px;

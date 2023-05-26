@@ -9,7 +9,6 @@ import { SubEditor } from './newEditor.client';
 export const SolutionTraining = () => {
   const params = useParams<string>();
   const problemData = useRecoilValue(getProblemDetail(params.id));
-
   return (
     <Wrapper>
       <Header>
@@ -26,7 +25,7 @@ export const SolutionTraining = () => {
         </Head>
       </Header>
       {/*       <ClientOnly>{() => <MainEditor />}</ClientOnly> */}
-      <ClientOnly>{() => <SubEditor />}</ClientOnly>
+      <ClientOnly>{() => <SubEditor params={params.id} />}</ClientOnly>
     </Wrapper>
   );
 };

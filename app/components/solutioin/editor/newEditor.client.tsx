@@ -1,49 +1,32 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Editor from '@draft-js-plugins/editor';
+import axios from 'axios';
 import {
+  convertToRaw,
   EditorState,
   getDefaultKeyBinding,
   KeyBindingUtil,
   RichUtils,
 } from 'draft-js';
 import { useRef, useState } from 'react';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { createEmptyBlock } from './createEmtypBlock';
+import { solutionAddress } from '~/data/constants/adress';
+import { myAccessToken } from '~/data/user/common/login-information';
+import { createEmptyBlock2 } from './createEmtypBlock';
 import { getBlockType } from './get-block-type';
 
-export const SubEditor = () => {
+export const SubEditor = ({ params }: { params: string }) => {
+  const accessToken = useRecoilValue(myAccessToken);
   const [editorState, setEditorState] = useState<EditorState>(
     EditorState.createEmpty()
   );
-  const [currentBlockType, setCurrentBlockType] = useState();
   const editorRef = useRef();
 
   const onChange = (onChangeeditorState: EditorState) => {
     setEditorState(onChangeeditorState);
   };
   console.log('-------------------------------');
-  // 0.이 함수는 오히려 한국말 뒤에 /n을 붙여 작성되게 돼서 좋다.
-  /* const handleReturn = (e: React.KeyboardEvent<{}>) => {
-    if (e.shiftKey) {
-      setEditorState(RichUtils.insertSoftNewline(editorState));
-    } else {
-      console.log('0 엔터키누름 -> 띄어쓰기');
-      const currentContent = editorState.getCurrentContent();
-      const selection = editorState.getSelection();
-
-      // 현재 컨텐트와 선택 영역에 '\n' (줄 바꿈)을 삽입합니다.
-      const newContent = Modifier.insertText(currentContent, selection, '\n');
-
-      // 새로운 컨텐트를 에디터 상태에 반영합니다.
-      const newEditorState = EditorState.push(
-        editorState,
-        newContent,
-        'insert-characters'
-      );
-      onChange(newEditorState);
-      e.preventDefault();
-    }
-  }; */
 
   /* 1. 무슨 키를 입력했는지 나오는 함수 */
   const myKeyBindingFn = (e: React.KeyboardEvent<{}>) => {
@@ -54,65 +37,51 @@ export const SubEditor = () => {
     if (keyCode === 13 && KeyBindingUtil.isSoftNewlineEvent(e)) {
       return 'shift_enter';
     }
-    /* if (keyCode === 13) {
-      return 'enter';
-    } */
-    if (keyCode === 191) {
+
+    /* if (keyCode === 191) {
       console.log('slash');
       return 'slash';
-    }
+    } */
     return getDefaultKeyBinding(e);
   };
 
   /* 2. 내가 무슨 커멘드를 입력했는지 확인하는 함수 */
   const handleKeyCommand = (command: string) => {
-    console.log('커멘드가 입력되었습니다.', command);
     const blockType = getBlockType(editorState);
-    console.log('blockTYPE이다!!', blockType);
+    console.log('커멘드가 입력되었습니다: ', command, 'blockType: ', blockType);
     if (command === 'split-block' && blockType === 'code-block') {
-      console.log('codeBlock+Enter');
       onChange(RichUtils.insertSoftNewline(editorState));
       return 'handled';
     }
     if (command === 'shift_enter') {
-      console.log('shift_enter이 클릭되었습니다.');
       if (blockType === 'code-block') {
-        const newEditerState = createEmptyBlock(editorState);
+        const newEditerState = createEmptyBlock2(editorState);
         onChange(newEditerState);
       } else {
-        onChange(RichUtils.insertSoftNewline(editorState));
-      }
-      return 'handled';
-    }
-    /* if (command === 'enter') {
-      console.log('enter이 클릭되었습니다.');
-      if (blockType === 'code-block') {
-        onChange(RichUtils.insertSoftNewline(editorState));
-      } else {
-        const newEditerState = createEmptyBlock(editorState);
-        onChange(newEditerState);
-      }
-      return 'handled';
-    }
-    if (command === 'shift_enter') {
-      console.log('shift_enter이 클릭되었습니다.');
-      if (blockType === 'code-block') {
-        const newEditerState = createEmptyBlock(editorState);
-        onChange(newEditerState);
-      } else {
-        onChange(RichUtils.insertSoftNewline(editorState));
-      }
-      return 'handled';
-    } */
+        // 1
+        /* console.log('BB');
+        const newEditorState = customInsertSoftNewline(editorState);
+        onChange(newEditorState);
 
-    /* if (command === 'split-block' && currentBlockType === 'code-block') {
-      console.log('특별');
-      onChange(RichUtils.insertSoftNewline(editorState));
+        const contentState = Modifier.splitBlock(
+          editorState.getCurrentContent(),
+          editorState.getSelection()
+        );
+        const newEditorState2 = EditorState.push(
+          editorState,
+          contentState,
+          'split-block'
+        );
+        onChange(newEditorState2); */
+        onChange(RichUtils.insertSoftNewline(editorState));
+        /* const temp = fuckTemp(editorState); */
+        /* onChange(temp); */
+      }
       return 'handled';
-    } */
+    }
+
     if (command === 'h1') {
       onChange(RichUtils.toggleBlockType(editorState, 'h1'));
-      console.log('커멘트 타입은 헤더 입니다.');
       return 'handled';
     }
 
@@ -128,7 +97,6 @@ export const SubEditor = () => {
   /* 3. 박스의 스타일을 지정 */
   const myBlockStyleFn = (innercontent: any) => {
     const type = innercontent.getType();
-    console.log('type???', type);
     if (type === 'h1') {
       return 'headerFont';
     }
@@ -144,24 +112,43 @@ export const SubEditor = () => {
   const focusEditor = () => {
     editorRef.current.focus();
   };
-  /* const myBlockRendefFn = () => {
-    return {
-      component: MyBlockStyle,
-      props: {},
-    };
-  }; */
+  const submitFunc = async () => {
+    const contentState = editorState.getCurrentContent();
+    const rawContentState = convertToRaw(contentState);
+
+    // JSON 객체를 문자열로 변환
+    const jsonString = JSON.stringify(rawContentState);
+    console.log(rawContentState, '1');
+    console.log(jsonString, '2');
+    const response = await axios.post(
+      `${solutionAddress}`,
+      {
+        title: '안녕',
+        lessonId: Number(params),
+        description: jsonString,
+        relatedLink: 'https://github.com/the-pool/the-pool-api',
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    if (window !== null) {
+      window.location.replace('/solution');
+    }
+  };
   return (
     <Wrapper>
       <Container>
         <EditorWrapper onClick={focusEditor}>
           <Editor
             editorState={editorState}
-            placeholder='명령어는 `/` 를 입력해주세요'
+            placeholder=' 명령어는 `/` 를 입력해주세요'
             onChange={onChange}
             handleKeyCommand={handleKeyCommand}
             keyBindingFn={myKeyBindingFn}
             blockStyleFn={myBlockStyleFn}
-            /* blockRendererFn={myBlockRendefFn} */
             /* handleReturn={handleReturn} */
             ref={editorRef}
           />
@@ -177,7 +164,7 @@ export const SubEditor = () => {
               <div>코드 추가</div>
             </AddCodeButton>
           </Footer>
-          <AddCodeButton>제출하기</AddCodeButton>
+          <AddCodeButton onClick={submitFunc}>제출하기</AddCodeButton>
         </Headers>
       </Container>
     </Wrapper>
