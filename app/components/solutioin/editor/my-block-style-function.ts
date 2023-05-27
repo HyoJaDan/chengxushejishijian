@@ -2,7 +2,7 @@
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const myBlockStyleFn = (innercontent: any) => {
   const type = innercontent.getType();
-  console.log(type);
+
   if (type === 'h1') {
     return 'headerFont';
   }
