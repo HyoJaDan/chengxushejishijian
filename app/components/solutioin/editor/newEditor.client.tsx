@@ -6,6 +6,7 @@ import {
   KeyBindingUtil,
   RichUtils,
 } from 'draft-js';
+
 import { useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
@@ -21,15 +22,13 @@ export const SubEditor = ({ params }: { params: string }) => {
     EditorState.createEmpty()
   );
   const editorRef = useRef();
-
   const onChange = (onChangeeditorState: EditorState) => {
     setEditorState(onChangeeditorState);
   };
+
   const focusEditor = () => {
     editorRef.current.focus();
   };
-
-  console.log('-------------------------------');
 
   /* 1. 무슨 키를 입력했는지 나오는 함수 */
   const myKeyBindingFn = (e: React.KeyboardEvent<{}>) => {
@@ -40,56 +39,28 @@ export const SubEditor = ({ params }: { params: string }) => {
     if (keyCode === 13 && KeyBindingUtil.isSoftNewlineEvent(e)) {
       return 'shift_enter';
     }
-
-    /* if (keyCode === 191) {
-      console.log('slash');
-      return 'slash';
-    } */
     return getDefaultKeyBinding(e);
   };
 
   /* 2. 내가 무슨 커멘드를 입력했는지 확인하는 함수 */
   const handleKeyCommand = (command: string) => {
     const blockType = getBlockType(editorState);
-    console.log('커멘드가 입력되었습니다: ', command, 'blockType: ', blockType);
+
     if (command === 'split-block' && blockType === 'code-block') {
       onChange(RichUtils.insertSoftNewline(editorState));
       return 'handled';
     }
-    if (command === 'shift_enter') {
-      if (blockType === 'code-block') {
-        const newEditerState = createEmptyBlock2(editorState);
-        onChange(newEditerState);
-      } else {
-        // 1
-        /* console.log('BB');
-        const newEditorState = customInsertSoftNewline(editorState);
-        onChange(newEditorState);
-
-        const contentState = Modifier.splitBlock(
-          editorState.getCurrentContent(),
-          editorState.getSelection()
-        );
-        const newEditorState2 = EditorState.push(
-          editorState,
-          contentState,
-          'split-block'
-        );
-        onChange(newEditorState2); */
-        onChange(RichUtils.insertSoftNewline(editorState));
-        /* const temp = fuckTemp(editorState); */
-        /* onChange(temp); */
-      }
+    if (command === 'shift_enter' && blockType === 'code-block') {
+      const newEditerState = createEmptyBlock2(editorState);
+      onChange(newEditerState);
       return 'handled';
     }
-
     if (command === 'h1') {
       onChange(RichUtils.toggleBlockType(editorState, 'h1'));
       return 'handled';
     }
 
     const newState = RichUtils.handleKeyCommand(editorState, command);
-    console.log('마아아아아지막 커멘트 타입은', newState, '입니다.');
     if (newState) {
       onChange(newState);
       return 'handled';
@@ -103,11 +74,12 @@ export const SubEditor = ({ params }: { params: string }) => {
         <EditorWrapper onClick={focusEditor}>
           <Editor
             editorState={editorState}
-            placeholder=' 명령어는 `/` 를 입력해주세요'
+            placeholder='명령어는 `/` 를 입력해주세요. 사진, 혹은 첫번째 줄에 있는 내용이 됩니다.'
             onChange={onChange}
             handleKeyCommand={handleKeyCommand}
             keyBindingFn={myKeyBindingFn}
             blockStyleFn={myBlockStyleFn}
+            /* blockRenderMap={extendedBlockRenderMap} */
             ref={editorRef}
           />
         </EditorWrapper>

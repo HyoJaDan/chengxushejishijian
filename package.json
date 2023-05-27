@@ -36,6 +36,7 @@
     "draft-js-plugins-editor": "^3.0.0",
     "draftjs-to-html": "^0.9.1",
     "framer-motion": "^7.6.12",
+    "immutable": "^4.3.0",
     "jsonwebtoken": "^9.0.0",
     "jwt-decode": "^3.1.2",
     "lodash": "^4.17.21",
