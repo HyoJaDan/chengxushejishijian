@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
@@ -23,7 +23,7 @@ export const SimilerTraining = ({ id }: { id: number }) => {
     <Wrapper>
       <Header className='body1_BD'>유사한 트레이닝 문제</Header>
       <Slider>
-        <AnimatePresence onExitComplete={toggleLeaving} initial={false}>
+        {/* <AnimatePresence onExitComplete={toggleLeaving} initial={false}>
           <Row
             variants={rowVariants}
             initial='hidden'
@@ -36,10 +36,13 @@ export const SimilerTraining = ({ id }: { id: number }) => {
               .slice(offset * index, offset * index + offset)
               .map((data, num) => TrainBox(data, num, 1149))}
           </Row>
-        </AnimatePresence>
-        <Button onClick={() => increaseIndex()} isLeaving={leaving}>
+        </AnimatePresence> */}
+        <Contents>
+          {problems.map((data, num) => TrainBox(data, num, 1149))}
+        </Contents>
+        {/* <Button onClick={() => increaseIndex()} isLeaving={leaving}>
           <img src='/icons/problem/right.svg' alt='right' />
-        </Button>
+        </Button> */}
       </Slider>
     </Wrapper>
   );
@@ -48,7 +51,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-bottom: 142px;
 `;
 const Header = styled.div`
   color: ${(prop) => prop.theme.color.grayScale.gray_800};
@@ -90,4 +92,10 @@ const Button = styled.div<{ isLeaving: boolean }>`
   top: 46px;
   right: -22px;
   ${({ isLeaving }) => isLeaving && 'display:none'}
+`;
+const Contents = styled.div`
+  display: -webkit-box;
+  -webkit-box-align: center;
+  gap: 24px;
+  overflow-x: scroll;
 `;
