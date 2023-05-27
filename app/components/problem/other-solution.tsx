@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
@@ -25,7 +25,7 @@ export const OtherSolution = ({ id }: { id: number }) => {
     <Wrapper>
       <Header className='body1_BD'>다른 스위머의 풀이</Header>
       <Slider>
-        <AnimatePresence onExitComplete={toggleLeaving} initial={false}>
+        {/* <AnimatePresence onExitComplete={toggleLeaving} initial={false}>
           <Row
             variants={rowVariants}
             initial='hidden'
@@ -41,7 +41,10 @@ export const OtherSolution = ({ id }: { id: number }) => {
         </AnimatePresence>
         <Button onClick={() => increaseIndex()} isLeaving={leaving}>
           <img src='/icons/problem/right.svg' alt='right' />
-        </Button>
+        </Button> */}
+        <Contents>
+          {solutionList.map((data, num) => SolutionBox(data, num, 1149))}
+        </Contents>
       </Slider>
     </Wrapper>
   );
@@ -50,7 +53,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-bottom: 309px;
+  /* margin-bottom: 309px; */
 `;
 const Header = styled.div`
   color: ${(prop) => prop.theme.color.grayScale.gray_800};
@@ -92,4 +95,10 @@ const Button = styled.div<{ isLeaving: boolean }>`
   top: 130px;
   right: -22px;
   ${({ isLeaving }) => isLeaving && 'display:none'}
+`;
+const Contents = styled.div`
+  display: -webkit-box;
+  -webkit-box-align: center;
+  gap: 24px;
+  overflow-x: scroll;
 `;

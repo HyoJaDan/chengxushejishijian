@@ -18,13 +18,14 @@ export const ProblemMain = () => {
   const problemData = useRecoilValue(getProblemDetail(params.id));
   const hashTags = useRecoilValue(getProblemDetailTags(params.id as string));
   const navigate = useNavigate();
+  console.log(problemData.lessonCategory.id);
   return (
     <Wrapper>
       <FlexBox>
         <ProblemMainContent problemData={problemData} hashTags={hashTags} />
         <WaitAnswer id={params.id as string} />
         <SimilerTraining id={problemData.lessonCategory.id} />
-        <OtherSolution id={problemData.lessonCategory.id} />
+        <OtherSolution id={params.id} />
         <Comment problemId={params.id as string} navigate={navigate} />
       </FlexBox>
       <ProblemBanner
