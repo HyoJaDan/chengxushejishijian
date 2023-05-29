@@ -20,12 +20,13 @@ export const OtherSolution = ({ id }: { id: number }) => {
     setIndex((prev) => (prev === maxIndex ? 0 : prev + 1));
   };
   const toggleLeaving = () => setLeaving((prev) => !prev);
-
-  return (
-    <Wrapper>
-      <Header className='body1_BD'>다른 스위머의 풀이</Header>
-      <Slider>
-        {/* <AnimatePresence onExitComplete={toggleLeaving} initial={false}>
+  console.log(solutionList);
+  if (solutionList.length !== 0)
+    return (
+      <Wrapper>
+        <Header className='body1_BD'>다른 스위머의 풀이</Header>
+        <Slider>
+          {/* <AnimatePresence onExitComplete={toggleLeaving} initial={false}>
           <Row
             variants={rowVariants}
             initial='hidden'
@@ -42,12 +43,13 @@ export const OtherSolution = ({ id }: { id: number }) => {
         <Button onClick={() => increaseIndex()} isLeaving={leaving}>
           <img src='/icons/problem/right.svg' alt='right' />
         </Button> */}
-        <Contents>
-          {solutionList.map((data, num) => SolutionBox(data, num, 1149))}
-        </Contents>
-      </Slider>
-    </Wrapper>
-  );
+          <Contents>
+            {solutionList.map((data, num) => SolutionBox(data, num, 1149))}
+          </Contents>
+        </Slider>
+      </Wrapper>
+    );
+  return null;
 };
 const Wrapper = styled.div`
   display: flex;

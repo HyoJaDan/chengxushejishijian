@@ -34,7 +34,7 @@ export const getSolutionListById = selectorFamily<ISolutions[], string>({
         return response.data.solutions;
       })
       .catch(() => {
-        return false;
+        return 0;
       });
     return solutions;
   },
