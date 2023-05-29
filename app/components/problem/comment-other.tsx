@@ -97,6 +97,7 @@ const Job = styled.div`
 
 const PreWrap = styled.div`
   white-space: pre-wrap;
+  word-break: break-word;
 `;
 
 const HoverNickName = styled.div`
