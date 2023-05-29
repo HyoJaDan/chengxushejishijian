@@ -47,7 +47,6 @@ const WaitAnswer = styled.div`
   border-radius: 8px;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 16px;
 `;
 const Header = styled.div`
   color: ${(prop) => prop.theme.color.grayScale.gray_800};

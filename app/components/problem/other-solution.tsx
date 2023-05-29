@@ -20,7 +20,6 @@ export const OtherSolution = ({ id }: { id: number }) => {
     setIndex((prev) => (prev === maxIndex ? 0 : prev + 1));
   };
   const toggleLeaving = () => setLeaving((prev) => !prev);
-  console.log(solutionList);
   if (solutionList.length !== 0)
     return (
       <Wrapper>

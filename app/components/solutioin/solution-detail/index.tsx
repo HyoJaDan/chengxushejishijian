@@ -2,6 +2,7 @@ import { useNavigate, useParams } from '@remix-run/react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
+import { OtherSolution } from '~/components/problem/other-solution';
 import { getSolutionDetail } from '~/data/solution/get-solution-detail';
 import { SolutionBanner } from './banner';
 import { Comment } from './comment';
@@ -21,6 +22,7 @@ export const SolutionMain = () => {
           solutionData={solutionData}
           navigate={navigate} /* hashTags={hashTags} */
         />
+        <OtherSolution id={solutionData.lessonId} />
         <Comment solutionId={params.id as string} navigate={navigate} />
       </FlexBox>
       <SolutionBanner
@@ -43,4 +45,5 @@ const FlexBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 40px;
+  overflow: auto;
 `;

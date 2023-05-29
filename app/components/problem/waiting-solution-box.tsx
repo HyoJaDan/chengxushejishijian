@@ -48,7 +48,6 @@ const Wrapper = styled.div`
   border-radius: 8px;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 16px;
 `;
 const Letters = styled.div`
   display: flex;

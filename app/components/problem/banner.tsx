@@ -67,6 +67,7 @@ const Wrapper = styled.div`
   gap: 16px;
   position: sticky;
   top: 72px;
+  width: max-content;
 `;
 const Flex = styled.div`
   display: flex;
