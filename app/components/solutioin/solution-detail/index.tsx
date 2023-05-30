@@ -44,6 +44,7 @@ const Wrapper = styled.div`
 const FlexBox = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 24px;
   overflow: auto;
+  max-width: 1149px;
 `;
