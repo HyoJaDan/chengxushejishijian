@@ -93,7 +93,7 @@ const FlexColumn = styled.div`
   gap: 9px;
   flex-direction: column;
   align-items: center;
-  padding: 0 28px;
+  width: -webkit-fill-available;
 `;
 const FlexColumnPlusLine = styled(FlexColumn)`
   border-right: 1px solid #efedea;

@@ -20,6 +20,7 @@ export const Training = () => {
 const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
+
   gap: 24px;
   max-width: 1256px;
   margin: 28px auto;
