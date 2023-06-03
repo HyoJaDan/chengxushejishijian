@@ -1,36 +1,63 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Editor from '@draft-js-plugins/editor';
+import createBlockDndPlugin from '@draft-js-plugins/drag-n-drop';
+import Editor, { composeDecorators } from '@draft-js-plugins/editor';
+
+import createFocusPlugin from '@draft-js-plugins/focus';
+import createImagePlugin from '@draft-js-plugins/image';
+import createResizeablePlugin from '@draft-js-plugins/resizeable';
 import {
   AtomicBlockUtils,
+  convertToRaw,
   EditorState,
   getDefaultKeyBinding,
   KeyBindingUtil,
   Modifier,
   RichUtils,
 } from 'draft-js';
-
+import draftToHtml from 'draftjs-to-html';
 import { useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
+import { pictureTranstorm } from '~/components/common/pirture-transtorm';
 import { myAccessToken } from '~/data/user/common/login-information';
 import { createEmptyBlock2 } from './createEmtypBlock';
 import { getBlockType } from './get-block-type';
-import { myBlockStyleFn } from './my-block-style-function';
 import { submitFunc } from './submit';
 
+const focusPlugin = createFocusPlugin();
+
+const resizeablePlugin = createResizeablePlugin();
+const blockDndPlugin = createBlockDndPlugin();
+const Image = ({ src }) => {
+  return <img src={src} alt='img' style={styles.media} />;
+};
+const decorator = composeDecorators(
+  resizeablePlugin.decorator,
+
+  focusPlugin.decorator,
+  blockDndPlugin.decorator
+);
+const imagePlugin = createImagePlugin({ decorator });
+const plugins = [blockDndPlugin, imagePlugin, resizeablePlugin, focusPlugin];
 export const SubEditor = ({ params }: { params: string }) => {
   const accessToken = useRecoilValue(myAccessToken);
   const [editorState, setEditorState] = useState<EditorState>(
     EditorState.createEmpty()
   );
   const editorRef = useRef();
+  const [content, setContent] = useState<string>('');
+  console.log(content);
   const onChange = (onChangeeditorState: EditorState) => {
     setEditorState(onChangeeditorState);
+    setContent(
+      draftToHtml(convertToRaw(onChangeeditorState.getCurrentContent()))
+    );
   };
 
   const focusEditor = () => {
     editorRef.current.focus();
   };
+  /** 복사, 붙여녛기 허용하는 함수 */
   const handlePastedText = (text: string) => {
     const contentState = editorState.getCurrentContent();
     const currentSelection = editorState.getSelection();
@@ -51,35 +78,6 @@ export const SubEditor = ({ params }: { params: string }) => {
 
     setEditorState(newEditorState);
     return 'handled';
-  };
-  const handleInsertImage = (e: any) => {
-    const file = e.target.files[0]; // Get the selected image file
-    const reader = new FileReader();
-    console.log(file, reader);
-    reader.onload = (event) => {
-      // Create a new entity for the image
-      const contentState = editorState.getCurrentContent();
-      const contentStateWithEntity = contentState.createEntity(
-        'IMAGE',
-        'IMMUTABLE',
-        {
-          src: event.target.result,
-          alt: 'Example Image',
-        }
-      );
-      const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
-
-      // Insert the image into the editor as an atomic block
-      const newEditorState = AtomicBlockUtils.insertAtomicBlock(
-        editorState,
-        entityKey,
-        ' '
-      );
-
-      // Update the editor state
-      setEditorState(newEditorState);
-    };
-    reader.readAsDataURL(file);
   };
   /* 1. 무슨 키를 입력했는지 나오는 함수 */
   const myKeyBindingFn = (e: React.KeyboardEvent<{}>) => {
@@ -118,6 +116,70 @@ export const SubEditor = ({ params }: { params: string }) => {
     }
     return 'not-handled';
   };
+  const handleInsertImage = (e: any) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onload = async () => {
+      // Create a new entity for the image
+      const contentState = editorState.getCurrentContent();
+      const image = await pictureTranstorm(file, accessToken);
+
+      const contentStateWithEntity = contentState.createEntity(
+        'IMAGE',
+        'IMMUTABLE',
+        {
+          src: image,
+          alt: 'Image',
+        }
+      );
+      const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+
+      // Insert the image into the editor as an atomic block
+      const newEditorState = AtomicBlockUtils.insertAtomicBlock(
+        editorState,
+        entityKey,
+        ' '
+      );
+      // Update the editor state
+      setEditorState(newEditorState);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const Media = (props) => {
+    console.log(props, 'helo');
+    const entity = props.contentState.getEntity(props.block.getEntityAt(0));
+    const { src } = entity.getData();
+    const type = entity.getType();
+    console.log(src, 'sic');
+    let media;
+    if (type === 'image') {
+      media = <Image src={src} />;
+    }
+
+    return media;
+  };
+
+  const myBlockStyleFn = (innercontent: any) => {
+    const type = innercontent.getType();
+
+    if (type === 'h1') {
+      return 'headerFont';
+    }
+    if (type === 'code-block') {
+      return 'code-block-css';
+    }
+    if (type === 'unstyled') {
+      return 'my-custom-block-style';
+    }
+    if (type === 'atomic') {
+      return {
+        component: Media,
+        editable: false,
+      };
+    }
+    return null;
+  };
 
   return (
     <Wrapper>
@@ -131,6 +193,7 @@ export const SubEditor = ({ params }: { params: string }) => {
             keyBindingFn={myKeyBindingFn}
             blockStyleFn={myBlockStyleFn}
             handlePastedText={handlePastedText}
+            plugins={plugins}
             /* blockRenderMap={extendedBlockRenderMap} */
             ref={editorRef}
           />

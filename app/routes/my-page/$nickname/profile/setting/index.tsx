@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
+import { pictureTranstorm } from '~/components/common/pirture-transtorm';
 import { Url } from '~/components/myPage/profile/setting/url';
 import { memberDataAdress } from '~/data/constants/adress';
 import { getUserData } from '~/data/my-page/user-data';
@@ -69,9 +70,12 @@ function InputForm() {
   const ImgURL = useRef('');
   const [avatarPreview, setAvatarPreview] = useState('');
   const avatar = watch('image');
+  console.log(avatar, 'avatar');
+  console.log(avatarPreview, 'preview');
   useEffect(() => {
     if (avatar && avatar.length > 0) {
       const file = avatar[0];
+      console.log(avatar);
       setAvatarPreview(URL.createObjectURL(file));
     }
   }, [avatar]);
@@ -80,19 +84,9 @@ function InputForm() {
   const onValid = async (inputData: IData) => {
     const myPageURL = `/my-page/${inputData.userName}/profile`;
     if (inputData?.image[0]) {
-      const formData = new FormData();
-      formData.append('data', inputData?.image[0]);
-      ImgURL.current = await axios({
-        method: 'post',
-        url: ' https://api.thepool.kr/uploads/post',
-        data: formData,
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${localData.accessToken}`,
-        },
-      }).then((res) => {
-        return res.data.url;
-      });
+      const temp = pictureTranstorm(inputData.image[0], localData.accessToken);
+
+      ImgURL.current = temp as unknown as string;
     } else if (data.thumbnail !== '') {
       ImgURL.current = data.thumbnail as string;
     }

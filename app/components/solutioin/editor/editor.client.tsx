@@ -2,6 +2,7 @@
 import Editor, { composeDecorators } from '@draft-js-plugins/editor';
 import {
   AtomicBlockUtils,
+  convertToRaw,
   EditorState,
   getDefaultKeyBinding,
   KeyBindingUtil,
@@ -16,8 +17,11 @@ import createBlockDndPlugin from '@draft-js-plugins/drag-n-drop';
 import createFocusPlugin from '@draft-js-plugins/focus';
 import createImagePlugin from '@draft-js-plugins/image';
 import createResizeablePlugin from '@draft-js-plugins/resizeable';
+import draftToHtml from 'draftjs-to-html';
+import { useRecoilValue } from 'recoil';
+import { pictureTranstorm } from '~/components/common/pirture-transtorm';
+import { myAccessToken } from '~/data/user/common/login-information';
 import { SimpleHashtagEditor } from './hashtag';
-import { myBlockStyleFn } from './my-block-style-function';
 
 const alignmentPlugin = createAlignmentPlugin();
 const { AlignmentTool } = alignmentPlugin;
@@ -47,18 +51,28 @@ const Image = ({ src }) => {
 };
 
 export const MainEditor = () => {
+  const accessToken = useRecoilValue(myAccessToken);
   const [editorState, setEditorState] = useState<EditorState>(
     EditorState.createEmpty()
   );
-
+  /* const [avatarPreview, setAvatarPreview] = useState('');
+  const avatar = watch('image');
+  console.log(avatar, 'hello');
+  console.log(avatarPreview, 'preview');
+  useEffect(() => {
+    if (avatar && avatar.length > 0) {
+      const file = avatar[0];
+      setAvatarPreview(URL.createObjectURL(file));
+    }
+  }, [avatar]); */
   const [currentBlockType, setCurrentBlockType] = useState();
   const editorRef = useRef();
   const focusEditor = () => {
     editorRef.current.focus();
   };
 
-  /* const [content, setContent] = useState<string>(''); */
-  /* console.log(content); */
+  const [content, setContent] = useState<string>('');
+  console.log(content);
   const handlePastedText = (text: string) => {
     const contentState = editorState.getCurrentContent();
     const currentSelection = editorState.getSelection();
@@ -83,9 +97,9 @@ export const MainEditor = () => {
 
   const onChange = (onChangeeditorState: EditorState) => {
     setEditorState(onChangeeditorState);
-    /* setContent(
+    setContent(
       draftToHtml(convertToRaw(onChangeeditorState.getCurrentContent()))
-    ); */
+    );
   };
 
   /* 1. 무슨 키를 입력했는지 나오는 함수 */
@@ -121,7 +135,6 @@ export const MainEditor = () => {
       return 'handled';
     } */
     if (command === 'split-block' && currentBlockType === 'code-block') {
-      console.log('특별');
       onChange(RichUtils.insertSoftNewline(editorState));
       return 'handled';
     }
@@ -153,15 +166,18 @@ export const MainEditor = () => {
   const handleInsertImage = (e: any) => {
     const file = e.target.files[0]; // Get the selected image file
     const reader = new FileReader();
-    console.log(file, reader);
-    reader.onload = (event) => {
+    console.log(file, reader, 'hello');
+    reader.onload = async (event) => {
       // Create a new entity for the image
       const contentState = editorState.getCurrentContent();
+      const previewImage = URL.createObjectURL(file);
+      const temp = await pictureTranstorm(file, accessToken);
+      console.log(temp, 'temp');
       const contentStateWithEntity = contentState.createEntity(
         'IMAGE',
         'IMMUTABLE',
         {
-          src: event.target.result,
+          src: temp,
           alt: 'Example Image',
         }
       );
@@ -179,13 +195,44 @@ export const MainEditor = () => {
     };
     reader.readAsDataURL(file);
   };
+  /* const handleInsertImage = async (e: any) => {
+    const file = e.target.files[0]; // Get the selected image file
+    const formData = new FormData();
+    formData.append('data', file);
+    const temp = pictureTranstorm(file, accessToken);
+    setAvatarPreview(URL.createObjectURL(file));
+    const render = new FileReader();
+    render.onload = () => {
+      const contentState = editorState.getCurrentContent();
+      const contentStateWithEntity = contentState.createEntity(
+        'IMAGE',
+        'IMMUTABLE',
+        {
+          src: avatarPreview,
+          alt: 'Example Image',
+        }
+      );
+      const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+
+      // Insert the image into the editor as an atomic block
+      const newEditorState = AtomicBlockUtils.insertAtomicBlock(
+        editorState,
+        entityKey,
+        ' '
+      );
+
+      // Update the editor state
+      setEditorState(newEditorState);
+    };
+    render.readAsDataURL(file);
+  }; */
 
   const Media = (props) => {
     console.log(props, 'helo');
     const entity = props.contentState.getEntity(props.block.getEntityAt(0));
     const { src } = entity.getData();
     const type = entity.getType();
-
+    console.log(src, 'sic');
     let media;
     if (type === 'image') {
       media = <Image src={src} />;
@@ -205,7 +252,27 @@ export const MainEditor = () => {
 
     return null;
   };
+  const myBlockStyleFn = (innercontent: any) => {
+    const type = innercontent.getType();
 
+    if (type === 'h1') {
+      return 'headerFont';
+    }
+    if (type === 'code-block') {
+      return 'code-block-css';
+    }
+    if (type === 'unstyled') {
+      return 'my-custom-block-style';
+    }
+    if (type === 'atomic') {
+      console.log('hello! atomic');
+      return {
+        component: Media,
+        editable: false,
+      };
+    }
+    return null;
+  };
   return (
     <Wrapper>
       <Container>
@@ -218,7 +285,7 @@ export const MainEditor = () => {
             handleKeyCommand={handleKeyCommand}
             keyBindingFn={myKeyBindingFn}
             blockStyleFn={myBlockStyleFn}
-            blockRendererFn={mediaBlockRenderer}
+            /* blockRendererFn={mediaBlockRenderer} */
             handlePastedText={handlePastedText}
             plugins={plugins}
             ref={editorRef}

@@ -24,7 +24,7 @@ export const SolutionTraining = () => {
           </Titles>
         </Head>
       </Header>
-      {/*       <ClientOnly>{() => <MainEditor />}</ClientOnly> */}
+      {/* <ClientOnly>{() => <MainEditor />}</ClientOnly> */}
       <ClientOnly>{() => <SubEditor params={params.id} />}</ClientOnly>
     </Wrapper>
   );

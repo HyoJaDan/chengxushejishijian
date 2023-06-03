@@ -1,5 +1,6 @@
 /** 3. 박스의 스타일을 지정  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 export const myBlockStyleFn = (innercontent: any) => {
   const type = innercontent.getType();
 
@@ -11,6 +12,13 @@ export const myBlockStyleFn = (innercontent: any) => {
   }
   if (type === 'unstyled') {
     return 'my-custom-block-style';
+  }
+  if (type === 'atomic') {
+    console.log('hello! atomic');
+    return {
+      component: Media,
+      editable: false,
+    };
   }
   return null;
 };
