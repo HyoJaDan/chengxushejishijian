@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Editor from '@draft-js-plugins/editor';
 import {
+  AtomicBlockUtils,
   EditorState,
   getDefaultKeyBinding,
   KeyBindingUtil,
+  Modifier,
   RichUtils,
 } from 'draft-js';
 
@@ -29,7 +31,56 @@ export const SubEditor = ({ params }: { params: string }) => {
   const focusEditor = () => {
     editorRef.current.focus();
   };
+  const handlePastedText = (text: string) => {
+    const contentState = editorState.getCurrentContent();
+    const currentSelection = editorState.getSelection();
 
+    // 붙여넣은 텍스트를 현재 블록의 스타일과 일치하도록 처리
+    const styledContentState = Modifier.replaceText(
+      contentState,
+      currentSelection,
+      text,
+      editorState.getCurrentInlineStyle()
+    );
+
+    const newEditorState = EditorState.push(
+      editorState,
+      styledContentState,
+      'insert-characters'
+    );
+
+    setEditorState(newEditorState);
+    return 'handled';
+  };
+  const handleInsertImage = (e: any) => {
+    const file = e.target.files[0]; // Get the selected image file
+    const reader = new FileReader();
+    console.log(file, reader);
+    reader.onload = (event) => {
+      // Create a new entity for the image
+      const contentState = editorState.getCurrentContent();
+      const contentStateWithEntity = contentState.createEntity(
+        'IMAGE',
+        'IMMUTABLE',
+        {
+          src: event.target.result,
+          alt: 'Example Image',
+        }
+      );
+      const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+
+      // Insert the image into the editor as an atomic block
+      const newEditorState = AtomicBlockUtils.insertAtomicBlock(
+        editorState,
+        entityKey,
+        ' '
+      );
+
+      // Update the editor state
+      setEditorState(newEditorState);
+    };
+    reader.readAsDataURL(file);
+  };
   /* 1. 무슨 키를 입력했는지 나오는 함수 */
   const myKeyBindingFn = (e: React.KeyboardEvent<{}>) => {
     const { keyCode } = e;
@@ -79,6 +130,7 @@ export const SubEditor = ({ params }: { params: string }) => {
             handleKeyCommand={handleKeyCommand}
             keyBindingFn={myKeyBindingFn}
             blockStyleFn={myBlockStyleFn}
+            handlePastedText={handlePastedText}
             /* blockRenderMap={extendedBlockRenderMap} */
             ref={editorRef}
           />
@@ -93,6 +145,15 @@ export const SubEditor = ({ params }: { params: string }) => {
               <img src='/icons/code.svg' alt='code' />
               <div>코드 추가</div>
             </AddCodeButton>
+            <AddPirtureButton htmlFor='ex_file'>
+              <img src='/icons/problem/picture.svg' alt='' />
+              사진 추가
+              <FileNoneStyle
+                type='file'
+                id='ex_file'
+                onChange={handleInsertImage}
+              />
+            </AddPirtureButton>
           </Footer>
           <AddCodeButton
             onClick={() => {
@@ -159,4 +220,40 @@ const AddCodeButton = styled.div`
     box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
     border: none;
   }
+`;
+const AddPirtureButton = styled.label`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  gap: 12px;
+  width: 128px;
+  height: 44px;
+  background: #f8f6f4;
+  border-radius: 100px;
+  border: 0;
+
+  &:hover {
+    background-color: ${(prop) => prop.theme.color.basic.white};
+    border: 1px solid #a4a2a0;
+  }
+  &:active {
+    background: #ffffff;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
+    border: none;
+  }
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+const FileNoneStyle = styled.input`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 `;
