@@ -1,8 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import createBlockDndPlugin from '@draft-js-plugins/drag-n-drop';
 import Editor, { composeDecorators } from '@draft-js-plugins/editor';
+
+import createFocusPlugin from '@draft-js-plugins/focus';
+import createImagePlugin from '@draft-js-plugins/image';
+import createResizeablePlugin from '@draft-js-plugins/resizeable';
 import {
   AtomicBlockUtils,
-  convertToRaw,
   EditorState,
   getDefaultKeyBinding,
   KeyBindingUtil,
@@ -10,69 +14,40 @@ import {
   RichUtils,
 } from 'draft-js';
 import { useRef, useState } from 'react';
-import styled from 'styled-components';
-
-import createAlignmentPlugin from '@draft-js-plugins/alignment';
-import createBlockDndPlugin from '@draft-js-plugins/drag-n-drop';
-import createFocusPlugin from '@draft-js-plugins/focus';
-import createImagePlugin from '@draft-js-plugins/image';
-import createResizeablePlugin from '@draft-js-plugins/resizeable';
-import draftToHtml from 'draftjs-to-html';
 import { useRecoilValue } from 'recoil';
+import styled from 'styled-components';
 import { pictureTranstorm } from '~/components/common/pirture-transtorm';
 import { myAccessToken } from '~/data/user/common/login-information';
-import { SimpleHashtagEditor } from './hashtag';
-
-const alignmentPlugin = createAlignmentPlugin();
-const { AlignmentTool } = alignmentPlugin;
+import { createEmptyBlock2 } from './createEmtypBlock';
+import { getBlockType } from './get-block-type';
+import { myBlockStyleFn } from './my-block-style-function';
+import { submitFunc } from './submit';
 
 const focusPlugin = createFocusPlugin();
-
 const resizeablePlugin = createResizeablePlugin();
 const blockDndPlugin = createBlockDndPlugin();
-
 const decorator = composeDecorators(
   resizeablePlugin.decorator,
-  alignmentPlugin.decorator,
   focusPlugin.decorator,
   blockDndPlugin.decorator
 );
 const imagePlugin = createImagePlugin({ decorator });
+const plugins = [blockDndPlugin, imagePlugin, resizeablePlugin, focusPlugin];
 
-const plugins = [
-  blockDndPlugin,
-  imagePlugin,
-  resizeablePlugin,
-  alignmentPlugin,
-  focusPlugin,
-];
-const Image = ({ src }) => {
-  return <img src={src} alt='img' style={styles.media} />;
-};
-
-export const MainEditor = () => {
+export const CustomEditor = ({ params }: { params: string }) => {
   const accessToken = useRecoilValue(myAccessToken);
   const [editorState, setEditorState] = useState<EditorState>(
     EditorState.createEmpty()
   );
-  /* const [avatarPreview, setAvatarPreview] = useState('');
-  const avatar = watch('image');
-  console.log(avatar, 'hello');
-  console.log(avatarPreview, 'preview');
-  useEffect(() => {
-    if (avatar && avatar.length > 0) {
-      const file = avatar[0];
-      setAvatarPreview(URL.createObjectURL(file));
-    }
-  }, [avatar]); */
-  const [currentBlockType, setCurrentBlockType] = useState();
   const editorRef = useRef();
+  const onChange = (onChangeeditorState: EditorState) => {
+    setEditorState(onChangeeditorState);
+  };
+
   const focusEditor = () => {
     editorRef.current.focus();
   };
-
-  const [content, setContent] = useState<string>('');
-  console.log(content);
+  /** 복사, 붙여녛기 허용하는 함수 */
   const handlePastedText = (text: string) => {
     const contentState = editorState.getCurrentContent();
     const currentSelection = editorState.getSelection();
@@ -94,91 +69,57 @@ export const MainEditor = () => {
     setEditorState(newEditorState);
     return 'handled';
   };
-
-  const onChange = (onChangeeditorState: EditorState) => {
-    setEditorState(onChangeeditorState);
-    setContent(
-      draftToHtml(convertToRaw(onChangeeditorState.getCurrentContent()))
-    );
-  };
-
   /* 1. 무슨 키를 입력했는지 나오는 함수 */
   const myKeyBindingFn = (e: React.KeyboardEvent<{}>) => {
     const { keyCode } = e;
     if (keyCode === 49 && KeyBindingUtil.hasCommandModifier(e)) {
       return 'h1';
     }
-    /*  if (keyCode === 13 && KeyBindingUtil.isSoftNewlineEvent(e)) {
+    if (keyCode === 13 && KeyBindingUtil.isSoftNewlineEvent(e)) {
       return 'shift_enter';
-    } */
-    /* if (keyCode === 13) {
-      return 'enter';
-    } */
-    if (keyCode === 191) {
-      console.log('slash');
-      return 'slash';
     }
     return getDefaultKeyBinding(e);
   };
 
   /* 2. 내가 무슨 커멘드를 입력했는지 확인하는 함수 */
   const handleKeyCommand = (command: string) => {
-    console.log('커멘드가 입력되었습니다.', command);
-    /* if (command === 'enter') {
-      console.log('enter이 클릭되었습니다.');
-      if (currentBlockType === 'code-block') {
-        onChange(RichUtils.insertSoftNewline(editorState));
-      } else {
-        const newEditerState = createEmptyBlock(editorState);
-        onChange(newEditerState);
-      }
-      return 'handled';
-    } */
-    if (command === 'split-block' && currentBlockType === 'code-block') {
+    const blockType = getBlockType(editorState);
+
+    if (command === 'split-block' && blockType === 'code-block') {
       onChange(RichUtils.insertSoftNewline(editorState));
       return 'handled';
     }
-    /* if (command === 'shift_enter') {
-      console.log('shift_enter이 클릭되었습니다.');
-      if (currentBlockType === 'code-block') {
-        const newEditerState = createEmptyBlock(editorState);
-        onChange(newEditerState);
-      } else {
-        onChange(RichUtils.insertSoftNewline(editorState));
-      }
+    if (command === 'shift_enter' && blockType === 'code-block') {
+      const newEditerState = createEmptyBlock2(editorState);
+      onChange(newEditerState);
       return 'handled';
-    } */
+    }
     if (command === 'h1') {
       onChange(RichUtils.toggleBlockType(editorState, 'h1'));
-      console.log('커멘트 타입은 헤더 입니다.');
       return 'handled';
     }
 
     const newState = RichUtils.handleKeyCommand(editorState, command);
-    console.log('마아아아아지막 커멘트 타입은', newState, '입니다.');
     if (newState) {
       onChange(newState);
       return 'handled';
     }
     return 'not-handled';
   };
-
   const handleInsertImage = (e: any) => {
-    const file = e.target.files[0]; // Get the selected image file
+    const file = e.target.files[0];
     const reader = new FileReader();
-    console.log(file, reader, 'hello');
-    reader.onload = async (event) => {
+    reader.onload = async () => {
       // Create a new entity for the image
       const contentState = editorState.getCurrentContent();
-      const previewImage = URL.createObjectURL(file);
-      const temp = await pictureTranstorm(file, accessToken);
-      console.log(temp, 'temp');
+      const image = await pictureTranstorm(file, accessToken);
+
       const contentStateWithEntity = contentState.createEntity(
         'IMAGE',
         'IMMUTABLE',
         {
-          src: temp,
-          alt: 'Example Image',
+          src: image,
+          alt: 'Image',
         }
       );
       const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
@@ -189,111 +130,29 @@ export const MainEditor = () => {
         entityKey,
         ' '
       );
-
       // Update the editor state
       setEditorState(newEditorState);
     };
     reader.readAsDataURL(file);
   };
-  /* const handleInsertImage = async (e: any) => {
-    const file = e.target.files[0]; // Get the selected image file
-    const formData = new FormData();
-    formData.append('data', file);
-    const temp = pictureTranstorm(file, accessToken);
-    setAvatarPreview(URL.createObjectURL(file));
-    const render = new FileReader();
-    render.onload = () => {
-      const contentState = editorState.getCurrentContent();
-      const contentStateWithEntity = contentState.createEntity(
-        'IMAGE',
-        'IMMUTABLE',
-        {
-          src: avatarPreview,
-          alt: 'Example Image',
-        }
-      );
-      const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
 
-      // Insert the image into the editor as an atomic block
-      const newEditorState = AtomicBlockUtils.insertAtomicBlock(
-        editorState,
-        entityKey,
-        ' '
-      );
-
-      // Update the editor state
-      setEditorState(newEditorState);
-    };
-    render.readAsDataURL(file);
-  }; */
-
-  const Media = (props) => {
-    console.log(props, 'helo');
-    const entity = props.contentState.getEntity(props.block.getEntityAt(0));
-    const { src } = entity.getData();
-    const type = entity.getType();
-    console.log(src, 'sic');
-    let media;
-    if (type === 'image') {
-      media = <Image src={src} />;
-    }
-
-    return media;
-  };
-
-  const mediaBlockRenderer = (block) => {
-    if (block.getType() === 'atomic') {
-      console.log('hello! atomic');
-      return {
-        component: Media,
-        editable: false,
-      };
-    }
-
-    return null;
-  };
-  const myBlockStyleFn = (innercontent: any) => {
-    const type = innercontent.getType();
-
-    if (type === 'h1') {
-      return 'headerFont';
-    }
-    if (type === 'code-block') {
-      return 'code-block-css';
-    }
-    if (type === 'unstyled') {
-      return 'my-custom-block-style';
-    }
-    if (type === 'atomic') {
-      console.log('hello! atomic');
-      return {
-        component: Media,
-        editable: false,
-      };
-    }
-    return null;
-  };
   return (
     <Wrapper>
       <Container>
         <EditorWrapper onClick={focusEditor}>
           <Editor
-            /* wrapperClassName='card' */
             editorState={editorState}
-            placeholder='명령어는 `/` 를 입력해주세요'
+            placeholder='명령어는 `/` 를 입력해주세요. 사진, 혹은 첫번째 줄에 있는 내용이 됩니다.'
             onChange={onChange}
             handleKeyCommand={handleKeyCommand}
             keyBindingFn={myKeyBindingFn}
             blockStyleFn={myBlockStyleFn}
-            /* blockRendererFn={mediaBlockRenderer} */
             handlePastedText={handlePastedText}
             plugins={plugins}
             ref={editorRef}
           />
-          <AlignmentTool />
         </EditorWrapper>
         <Headers>
-          <SimpleHashtagEditor />
           <Footer>
             <AddCodeButton
               onClick={() => {
@@ -313,7 +172,13 @@ export const MainEditor = () => {
               />
             </AddPirtureButton>
           </Footer>
-          <AddCodeButton>제출하기</AddCodeButton>
+          <AddCodeButton
+            onClick={() => {
+              submitFunc(editorState, params, accessToken);
+            }}
+          >
+            제출하기
+          </AddCodeButton>
         </Headers>
       </Container>
     </Wrapper>
@@ -331,16 +196,6 @@ const Wrapper = styled.div`
   z-index: 0;
 `;
 
-const FileNoneStyle = styled.input`
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-`;
 const Container = styled.div`
   width: 100%;
   height: 100%;
@@ -383,7 +238,6 @@ const AddCodeButton = styled.div`
     border: none;
   }
 `;
-
 const AddPirtureButton = styled.label`
   display: flex;
   flex-direction: row;
@@ -409,4 +263,14 @@ const AddPirtureButton = styled.label`
   display: flex;
   align-items: center;
   gap: 8px;
+`;
+const FileNoneStyle = styled.input`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 `;

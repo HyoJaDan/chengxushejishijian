@@ -36,7 +36,7 @@ export const ProblemMainContent = ({ problemData, hashTags }: ITemp) => {
 };
 const Wrapper = styled.div`
   width: 1149px;
-  height: 408px;
+  min-height: 408px;
   background: ${(prop) => prop.theme.color.basic.white};
   border: 1px solid #efedea;
   border-radius: 8px;
