@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { categoryList } from '~/models/problem-and-solution/common-used/category-list';
 
-export const AskHeader = ({ title, setTitle }) => {
+export const AskHeader = ({ title, setTitle, selectedId, setSelectedId }) => {
   const handleChange = (event: { target: { value: string } }) => {
     setTitle(event.target.value);
   };
@@ -8,6 +9,12 @@ export const AskHeader = ({ title, setTitle }) => {
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
   };
+
+  const handleLabelChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const id = parseInt(event.target.value, 10);
+    setSelectedId(id);
+  };
+  console.log(selectedId);
   return (
     <Wrapper>
       <Form onSubmit={handleSubmit}>
@@ -18,6 +25,17 @@ export const AskHeader = ({ title, setTitle }) => {
           placeholder='제목을 입력해 주세요'
           onChange={handleChange}
         />
+        <Select
+          id='selectInput'
+          value={selectedId}
+          onChange={handleLabelChange}
+        >
+          {categoryList.map((item) => (
+            <option key={item.id} value={item.id}>
+              {item.name}
+            </option>
+          ))}
+        </Select>
       </Form>
     </Wrapper>
   );
@@ -35,6 +53,7 @@ const Wrapper = styled.div`
 
 const Form = styled.form`
   width: 100%;
+  display: flex;
 `;
 const Input = styled.input`
   color: ${(prop) => prop.theme.color.grayScale.gray_900};
@@ -46,5 +65,16 @@ const Input = styled.input`
     border: none;
     background-color: transparent;
     box-shadow: none;
+  }
+`;
+
+const Select = styled.select`
+  width: 150px;
+  height: 35px;
+  border-radius: 3px;
+  border: 1px solid #bfbfbf;
+  &:focus {
+    border: 1px solid red;
+    outline: none;
   }
 `;

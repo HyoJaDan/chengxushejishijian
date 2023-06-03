@@ -16,7 +16,7 @@ import { getBlockType } from '../solutioin/editor/get-block-type';
 import { myBlockStyleFn } from '../solutioin/editor/my-block-style-function';
 import { askSubmitFunction } from './submit-function';
 
-export const AskEditor = ({ title }) => {
+export const AskEditor = ({ title, selectedId }) => {
   const accessToken = useRecoilValue(myAccessToken);
   const [editorState, setEditorState] = useState<EditorState>(
     EditorState.createEmpty()
@@ -96,7 +96,7 @@ export const AskEditor = ({ title }) => {
           </Footer>
           <AddCodeButton
             onClick={() => {
-              askSubmitFunction(editorState, title, accessToken);
+              askSubmitFunction(editorState, title, selectedId, accessToken);
             }}
           >
             제출하기

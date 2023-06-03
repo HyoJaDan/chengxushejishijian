@@ -6,10 +6,18 @@ import { AskHeader } from './header';
 
 export default function Ask() {
   const [title, setTitle] = useState<string>('');
+  const [selectedId, setSelectedId] = useState<number>(1);
   return (
     <Wrapper>
-      <AskHeader title={title} setTitle={setTitle} />
-      <ClientOnly>{() => <AskEditor title={title} />}</ClientOnly>
+      <AskHeader
+        title={title}
+        setTitle={setTitle}
+        selectedId={selectedId}
+        setSelectedId={setSelectedId}
+      />
+      <ClientOnly>
+        {() => <AskEditor title={title} selectedId={selectedId} />}
+      </ClientOnly>
     </Wrapper>
   );
 }

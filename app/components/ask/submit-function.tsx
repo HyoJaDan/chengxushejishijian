@@ -6,11 +6,11 @@ import { lessonAddress } from '~/data/constants/adress';
 export const askSubmitFunction = async (
   editorState: EditorState,
   title: string,
+  selectedId: number,
   accessToken: string
 ) => {
   const contentState = editorState.getCurrentContent();
   const rawContentState = convertToRaw(contentState);
-
   // JSON 객체를 문자열로 변환
   const jsonString = JSON.stringify(rawContentState);
 
@@ -18,7 +18,7 @@ export const askSubmitFunction = async (
     `${lessonAddress}`,
     {
       levelId: 1,
-      categoryId: 1,
+      categoryId: selectedId,
       title,
       description: jsonString,
     },
