@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import type { IProblemHashTags } from '~/models/hashtags';
 import type { IProblem } from '~/models/problem-and-solution/problem/problem';
+import { Description } from '../common/problem-and-solution/description';
 import { Category } from './problem-box';
 
 interface ITemp {
@@ -27,7 +28,7 @@ export const ProblemMainContent = ({ problemData, hashTags }: ITemp) => {
         </Titles>
       </Header>
       <Main className='body2_MD'>
-        <PreWrap className='body2_MD'>{problemData.description}</PreWrap>
+        <Description description={problemData.description} />
         <Tags>{hashTagList}</Tags>
       </Main>
     </Wrapper>

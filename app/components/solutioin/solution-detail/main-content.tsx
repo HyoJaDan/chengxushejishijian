@@ -1,8 +1,8 @@
 import styled from 'styled-components';
+import { Description } from '~/components/common/problem-and-solution/description';
 import { Circle } from '~/components/global-navigation-bar/login';
 import type { IProblemHashTags } from '~/models/hashtags';
 import type { ISolutionDetail } from '~/models/problem-and-solution/solution/solution-detail';
-import { SolutionDescription } from './description';
 
 interface ITemp {
   solutionData: ISolutionDetail;
@@ -63,7 +63,7 @@ export const SolutionMainContent = ({
         </SolutionUserInformation>
       </Header>
       <Main className='body2_MD'>
-        <SolutionDescription description={solutionData.description} />
+        <Description description={solutionData.description} />
         {/* <Tags>{hashTagList}</Tags> */}
       </Main>
     </Wrapper>

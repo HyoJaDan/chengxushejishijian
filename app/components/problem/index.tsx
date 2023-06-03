@@ -18,7 +18,7 @@ export const ProblemMain = () => {
   const problemData = useRecoilValue(getProblemDetail(params.id));
   const hashTags = useRecoilValue(getProblemDetailTags(params.id as string));
   const navigate = useNavigate();
-
+  console.log(problemData.description, 'hello');
   return (
     <Wrapper>
       <FlexBox>

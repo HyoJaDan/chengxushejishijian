@@ -1,12 +1,8 @@
 import Editor from '@draft-js-plugins/editor';
 import { EditorState, convertFromRaw } from 'draft-js';
-import { myBlockStyleFn } from '../editor/my-block-style-function';
+import { myBlockStyleFn } from '~/components/solutioin/editor/my-block-style-function';
 
-export const SolutionDescription = ({
-  description,
-}: {
-  description: string;
-}) => {
+export const Description = ({ description }: { description: string }) => {
   const parsedJson = JSON.parse(description);
   const contentState = {
     entityMap: parsedJson.entityMap,

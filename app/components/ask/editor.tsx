@@ -74,7 +74,7 @@ export const AskEditor = ({ title }) => {
         <EditorWrapper onClick={focusEditor}>
           <Editor
             editorState={editorState}
-            placeholder='명령어는 `/` 를 입력해주세요. 사진, 혹은 첫번째 줄에 있는 내용이 됩니다.'
+            placeholder='명령어는 `/` 를 입력해주세요.'
             onChange={onChange}
             handleKeyCommand={handleKeyCommand}
             keyBindingFn={myKeyBindingFn}
