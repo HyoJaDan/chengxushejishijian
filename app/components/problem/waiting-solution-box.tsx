@@ -75,7 +75,7 @@ const SolutionButton = styled(Link)`
   align-items: center;
   padding: 16px 24px;
   gap: 8px;
-  width: 135px;
+  width: fit-content;
   height: 54px;
   background: #ffffff;
   border-radius: 100px;

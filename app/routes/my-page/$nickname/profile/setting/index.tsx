@@ -300,7 +300,6 @@ const Setting = styled.button`
   padding: 16px;
   gap: 6.5px;
   border: 1px solid transparent;
-  width: 107px;
   height: 46px;
   background: #efedea;
   border-radius: 100px;

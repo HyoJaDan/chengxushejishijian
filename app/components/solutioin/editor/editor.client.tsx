@@ -224,7 +224,7 @@ const AddCodeButton = styled.div`
   justify-content: center;
   padding: 10px 16px;
   gap: 12px;
-  width: 128px;
+  width: fit-content;
   height: 44px;
   background: #f8f6f4;
   border-radius: 100px;
@@ -245,7 +245,7 @@ const AddPirtureButton = styled.label`
   justify-content: center;
   padding: 10px 16px;
   gap: 12px;
-  width: 128px;
+  width: fit-content;
   height: 44px;
   background: #f8f6f4;
   border-radius: 100px;
