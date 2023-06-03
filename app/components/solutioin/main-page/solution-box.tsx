@@ -1,11 +1,18 @@
-import Editor from '@draft-js-plugins/editor';
+import Editor, { composeDecorators } from '@draft-js-plugins/editor';
+import createImagePlugin from '@draft-js-plugins/image';
+import createResizeablePlugin from '@draft-js-plugins/resizeable';
 import { Link } from '@remix-run/react';
-import { EditorState, convertFromRaw } from 'draft-js';
+import { EditorState } from 'draft-js';
 import styled from 'styled-components';
 import { Circle } from '~/components/global-navigation-bar/login';
+import { convertJsonToDraft } from '~/hooks/convert-json-to-draft';
 import type { ISolutions } from '~/models/problem-and-solution/solution/solutions';
 import { myBlockStyleFn } from '../editor/my-block-style-function';
 
+const resizeablePlugin = createResizeablePlugin();
+const decorator = composeDecorators(resizeablePlugin.decorator);
+const imagePlugin = createImagePlugin({ decorator });
+const plugins = [imagePlugin, resizeablePlugin];
 export const SolutionBox = (data: ISolutions, index: number, width: number) => {
   const { id, description, member, _count, title } = data;
   const { lessonSolutionComments, lessonSolutionLikes } = _count;
@@ -22,12 +29,7 @@ export const SolutionBox = (data: ISolutions, index: number, width: number) => {
     }
     return <ThumbnailBackground />;
   };
-  const parsedJson = JSON.parse(description);
-  const contentState = {
-    entityMap: parsedJson.entityMap,
-    blocks: parsedJson.blocks,
-  };
-  const restoredContentState = convertFromRaw(contentState);
+  const restoredContentState = convertJsonToDraft(description);
   const restoredEditorState =
     EditorState.createWithContent(restoredContentState);
 
@@ -37,6 +39,7 @@ export const SolutionBox = (data: ISolutions, index: number, width: number) => {
         <Editor
           editorState={restoredEditorState}
           blockStyleFn={myBlockStyleFn}
+          plugins={plugins}
         />
       </Content>
 

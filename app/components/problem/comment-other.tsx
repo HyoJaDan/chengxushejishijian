@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import type { IComments } from '~/models/problem-and-solution/problem/comments';
-import { convertUTCtoKST } from './convertUTCtoKST';
+import { convertUTCtoKST } from '../../hooks/convertUTCtoKST';
 
 export const otherComments = (comments: IComments[], navigate: Function) => {
   return comments.map(({ updatedAt, description, id, member }, index) => {
