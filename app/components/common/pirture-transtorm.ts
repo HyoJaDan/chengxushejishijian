@@ -1,6 +1,9 @@
 import axios from 'axios';
 
-export const pictureTranstorm = async (image, accessToken) => {
+export const pictureTranstorm = async (
+  image: string | Blob,
+  accessToken: string
+) => {
   const formData = new FormData();
   formData.append('data', image);
   const temp = await axios({

@@ -22,23 +22,20 @@ import { pictureTranstorm } from '~/components/common/pirture-transtorm';
 import { myAccessToken } from '~/data/user/common/login-information';
 import { createEmptyBlock2 } from './createEmtypBlock';
 import { getBlockType } from './get-block-type';
+import { myBlockStyleFn } from './my-block-style-function';
 import { submitFunc } from './submit';
 
 const focusPlugin = createFocusPlugin();
-
 const resizeablePlugin = createResizeablePlugin();
 const blockDndPlugin = createBlockDndPlugin();
-const Image = ({ src }) => {
-  return <img src={src} alt='img' style={styles.media} />;
-};
 const decorator = composeDecorators(
   resizeablePlugin.decorator,
-
   focusPlugin.decorator,
   blockDndPlugin.decorator
 );
 const imagePlugin = createImagePlugin({ decorator });
 const plugins = [blockDndPlugin, imagePlugin, resizeablePlugin, focusPlugin];
+
 export const SubEditor = ({ params }: { params: string }) => {
   const accessToken = useRecoilValue(myAccessToken);
   const [editorState, setEditorState] = useState<EditorState>(
@@ -144,41 +141,6 @@ export const SubEditor = ({ params }: { params: string }) => {
       setEditorState(newEditorState);
     };
     reader.readAsDataURL(file);
-  };
-
-  const Media = (props) => {
-    console.log(props, 'helo');
-    const entity = props.contentState.getEntity(props.block.getEntityAt(0));
-    const { src } = entity.getData();
-    const type = entity.getType();
-    console.log(src, 'sic');
-    let media;
-    if (type === 'image') {
-      media = <Image src={src} />;
-    }
-
-    return media;
-  };
-
-  const myBlockStyleFn = (innercontent: any) => {
-    const type = innercontent.getType();
-
-    if (type === 'h1') {
-      return 'headerFont';
-    }
-    if (type === 'code-block') {
-      return 'code-block-css';
-    }
-    if (type === 'unstyled') {
-      return 'my-custom-block-style';
-    }
-    if (type === 'atomic') {
-      return {
-        component: Media,
-        editable: false,
-      };
-    }
-    return null;
   };
 
   return (

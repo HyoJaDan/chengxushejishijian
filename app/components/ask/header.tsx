@@ -14,7 +14,6 @@ export const AskHeader = ({ title, setTitle, selectedId, setSelectedId }) => {
     const id = parseInt(event.target.value, 10);
     setSelectedId(id);
   };
-  console.log(selectedId);
   return (
     <Wrapper>
       <Form onSubmit={handleSubmit}>

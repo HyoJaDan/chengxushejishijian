@@ -70,12 +70,9 @@ function InputForm() {
   const ImgURL = useRef('');
   const [avatarPreview, setAvatarPreview] = useState('');
   const avatar = watch('image');
-  console.log(avatar, 'avatar');
-  console.log(avatarPreview, 'preview');
   useEffect(() => {
     if (avatar && avatar.length > 0) {
       const file = avatar[0];
-      console.log(avatar);
       setAvatarPreview(URL.createObjectURL(file));
     }
   }, [avatar]);

@@ -20,7 +20,7 @@ export const submitFunc = async (
       title: rawContentState.blocks[0].text,
       lessonId: Number(params),
       description: jsonString,
-      relatedLink: 'https://github.com/the-pool/the-pool-api',
+      relatedLink: '',
     },
     {
       headers: {
