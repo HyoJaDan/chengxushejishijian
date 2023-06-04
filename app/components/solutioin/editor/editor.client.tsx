@@ -110,7 +110,6 @@ export const CustomEditor = ({ params }: { params: string }) => {
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.onload = async () => {
-      // Create a new entity for the image
       const contentState = editorState.getCurrentContent();
       const image = await pictureTranstorm(file, accessToken);
 
@@ -122,16 +121,16 @@ export const CustomEditor = ({ params }: { params: string }) => {
           alt: 'Image',
         }
       );
+      /* const entityKey = contentState.getLastCreatedEntityKey(); */
       const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
-
-      // Insert the image into the editor as an atomic block
+      console.log(contentStateWithEntity);
+      console.log(entityKey);
       const newEditorState = AtomicBlockUtils.insertAtomicBlock(
         editorState,
         entityKey,
         ' '
       );
-      // Update the editor state
-      setEditorState(newEditorState);
+      onChange(newEditorState);
     };
     reader.readAsDataURL(file);
   };

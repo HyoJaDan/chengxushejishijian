@@ -79,6 +79,7 @@ export default function App() {
 const Wrapper = styled.div`
   position: relative;
   min-height: 100vh;
+  overflow-y: scroll;
 `;
 
 export const ContentArea = styled.div`

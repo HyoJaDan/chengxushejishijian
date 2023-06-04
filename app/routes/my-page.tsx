@@ -9,11 +9,12 @@ export default function DefaultMyPage() {
   const navigate = useNavigate();
   if (nickname === undefined) navigate('/');
   const [isSetting, setIsSetting] = useState(false);
+  console.log(isSetting, 'isSetting');
   useEffect(() => {
     const [, , , , , , adress] = window.location.href.split('/');
     if (adress === 'setting') setIsSetting(true);
     else setIsSetting(false);
-  }, []);
+  });
   return (
     <Wrapper>
       <MyPageHeader page={nickname as string} />
