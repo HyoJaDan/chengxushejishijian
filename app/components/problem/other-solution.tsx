@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { getSolutionListById } from '~/data/solution/get-solutions';
-import { increaseIndex } from '~/hooks/increase-index';
-import { Button } from '../common/right-button';
+import { decreaseIndex, increaseIndex } from '~/hooks/manage-button-index';
+import { LeftButton, RightButton } from '../common/buttons';
 import { SolutionBox } from '../solutioin/main-page/solution-box';
 
 export const OtherSolution = ({ id }: { id: number }) => {
@@ -12,10 +12,10 @@ export const OtherSolution = ({ id }: { id: number }) => {
     getSolutionListById(id as unknown as string)
   );
   const [index, setIndex] = useState(0);
-  const [leaving, setLeaving] = useState<boolean>(false);
-  const [endIndex, setEndIndex] = useState<boolean>(false);
-  console.log(index);
-  const toggleLeaving = () => setLeaving((prev) => !prev);
+  const [isEndIndex, setIsEndIndex] = useState<boolean>(false);
+  const [isMoving, setIsMoving] = useState<boolean>(false);
+  const [isStartIndex, setIsStartIndex] = useState<boolean>(true);
+
   if (solutionList.length > 3) {
     return (
       <Wrapper>
@@ -24,7 +24,29 @@ export const OtherSolution = ({ id }: { id: number }) => {
           <>{solutionList.length}개</>
         </Header>
         <Slider>
-          <AnimatePresence onExitComplete={toggleLeaving} initial={false}>
+          <LeftButton
+            onClick={() =>
+              decreaseIndex(
+                index,
+                setIndex,
+                isMoving,
+                setIsMoving,
+                solutionList.length,
+                setIsStartIndex,
+                setIsEndIndex
+              )
+            }
+            startIndex={isStartIndex}
+            top={130}
+          >
+            <FlippedImg src='/icons/problem/right.svg' alt='left' />
+          </LeftButton>
+          <AnimatePresence
+            onExitComplete={() => {
+              setIsMoving((prev: boolean) => !prev);
+            }}
+            initial={false}
+          >
             <Row
               variants={rowVariants}
               initial='hidden'
@@ -38,22 +60,23 @@ export const OtherSolution = ({ id }: { id: number }) => {
                 .map((data, num) => SolutionBox(data, num, 1149))}
             </Row>
           </AnimatePresence>
-          <Button
+          <RightButton
             onClick={() =>
               increaseIndex(
                 index,
                 setIndex,
-                leaving,
-                setLeaving,
+                isMoving,
+                setIsMoving,
                 solutionList.length,
-                setEndIndex
+                setIsEndIndex,
+                setIsStartIndex
               )
             }
-            endIndex={endIndex}
+            endIndex={isEndIndex}
             top={130}
           >
             <img src='/icons/problem/right.svg' alt='right' />
-          </Button>
+          </RightButton>
         </Slider>
       </Wrapper>
     );
@@ -108,4 +131,7 @@ const Contents = styled.div`
   -webkit-box-align: center;
   gap: 24px;
   overflow-x: scroll;
+`;
+const FlippedImg = styled.img`
+  transform: scaleX(-1);
 `;

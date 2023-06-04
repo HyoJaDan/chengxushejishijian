@@ -4,9 +4,9 @@ import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { getProblemsById } from '~/data/problem/get-problemList';
 import { exceptCurrentAdress } from '~/hooks/except-current-adress';
-import { increaseIndex } from '~/hooks/increase-index';
+import { decreaseIndex, increaseIndex } from '~/hooks/manage-button-index';
 import type { IProblems } from '~/models/problem-and-solution/problem/problems';
-import { Button } from '../common/right-button';
+import { LeftButton, RightButton } from '../common/buttons';
 import { TrainBox } from './problem-box';
 
 export const SimilerTraining = ({
@@ -17,10 +17,11 @@ export const SimilerTraining = ({
   paramsId: number;
 }) => {
   const problems = useRecoilValue(getProblemsById(id));
-  const [index, setIndex] = useState(0);
-  const [leaving, setLeaving] = useState<boolean>(false);
   const problemList = exceptCurrentAdress(problems, paramsId);
-  const [endIndex, setEndIndex] = useState<boolean>(false);
+  const [index, setIndex] = useState(0);
+  const [isEndIndex, setIsEndIndex] = useState<boolean>(false);
+  const [isMoving, setIsMoving] = useState<boolean>(false);
+  const [isStartIndex, setIsStartIndex] = useState<boolean>(true);
 
   if (problemList.length > 3)
     return (
@@ -30,8 +31,27 @@ export const SimilerTraining = ({
           <>{problemList.length}개</>
         </Header>
         <Slider>
+          <LeftButton
+            onClick={() =>
+              decreaseIndex(
+                index,
+                setIndex,
+                isMoving,
+                setIsMoving,
+                problemList.length,
+                setIsStartIndex,
+                setIsEndIndex
+              )
+            }
+            startIndex={isStartIndex}
+            top={46}
+          >
+            <FlippedImg src='/icons/problem/right.svg' alt='left' />
+          </LeftButton>
           <AnimatePresence
-            onExitComplete={() => setLeaving((prev: boolean) => !prev)}
+            onExitComplete={() => {
+              setIsMoving((prev: boolean) => !prev);
+            }}
             initial={false}
           >
             <Row
@@ -49,22 +69,23 @@ export const SimilerTraining = ({
                 )}
             </Row>
           </AnimatePresence>
-          <Button
+          <RightButton
             onClick={() =>
               increaseIndex(
                 index,
                 setIndex,
-                leaving,
-                setLeaving,
+                isMoving,
+                setIsMoving,
                 problemList.length,
-                setEndIndex
+                setIsEndIndex,
+                setIsStartIndex
               )
             }
-            endIndex={endIndex}
+            endIndex={isEndIndex}
             top={46}
           >
             <img src='/icons/problem/right.svg' alt='right' />
-          </Button>
+          </RightButton>
         </Slider>
       </SliderWrapper>
     );
@@ -121,4 +142,7 @@ const Contents = styled.div`
   -webkit-box-align: center;
   gap: 24px;
   overflow-x: scroll;
+`;
+const FlippedImg = styled.img`
+  transform: scaleX(-1);
 `;

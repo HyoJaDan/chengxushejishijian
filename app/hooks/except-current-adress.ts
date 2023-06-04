@@ -6,6 +6,6 @@ export const exceptCurrentAdress = (
   paramsId: number
 ) => {
   const intId = Number(paramsId);
-  const result = problems.filter((data) => data.id !== intId);
+  const result = problems.filter((data: { id: number }) => data.id !== intId);
   return result;
 };
