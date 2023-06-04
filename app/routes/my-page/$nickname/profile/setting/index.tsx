@@ -3,13 +3,13 @@ import { useEffect, useRef, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { pictureTranstorm } from '~/components/common/pirture-transtorm';
 import { Url } from '~/components/myPage/profile/setting/url';
 import { memberDataAdress } from '~/data/constants/adress';
 import { getUserData } from '~/data/my-page/user-data';
 import { localStorageData } from '~/data/user/common/login-information';
 import type { IURLImage } from '~/data/user/url-image';
 import { getURLImage } from '~/data/user/url-image';
+import { pictureTranstorm } from '~/hooks/pirture-transtorm';
 import SSRSafeSuspense from '~/hooks/ssr-safe-suspense';
 
 export interface IData {

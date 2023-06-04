@@ -16,7 +16,7 @@ import { useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { myAccessToken } from '~/data/user/common/login-information';
-import { pictureTranstorm } from '../common/pirture-transtorm';
+import { pictureTranstorm } from '../../hooks/pirture-transtorm';
 import { createEmptyBlock2 } from '../solutioin/editor/createEmtypBlock';
 import { getBlockType } from '../solutioin/editor/get-block-type';
 import { myBlockStyleFn } from '../solutioin/editor/my-block-style-function';

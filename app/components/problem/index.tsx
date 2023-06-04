@@ -23,7 +23,10 @@ export const ProblemMain = () => {
       <FlexBox>
         <ProblemMainContent problemData={problemData} hashTags={hashTags} />
         <WaitAnswer id={params.id as string} />
-        <SimilerTraining id={problemData.lessonCategory.id} />
+        <SimilerTraining
+          id={problemData.lessonCategory.id}
+          paramsId={params.id}
+        />
         <OtherSolution id={params.id} />
         <Comment problemId={params.id as string} navigate={navigate} />
       </FlexBox>
@@ -45,6 +48,5 @@ const FlexBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
-  overflow: auto;
   max-width: 1149px;
 `;
