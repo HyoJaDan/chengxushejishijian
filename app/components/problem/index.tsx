@@ -10,7 +10,8 @@ import { ProblemBanner } from './banner';
 import { Comment } from './comment';
 import { ProblemMainContent } from './main-content';
 import { OtherSolution } from './other-solution';
-import { SimilerTraining } from './similer-problem';
+
+import { SimilerTraining } from './similer-training';
 import { WaitAnswer } from './waiting-solution-box';
 
 export const ProblemMain = () => {
@@ -27,6 +28,7 @@ export const ProblemMain = () => {
           id={problemData.lessonCategory.id}
           paramsId={params.id}
         />
+        {/* <Temp id={problemData.lessonCategory.id} paramsId={params.id} /> */}
         <OtherSolution id={params.id} />
         <Comment problemId={params.id as string} navigate={navigate} />
       </FlexBox>

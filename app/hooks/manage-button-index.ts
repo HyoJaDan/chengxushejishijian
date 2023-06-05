@@ -12,31 +12,30 @@ const judgeWhitchPosition = (
     setIsEndIndex(false);
   }
 };
+
 const toggleLeaving = (setIsMoving: Function) =>
   setIsMoving((prev: boolean) => !prev);
 export const increaseIndex = (
-  index: number,
-  setIndex: Function,
+  page: number,
+  setPage: Function,
   isMoving: boolean,
   setIsMoving: Function,
   length: number,
-  setIsEndIndex: Function,
-  setIsStartIndex: Function
+  setIsStartIndex: Function,
+  setIsEndIndex: Function
 ) => {
   if (isMoving) return;
   toggleLeaving(setIsMoving);
-
   const totalProblems = length;
-  let newIndex = index + 2;
+  let newIndex = page + 2;
   const maxIndex = totalProblems - 3;
   if (newIndex >= maxIndex) newIndex = maxIndex;
-
-  setIndex(newIndex);
+  setPage([newIndex, +22]);
   judgeWhitchPosition(newIndex, length, setIsEndIndex, setIsStartIndex);
 };
 export const decreaseIndex = (
-  index: number,
-  setIndex: Function,
+  page: number,
+  setPage: Function,
   isMoving: boolean,
   setIsMoving: Function,
   length: number,
@@ -46,8 +45,8 @@ export const decreaseIndex = (
   if (isMoving) return;
   toggleLeaving(setIsMoving);
 
-  let newIndex = index - 2;
+  let newIndex = page - 2;
   if (newIndex < 0) newIndex = 0;
-  setIndex(newIndex);
+  setPage([newIndex, -2]);
   judgeWhitchPosition(newIndex, length, setIsEndIndex, setIsStartIndex);
 };

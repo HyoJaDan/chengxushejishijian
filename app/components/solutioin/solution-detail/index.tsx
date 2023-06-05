@@ -45,6 +45,5 @@ const FlexBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
-  overflow: auto;
   max-width: 1149px;
 `;

@@ -7,18 +7,25 @@ import { decreaseIndex, increaseIndex } from '~/hooks/manage-button-index';
 import { LeftButton, RightButton } from '../common/buttons';
 import { SolutionBox } from '../solutioin/main-page/solution-box';
 
+const swipeConfidenceThreshold = 10000;
+const swipePower = (offset: number, velocity: number) => {
+  return Math.abs(offset) * velocity;
+};
 export const OtherSolution = ({ id }: { id: number }) => {
   const solutionList = useRecoilValue(
     getSolutionListById(id as unknown as string)
   );
-  const [index, setIndex] = useState(0);
+  const [[page, direction], setPage] = useState([0, 0]);
   const [isEndIndex, setIsEndIndex] = useState<boolean>(false);
   const [isMoving, setIsMoving] = useState<boolean>(false);
   const [isStartIndex, setIsStartIndex] = useState<boolean>(true);
 
+  const paginate = (newDirection: number) => {
+    setPage([page + newDirection, newDirection]);
+  };
   if (solutionList.length > 3) {
     return (
-      <Wrapper>
+      <SliderWrapper>
         <Header className='body1_BD'>
           <div>다른 스위머의 풀이</div>
           <>{solutionList.length}개</>
@@ -27,8 +34,8 @@ export const OtherSolution = ({ id }: { id: number }) => {
           <LeftButton
             onClick={() =>
               decreaseIndex(
-                index,
-                setIndex,
+                page,
+                setPage,
                 isMoving,
                 setIsMoving,
                 solutionList.length,
@@ -46,30 +53,47 @@ export const OtherSolution = ({ id }: { id: number }) => {
               setIsMoving((prev: boolean) => !prev);
             }}
             initial={false}
+            custom={direction}
           >
             <Row
-              variants={rowVariants}
-              initial='hidden'
-              animate='visible'
+              key={page}
+              custom={direction}
+              variants={variants}
+              initial='enter'
+              animate='center'
               exit='exit'
-              transition={{ type: 'tween', duration: 1 }}
-              key={index}
+              transition={{
+                x: { type: 'spring', stiffness: 300, damping: 30 },
+                opacity: { duration: 0.2 },
+              }}
+              drag='x'
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={1}
+              onDragEnd={(e, { offset, velocity }) => {
+                const swipe = swipePower(offset.x, velocity.x);
+
+                if (swipe < -swipeConfidenceThreshold) {
+                  paginate(2);
+                } else if (swipe > swipeConfidenceThreshold) {
+                  paginate(-2);
+                }
+              }}
             >
               {solutionList
-                .slice(index, index + 3)
+                .slice(page, page + 3)
                 .map((data, num) => SolutionBox(data, num, 1149))}
             </Row>
           </AnimatePresence>
           <RightButton
             onClick={() =>
               increaseIndex(
-                index,
-                setIndex,
+                page,
+                setPage,
                 isMoving,
                 setIsMoving,
                 solutionList.length,
-                setIsEndIndex,
-                setIsStartIndex
+                setIsStartIndex,
+                setIsEndIndex
               )
             }
             endIndex={isEndIndex}
@@ -78,13 +102,16 @@ export const OtherSolution = ({ id }: { id: number }) => {
             <img src='/icons/problem/right.svg' alt='right' />
           </RightButton>
         </Slider>
-      </Wrapper>
+      </SliderWrapper>
     );
   }
   if (solutionList.length !== 0)
     return (
       <Wrapper>
-        <Header className='body1_BD'>다른 스위머의 풀이</Header>
+        <Header className='body1_BD'>
+          <div>다른 스위머의 풀이</div>
+          <>{solutionList.length}개</>
+        </Header>
         <Slider>
           <Contents>
             {solutionList.map((data, num) => SolutionBox(data, num, 1149))}
@@ -98,6 +125,8 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+`;
+const SliderWrapper = styled(Wrapper)`
   margin-bottom: 309px;
 `;
 const Header = styled.div`
@@ -114,15 +143,24 @@ const Row = styled(motion.div)`
   gap: 24px;
   grid-template-columns: repeat(3, 1fr);
 `;
-const rowVariants = {
-  hidden: {
-    x: 1256 + 10,
+const variants = {
+  enter: (direction: number) => {
+    return {
+      x: direction > 0 ? 1000 : -1000,
+      opacity: 0,
+    };
   },
-  visible: {
+  center: {
+    zIndex: 1,
     x: 0,
+    opacity: 1,
   },
-  exit: {
-    x: 0,
+  exit: (direction: number) => {
+    return {
+      zIndex: 0,
+      x: direction < 0 ? 1000 : -1000,
+      opacity: 0,
+    };
   },
 };
 

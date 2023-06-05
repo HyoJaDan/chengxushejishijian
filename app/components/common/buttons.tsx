@@ -35,6 +35,6 @@ export const LeftButton = styled.div<{ startIndex: boolean; top: number }>`
   position: absolute;
   top: ${(prop) => `${prop.top}px`};
   left: -22px;
-  z-index: 1;
+  z-index: 2;
   ${({ startIndex }) => startIndex && 'display:none'}
 `;
