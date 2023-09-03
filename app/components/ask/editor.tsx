@@ -5,22 +5,22 @@ import createFocusPlugin from '@draft-js-plugins/focus';
 import createImagePlugin from '@draft-js-plugins/image';
 import createResizeablePlugin from '@draft-js-plugins/resizeable';
 import {
-  AtomicBlockUtils,
   EditorState,
   KeyBindingUtil,
   Modifier,
   RichUtils,
+  convertToRaw,
   getDefaultKeyBinding,
 } from 'draft-js';
+import { addDoc, collection } from 'firebase/firestore';
 import { useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { myAccessToken } from '~/data/user/common/login-information';
-import { pictureTranstorm } from '../../hooks/pirture-transtorm';
+import { db } from '~/config/firebase.client';
+import { heightestProblemNumber } from '~/data/heightNumber';
 import { createEmptyBlock2 } from '../solutioin/editor/createEmtypBlock';
 import { getBlockType } from '../solutioin/editor/get-block-type';
 import { myBlockStyleFn } from '../solutioin/editor/my-block-style-function';
-import { askSubmitFunction } from './submit-function';
 
 const focusPlugin = createFocusPlugin();
 const resizeablePlugin = createResizeablePlugin();
@@ -34,7 +34,7 @@ const imagePlugin = createImagePlugin({ decorator });
 const plugins = [blockDndPlugin, imagePlugin, resizeablePlugin, focusPlugin];
 
 export const AskEditor = ({ title, selectedId }) => {
-  const accessToken = useRecoilValue(myAccessToken);
+  const heightNumber = useRecoilValue<number>(heightestProblemNumber);
   const [editorState, setEditorState] = useState<EditorState>(
     EditorState.createEmpty()
   );
@@ -104,34 +104,42 @@ export const AskEditor = ({ title, selectedId }) => {
     }
     return 'not-handled';
   };
-  const handleInsertImage = (e: any) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onload = async () => {
-      // Create a new entity for the image
-      const contentState = editorState.getCurrentContent();
-      const image = await pictureTranstorm(file, accessToken);
+  const goToMainPage = () => {
+    if (window !== null) {
+      window.location.replace('/');
+    }
+  };
+  const submitFunction = () => {
+    const contentState = editorState.getCurrentContent();
+    const rawContentState = convertToRaw(contentState);
+    // JSON 객체를 문자열로 변환
+    const jsonString = JSON.stringify(rawContentState);
 
-      const contentStateWithEntity = contentState.createEntity(
-        'IMAGE',
-        'IMMUTABLE',
-        {
-          src: image,
-          alt: 'Image',
-        }
-      );
-      const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
-
-      // Insert the image into the editor as an atomic block
-      const newEditorState = AtomicBlockUtils.insertAtomicBlock(
-        editorState,
-        entityKey,
-        ' '
-      );
-      // Update the editor state
-      setEditorState(newEditorState);
+    const problemCollectionRef = collection(db, 'problems');
+    const date = new Date();
+    const currentDate = date.toLocaleDateString();
+    let currentSelect: string;
+    if (selectedId === 1) currentSelect = '后端开发';
+    else if (selectedId === 2) currentSelect = '前端开发';
+    else if (selectedId === 3) currentSelect = 'Android';
+    else if (selectedId === 4) currentSelect = 'IOS';
+    else if (selectedId === 5) currentSelect = '其他开发';
+    const onSubmitFunction = async () => {
+      try {
+        await addDoc(problemCollectionRef, {
+          title,
+          createdAt: currentDate,
+          description: jsonString,
+          categories: currentSelect,
+          id: heightNumber,
+          problemId: heightNumber,
+        });
+      } catch (err) {
+        console.error(err);
+      }
     };
-    reader.readAsDataURL(file);
+    onSubmitFunction();
+    setTimeout(goToMainPage, 2000);
   };
   return (
     <Wrapper>
@@ -139,7 +147,7 @@ export const AskEditor = ({ title, selectedId }) => {
         <EditorWrapper onClick={focusEditor}>
           <Editor
             editorState={editorState}
-            placeholder='명령어는 `/` 를 입력해주세요.'
+            placeholder='写你想问的问题'
             onChange={onChange}
             handleKeyCommand={handleKeyCommand}
             keyBindingFn={myKeyBindingFn}
@@ -158,24 +166,15 @@ export const AskEditor = ({ title, selectedId }) => {
               }}
             >
               <img src='/icons/code.svg' alt='code' />
-              <div>코드 추가</div>
+              <div>添加代码</div>
             </AddCodeButton>
-            <AddPirtureButton htmlFor='ex_file'>
-              <img src='/icons/problem/picture.svg' alt='' />
-              사진 추가
-              <FileNoneStyle
-                type='file'
-                id='ex_file'
-                onChange={handleInsertImage}
-              />
-            </AddPirtureButton>
           </Footer>
           <AddCodeButton
             onClick={() => {
-              askSubmitFunction(editorState, title, selectedId, accessToken);
+              submitFunction();
             }}
           >
-            제출하기
+            提交
           </AddCodeButton>
         </Headers>
       </Container>

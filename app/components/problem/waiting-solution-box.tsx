@@ -1,41 +1,18 @@
 import { Link } from '@remix-run/react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
-import {
-  localStorageData,
-  loginStatus,
-} from '~/data/user/common/login-information';
 
 export const WaitAnswer = ({ id }: { id: string }) => {
-  const localData = useRecoilValue(localStorageData);
-  const setLoginStatus = useSetRecoilState(loginStatus);
-
   return (
     <Wrapper>
       <Letters>
-        <LineOne className='body1_BD'>
-          {localData.loginStatus !== 'unChecked'
-            ? `${localData.name} 님의 풀이를 기다리고 있어요 `
-            : '로그인 후에 풀이를 제출할 수 있어요'}
-        </LineOne>
+        <LineOne className='body1_BD'>正在等待你的解答</LineOne>
         <LineTwo className='body3_MD'>
-          나의 풀이를 제출하고 다른 사용자의 풀이를 살펴보세요
+          提交我的解释，然后查看其他用户的解释。
         </LineTwo>
       </Letters>
-      {localData.loginStatus !== 'unChecked' ? (
-        <SolutionButton to={`/solution/problem/${id}`} className='body2_SB'>
-          풀이 제출하기
-        </SolutionButton>
-      ) : (
-        <Button
-          className='body2_SB'
-          onClick={() => {
-            setLoginStatus('unLogin');
-          }}
-        >
-          로그인하기
-        </Button>
-      )}
+      <SolutionButton to={`/solution/problem/${id}`} className='body2_SB'>
+        提交解答
+      </SolutionButton>
     </Wrapper>
   );
 };

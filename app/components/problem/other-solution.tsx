@@ -1,9 +1,8 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
-import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { getSolutionListById } from '~/data/solution/get-solutions';
 import { decreaseIndex, increaseIndex } from '~/hooks/manage-button-index';
+import type { ISolutions } from '~/models/solutions';
 import { LeftButton, RightButton } from '../common/buttons';
 import { SolutionBox } from '../solutioin/main-page/solution-box';
 
@@ -11,10 +10,11 @@ const swipeConfidenceThreshold = 10000;
 const swipePower = (offset: number, velocity: number) => {
   return Math.abs(offset) * velocity;
 };
-export const OtherSolution = ({ id }: { id: number }) => {
-  const solutionList = useRecoilValue(
-    getSolutionListById(id as unknown as string)
-  );
+export const OtherSolution = ({
+  solutionList,
+}: {
+  solutionList: ISolutions[];
+}) => {
   const [[page, direction], setPage] = useState([0, 0]);
   const [isEndIndex, setIsEndIndex] = useState<boolean>(false);
   const [isMoving, setIsMoving] = useState<boolean>(false);
@@ -27,8 +27,8 @@ export const OtherSolution = ({ id }: { id: number }) => {
     return (
       <SliderWrapper>
         <Header className='body1_BD'>
-          <div>다른 스위머의 풀이</div>
-          <>{solutionList.length}개</>
+          <div>其他朋友的解答</div>
+          <>{solutionList.length}个</>
         </Header>
         <Slider>
           <LeftButton
@@ -109,8 +109,8 @@ export const OtherSolution = ({ id }: { id: number }) => {
     return (
       <Wrapper>
         <Header className='body1_BD'>
-          <div>다른 스위머의 풀이</div>
-          <>{solutionList.length}개</>
+          <div>其他朋友的解答</div>
+          <>{solutionList.length}和</>
         </Header>
         <Slider>
           <Contents>

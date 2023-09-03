@@ -1,13 +1,10 @@
-import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { numOfProblems } from '~/data/problem/get-problemList';
 
 export const ProblemFallback = () => {
-  const numOfProblem = useRecoilValue(numOfProblems);
   const components = [];
 
   // eslint-disable-next-line no-plusplus
-  for (let i = 0; i < numOfProblem; i++) {
+  for (let i = 0; i < 5; i++) {
     components.push(<Box key={i} />);
   }
   return <Wrapper>{components}</Wrapper>;

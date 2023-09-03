@@ -1,9 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
-import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { getProblemsById } from '~/data/problem/get-problemList';
-import { exceptCurrentAdress } from '~/hooks/except-current-adress';
 import { decreaseIndex, increaseIndex } from '~/hooks/manage-button-index';
 import type { IProblems } from '~/models/problem-and-solution/problem/problems';
 import { LeftButton, RightButton } from '../common/buttons';
@@ -14,15 +11,10 @@ const swipePower = (offset: number, velocity: number) => {
   return Math.abs(offset) * velocity;
 };
 export const SimilerTraining = ({
-  id,
-  paramsId,
+  similerProblemList,
 }: {
-  id: number;
-  paramsId: number;
+  similerProblemList: IProblems[];
 }) => {
-  const problems = useRecoilValue(getProblemsById(id));
-  const problemList = exceptCurrentAdress(problems, paramsId);
-
   const [[page, direction], setPage] = useState([0, 0]);
   const [isEndIndex, setIsEndIndex] = useState<boolean>(false);
   const [isMoving, setIsMoving] = useState<boolean>(false);
@@ -30,13 +22,15 @@ export const SimilerTraining = ({
   const paginate = (newDirection: number) => {
     setPage([page + newDirection, newDirection]);
   };
-
-  if (problemList.length > 3)
+  console.log(page, 'page');
+  console.log(isStartIndex);
+  console.log(isEndIndex);
+  if (similerProblemList.length > 3)
     return (
       <SliderWrapper>
         <Header className='body1_BD'>
-          <div>유사한 트레이닝 문제</div>
-          <>{problemList.length}개</>
+          <div>类似问题</div>
+          <>{similerProblemList.length}个</>
         </Header>
         <Slider>
           <LeftButton
@@ -46,7 +40,7 @@ export const SimilerTraining = ({
                 setPage,
                 isMoving,
                 setIsMoving,
-                problemList.length,
+                similerProblemList.length,
                 setIsStartIndex,
                 setIsEndIndex
               )
@@ -87,7 +81,7 @@ export const SimilerTraining = ({
                 }
               }}
             >
-              {problemList
+              {similerProblemList
                 .slice(page, page + 3)
                 .map((data: IProblems, num: number) =>
                   TrainBox(data, num, 1149)
@@ -101,7 +95,7 @@ export const SimilerTraining = ({
                 setPage,
                 isMoving,
                 setIsMoving,
-                problemList.length,
+                similerProblemList.length,
                 setIsStartIndex,
                 setIsEndIndex
               )
@@ -114,16 +108,16 @@ export const SimilerTraining = ({
         </Slider>
       </SliderWrapper>
     );
-  if (problemList.length === 0) return null;
+  if (similerProblemList.length === 0) return null;
   return (
     <Wrapper>
       <Header className='body1_BD'>
-        <div>유사한 트레이닝 문제</div>
-        <>{problemList.length}개</>
+        <div>类似问题</div>
+        <>{similerProblemList.length}个</>
       </Header>
       <Slider>
         <Contents>
-          {problemList.map((data: IProblems, num: number) =>
+          {similerProblemList.map((data: IProblems, num: number) =>
             TrainBox(data, num, 1149)
           )}
         </Contents>

@@ -3,33 +3,24 @@ import styled from 'styled-components';
 import type { IProblems } from '~/models/problem-and-solution/problem/problems';
 
 export const TrainBox = (data: IProblems, index: number, width: number) => {
-  const { id, lessonCategory, title, _count } = data;
-  const { name } = lessonCategory;
-  const { lessonBookMarks, lessonComments, lessonSolutions } = _count;
-  const keyId = `${id}_${index}`;
+  const { problemId, title, createdAt, description, thumbnail, categories } =
+    data;
+  const keyId = `${problemId}_${index}`;
   const maxWidth = Math.floor((width - 48) / 3);
   return (
-    <Box to={`/problem/${id}`} key={keyId} maxwidth={maxWidth}>
-      <Category className='caption1_SB'>{name}</Category>
+    <Box to={`/problem/${problemId}`} key={keyId} maxwidth={maxWidth}>
+      <Flex>
+        <Category className='caption1_SB'>{categories}</Category>
+        <Category className='caption1_SB'>{createdAt}</Category>
+      </Flex>
       <Title className='body1_BD'>{title}</Title>
-      <Counts>
-        <Count>
-          <Img src='/icons/problem/solutions.svg' alt='solutions' />
-          <Text>{lessonSolutions}</Text>
-        </Count>
-        <Count>
-          <Img src='/icons/problem/likes.svg' alt='likes' />
-          <Text>{lessonBookMarks}</Text>
-        </Count>
-        <Count>
-          <Img src='/icons/problem/comments.svg' alt='comments' />
-          <Text>{lessonComments}</Text>
-        </Count>
-      </Counts>
     </Box>
   );
 };
-
+const Flex = styled.div`
+  display: flex;
+  gap: 5px;
+`;
 const Box = styled(Link)<{ maxwidth: number }>`
   width: ${(prop) => `${prop.maxwidth}px`};
   height: 142px;

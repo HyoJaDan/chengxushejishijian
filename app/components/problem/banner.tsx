@@ -1,58 +1,15 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import axios from 'axios';
-import { useState } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { lessonAddress } from '~/data/constants/adress';
-import {
-  localStorageData,
-  loginStatus,
-} from '~/data/user/common/login-information';
 import { CopyLink } from '../common/copy-link';
 
 interface IGetData {
-  isBookmark: boolean;
   id: string;
 }
-export const ProblemBanner = ({ isBookmark, id }: IGetData) => {
-  const localData = useRecoilValue(localStorageData);
-  const setLoginStatus = useSetRecoilState(loginStatus);
-  const [isBookmarked, setIsBookmarked] = useState<boolean>(isBookmark);
-
-  const clickBookmark = () => {
-    if (localData.loginStatus === 'unChecked') setLoginStatus('unLogin');
-    else {
-      setIsBookmarked(!isBookmarked);
-      if (isBookmarked) {
-        axios.delete(`${lessonAddress}/${id}/bookmarks`, {
-          headers: {
-            Authorization: `Bearer ${localData.accessToken}`,
-          },
-        });
-      } else {
-        axios.post(`${lessonAddress}/${id}/bookmarks`, null, {
-          headers: {
-            Authorization: `Bearer ${localData.accessToken}`,
-          },
-        });
-      }
-    }
-  };
-
+export const ProblemBanner = ({ id }: IGetData) => {
   return (
     <Sticky>
       <Wrapper>
-        <Flex>
-          <Circle onClick={clickBookmark}>
-            <div className={`cross ${isBookmarked ? 'checked' : ''}`} />
-          </Circle>
-          {isBookmarked ? (
-            <Title className='body3_MD'>저장완료!</Title>
-          ) : (
-            <Title className='body3_MD'>저장하기</Title>
-          )}{' '}
-        </Flex>
         <Flex>
           <CopyLink />
         </Flex>

@@ -1,35 +1,26 @@
 import styled from 'styled-components';
-import type { IProblemHashTags } from '~/models/hashtags';
 import type { IProblem } from '~/models/problem-and-solution/problem/problem';
 import { Description } from '../common/problem-and-solution/description';
 import { Category } from './problem-box';
 
 interface ITemp {
   problemData: IProblem;
-  hashTags: IProblemHashTags;
 }
-export const ProblemMainContent = ({ problemData, hashTags }: ITemp) => {
-  const { name } = problemData.lessonCategory;
-  const hashTagList = hashTags.lessonHashtags.map((value) => {
-    const { lessonHashtag } = value;
-    const { id, tag, createdAt } = lessonHashtag;
-    const Id = `${id}_${createdAt}`;
-    return <Tag key={Id}>#{tag}</Tag>;
-  });
+export const ProblemMainContent = ({ problemData }: ITemp) => {
+  console.log('111111111111', problemData.description);
   return (
     <Wrapper>
       <Header>
-        <Category className='caption1_SB'>{name}</Category>
+        <Category className='caption1_SB'>{problemData.categories}</Category>
         <Titles>
           <Title className='title4_BD'>{problemData.title}</Title>
           <DateFontcaption1SB className='caption1_SB'>
-            {problemData.updatedAt.substr(0, 10)}
+            {problemData.createdAt}
           </DateFontcaption1SB>
         </Titles>
       </Header>
       <Main className='body2_MD'>
         <Description description={problemData.description} />
-        <Tags>{hashTagList}</Tags>
       </Main>
     </Wrapper>
   );
@@ -65,25 +56,4 @@ const Main = styled.div`
 const DateFontcaption1SB = styled.div`
   text-align: right;
   color: #c2c0bd;
-`;
-const Tags = styled.div`
-  display: flex;
-  gap: 8px;
-`;
-const Content = styled.textarea`
-  outline: none;
-  border: none;
-`;
-const PreWrap = styled.div`
-  white-space: pre-wrap;
-  /* min-height: 200px;
-  width: 100%;
-  color: ${(prop) => prop.theme.color.grayScale.gray_800};
-  resize: none; */
-`;
-const Tag = styled.div`
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 140%;
-  color: #2bc0ef;
 `;

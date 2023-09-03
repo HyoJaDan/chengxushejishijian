@@ -4,37 +4,26 @@ import createResizeablePlugin from '@draft-js-plugins/resizeable';
 import { Link } from '@remix-run/react';
 import { EditorState } from 'draft-js';
 import styled from 'styled-components';
-import { Circle } from '~/components/global-navigation-bar/login';
 import { convertJsonToDraft } from '~/hooks/convert-json-to-draft';
-import type { ISolutions } from '~/models/problem-and-solution/solution/solutions';
+import type { ISolutions } from '~/models/solutions';
 import { myBlockStyleFn } from '../editor/my-block-style-function';
 
 const resizeablePlugin = createResizeablePlugin();
 const decorator = composeDecorators(resizeablePlugin.decorator);
 const imagePlugin = createImagePlugin({ decorator });
 const plugins = [imagePlugin, resizeablePlugin];
+
 export const SolutionBox = (data: ISolutions, index: number, width: number) => {
-  const { id, description, member, _count, title } = data;
-  const { lessonSolutionComments, lessonSolutionLikes } = _count;
-  const { thumbnail, nickname } = member;
+  const { id, description, title, createdAt, solutionId } = data;
   const keyId = `${index}_${id}`;
   const maxWidth = Math.floor((width - 48) / 3);
-  const outputThumbnail = () => {
-    if (thumbnail !== '') {
-      return (
-        <ThumbnailBackground>
-          <Img src={thumbnail} alt='' />
-        </ThumbnailBackground>
-      );
-    }
-    return <ThumbnailBackground />;
-  };
+  console.log('22222222', description);
   const restoredContentState = convertJsonToDraft(description);
   const restoredEditorState =
     EditorState.createWithContent(restoredContentState);
 
   return (
-    <Box to={`/solution/${id}`} key={keyId} maxwidth={maxWidth}>
+    <Box to={`/solution/${solutionId}`} key={keyId} maxwidth={maxWidth}>
       <Content className='body2_BD'>
         <Editor
           editorState={restoredEditorState}
@@ -42,27 +31,10 @@ export const SolutionBox = (data: ISolutions, index: number, width: number) => {
           plugins={plugins}
         />
       </Content>
-
       <TeskInformaion>
         <Header>
           <Title className='body1_BD'>{title}</Title>
         </Header>
-        <SubContent>
-          <User>
-            {outputThumbnail()}
-            <Name>{nickname}</Name>
-          </User>
-          <Counts>
-            <Count>
-              <Img src='/icons/problem/likes.svg' alt='likes' />
-              <Text>{lessonSolutionLikes}</Text>
-            </Count>
-            <Count>
-              <Img src='/icons/problem/comments.svg' alt='comments' />
-              <Text>{lessonSolutionComments}</Text>
-            </Count>
-          </Counts>
-        </SubContent>
       </TeskInformaion>
     </Box>
   );
@@ -113,34 +85,4 @@ const Header = styled.div`
 `;
 const Title = styled.div`
   color: ${(prop) => prop.theme.color.grayScale.gray_800};
-`;
-const SubContent = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-const User = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-`;
-const Name = styled.div`
-  color: ${(prop) => prop.theme.color.grayScale.gray_700};
-`;
-
-const ThumbnailBackground = styled(Circle)``;
-const Img = styled.img`
-  width: 100%;
-`;
-
-const Counts = styled.div`
-  display: flex;
-  gap: 16px;
-`;
-const Count = styled.div`
-  display: flex;
-  gap: 4px;
-`;
-const Text = styled.div`
-  color: ${(prop) => prop.theme.color.basic.black};
 `;

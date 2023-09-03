@@ -5,12 +5,12 @@ export const Banner: FC<HTMLProps<HTMLElement>> = ({ className }) => {
   return (
     <Overlay>
       <Wrapper>
-        <div className='title2_BD'>평소 공부하면서 모르는 것이 많았다고요?</div>
-        <div className='title2_BD'>당신이 필요한 장소는 바로 이곳입니다!</div>
+        <div className='title2_BD'>平时学习的时候有很多不懂的地方吗？</div>
+        <div className='title2_BD'>你需要的地方就是这里！</div>
         <div style={{ marginTop: '15px' }} className='body2_BD'>
-          모르는 것을 질문하고 대답하여
+          提问并回答不懂地问题
         </div>
-        <div className='body2_BD'>다른 사용자와 함께 성장하세요!</div>
+        <div className='body2_BD'>和其他用户一起成长吧！</div>
       </Wrapper>
     </Overlay>
   );

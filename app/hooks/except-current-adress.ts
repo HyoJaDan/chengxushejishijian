@@ -1,5 +1,5 @@
 import type { IProblems } from '~/models/problem-and-solution/problem/problems';
-import type { ISolutions } from '~/models/problem-and-solution/solution/solutions';
+import type { ISolutions } from '~/models/solutions';
 
 export const exceptCurrentAdress = (
   problems: IProblems[] | ISolutions[],

@@ -1,15 +1,40 @@
-import { useRecoilValue } from 'recoil';
+import { collection, getDocs } from 'firebase/firestore';
+import { useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { ProblemCategoryId, getProblems } from '~/data/problem/get-problemList';
+import { db } from '~/config/firebase.client';
+import { heightestProblemNumber } from '~/data/heightNumber';
+import type { IProblems } from '~/models/problem-and-solution/problem/problems';
 import { TrainBox } from '../problem/problem-box';
 
 export const Training = () => {
-  const sortBy = useRecoilValue(ProblemCategoryId);
-  const problems = useRecoilValue(getProblems(sortBy));
-  const problem = problems.map((data, index) => {
+  const [problem, setProblem] = useState([]);
+  const setNumber = useSetRecoilState<number>(heightestProblemNumber);
+  const problemClooectionRef = collection(db, 'problems');
+  useEffect(() => {
+    const getProblemList = async () => {
+      try {
+        const data = await getDocs(problemClooectionRef);
+        const filteredData = data.docs.map((doc) => {
+          return {
+            ...doc.data(),
+            id: doc.id,
+          };
+        });
+
+        setNumber(filteredData.length);
+        setProblem(filteredData);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    getProblemList();
+  }, []);
+
+  const problemList = problem.map((data: IProblems, index: number) => {
     return TrainBox(data, index, 1256);
   });
-  return <Wrapper>{problem}</Wrapper>;
+  return <Wrapper>{problemList}</Wrapper>;
 };
 const Wrapper = styled.div`
   display: flex;

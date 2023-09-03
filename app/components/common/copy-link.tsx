@@ -18,9 +18,9 @@ export function CopyLink() {
         <Img src='/icons/problem/link.svg' alt='temp' />
       </Circle>
       {isCopy ? (
-        <Title className='body3_MD'>복사완료!</Title>
+        <Title className='body3_MD'>复制完成!</Title>
       ) : (
-        <Title className='body3_MD'>링크복사</Title>
+        <Title className='body3_MD'>复制链接</Title>
       )}
     </>
   );

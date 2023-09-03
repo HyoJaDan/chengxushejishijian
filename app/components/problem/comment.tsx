@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { lessonAddress } from '~/data/constants/adress';
+import { lessonAddress } from '~/data/adress';
 import { commentAtom } from '~/data/problem/commits';
 import {
   loginStatus,

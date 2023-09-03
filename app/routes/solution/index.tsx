@@ -2,14 +2,12 @@ import styled from 'styled-components';
 import { Banner } from '~/components/main/banner';
 import { SolutionFallback } from '~/components/main/solution-fallback';
 import { Solution } from '~/components/main/solutions';
-import SolutionRadio from '~/components/solutioin/main-page/radio';
 import SSRSafeSuspense from '~/hooks/ssr-safe-suspense';
 
 export default function SolutionDefault() {
   return (
     <Wrapper>
       <Banner />
-      <SolutionRadio />
       <SSRSafeSuspense fallback={<SolutionFallback />}>
         <Solution />
       </SSRSafeSuspense>

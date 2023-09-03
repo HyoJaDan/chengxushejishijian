@@ -1,27 +1,26 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import createBlockDndPlugin from '@draft-js-plugins/drag-n-drop';
 import Editor, { composeDecorators } from '@draft-js-plugins/editor';
-
 import createFocusPlugin from '@draft-js-plugins/focus';
 import createImagePlugin from '@draft-js-plugins/image';
 import createResizeablePlugin from '@draft-js-plugins/resizeable';
 import {
-  AtomicBlockUtils,
   EditorState,
-  getDefaultKeyBinding,
   KeyBindingUtil,
   Modifier,
   RichUtils,
+  convertToRaw,
+  getDefaultKeyBinding,
 } from 'draft-js';
+import { addDoc, collection } from 'firebase/firestore';
 import { useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { myAccessToken } from '~/data/user/common/login-information';
-import { pictureTranstorm } from '~/hooks/pirture-transtorm';
+import { db } from '~/config/firebase.client';
+import { heightestSolutionNumber } from '~/data/heightNumber';
 import { createEmptyBlock2 } from './createEmtypBlock';
 import { getBlockType } from './get-block-type';
 import { myBlockStyleFn } from './my-block-style-function';
-import { submitFunc } from './submit';
 
 const focusPlugin = createFocusPlugin();
 const resizeablePlugin = createResizeablePlugin();
@@ -35,10 +34,10 @@ const imagePlugin = createImagePlugin({ decorator });
 const plugins = [blockDndPlugin, imagePlugin, resizeablePlugin, focusPlugin];
 
 export const CustomEditor = ({ params }: { params: string }) => {
-  const accessToken = useRecoilValue(myAccessToken);
   const [editorState, setEditorState] = useState<EditorState>(
     EditorState.createEmpty()
   );
+  const heightNumber = useRecoilValue<number>(heightestSolutionNumber);
   const editorRef = useRef();
   const onChange = (onChangeeditorState: EditorState) => {
     setEditorState(onChangeeditorState);
@@ -47,7 +46,6 @@ export const CustomEditor = ({ params }: { params: string }) => {
   const focusEditor = () => {
     editorRef.current.focus();
   };
-  /** 복사, 붙여녛기 허용하는 함수 */
   const handlePastedText = (text: string) => {
     const contentState = editorState.getCurrentContent();
     const currentSelection = editorState.getSelection();
@@ -106,48 +104,50 @@ export const CustomEditor = ({ params }: { params: string }) => {
     }
     return 'not-handled';
   };
-  const handleInsertImage = (e: any) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onload = async () => {
-      const contentState = editorState.getCurrentContent();
-      const image = await pictureTranstorm(file, accessToken);
-
-      const contentStateWithEntity = contentState.createEntity(
-        'IMAGE',
-        'IMMUTABLE',
-        {
-          src: image,
-          alt: 'Image',
-        }
-      );
-      /* const entityKey = contentState.getLastCreatedEntityKey(); */
-      const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
-      console.log(contentStateWithEntity);
-      console.log(entityKey);
-      const newEditorState = AtomicBlockUtils.insertAtomicBlock(
-        editorState,
-        entityKey,
-        ' '
-      );
-      onChange(newEditorState);
-    };
-    reader.readAsDataURL(file);
+  const goToMainPage = () => {
+    if (window !== null) {
+      window.location.replace('/');
+    }
   };
+  const submitFunction = () => {
+    const contentState = editorState.getCurrentContent();
+    const rawContentState = convertToRaw(contentState);
+    // JSON 객체를 문자열로 변환
+    const jsonString = JSON.stringify(rawContentState);
 
+    const solutionCollectionRef = collection(db, 'solutions');
+    const date = new Date();
+    const currentDate = date.toLocaleDateString();
+    const onSubmitFunction = async () => {
+      try {
+        await addDoc(solutionCollectionRef, {
+          createdAt: currentDate,
+          description: jsonString,
+          problemId: params,
+          id: heightNumber,
+          solutionId: heightNumber,
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    onSubmitFunction();
+    setTimeout(goToMainPage, 2000);
+  };
   return (
     <Wrapper>
       <Container>
         <EditorWrapper onClick={focusEditor}>
           <Editor
             editorState={editorState}
-            placeholder='명령어는 `/` 를 입력해주세요. 사진, 혹은 첫번째 줄에 있는 내용이 됩니다.'
+            placeholder='写你的回答'
             onChange={onChange}
             handleKeyCommand={handleKeyCommand}
             keyBindingFn={myKeyBindingFn}
             blockStyleFn={myBlockStyleFn}
             handlePastedText={handlePastedText}
             plugins={plugins}
+            /* blockRenderMap={extendedBlockRenderMap} */
             ref={editorRef}
           />
         </EditorWrapper>
@@ -159,24 +159,15 @@ export const CustomEditor = ({ params }: { params: string }) => {
               }}
             >
               <img src='/icons/code.svg' alt='code' />
-              <div>코드 추가</div>
+              <div>添加代码</div>
             </AddCodeButton>
-            <AddPirtureButton htmlFor='ex_file'>
-              <img src='/icons/problem/picture.svg' alt='' />
-              사진 추가
-              <FileNoneStyle
-                type='file'
-                id='ex_file'
-                onChange={handleInsertImage}
-              />
-            </AddPirtureButton>
           </Footer>
           <AddCodeButton
             onClick={() => {
-              submitFunc(editorState, params, accessToken);
+              submitFunction();
             }}
           >
-            제출하기
+            提交
           </AddCodeButton>
         </Headers>
       </Container>

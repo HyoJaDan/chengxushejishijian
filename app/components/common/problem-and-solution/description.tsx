@@ -9,12 +9,11 @@ const resizeablePlugin = createResizeablePlugin();
 const decorator = composeDecorators(resizeablePlugin.decorator);
 const imagePlugin = createImagePlugin({ decorator });
 const plugins = [imagePlugin, resizeablePlugin];
+
 export const Description = ({ description }: { description: string }) => {
   const restoredContentState = convertJsonToDraft(description);
   const restoredEditorState =
     EditorState.createWithContent(restoredContentState);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-
   return (
     <Editor
       editorState={restoredEditorState}

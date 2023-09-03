@@ -1,38 +1,57 @@
 import { useNavigate, useParams } from '@remix-run/react';
-import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
+import { collection, getDocs } from 'firebase/firestore';
+import { useEffect, useState } from 'react';
 import { OtherSolution } from '~/components/problem/other-solution';
-import { getSolutionDetail } from '~/data/solution/get-solution-detail';
+import { db } from '~/config/firebase.client';
+import type { ISolutionDetail } from '~/models/solution-detail';
+import type { ISolutions } from '~/models/solutions';
 import { SolutionBanner } from './banner';
-import { Comment } from './comment';
 import { SolutionMainContent } from './main-content';
 
 export const SolutionMain = () => {
   const params = useParams<string>();
   const navigate = useNavigate();
-  /* const problemData = useRecoilValue(getProblemDetail(params.id)); */
-  /* const hashTags = useRecoilValue(getProblemDetailTags(params.id as string)); */
-  const solutionData = useRecoilValue(getSolutionDetail(params.id as string));
+  const [solution, setSolution] = useState<ISolutionDetail>();
+  const solutionCollectionRef = collection(db, 'solutions');
+  const [otherSolutions, setOtherSolution] = useState<ISolutions[]>([]);
+  useEffect(() => {
+    const getSolutionList = async () => {
+      try {
+        const solutionData = await getDocs(solutionCollectionRef);
+        const filteredData = solutionData.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        const solutionDatas = filteredData.filter(
+          (item) => item.solutionId == params.id
+        );
 
-  return (
-    <Wrapper>
-      <FlexBox>
-        <SolutionMainContent
-          solutionData={solutionData}
-          navigate={navigate} /* hashTags={hashTags} */
-        />
-        <OtherSolution id={solutionData.lessonId} />
-        <Comment solutionId={params.id as string} navigate={navigate} />
-      </FlexBox>
-      <SolutionBanner
-        navigate={navigate}
-        lessonId={solutionData.lessonId}
-        isBookmark={solutionData.isLike as boolean}
-        id={params.id as string}
-      />
-    </Wrapper>
-  );
+        setSolution(solutionDatas[0]);
+
+        const otherSolutionData = filteredData.filter(
+          (item) => item.problemId == solutionDatas[0].problemId
+        );
+        setOtherSolution(otherSolutionData);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    getSolutionList();
+  }, []);
+  if (solution !== undefined)
+    return (
+      <Wrapper>
+        <FlexBox>
+          <SolutionMainContent solutionData={solution} navigate={navigate} />
+          <OtherSolution solutionList={otherSolutions} />
+        </FlexBox>
+        <SolutionBanner navigate={navigate} lessonId={solution.lessonId} />
+      </Wrapper>
+    );
+  return null;
 };
 const Wrapper = styled.div`
   max-width: 1256px;
@@ -47,3 +66,7 @@ const FlexBox = styled.div`
   gap: 24px;
   max-width: 1149px;
 `;
+/* export const SolutionMain = () => {
+  return null;
+};
+ */

@@ -21,7 +21,7 @@ export const AskHeader = ({ title, setTitle, selectedId, setSelectedId }) => {
           className='title4_BD'
           type='text'
           value={title}
-          placeholder='제목을 입력해 주세요'
+          placeholder='请输入标题'
           onChange={handleChange}
         />
         <Select

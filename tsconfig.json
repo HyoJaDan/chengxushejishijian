@@ -6,7 +6,8 @@
     "app/recoil/user-info",
     "app/components/myPage/profile/chart/abc.ts",
     "app/components/main",
-    "app/hooks/convert-nickname-to-user-data.ts"
+    "app/hooks/convert-nickname-to-user-data.ts",
+    "app/hooks/convert-json-to-draft.js"
   ],
   "compilerOptions": {
     "types": ["node"],

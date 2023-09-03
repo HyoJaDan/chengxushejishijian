@@ -1,22 +1,14 @@
-import { Link } from '@remix-run/react';
 import styled from 'styled-components';
 import type { FCClass } from '~/models/function-component';
 import { NavButtons } from './nav-buttons';
-import { TrailingButtons } from './trailing-buttons';
 
 export const GlobalNavigationBar: FCClass = ({ className }) => {
   return (
     <Wrapper className={className}>
       <FlexWrapper>
         <FlexTie>
-          <Links>
-            <Link to='/'>
-              <Logo src='/icons/the-pool.svg' alt='thePool' />
-            </Link>
-          </Links>
           <NavButtons />
         </FlexTie>
-        <TrailingButtons />
       </FlexWrapper>
     </Wrapper>
   );

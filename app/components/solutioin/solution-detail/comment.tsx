@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { otherComments } from '~/components/problem/comment-other';
-import { solutionAddress } from '~/data/constants/adress';
+import { solutionAddress } from '~/data/adress';
 import { commentAtom } from '~/data/problem/commits';
 import {
   loginStatus,
